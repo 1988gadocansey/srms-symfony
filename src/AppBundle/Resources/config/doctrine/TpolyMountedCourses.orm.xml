@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpolyMountedCourses" table="tpoly_mounted_courses">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="course" type="string" column="COURSE" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="courseCode" type="string" column="COURSE_CODE" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="courseCredit" type="integer" column="COURSE_CREDIT" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="courseSemester" type="integer" column="COURSE_SEMESTER" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="courseLevel" type="string" column="COURSE_LEVEL" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="courseType" type="string" column="COURSE_TYPE" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="programme" type="string" column="PROGRAMME" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lecturer" type="string" column="LECTURER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default">54</option>
+      </options>
+    </field>
+    <field name="courseYear" type="string" column="COURSE_YEAR" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sync" type="integer" column="SYNC" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 means online , 0 means offline</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="mountedBy" type="string" column="MOUNTED_BY" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">HOD who mount the course</option>
+      </options>
+    </field>
+    <field name="inputeddate" type="datetime" column="INPUTEDDATE" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

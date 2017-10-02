@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpolyFeedetails" table="tpoly_feedetails">
+    <unique-constraints>
+      <unique-constraint name="RECEIPTNO" columns="RECEIPTNO"/>
+      <unique-constraint name="INDEXNO" columns="INDEXNO,RECEIPTNO"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="indexno" type="string" column="INDEXNO" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="programme" type="string" column="PROGRAMME" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="level" type="string" column="LEVEL" length="25" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="amount" type="string" column="AMOUNT" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="noCopies" type="integer" column="NO_COPIES" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">if its a transcript</option>
+      </options>
+    </field>
+    <field name="paymenttype" type="string" column="PAYMENTTYPE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="paymentdetails" type="string" column="PAYMENTDETAILS" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bank" type="string" column="BANK" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bankDate" type="string" column="BANK_DATE" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="transactionId" type="string" column="TRANSACTION_ID" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="receiptno" type="string" column="RECEIPTNO" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="feeType" type="string" column="FEE_TYPE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="year" type="string" column="YEAR" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="semester" type="string" column="SEMESTER" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="reciepient" type="string" column="RECIEPIENT" length="222" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="transdate" type="datetime" column="TRANSDATE" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="checker" type="string" column="CHECKER" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

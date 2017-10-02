@@ -1,0 +1,9 @@
+common:
+    sidebar: Barre latérale
+
+index:
+    title: Projet SymfoNyx Démarreur
+    import: Importer des documents
+
+upload:
+    title: Téléversement

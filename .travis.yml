@@ -1,0 +1,21 @@
+language: php
+php:
+  - '7.0'
+env:
+  - SYMFONY_VERSION="3.3.*"
+services:
+  - mysql
+before_script:
+  - cp app/config/parameters.yml.travis app/config/parameters.yml
+  - composer install
+  - php bin/console doctrine:database:create --env=dev
+  - php bin/console doctrine:schema:create --env=dev
+  - php bin/console doctrine:fixtures:load --env=dev -n
+  - php bin/console server:start
+script:
+  - bin/phpunit
+after_script:
+  - php bin/console server:stop
+notifications:
+  email:
+    - root@maxperei.info

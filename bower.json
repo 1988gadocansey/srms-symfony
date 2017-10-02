@@ -1,0 +1,21 @@
+{
+  "name": "legaltech",
+  "description": "gassetic integration",
+  "main": "index.js",
+  "authors": [
+    "cosavostra"
+  ],
+  "license": "ISC",
+  "homepage": "ssh://maxperei@ns3363707.ip-94-23-251.eu:2702/home/WEB/cosavostra/git-repositories/legaltech.git",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}

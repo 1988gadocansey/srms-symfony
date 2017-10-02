@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpolyAcademicRecord" table="tpoly_academic_record">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="course" type="integer" column="course" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="code" type="string" column="code" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="credits" type="integer" column="credits" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="student" type="integer" column="student" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="indexno" type="string" column="indexno" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="quiz1" type="decimal" column="quiz1" precision="4" scale="1" nullable="false"/>
+    <field name="quiz2" type="decimal" column="quiz2" precision="4" scale="1" nullable="false"/>
+    <field name="quiz3" type="decimal" column="quiz3" precision="4" scale="1" nullable="false"/>
+    <field name="midsem1" type="decimal" column="midSem1" precision="4" scale="1" nullable="false"/>
+    <field name="exam" type="string" column="exam" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default">0.00</option>
+      </options>
+    </field>
+    <field name="total" type="decimal" column="total" precision="4" scale="1" nullable="true">
+      <options>
+        <option name="default">0.0</option>
+      </options>
+    </field>
+    <field name="grade" type="string" column="grade" length="2" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+        <option name="default">E</option>
+      </options>
+    </field>
+    <field name="gpoint" type="decimal" column="gpoint" precision="4" scale="1" nullable="true">
+      <options>
+        <option name="default">0.0</option>
+      </options>
+    </field>
+    <field name="year" type="string" column="year" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sem" type="string" column="sem" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="level" type="string" column="level" length="11" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="yrgp" type="string" column="yrgp" length="90" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="groups" type="string" column="groups" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lecturer" type="integer" column="lecturer" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">lecturer who uploads mark</option>
+      </options>
+    </field>
+    <field name="resit" type="string" column="resit" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dateregistered" type="string" column="dateRegistered" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="createdat" type="datetime" column="createdAt" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="updates" type="integer" column="updates" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

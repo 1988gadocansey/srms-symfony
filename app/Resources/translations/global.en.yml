@@ -1,0 +1,9 @@
+common:
+    sidebar: Sidebar
+
+index:
+    title: SymfoNyx Starter Project
+    import: Import documents
+
+upload:
+    title: Upload

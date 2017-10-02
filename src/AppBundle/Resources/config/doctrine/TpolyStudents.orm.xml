@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TpolyStudents" table="tpoly_students">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="indexno" type="string" column="INDEXNO" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="programmecode" type="string" column="PROGRAMMECODE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="level" type="string" column="LEVEL" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="year" type="string" column="YEAR" length="11" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">when we refers to levels as year</option>
+      </options>
+    </field>
+    <field name="stno" type="string" column="STNO" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="surname" type="string" column="SURNAME" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="NAME" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="firstname" type="string" column="FIRSTNAME" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="othernames" type="string" column="OTHERNAMES" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sex" type="string" column="SEX" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dateofbirth" type="string" column="DATEOFBIRTH" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="age" type="integer" column="AGE" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateAdmitted" type="string" column="DATE_ADMITTED" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="title" type="string" column="TITLE" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="graduatingGroup" type="string" column="GRADUATING_GROUP" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="maritalStatus" type="string" column="MARITAL_STATUS" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hall" type="string" column="HALL" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address" type="string" column="ADDRESS" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="residentialAddress" type="string" column="RESIDENTIAL_ADDRESS" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">resident address</option>
+      </options>
+    </field>
+    <field name="email" type="string" column="EMAIL" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telephoneno" type="string" column="TELEPHONENO" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="country" type="string" column="COUNTRY" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="region" type="string" column="REGION" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="religion" type="string" column="RELIGION" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hometown" type="string" column="HOMETOWN" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="guardianName" type="string" column="GUARDIAN_NAME" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="guardianAddress" type="string" column="GUARDIAN_ADDRESS" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="guardianPhone" type="string" column="GUARDIAN_PHONE" length="10" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="guardianOccupation" type="string" column="GUARDIAN_OCCUPATION" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="disability" type="string" column="DISABILITY" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="status" type="string" column="STATUS" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Completed,Dead,Deffered...</option>
+      </options>
+    </field>
+    <field name="nhis" type="string" column="NHIS" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="studentType" type="string" column="STUDENT_TYPE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">resident ,non resident</option>
+      </options>
+    </field>
+    <field name="hostel" type="string" column="HOSTEL" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cgpa" type="float" column="CGPA" precision="10" scale="0" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="class" type="string" column="CLASS" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">eg 1st class</option>
+      </options>
+    </field>
+    <field name="flags" type="string" column="FLAGS" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="type" type="string" column="TYPE" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="totalCreditDone" type="integer" column="TOTAL_CREDIT_DONE" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="creditLeftComplete" type="integer" column="CREDIT_LEFT_COMPLETE" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="allowRegister" type="integer" column="ALLOW_REGISTER" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">allow to register on portal</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="allowResult" type="integer" column="ALLOW_RESULT" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">allow to see result on portal</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="registered" type="integer" column="REGISTERED" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="qualityAssurance" type="integer" column="QUALITY_ASSURANCE" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 means assesed, 0 means pending</option>
+      </options>
+    </field>
+    <field name="liaison" type="integer" column="LIAISON" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 means assesed, 0 means pending</option>
+      </options>
+    </field>
+    <field name="hasPassword" type="integer" column="HAS_PASSWORD" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">1 means has password,0 means no</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="sysupdate" type="integer" column="SYSUPDATE" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">biodata updates</option>
+      </options>
+    </field>
+    <field name="bills" type="float" column="BILLS" precision="10" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="billOwing" type="float" column="BILL_OWING" precision="10" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="smsSent" type="integer" column="SMS_SENT" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="inputeddate" type="datetime" column="INPUTEDDATE" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

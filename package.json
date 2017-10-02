@@ -1,0 +1,25 @@
+{
+  "name": "legaltech",
+  "version": "1.0.0",
+  "description": "gassetic integration",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://maxperei@ns3363707.ip-94-23-251.eu:2702/home/WEB/cosavostra/git-repositories/legaltech.git"
+  },
+  "author": "cosavostra",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}

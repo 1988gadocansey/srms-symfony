@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+{% trans_default_domain 'global' %}
+
+{% block body %}
+    <h1>{{ 'upload.title'|trans }}</h1>
+    {{ form(form) }}
+{% endblock %}

@@ -1,0 +1,94 @@
+# Group
+group:
+    edit:
+        submit: Modification du groupe
+    show:
+        name: Nom du groupe
+    new:
+        submit: Créer un groupe
+    flash:
+        updated: Le groupe a été mis à jour
+        created: Le groupe a été crée
+        deleted: Le groupe a été supprimé
+
+# Security
+security:
+    login:
+        username: Identifiant
+        password: Mot de passe
+        remember_me: Se souvenir de moi
+        submit: S'identifier
+
+# Profile
+profile:
+    show:
+        username:  Identifiant
+        email: Email
+    edit:
+        submit: Mettre à jour
+    flash:
+        updated: Le profil a été mis à jour
+
+# Password change
+change_password:
+    submit: Changer de mot de passe
+    flash:
+        success: Le mot de passe a bien été modifié
+
+# Registration
+registration:
+    check_email: Un email vient d'être envoyé à %email%. Il contient un lien d'activation sur lequel il faut cliquer pour activer son compte.
+    confirmed: Félicitation %username%, votre compte est désormais actif.
+    back: Back to the originating page.
+    submit: S'inscrire
+    flash:
+        user_created: L'utilisateur a été crée avec succès
+    email:
+        subject: Bienvenue %username%!
+        message: |
+            Bonjour %username%!
+
+            Pour achever votre inscription - veuillez consulter ce lien %confirmationUrl%
+
+            Cordialement,
+            L'équipe CosaVostra.
+
+# Password resetting
+resetting:
+    password_already_requested: Le mot de passe de cet utilisateur a déjà été modifié il y a moins de 24 heures.
+    check_email: Un email a été envoyé à %email%. Il contient un lien d'activation sur lequel il faut cliquer pour réinitialiser son mot de passe.
+    request:
+        invalid_username: Le nom d'utilisateur ou l'adresse email "%username%" n'existe pas.
+        username: Nom d'utilisateur ou adresse email
+        submit: Modifier le mot de passe
+    reset:
+        submit: Modifier le mot de passe
+    flash:
+        success: Le mot de passe vient d'être réinitialisé avec succès
+    email:
+        subject: Réinitialisation du mot de passe
+        message: |
+            Bonjour %username%!
+
+            Pour finaliser la modification de votre mot de passe - veuillez consulter ce lien %confirmationUrl%
+
+            Cordialement,
+            L'équipe CosaVostra.
+
+# Global strings
+layout:
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
+    logged_in_as: Connecté en tant que %username%
+
+# Form field labels
+form:
+    group_name: Nom du groupe
+    username: Nom d'utilisateur
+    email: Email
+    current_password: Mot de passe actuel
+    password: Mot de passe
+    password_confirmation: Répéter le mot de passe
+    new_password: Nouveau mot de passe
+    new_password_confirmation: Répéter le mot de passe
