@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gadoo
- * Date: 29/09/2017
- * Time: 3:58 PM
- */
 
 namespace AppBundle\Entity;
 
@@ -12,8 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
-
-class AppUser
+/**
+ * @ORM\Table(name="app_user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class AppUser extends BaseUser
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -82,5 +80,8 @@ class AppUser
         return $this->updatedAt;
     }
 
-
+    public function __toString()
+    {
+        return $this->username;
+    }
 }
