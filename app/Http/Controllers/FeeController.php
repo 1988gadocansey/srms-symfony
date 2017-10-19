@@ -583,13 +583,14 @@ class FeeController extends Controller
                     $newyear = substr($level, 0, 1);
 
                     if($request->input('stno')!=""){
-                    $balance = StudentModel::where("STNO", $indexno)->where('STATUS', '=', 'In school')->get();
+                    $balance = StudentModel::where("INDEXNO", $indexno)->where('STATUS', '=', 'In school')->get();
+                        //dd($balance);
                     }
                     else{
                           $balance = StudentModel::where("INDEXNO", $indexno)->where('STATUS', '=', 'In school')->get();
-                 
+                       // dd($balance);
                     }
-                    //dd($balance);
+
 
                     $billOwing = (@$balance[0]->BILL_OWING - $amount)+$previousOwing;
                     if($level!="" &&$year!=""){
@@ -650,7 +651,7 @@ class FeeController extends Controller
     }
     // allow student to register by authority
     public function allowRegister(Request $request) {
-         if(@\Auth::user()->department=="Finance"){
+         if(@\Auth::user()->department=="Finance" || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop"){
           if ($request->isMethod("get")) {
    	 	return view("finance.fees.allowRegister");
    	 }
@@ -680,7 +681,7 @@ class FeeController extends Controller
         
     }
     public function processProtocol(Request $request, SystemController $sys) {
-         if(@\Auth::user()->department=="Finance"){
+         if(@\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop"){
          
                $this->validate($request, [
                     'action' => 'required',
@@ -703,6 +704,7 @@ class FeeController extends Controller
             $protocol->action=$action;
             $protocol->policy=$type;
             $protocol->user=@\Auth::user()->fund;
+            Models\StudentModel::where("INDEXNO",$student)->update(array("PROTOCOL"=>1));
             if($protocol->save()){
                 return redirect("/students")->with("success","Registration protocol subscribed for $student successful. He/She can proceed to register");
             }

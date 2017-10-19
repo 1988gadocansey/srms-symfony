@@ -46,6 +46,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/sms/kojo', function () {
         return view('kojo');
     });
+    Route::get('/indexno/upload', function () {
+        return view('nii');
+    });
     Route::get('/nii/upload', function () {
         return view('nii');
     });
@@ -92,7 +95,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::match(array("get", "post"), '/outreach/add', "ApplicantController@addOutreach");
     Route::match(array("get", "post"), '/pro', "SupportController@index");
     Route::get('generator/{program}', 'StudentController@generateIndexNoProgram');
-    Route::post('/nii/process/upload', 'StudentController@loadIndexNo');
+    Route::post('/nii/process/upload', 'StudentController@loadNewIndexNo');
 
     Route::get('outreach/view', 'ApplicantController@outreachs');
     Route::post('outreach/sms', 'ApplicantController@fireOutreach');

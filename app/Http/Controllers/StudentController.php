@@ -95,7 +95,7 @@ class StudentController extends Controller
     }
     public function index(Request $request, SystemController $sys) {
         
-          if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->role=="Tpmid" || @\Auth::user()->department=="Finance" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'){
+          if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'){
              $student = StudentModel::query();
          }
           elseif (@\Auth::user()->role=="Registrar") {
@@ -183,7 +183,7 @@ class StudentController extends Controller
             $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
                ;
         }
-        $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(200);
+        $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(400);
 
         $request->flashExcept("_token");
 
@@ -320,7 +320,7 @@ class StudentController extends Controller
         /*transaction is used here so that any errror rolls
          *  back the whole process and prevents any inserts or updates
          */
- if($request->user()->isSupperAdmin || @\Auth::user()->role=="Dean" || @\Auth::user()->department=="top"|| @\Auth::user()->role=="HOD"){
+ if($request->user()->isSupperAdmin || @\Auth::user()->role=="Dean" || @\Auth::user()->department=="top"|| @\Auth::user()->role=="HOD" || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department == "Admissions"){
        
   \DB::beginTransaction();
 
@@ -533,8 +533,8 @@ class StudentController extends Controller
     public function edit($id,  SystemController $sys,Request $request)
     {
         //
-        if($request->user()->isSupperAdmin || @\Auth::user()->department=="top"  || @\Auth::user()->role=="Tpmid" || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Support" ||   @\Auth::user()->role=="Dean"){
-              
+        if($request->user()->isSupperAdmin || @\Auth::user()->department=="top"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Support" ||   @\Auth::user()->role=="Dean" || @\Auth::user()->department=="Rector" || @\Auth::user()->department=="Admissions" || @\Auth::user()->department=="Planning"){
+             
                $query = StudentModel::where('ID', $id)->where('STATUS','In School')->first();
                //dd( $query );
          }
@@ -606,7 +606,7 @@ public function gad()
      */
     public function update(Request $request, $id, SystemController $sys)
     {
-        if($request->user()->isSupperAdmin || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Dean"||@\Auth::user()->department=="top"  || @\Auth::user()->role=="Tpmid" || @\Auth::user()->role=="Support"){
+        if($request->user()->isSupperAdmin || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Dean"||@\Auth::user()->department=="top"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->role=="Support" || @\Auth::user()->department=="Rector"){
         {
        set_time_limit(36000);
         /*transaction is used here so that any errror rolls
@@ -1183,6 +1183,45 @@ public function gad()
             }
         }
     }
+
+    public function loadNewIndexNo(Request $request,SystemController $sys){
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+
+            $user = \Auth::user()->fund;
+            $ext = strtolower($file->getClientOriginalExtension());
+            $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
+
+            $path = $request->file('file')->getRealPath();
+
+            if (in_array($ext, $valid_exts)) {
+                $data = Excel::load($path, function($reader) {
+
+                })->get();
+                //dd($data);
+
+                if (!empty($data) && $data->count()) {
+
+                    foreach ($data as $key => $value) {
+
+
+                        $indexno=$value->indexno;
+
+
+                        $stno=$value->stno;
+    $check= @StudentModel::where("stno", $stno)->get();
+                if(empty( $check)) {
+                    @StudentModel::where("stno", $stno)->update(array("INDEXNO" => $indexno));
+                    @Models\PortalPasswordModel::where("username", $stno)->update(array("username" => $indexno));
+                }
+
+                    }
+                }
+            }
+        }
+    }
+
+
     public function deleteWrong(Request $request, SystemController $sys) {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -1282,12 +1321,17 @@ public function gad()
                                     $feeLedger->AMOUNT = $item->amount;
                                     $feeLedger->PAYMENTTYPE = "School Fees";
                                     $feeLedger->PAYMENTDETAILS = $details;
-                                    $feeLedger->BANK_DATE = date("Y-m-d");
+                                    $feeLedger->BANK_DATE = $item->paymentdate;
                                     $feeLedger->CHECKER = rand();
                                     $feeLedger->LEVEL = $level;
                                     $feeLedger->RECIEPIENT = 751999;
                                     $feeLedger->BANK = $item->accountnumber;
+                                    if(empty($item->transaction)){
                                     $feeLedger->TRANSACTION_ID = rand();
+                                     }
+                                     else{
+                                         $feeLedger->TRANSACTION_ID =$item->transaction;
+                                     }
                                     $feeLedger->RECEIPTNO = $sys->getReceipt();
                                     $feeLedger->YEAR = $year;
                                     $feeLedger->FEE_TYPE = "School Fees";

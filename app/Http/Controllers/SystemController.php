@@ -36,6 +36,26 @@ class SystemController extends Controller
                 return $result;
  
      }
+     public function totalCredit($indexno,$sem,$level){
+         $data= @\DB::table('tpoly_academic_record')->where("indexno",$indexno)
+             ->where("sem",$sem)
+             ->where("level",$level)
+             ->sum("credits");
+
+        return $data;
+     }
+    public function totalGradePoint($indexno,$sem,$level){
+        $data= @\DB::table('tpoly_academic_record')->where("indexno",$indexno)
+            ->where("sem",$sem)->where("level",$level)
+            ->sum("gpoint");
+        return $data;
+    }
+    public function totalGPA($indexno,$sem,$level){
+         $cr=$this->totalCredit($indexno,$sem,$level);
+        $gp=$this->totalGradePoint($indexno,$sem,$level);
+        $gpa= number_format($gp/$cr, 2, '.', '');
+        return $gpa;
+    }
     public function getCourseGrade($courseId,$year,$term,$student,$level) {
      
       $data= @\DB::table('tpoly_academic_record')->where("indexno",$student)
@@ -454,7 +474,7 @@ class SystemController extends Controller
 
 
     public function getProgramListEvening() {
-        if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Accountant"|| @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Planning" || @\Auth::user()->department=="Admissions"  || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
             $program = \DB::table('tpoly_programme')->where("PROGRAMME","!LIKE","%"."Evening"."%")->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
@@ -476,7 +496,7 @@ class SystemController extends Controller
     }
     // this is purposely for select box 
     public function getProgramList() {
-        if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Accountant"|| @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Planning" || @\Auth::user()->department=="Admissions"  || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
          $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
          return $program;

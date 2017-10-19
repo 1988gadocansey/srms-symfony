@@ -42,7 +42,7 @@ class HomeController extends Controller
         }
         else{
             //ini_set('max_execution_time', 50000);
-           $sys->getZenith();
+         // $sys->getZenith();
            // $sys->generateIndexNumbers();
            /* $dataGenerator=Models\StudentModel::where("LEVEL","100H")->orWhere("LEVEL","100NTT")
                 ->orWhere("LEVEL","100BTT")->orWhere("LEVEL","500")->get();

@@ -488,6 +488,8 @@
 <li><a href='{!! url("/systems/grades/recover") !!}'>Recover Deleted grades</a></li>
 <li><a href='{!! url("/systems/grades/delete") !!}'>Delete uploaded grades</a></li>
 <li><a href='{!! url("/search_account") !!}'>Search student password</a></li>
+<li><a href='{!! url("/finance/protocol") !!}'>Protocols/Policies</a></li>
+
                                              
                         </ul>
                     </div>

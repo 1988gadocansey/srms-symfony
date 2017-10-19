@@ -71,7 +71,7 @@
               <td colspan="3" style=" border-bottom-style:dotted"><strong>{!! strtoupper(@$transaction->bank->NAME)!!}</strong></td>
             </tr>
             @endif
-
+             
             <tr>
               <td><strong>Amount Paid:</strong></td>
               <td colspan="3" style=" border-bottom-style:dotted"><strong>GHC{!! @$transaction->AMOUNT!!}.00</strong>&nbsp;(<span > {!! $words !!}</span> )</td>

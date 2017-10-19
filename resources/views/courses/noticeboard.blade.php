@@ -182,7 +182,7 @@
             <tr>
                 <td><?php $students[]=$pupil->indexno;
                                                  \Session::put('students', $students);echo $count?></td>
-            <td> {{  strtoupper(@$pupil->student->NAME)	 }}</td>
+            <td> {{  strtoupper(@$pupil->student->NAME) .' - '.  @$pupil->student->INDEXNO	 }}</td>
             
             <?php
                $a=$pupil->student->INDEXNO;

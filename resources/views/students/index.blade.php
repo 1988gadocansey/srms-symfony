@@ -132,7 +132,7 @@
 
                             </div>
                         </div>
-                        @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tpmid' ||  @\Auth::user()->department=='Planning' || @\Auth::user()->role=='FO'  || @\Auth::user()->role=='top')
+                        @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin' || @\Auth::user()->department == 'top')
                             <div class="uk-width-medium-1-5">
                                 <div class="uk-margin-small-top">
                                     {!! Form::select('school',
@@ -158,7 +158,7 @@
 
                             </div>
                         </div>
-                        @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Planning' || @\Auth::user()->department=='Tpmid')
+                       @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin' || @\Auth::user()->department == 'top')
                             <div class="uk-width-medium-1-5">
                                 <div class="uk-margin-small-top">
                                     {!! Form::select('hall',
@@ -287,20 +287,20 @@
                                 <th>AGE</th>
 
 
-                            @if(@\Auth::user()->department!='Planning' || \Auth::user()->role!='Lecturer')
+                            @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
                                 <th>PHONE</th>
                             @endif
                             <th>NATIONALITY</th>
                             <th>YEAR BILLS</th>
+                            @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
                             <th>OWINGS</th>
-
-
                             <th>PASSWORD</th>
+                             @endif
                             <th>YEAR GROUP</th>
 
 
                             <th>STATUS</th>
-                            @if( @\Auth::user()->role=="Dean"|| @\Auth::user()->department=="top"|| @\Auth::user()->role=="Planning" || @\Auth::user()->role=="HOD"|| @\Auth::user()->role=='Support' || @\Auth::user()->department=='Tpmid')
+                            @if(@\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tpmid')
 
 
                                 <th colspan="2" class="filter-false remove sorter-false uk-text-center"
@@ -350,17 +350,19 @@
                         <td> {{ strtoupper(@$row->SEX) }}</td>
                         <td> {{ @$row->AGE }}yrs</td>
 
-                @if(@\Auth::user()->department!='Planning' || \Auth::user()->role!='Lecturer')
+                @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
 
                     <td> {{ @$row->TELEPHONENO }}</td>
                 @endif
                 <td> {{ strtoupper(@$row->COUNTRY) }}</td>
 
                 <td>GHC {{ @$row->BILLS }}</td>
+                @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
                 <td>GHC {{ @$row->BILL_OWING }}</td>
 
 
                 <td> {{ @$sys->getStudentPassword(@$row->INDEXNO) }}</td>
+                @endif
                 <td> {{ @$row->GRADUATING_GROUP }}</td>
 
                 <td> {{ strtoupper(@$row->STATUS) }}</td>

@@ -48,7 +48,7 @@
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2">
                                         <label>Index number</label>
-                                        <input type="number" class="md-input md-input-success" required="" name="username"/>
+                                        <input type="text" class="md-input md-input-success" required="" name="username"/>
                                     </div>
                                     <div class="uk-width-medium-1-2">
                                         <label>password</label>
