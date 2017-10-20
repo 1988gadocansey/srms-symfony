@@ -501,8 +501,8 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 $year = "100BTT";
             }
              elseif($program=="MTECHT"||$program=="MTECHP"||$program=="MTECHG"){
-             $level = "500";
-                $year = "500";
+             $level = "500MT";
+                $year = "500MT";
         }
             else {
                $level = "100NT";

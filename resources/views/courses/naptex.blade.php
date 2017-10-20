@@ -167,7 +167,7 @@
                                 <th colspan="3" style="text-align: center">SEM 4</th>
                                 <th colspan="3" style="text-align: center">SEM 5</th>
                                 <th colspan="3" style="text-align: center">SEM 6</th>
-                                <th colspan="3" style="text-align: center">CUMMULATIVE</th>
+                                <th colspan="" style="text-align: center">CUMMULATIVE</th>
 
                             </tr>
                             <tr>
@@ -192,9 +192,9 @@
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
-                                <th>CR</th>
-                                <th>GP</th>
-                                <th>GPA</th>
+                                <th>CGPA</th>
+
+
                                 <th>REC.AWARD</th>
                                 <th>REMARKS - (TRAILING COURSES)</th>
 
@@ -221,62 +221,68 @@
                                 <td> {{  strtoupper(@$pupil->student->NAME)  	 }}</td>
 
 
-                                <td><?php
+                                <td><?php $cr1[]=$sys->totalCredit($pupil->indexno,'1','100H');
                                  echo    $sys->totalCredit($pupil->indexno,'1','100H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp1[]=$sys->totalGradePoint($pupil->indexno,'1','100H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'1','100H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'1','100H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $cr2[]= $sys->totalCredit($pupil->indexno,'2','100H');
                                     echo    $sys->totalCredit($pupil->indexno,'2','100H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp2[]=$sys->totalGradePoint($pupil->indexno,'2','100H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'2','100H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'2','100H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $cr3[]=$sys->totalCredit($pupil->indexno,'1','200H');
                                     echo    $sys->totalCredit($pupil->indexno,'1','200H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp3[]=$sys->totalGradePoint($pupil->indexno,'1','200H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'1','200H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'1','200H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $cr4[]=$sys->totalCredit($pupil->indexno,'2','200H');
                                     echo    $sys->totalCredit($pupil->indexno,'2','200H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp4[]=$sys->totalGradePoint($pupil->indexno,'2','200H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'2','200H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'2','200H');
                                     ?></td>
 
-                                <td><?php
+                                <td><?php $cr5[]=$sys->totalCredit($pupil->indexno,'1','300H');
                                     echo    $sys->totalCredit($pupil->indexno,'1','300H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp5[]=$sys->totalGradePoint($pupil->indexno,'1','300H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'1','300H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'1','300H');
                                     ?></td>
 
-                                <td><?php
+                                <td><?php $cr6[]=$sys->totalCredit($pupil->indexno,'2','300H');
                                     echo    $sys->totalCredit($pupil->indexno,'2','300H');
                                     ?></td>
-                                <td><?php
+                                <td><?php $gp6[]= $sys->totalGradePoint($pupil->indexno,'2','300H');
                                     echo    $sys->totalGradePoint($pupil->indexno,'2','300H');
                                     ?></td>
                                 <td><?php
                                     echo    @$sys->totalGPA($pupil->indexno,'2','300H');
                                     ?></td>
+
+                                <td><?php $cgpa=@number_format( (array_sum($gp1)+array_sum($gp2)+array_sum($gp3)+array_sum($gp4)+array_sum($gp5)+array_sum($gp6))/(array_sum($cr1)+array_sum($cr2)+array_sum($cr3)+array_sum($cr4)+array_sum($cr5)+array_sum($cr6)), 2, '.', '');echo $cgpa;
+
+                                    ?></td>
+                                <td><?php echo $sys->getClass($cgpa);?></td>
+                                <td><?php print_r( $sys->checkTrails($pupil->indexno));?></td>
                             </tr>
 
 

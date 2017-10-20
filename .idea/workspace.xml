@@ -1,373 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3359a2f-c5e4-4bd2-9d25-344ae685ff0e" name="Default" comment="financial platform">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/courses/naptex.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/courses/broadsheet.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/26c649b28213e52795448986916d3ed7684f4149" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/394f3755d2484a89198562c41a78b0ff8e3a8630" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/3b121f714fca5a1ee763416eddb04866a730b772" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/49288c802d2f12ca5671602df4dbd4ffc27368f0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/5889052bdb6e8b5e0834e52119e580674168dee6" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/66b38b1b21e0139ab97abb1b54127c54ec42c86e" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/7569ad4d98d2ceda023f87f31fba73bdc0d1e3e7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/767ab46c96dedc8cfeb0da65e5d8b3ae5bf0460b" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/9251fa6ba1882b4767f422ae395ff7178846d7f8" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/a843c355b6be66ace5695b2cbd4be5e0da68b639" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/adcabcc2288b443efc3c2a9f4d9e7f3297004aab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/d5ac8e7b82cd52d422991c0cb377d79524e1436f" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/f9f6e620a2ab2dcfc5a4abcd2f7b225a4baaec5e" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth.zip" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public\uploads/1493066641-sample.csv" afterPath="$PROJECT_DIR$/public\uploads/1493066641-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions.zip" afterPath="$PROJECT_DIR$/resources/views/admissions.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vendor/.gitkeep" afterPath="$PROJECT_DIR$/resources/views/vendor/.gitkeep" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/views.zip" afterPath="$PROJECT_DIR$/resources/views/views.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fee-sample-year3.csv" afterPath="$PROJECT_DIR$/uploads/fee-sample-year3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472728680-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472728680-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472728707-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472728707-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472732689-fee-sample-year3.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472732689-fee-sample-year3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472732716-fee-sample-year3.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472732716-fee-sample-year3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473198466-fee-sample-year3.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473198466-fee-sample-year3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473363666-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473363666-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473363704-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473363704-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473368749-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473368749-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1474061338-fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/1474061338-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/fee-sample.csv" afterPath="$PROJECT_DIR$/uploads/fees/fee-sample.csv" />
+    <list default="true" id="c3359a2f-c5e4-4bd2-9d25-344ae685ff0e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/APIController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/APIController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicCalenderController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicCalenderController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AppBaseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AppBaseController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/BankController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/BankController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DatatablesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DatatablesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/FeeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/FeeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/FormController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/FormController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/GradeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/GradeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/GroupController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/GroupController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/LostPasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LostPasswordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/MaatwebsiteDemoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MaatwebsiteDemoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentProductController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProgrammeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProgrammeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SettingsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SettingsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StaffController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StaffController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SupportController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SupportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SyncController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SyncController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/routes.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Item.php" afterPath="$PROJECT_DIR$/app/Item.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/AcademicCalenderModel.php" afterPath="$PROJECT_DIR$/app/Models/AcademicCalenderModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/AcademicRecordsModel.php" afterPath="$PROJECT_DIR$/app/Models/AcademicRecordsModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ActivityModel.php" afterPath="$PROJECT_DIR$/app/Models/ActivityModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ApplicantModel.php" afterPath="$PROJECT_DIR$/app/Models/ApplicantModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/BankModel.php" afterPath="$PROJECT_DIR$/app/Models/BankModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/BillModel.php" afterPath="$PROJECT_DIR$/app/Models/BillModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ClassModel.php" afterPath="$PROJECT_DIR$/app/Models/ClassModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/CountryUser.php" afterPath="$PROJECT_DIR$/app/Models/CountryUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/CourseModel.php" afterPath="$PROJECT_DIR$/app/Models/CourseModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/DeletedGradesModel.php" afterPath="$PROJECT_DIR$/app/Models/DeletedGradesModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/DepartmentModel.php" afterPath="$PROJECT_DIR$/app/Models/DepartmentModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ExamResultsModel.php" afterPath="$PROJECT_DIR$/app/Models/ExamResultsModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ExamTypeModel.php" afterPath="$PROJECT_DIR$/app/Models/ExamTypeModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/FeeController.php" afterPath="$PROJECT_DIR$/app/Models/FeeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/FeeModel.php" afterPath="$PROJECT_DIR$/app/Models/FeeModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/FeePaymentModel.php" afterPath="$PROJECT_DIR$/app/Models/FeePaymentModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/FormModel.php" afterPath="$PROJECT_DIR$/app/Models/FormModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/GadModel.php" afterPath="$PROJECT_DIR$/app/Models/GadModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/GradeLogModel.php" afterPath="$PROJECT_DIR$/app/Models/GradeLogModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/GradeSystemModel.php" afterPath="$PROJECT_DIR$/app/Models/GradeSystemModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/GroupModel.php" afterPath="$PROJECT_DIR$/app/Models/GroupModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/HallModel.php" afterPath="$PROJECT_DIR$/app/Models/HallModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/IndexNoModel.php" afterPath="$PROJECT_DIR$/app/Models/IndexNoModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/IndexNumberModel.php" afterPath="$PROJECT_DIR$/app/Models/IndexNumberModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/LevelModel.php" afterPath="$PROJECT_DIR$/app/Models/LevelModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/MessagesModel.php" afterPath="$PROJECT_DIR$/app/Models/MessagesModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/MountedCourseCheckerModel.php" afterPath="$PROJECT_DIR$/app/Models/MountedCourseCheckerModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/MountedCourseModel.php" afterPath="$PROJECT_DIR$/app/Models/MountedCourseModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/OutreachCodeModel.php" afterPath="$PROJECT_DIR$/app/Models/OutreachCodeModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/OutreachModel.php" afterPath="$PROJECT_DIR$/app/Models/OutreachModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/PaymentProduct.php" afterPath="$PROJECT_DIR$/app/Models/PaymentProduct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/PaymentTransactions.php" afterPath="$PROJECT_DIR$/app/Models/PaymentTransactions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/PortalPasswordModel.php" afterPath="$PROJECT_DIR$/app/Models/PortalPasswordModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ProgrammeModel.php" afterPath="$PROJECT_DIR$/app/Models/ProgrammeModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ProtocolModel.php" afterPath="$PROJECT_DIR$/app/Models/ProtocolModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ReceiptModel.php" afterPath="$PROJECT_DIR$/app/Models/ReceiptModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/SchoolModel.php" afterPath="$PROJECT_DIR$/app/Models/SchoolModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/StudentModel.php" afterPath="$PROJECT_DIR$/app/Models/StudentModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/SubjectModel.php" afterPath="$PROJECT_DIR$/app/Models/SubjectModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/WorkerModel.php" afterPath="$PROJECT_DIR$/app/Models/WorkerModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/letter.blade.php" afterPath="$PROJECT_DIR$/app/Models/letter.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Policies/AdminPolicy.php" afterPath="$PROJECT_DIR$/app/Policies/AdminPolicy.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Policies/FinancePolicy.php" afterPath="$PROJECT_DIR$/app/Policies/FinancePolicy.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/project.properties" afterPath="$PROJECT_DIR$/nbproject/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/project.xml" afterPath="$PROJECT_DIR$/nbproject/project.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/1493066641-sample.csv" afterPath="$PROJECT_DIR$/public/1493066641-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Book1.csv" afterPath="$PROJECT_DIR$/public/Book1.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Untitled.csv" afterPath="$PROJECT_DIR$/public/Untitled.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/assets/img/spinners/spinner.html" afterPath="$PROJECT_DIR$/public/assets/css/assets/img/spinners/spinner.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/login_page.min.css" afterPath="$PROJECT_DIR$/public/assets/css/login_page.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/main.min.css" afterPath="$PROJECT_DIR$/public/assets/css/main.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/main44.min.css" afterPath="$PROJECT_DIR$/public/assets/css/main44.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/icons/_notes/dwsync.xml" afterPath="$PROJECT_DIR$/public/assets/icons/_notes/dwsync.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/jquery.min.js" afterPath="$PROJECT_DIR$/public/assets/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" afterPath="$PROJECT_DIR$/public/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" afterPath="$PROJECT_DIR$/public/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/hue.html" afterPath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/hue.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/transparency.html" afterPath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/transparency.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/transtexture.html" afterPath="$PROJECT_DIR$/public/assets/plugins/kendo-ui/styles/textures/transtexture.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/plugins/sweet-alert/_notes/dwsync.xml" afterPath="$PROJECT_DIR$/public/assets/plugins/sweet-alert/_notes/dwsync.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/tableexport/html2canvas.js" afterPath="$PROJECT_DIR$/public/assets/tableexport/html2canvas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/tableexport/tableExport.js" afterPath="$PROJECT_DIR$/public/assets/tableexport/tableExport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/css/custom-style.css" afterPath="$PROJECT_DIR$/public/logins/New folder/css/custom-style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/css/materialize.css" afterPath="$PROJECT_DIR$/public/logins/New folder/css/materialize.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/css/media-hover-effects.css" afterPath="$PROJECT_DIR$/public/logins/New folder/css/media-hover-effects.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/js/plugins/data-tables/data-tables-script.js" afterPath="$PROJECT_DIR$/public/logins/New folder/js/plugins/data-tables/data-tables-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/js/plugins/fullcalendar/fullcalendar-script.js" afterPath="$PROJECT_DIR$/public/logins/New folder/js/plugins/fullcalendar/fullcalendar-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/New folder/js/plugins/jvectormap/vectormap-script.js" afterPath="$PROJECT_DIR$/public/logins/New folder/js/plugins/jvectormap/vectormap-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/css/custom-style.css" afterPath="$PROJECT_DIR$/public/logins/css/custom-style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/css/materialize.css" afterPath="$PROJECT_DIR$/public/logins/css/materialize.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/css/media-hover-effects.css" afterPath="$PROJECT_DIR$/public/logins/css/media-hover-effects.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/js/plugins/data-tables/data-tables-script.js" afterPath="$PROJECT_DIR$/public/logins/js/plugins/data-tables/data-tables-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/js/plugins/fullcalendar/fullcalendar-script.js" afterPath="$PROJECT_DIR$/public/logins/js/plugins/fullcalendar/fullcalendar-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/logins/js/plugins/jvectormap/vectormap-script.js" afterPath="$PROJECT_DIR$/public/logins/js/plugins/jvectormap/vectormap-script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/public/uploads/fees/1462895704-fee-sample.csv" afterPath="$PROJECT_DIR$/public/public/uploads/fees/1462895704-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/public/uploads/fees/php2385.tmp" afterPath="$PROJECT_DIR$/public/public/uploads/fees/php2385.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/public/uploads/fees/php4DC1.tmp" afterPath="$PROJECT_DIR$/public/public/uploads/fees/php4DC1.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/public/uploads/fees/php7A95.tmp" afterPath="$PROJECT_DIR$/public/public/uploads/fees/php7A95.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/upload" afterPath="$PROJECT_DIR$/public/upload" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493066812-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493066812-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493066836-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493066836-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493066996-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493066996-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493067008-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493067008-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493067241-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493067241-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493067295-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493067295-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493104520-sample.csv" afterPath="$PROJECT_DIR$/public/uploads/1493104520-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/1493105421-potag-final.csv" afterPath="$PROJECT_DIR$/public/uploads/1493105421-potag-final.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/uploads/marks/mark.csv" afterPath="$PROJECT_DIR$/public/uploads/marks/mark.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/1462895668-fee-sample.csv" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/1462895668-fee-sample.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/php1B98.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/php1B98.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/php80D4.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/php80D4.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/phpBBBC.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/phpBBBC.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/phpCC7.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/phpCC7.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/phpDDB2.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/phpDDB2.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publicpublic/uploads/fees/phpE86D.tmp" afterPath="$PROJECT_DIR$/publicpublic/uploads/fees/phpE86D.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/academicCalender/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/academicCalender/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/academicCalender/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/academicCalender/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/letter.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/letter.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/outReachLetter.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/outReachLetter.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/outreachApplicant.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/outreachApplicant.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/postgraLetter.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/postgraLetter.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/settings.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/settings.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/support.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/support.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/applicants/viewOutreach.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/applicants/viewOutreach.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/hallReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/hallReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/programReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/programReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/reports/comprehensiveReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/comprehensiveReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/reports/hallReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/hallReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/reports/programReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/programReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/reports/programReport2.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/programReport2.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/reports/typeReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/typeReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/search.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/search.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/typeReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/typeReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/uploadScratchCards.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/uploadScratchCards.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admissions/viewScratchCard.blade.php" afterPath="$PROJECT_DIR$/resources/views/admissions/viewScratchCard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/emails/password.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/emails/password.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/screenLock.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/screenLock.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/autocomplete.blade.php" afterPath="$PROJECT_DIR$/resources/views/autocomplete.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/banks/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/banks/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/banks/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/banks/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/banks/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/banks/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/clone.blade.php" afterPath="$PROJECT_DIR$/resources/views/clone.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/common/errors.blade.php" afterPath="$PROJECT_DIR$/resources/views/common/errors.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/attendanceSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/attendanceSheet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/batchRegister.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/batchRegister.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/broadsheet_naptex.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/broadsheet_naptex.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/cardview.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/cardview.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/deleteGrades.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/deleteGrades.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/editMounted.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/editMounted.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/gad.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/gad.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/hodChecker.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/hodChecker.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/legacyGrades.blade - Copy.php" afterPath="$PROJECT_DIR$/resources/views/courses/legacyGrades.blade - Copy.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/legacyGrades.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/legacyGrades.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/markSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/markSheet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/markSheet2.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/markSheet2.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/markUpload.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/markUpload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/mount.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/mount.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/printAttendance.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/printAttendance.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/printCard.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/printCard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/recoverGrades.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/recoverGrades.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/registered_courses.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/registered_courses.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/registrationReport.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/registrationReport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/showTranscript.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/showTranscript.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/transcript.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/transcript.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/uploadCourse.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/uploadCourse.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/uploadMounted.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/uploadMounted.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/uploadResit.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/uploadResit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/view_mounted.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/view_mounted.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboardOLD.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboardOLD.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/errors/503.blade.php" afterPath="$PROJECT_DIR$/resources/views/errors/503.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/feeUpload.blade.php" afterPath="$PROJECT_DIR$/resources/views/feeUpload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/ePayments/addProducts.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/ePayments/addProducts.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/ePayments/processTranscript.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/ePayments/processTranscript.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/ePayments/transcriptReceipt.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/ePayments/transcriptReceipt.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/allowRegister.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/allowRegister.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/fee_summary.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/fee_summary.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/late_receipt.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/late_receipt.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/ledger.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/ledger.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/masterLedger.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/masterLedger.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/owing.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/owing.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/payfee.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/payfee.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/payment_create.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/payment_create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/printLostReceipt.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/printLostReceipt.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/processPayment.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/processPayment.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/processProtocol.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/processProtocol.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/process_penalty.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/process_penalty.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/receipt.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/receipt.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/transactions.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/transactions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/upload.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/upload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/uploadBalance.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/uploadBalance.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/fees/uploadComponent.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/fees/uploadComponent.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/bills.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/bills.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/ledgerPrograms.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/ledgerPrograms.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/paymentByPrograms.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/paymentByPrograms.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/studentLedger.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/studentLedger.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/summaryOwing.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/summaryOwing.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/summaryPayment.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/summaryPayment.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/finance/reports/summaryPrograms.blade.php" afterPath="$PROJECT_DIR$/resources/views/finance/reports/summaryPrograms.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/graph.blade.php" afterPath="$PROJECT_DIR$/resources/views/graph.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/groups/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/groups/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/groups/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/groups/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/importExport.blade.php" afterPath="$PROJECT_DIR$/resources/views/importExport.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/kojo.blade.php" afterPath="$PROJECT_DIR$/resources/views/kojo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout.blade2.php" afterPath="$PROJECT_DIR$/resources/views/layout.blade2.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/auth.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/auth.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/directory.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/directory.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/oldBLayout.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/oldBLayout.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/printlayout.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/printlayout.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/mypages should look like.php" afterPath="$PROJECT_DIR$/resources/views/mypages should look like.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/nii.blade.php" afterPath="$PROJECT_DIR$/resources/views/nii.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/classes.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/classes.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/create_class.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/create_class.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/create_grade.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/create_grade.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/grade_system.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/grade_system.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/programme/show_grade.blade.php" afterPath="$PROJECT_DIR$/resources/views/programme/show_grade.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/settings/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/settings/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/settings/log.blade.php" afterPath="$PROJECT_DIR$/resources/views/settings/log.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/settings/sms.blade.php" afterPath="$PROJECT_DIR$/resources/views/settings/sms.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/settings/sync.blade.php" afterPath="$PROJECT_DIR$/resources/views/settings/sync.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/staff/directory.blade.php" afterPath="$PROJECT_DIR$/resources/views/staff/directory.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/staff/directory.blade_1.php" afterPath="$PROJECT_DIR$/resources/views/staff/directory.blade_1.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/staff/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/staff/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/staff/upload.blade.php" afterPath="$PROJECT_DIR$/resources/views/staff/upload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/applicantUpload.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/applicantUpload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/gado.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/gado.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/indexUpload.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/indexUpload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/passwords.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/passwords.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/print_registration.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/print_registration.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/students/upload.blade.php" afterPath="$PROJECT_DIR$/resources/views/students/upload.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tasks/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tasks/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/reset.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/reset.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/update.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/update.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/updateProfile.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/updateProfile.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/users.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/users.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vendor/flash/message.blade.php" afterPath="$PROJECT_DIR$/resources/views/vendor/flash/message.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/vendor/flash/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/vendor/flash/modal.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/wrong.blade.php" afterPath="$PROJECT_DIR$/resources/views/wrong.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upload" afterPath="$PROJECT_DIR$/upload" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473362453-level 100-new.csv" afterPath="$PROJECT_DIR$/uploads/1473362453-level 100-new.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473365059-level 100-new.csv" afterPath="$PROJECT_DIR$/uploads/1473365059-level 100-new.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473806627-course-template.csv" afterPath="$PROJECT_DIR$/uploads/1473806627-course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473806776-course-template.csv" afterPath="$PROJECT_DIR$/uploads/1473806776-course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473806928-course-template.csv" afterPath="$PROJECT_DIR$/uploads/1473806928-course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473806974-course-template.csv" afterPath="$PROJECT_DIR$/uploads/1473806974-course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473807033-course-template.csv" afterPath="$PROJECT_DIR$/uploads/1473807033-course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473816568-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473816568-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473816912-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473816912-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818706-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818706-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818759-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818759-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818807-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818807-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818867-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818867-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818893-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818893-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818945-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818945-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473818969-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473818969-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473819035-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473819035-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473819078-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473819078-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473819330-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473819330-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473819485-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473819485-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473835898-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473835898-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473839533-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473839533-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473839620-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473839620-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473839696-teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/1473839696-teaching_staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/1473904109-courses_example.csv" afterPath="$PROJECT_DIR$/uploads/1473904109-courses_example.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/course-template.csv" afterPath="$PROJECT_DIR$/uploads/course-template.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fee-sample-year2.csv" afterPath="$PROJECT_DIR$/uploads/fee-sample-year2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472730457-fee-sample-year2.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472730457-fee-sample-year2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1472730771-fee-sample-year2.csv" afterPath="$PROJECT_DIR$/uploads/fees/1472730771-fee-sample-year2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473198419-fee-sample-year2.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473198419-fee-sample-year2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473656226-marks.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473656226-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473704011-fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473704011-fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473704072-fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473704072-fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473704098-fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473704098-fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473704161-fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473704161-fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/fees/1473704295-fee-component.csv" afterPath="$PROJECT_DIR$/uploads/fees/1473704295-fee-component.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks.csv" afterPath="$PROJECT_DIR$/uploads/marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473662839-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473662839-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473663394-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473663394-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473663948-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473663948-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473668644-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473668644-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473668732-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473668732-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473668800-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473668800-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669151-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669151-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669229-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669229-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669258-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669258-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669335-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669335-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669390-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669390-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/1473669472-marks.csv" afterPath="$PROJECT_DIR$/uploads/marks/1473669472-marks.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/marks/mark.csv" afterPath="$PROJECT_DIR$/uploads/marks/mark.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/staff.csv" afterPath="$PROJECT_DIR$/uploads/staff.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/teaching_staff.csv" afterPath="$PROJECT_DIR$/uploads/teaching_staff.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/naptex.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/naptex.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -380,11 +18,11 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="7700">
               <caret line="317" column="3" lean-forward="false" selection-start-line="316" selection-start-column="3" selection-end-line="317" selection-end-column="3" />
               <folding />
             </state>
@@ -394,8 +32,8 @@
       <file leaf-file-name="CourseController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="2715" column="68" lean-forward="true" selection-start-line="2715" selection-start-column="68" selection-end-line="2715" selection-end-column="68" />
+            <state relative-caret-position="25">
+              <caret line="2715" column="68" lean-forward="false" selection-start-line="2715" selection-start-column="68" selection-end-line="2715" selection-end-column="68" />
               <folding>
                 <marker date="1508424734000" expanded="true" signature="4399:4431" ph="..." />
                 <marker date="1508424734000" expanded="true" signature="7770:7802" ph="..." />
@@ -438,54 +76,39 @@
       <file leaf-file-name="SystemController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="52" column="28" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="28" />
+            <state relative-caret-position="413">
+              <caret line="116" column="5" lean-forward="true" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="noticeboard.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php">
+      <file leaf-file-name="ApplicantController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="166" column="24" lean-forward="true" selection-start-line="162" selection-start-column="22" selection-end-line="166" selection-end-column="24" />
+            <state relative-caret-position="401">
+              <caret line="512" column="80" lean-forward="false" selection-start-line="512" selection-start-column="80" selection-end-line="512" selection-end-column="80" />
               <folding>
-                <marker date="1508410216000" expanded="true" signature="4475:4735" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="4489:4732" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="4961:5213" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="4975:5210" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="5508:5713" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="5523:5710" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="5996:6238" ph="..." />
-                <marker date="1508410216000" expanded="true" signature="6010:6235" ph="..." />
+                <marker date="1508512264000" expanded="true" signature="40681:40713" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="naptex.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="naptex.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/courses/naptex.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="217" column="53" lean-forward="true" selection-start-line="217" selection-start-column="53" selection-end-line="217" selection-end-column="53" />
+            <state relative-caret-position="411">
+              <caret line="279" column="0" lean-forward="true" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
               <folding>
-                <element signature="e#6713#6737#0#HTML" expanded="true" />
-                <element signature="e#7217#7243#0#HTML" expanded="true" />
-                <element signature="e#7303#7329#0#HTML" expanded="true" />
-                <element signature="e#7389#7415#0#HTML" expanded="true" />
-                <element signature="e#7475#7501#0#HTML" expanded="true" />
-                <element signature="e#7561#7587#0#HTML" expanded="true" />
-                <element signature="e#7647#7673#0#HTML" expanded="true" />
-                <element signature="e#7733#7759#0#HTML" expanded="true" />
-                <marker date="1508426305000" expanded="true" signature="3947:4193" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="3961:4190" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="4418:4656" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="4432:4653" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="4883:5088" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="4898:5085" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="5315:5537" ph="..." />
-                <marker date="1508426305000" expanded="true" signature="5329:5534" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="3947:4193" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="3961:4190" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="4418:4656" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="4432:4653" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="4883:5088" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="4898:5085" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="5315:5537" ph="..." />
+                <marker date="1508494348000" expanded="true" signature="5329:5534" ph="..." />
               </folding>
             </state>
           </provider>
@@ -495,8 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hallFees</find>
-      <find>affix</find>
       <find>MOUNT</find>
       <find>g</find>
       <find>getProgrammeT</find>
@@ -525,6 +146,8 @@
       <find>broadsheet/naptex</find>
       <find>broadsheet</find>
       <find>naptexBroadsheet</find>
+      <find>grading</find>
+      <find>getClass</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -560,7 +183,6 @@
         <option value="$PROJECT_DIR$/resources/views/students/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/feeUpload.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
         <option value="$PROJECT_DIR$/resources/views/nii.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/students/passwords.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/finance/fees/receipt.blade.php" />
@@ -571,8 +193,9 @@
         <option value="$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/courses/broadsheet.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
         <option value="$PROJECT_DIR$/resources/views/courses/naptex.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
       </list>
     </option>
   </component>
@@ -724,8 +347,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -747,25 +368,16 @@
             <path>
               <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
               <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="courses" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -849,7 +461,8 @@
       <workItem from="1507647896074" duration="1976000" />
       <workItem from="1507652909755" duration="602000" />
       <workItem from="1507725637003" duration="2268000" />
-      <workItem from="1508407947601" duration="6242000" />
+      <workItem from="1508407947601" duration="8992000" />
+      <workItem from="1508483450076" duration="6091000" />
     </task>
     <task id="LOCAL-00001" summary="financial platform">
       <created>1503653729378</created>
@@ -928,17 +541,24 @@
       <option name="project" value="LOCAL" />
       <updated>1506950140928</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="NABPTEX Broadsheet integration">
+      <created>1508440543092</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1508440543092</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140719000" />
+    <option name="totallyTimeSpent" value="149560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="36" width="1400" height="795" extended-state="0" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19071428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14714286" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -985,7 +605,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="financial platform" />
-    <option name="LAST_COMMIT_MESSAGE" value="financial platform" />
+    <MESSAGE value="NABPTEX Broadsheet integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="NABPTEX Broadsheet integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -994,38 +615,17 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/courses/cardview.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2147">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1497552374000" expanded="true" signature="1390:1641" ph="..." />
-            <marker date="1497552374000" expanded="true" signature="1404:1638" ph="..." />
-            <marker date="1497552374000" expanded="true" signature="1924:2182" ph="..." />
-            <marker date="1497552374000" expanded="true" signature="1938:2179" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/courses/printCard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-916">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="317" column="3" lean-forward="false" selection-start-line="316" selection-start-column="3" selection-end-line="317" selection-end-column="3" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
+        <state relative-caret-position="67875">
           <caret line="2715" column="68" lean-forward="true" selection-start-line="2715" selection-start-column="68" selection-end-line="2715" selection-end-column="68" />
           <folding>
             <marker date="1508424734000" expanded="true" signature="4399:4431" ph="..." />
@@ -1065,9 +665,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1300">
+          <caret line="52" column="28" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
+        <state relative-caret-position="4150">
           <caret line="166" column="24" lean-forward="true" selection-start-line="162" selection-start-column="22" selection-end-line="166" selection-end-column="24" />
           <folding>
             <marker date="1508410216000" expanded="true" signature="4475:4735" ph="..." />
@@ -1082,35 +690,151 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/courses/naptex.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="52" column="28" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="28" />
+        <state relative-caret-position="5425">
+          <caret line="217" column="53" lean-forward="true" selection-start-line="217" selection-start-column="53" selection-end-line="217" selection-end-column="53" />
+          <folding>
+            <marker date="1508494348000" expanded="true" signature="3947:4193" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="3961:4190" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4418:4656" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4432:4653" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4883:5088" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4898:5085" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="5315:5537" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="5329:5534" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/courses/cardview.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2147">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/courses/printCard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-916">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7700">
+          <caret line="317" column="3" lean-forward="false" selection-start-line="316" selection-start-column="3" selection-end-line="317" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/ClassModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="166" column="24" lean-forward="false" selection-start-line="162" selection-start-column="22" selection-end-line="166" selection-end-column="24" />
+          <folding>
+            <marker date="1508410216000" expanded="true" signature="4475:4735" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="4489:4732" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="4961:5213" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="4975:5210" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="5508:5713" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="5523:5710" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="5996:6238" ph="..." />
+            <marker date="1508410216000" expanded="true" signature="6010:6235" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="2715" column="68" lean-forward="false" selection-start-line="2715" selection-start-column="68" selection-end-line="2715" selection-end-column="68" />
+          <folding>
+            <marker date="1508424734000" expanded="true" signature="4399:4431" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="7770:7802" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="8228:8260" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="8455:8487" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="8644:8676" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="14126:14158" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="14332:14364" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="14506:14538" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="19862:19894" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="20068:20100" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="20276:20308" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="37536:37568" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="37707:37739" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="48546:48578" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="48721:48753" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="62209:62241" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="69330:69346" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="70864:70873" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="83609:83641" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="83808:83840" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="86879:86911" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="87068:87100" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="109655:109687" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="110058:110090" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="110309:110341" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="110523:110555" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="116176:116208" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="116461:116493" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="116675:116707" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="125853:125885" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="127531:127563" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="127745:127777" ph="..." />
+            <marker date="1508424734000" expanded="true" signature="128797:128829" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/courses/naptex.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="217" column="53" lean-forward="true" selection-start-line="217" selection-start-column="53" selection-end-line="217" selection-end-column="53" />
+        <state relative-caret-position="411">
+          <caret line="279" column="0" lean-forward="true" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
           <folding>
-            <element signature="e#6713#6737#0#HTML" expanded="true" />
-            <element signature="e#7217#7243#0#HTML" expanded="true" />
-            <element signature="e#7303#7329#0#HTML" expanded="true" />
-            <element signature="e#7389#7415#0#HTML" expanded="true" />
-            <element signature="e#7475#7501#0#HTML" expanded="true" />
-            <element signature="e#7561#7587#0#HTML" expanded="true" />
-            <element signature="e#7647#7673#0#HTML" expanded="true" />
-            <element signature="e#7733#7759#0#HTML" expanded="true" />
-            <marker date="1508426305000" expanded="true" signature="3947:4193" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="3961:4190" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="4418:4656" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="4432:4653" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="4883:5088" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="4898:5085" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="5315:5537" ph="..." />
-            <marker date="1508426305000" expanded="true" signature="5329:5534" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="3947:4193" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="3961:4190" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4418:4656" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4432:4653" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4883:5088" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="4898:5085" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="5315:5537" ph="..." />
+            <marker date="1508494348000" expanded="true" signature="5329:5534" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="116" column="5" lean-forward="true" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="512" column="80" lean-forward="false" selection-start-line="512" selection-start-column="80" selection-end-line="512" selection-end-column="80" />
+          <folding>
+            <marker date="1508512264000" expanded="true" signature="40681:40713" ph="..." />
           </folding>
         </state>
       </provider>
