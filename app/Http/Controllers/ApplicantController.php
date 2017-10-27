@@ -19,36 +19,36 @@ class ApplicantController extends Controller {
     public function __construct() {
 
         $this->middleware('auth');
-         ini_set('max_execution_time', 300000); //300 seconds = 5 minutes
+        ini_set('max_execution_time', 300000); //300 seconds = 5 minutes
     }
-public function fireAutomaticApplicant(Request $request, SystemController $sys) {
-         ini_set('max_execution_time', 300000); //300 seconds = 5 minutes
+    public function fireAutomaticApplicant(Request $request, SystemController $sys) {
+        ini_set('max_execution_time', 300000); //300 seconds = 5 minutes
         // $message = $request->input("message", "");
         $query = \Session::get('students');
         //dd($query);
         $regular = "Congrats![firstname]. You have been admitted to TTU to  pursue [programme].Note, This letter supercedes the previous one sent you, Use this link; application.ttuportal.com to print your admission letter.";
-         $conditional = "Congrats![firstname]. You have been offered a conditional admission to TTU to pursue [programme].Note, This letter supercedes the previous one sent you, Use this link; Use this link application.ttuportal.com to print your admission letter.";
-         $technical=$regular ;
+        $conditional = "Congrats![firstname]. You have been offered a conditional admission to TTU to pursue [programme].Note, This letter supercedes the previous one sent you, Use this link; Use this link application.ttuportal.com to print your admission letter.";
+        $technical=$regular ;
         $provisional = "Congrats![firstname]. You have been offered a provisional admission to TTU to  pursue [programme].You will be required to send your results when published to complete the admission process.Use this link application.ttuportal.com to print your admission letter.";
         $mature = "Congrats![firstname]. Your application for admission to TTU as mature student to  pursue [programme].Note, This letter supercedes the previous one sent you, Use this link; Use this link application.ttuportal.com to print your admission letter.";
         foreach ($query as $rtmt => $member) {
             $name = $member->NAME;
             $firstname = $member->FIRSTNAME;
             $id = $member->ID;
- 
+
             $programme = $sys->getProgram($member->PROGRAMME_ADMITTED);
             if ($member->SMS_SENT == 0 && $member->ADMITTED==1) {
-                
+
                 if ($member->ADMISSION_TYPE == "conditional")
                 {
                     $newstring = str_replace("]", "", "$conditional");
-                    
-                } 
-                elseif($member->ADMISSION_TYPE == "regular" ){
-                      $newstring = str_replace("]", "", "$regular");
+
                 }
-                 elseif($member->ADMISSION_TYPE == "technical" ){
-                      $newstring = str_replace("]", "", "$regular");
+                elseif($member->ADMISSION_TYPE == "regular" ){
+                    $newstring = str_replace("]", "", "$regular");
+                }
+                elseif($member->ADMISSION_TYPE == "technical" ){
+                    $newstring = str_replace("]", "", "$regular");
                 }
                 elseif ($member->ADMISSION_TYPE== "provisional") {
                     $newstring = str_replace("]", "", "$provisional");
@@ -58,29 +58,29 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 $finalstring = str_replace("[", "$", "$newstring");
                 eval("\$finalstring =\"$finalstring\" ;");
 
-              $result= @$sys->firesms($finalstring, $member->PHONE, $member->APPLICATION_NUMBER);
-              
-               
-                 
-                
+                $result= @$sys->firesms($finalstring, $member->PHONE, $member->APPLICATION_NUMBER);
+
+
+
+
                 @Models\ApplicantModel::where("ID", $id)->update(array("SMS_SENT" => 1));
-                 
+
             } else {
-                
+
             }
         }
-       // return @redirect("applicants/view");
+        // return @redirect("applicants/view");
     }
 
- 
+
     public function fireAutomaticOutreach(Request $request, SystemController $sys) {
         ini_set('max_execution_time', 300000); //300 seconds = 5 minutes
         // $message = $request->input("message", "");
         $query = \Session::get('students');
         //dd($query);
         $regular = "Congrats! [name]. You have been admitted to TTU to pursue a programme of study leading to the award of [programme]. Your admission letter will be sent to you in due course.Your admission number is [code], print your letter using the link http://outreach.ttuportal.com";
-         $conditional = "Congrats! [name]. You have been offered a conditional admission to TTU to pursue a programme of study leading to the award of [programme]. Your admission letter will be sent to you in due course.Your admission number is [code], print your letter using the link http://outreach.ttuportal.com";
-      
+        $conditional = "Congrats! [name]. You have been offered a conditional admission to TTU to pursue a programme of study leading to the award of [programme]. Your admission letter will be sent to you in due course.Your admission number is [code], print your letter using the link http://outreach.ttuportal.com";
+
         $provisional = "Congrats! [name]. You have been offered a provisional admission to TTU to pursue a programme of study leading to the award of [programme]. You will be required to send your results when published to complete the admission process. Your admission number is [code], print your letter using the link http://outreach.ttuportal.com";
         //$mature = "Congrats! [name]. Your application for admission to TTU as mature student to pursue a program of study leading to the award of [programme] has been received. We will contact you in due course. Thanks";
         foreach ($query as $rtmt => $member) {
@@ -93,12 +93,12 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 if ($member->admissionType=="conditional")
                 {
                     $newstring = str_replace("]", "", "$conditional");
-                    
-                } 
-                elseif($member->admissionType=="regular" ){
-                      $newstring = str_replace("]", "", "$regular");
+
                 }
-                
+                elseif($member->admissionType=="regular" ){
+                    $newstring = str_replace("]", "", "$regular");
+                }
+
                 elseif ($member->admissionType=="provisional") {
                     $newstring = str_replace("]", "", "$provisional");
                 } else {
@@ -107,12 +107,12 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 $finalstring = str_replace("[", "$", "$newstring");
                 eval("\$finalstring =\"$finalstring\" ;");
 
-                 @$sys->firesms($finalstring, $member->phone, $member->phone);
-                    
-                
+                @$sys->firesms($finalstring, $member->phone, $member->phone);
+
+
                 @Models\OutreachModel::where("id", $id)->update(array("sms_sent" => 1));
             } else {
-                
+
             }
         }
         return @redirect("outreach/view");
@@ -137,16 +137,16 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 @Models\OutreachModel::where("id", $id)->update(array("sms_sent" => 1));
 
                 if (@$sys->firesms($finalstring, $member->phone, $member->phone)) {
-                    
+
                 }
             } else {
-                
+
             }
         }
         return @redirect("outreach/view");
     }
 
-    
+
     public function addOutreach(Request $request, SystemController $sys) {
         if ($request->isMethod("get")) {
 
@@ -160,20 +160,20 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
             $type = strtoupper($request->input('type'));
             $user = @\Auth::user()->fund;
 
-              $indexNo_query = @Models\OutreachCodeModel::first();
-          	
- $code ="201710".$indexNo_query->code;
+            $indexNo_query = @Models\OutreachCodeModel::first();
+
+            $code ="201710".$indexNo_query->code;
             $outreach = new Models\OutreachModel();
             $outreach->name = $name;
             $outreach->phone = $phone;
             $outreach->gender = $gender;
             $outreach->programme = $program;
             $outreach->actor = $user;
-             $outreach->applicationNumber =$code;
+            $outreach->applicationNumber =$code;
             $outreach->type = $type;
 
             if ($outreach->save()) {
-                  $indexNo_query->increment("code", 1);
+                $indexNo_query->increment("code", 1);
                 @$sys->firesms($message, $phone, $phone);
 
                 return response()->json(['status' => 'success', 'message' => ' Applicant admitted successfully ']);
@@ -186,7 +186,7 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
     public function outreachs(Request $request, SystemController $sys) {
         $applicant = Models\OutreachModel::query();
 
-         if ($request->has('search') && trim($request->input('search')) != "") {
+        if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
             $applicant->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%");
         }
@@ -211,17 +211,17 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
         \Session::put('students', $data);
 
         return view('admissions.applicants.viewOutreach')->with("data", $data)
-                
-                ->with('programme', $sys->getProgramList())
-                 ->with('halls', $sys->getHalls())
-                 ->with('year', $sys->years())
-                ->with('department', $sys->getDepartmentList())
-                        ->with('school', $sys->getSchoolList())
-                ->with('type', $sys->getProgrammeTypes());;
-        
-        
-       
-                        
+
+            ->with('programme', $sys->getProgramList())
+            ->with('halls', $sys->getHalls())
+            ->with('year', $sys->years())
+            ->with('department', $sys->getDepartmentList())
+            ->with('school', $sys->getSchoolList())
+            ->with('type', $sys->getProgrammeTypes());;
+
+
+
+
     }
 
     public function updateApplicantStatus() {
@@ -341,7 +341,7 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                 $status = $qualify;
                 return @Models\ApplicantModel::where("APPLICATION_NUMBER", $form)->update(array("ELIGIBILTY" => $status, "QUALIFY" => $qualify, "GRADE" => 0, "GRADES" => $row->CLASS));
             } else {
-                
+
             }
         }
     }
@@ -373,15 +373,15 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
             } elseif (strpos($member->PROGRAMME_ADMITTED, "A") === 0) {
                 $level = "100NT";
                 $year = '100NT';
-            } 
+            }
             elseif (strpos($member->PROGRAMME_ADMITTED, "B") === 0) {
-               
+
                 $level = "100BTT";
                 $year = "100BTT";
             }
-            
+
             else {
-               $level = "100NT";
+                $level = "100NT";
                 $year = '100NT';
             }
             // move all the applicants to the student table
@@ -456,7 +456,7 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
 
 
                     if ($sys->firesms($message, $member->PHONE, $APPLICATION_NUMBER)) {
-                        
+
                     }
                 }
             } else {
@@ -476,41 +476,41 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
         $program = $request->input("program");
         $hall = $request->input("hall");
         $admit = $request->input("admit");
-         $type= $request->input("type");
-         $resident= $request->input("resident");
+        $type= $request->input("type");
+        $resident= $request->input("resident");
         $conditional = $request->input("conditional");
         $programName = $sys->getProgram($program);
         $array = $sys->getSemYear();
 
-       // $fiscalYear = $array[0]->YEAR;
+        // $fiscalYear = $array[0]->YEAR;
         $fiscalYear ='2017/2018';
 //dd($program);
-            if (strpos($program, "H") == 0) {
-                $level = "100H";
-                $year = '100H';
-            } elseif (strpos($program, "D") == 0 || strpos($program, "C") == 0) {
-                $level = "100NT";
-                $year = '100NT';
-            } elseif (strpos($program, "A") == 0) {
-                $level = "100NT";
-                $year = '100NT';
-            } 
-            elseif (strpos($program, "B") == 0) {
-               
-                $level = "100BTT";
-                $year = "100BTT";
-            }
-             elseif($program=="MTECHT"||$program=="MTECHP"||$program=="MTECHG"){
-             $level = "500MT";
-                $year = "500MT";
+        if (strpos($program, "H") == 0) {
+            $level = "100H";
+            $year = '100H';
+        } elseif (strpos($program, "D") == 0 || strpos($program, "C") == 0) {
+            $level = "100NT";
+            $year = '100NT';
+        } elseif (strpos($program, "A") == 0) {
+            $level = "100NT";
+            $year = '100NT';
         }
-            else {
-               $level = "100NT";
-                $year = '100NT';
-            }
+        elseif (strpos($program, "B") == 0) {
+
+            $level = "100BTT";
+            $year = "100BTT";
+        }
+        elseif($program=="MTECHT"||$program=="MTECHP"||$program=="MTECHG"){
+            $level = "500MT";
+            $year = "500MT";
+        }
+        else {
+            $level = "100NT";
+            $year = '100NT';
+        }
 //dd($level);
         if($program=="MTECHT"||$program=="MTECHP"||$program=="MTECHG"){
-        $fee = $sys->getYearBillLevelPostgraduate($fiscalYear, $level, $program);
+            $fee = $sys->getYearBillLevelPostgraduate($fiscalYear, $level, $program);
         }
         else{
             $fee = $sys->getYearBillLevel100($fiscalYear, $level, $program);
@@ -521,32 +521,32 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
         $size=@$capacity->HALL_CAPACITY;
         $spaceLeft=@$sys->hallRoomConsumed($hall);
         $left= $spaceLeft;
-        
+
         if($left<=$size && $resident==1){
-           @Models\HallModel::where("HALL_NAME",$hall)->update(array("SPACE_USED"=>$left));
-          
+            @Models\HallModel::where("HALL_NAME",$hall)->update(array("SPACE_USED"=>$left));
+
         }
-        
+
         if($fee > 0){
 
 
             if ($admit =="admit") {
-                
-                
+
+
                 Models\ApplicantModel::where("APPLICATION_NUMBER", $applicant)
-                        ->update(
-                                array(
-                                    "PROGRAMME_ADMITTED" => $program,
-                                    "ADMISSION_FEES" => $fee,
-                                    "ADMISSION_TYPE" => $type,
-                                    "HALL_ADMITTED" => strtoupper($hall),
-                                    "STATUS" => "ADMITTED",
-                                    "ADMITTED" => "1",
-                                    "RESIDENTIAL_STATUS" =>$resident,
-                                    "DATE_ADMITTED" => date("D M d, Y"),
-                                    "ADMITTED_BY_OFFICER" => $user
-                                )
-                );
+                    ->update(
+                        array(
+                            "PROGRAMME_ADMITTED" => $program,
+                            "ADMISSION_FEES" => $fee,
+                            "ADMISSION_TYPE" => $type,
+                            "HALL_ADMITTED" => strtoupper($hall),
+                            "STATUS" => "ADMITTED",
+                            "ADMITTED" => "1",
+                            "RESIDENTIAL_STATUS" =>$resident,
+                            "DATE_ADMITTED" => date("D M d, Y"),
+                            "ADMITTED_BY_OFFICER" => $user
+                        )
+                    );
 
                 $student=Models\ApplicantModel::where("APPLICATION_NUMBER",$applicant)->first();
                 $check=Models\StudentModel::where("STNO",$applicant)->first();
@@ -636,9 +636,9 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
                     Models\PortalPasswordModel::where("username",$student->APPLICATION_NUMBER)->update(array("programme"=>$student->PROGRAMME_ADMITTED,"level"=>$level));
                 }
 
-                
+
             } else {
-                 
+
             }
         } else {
             return response()->json(['status' => 'error', 'message' => $programName . ' does not have fees set. please contact finance']);
@@ -648,78 +648,78 @@ public function fireAutomaticApplicant(Request $request, SystemController $sys) 
     }
 
     public function generateAccounts() {
-        
+
     }
-public function admitOutreach(Request $request, SystemController $sys) {
+    public function admitOutreach(Request $request, SystemController $sys) {
 //dd($request);
         $applicant = $request->input("applicant");
         $program = $request->input("program");
         $hall = $request->input("hall");
         $admit = $request->input("admit");
-         $type= $request->input("type");
-      $resident= $request->input("resident");
+        $type= $request->input("type");
+        $resident= $request->input("resident");
         $programName = $sys->getProgram($program);
         $array = $sys->getSemYear();
 
-       // $fiscalYear = $array[0]->YEAR;
+        // $fiscalYear = $array[0]->YEAR;
         $fiscalYear ='2017/2018';
 //dd($program);
-            if (strpos($program, "H") == 0) {
-                $level = "100H";
-                $year = '100H';
-            } elseif (strpos($program, "D") == 0 || strpos($program, "C") == 0) {
-                $level = "100NT";
-                $year = '100NT';
-            } elseif (strpos($program, "A") == 0) {
-                $level = "100NT";
-                $year = '100NT';
-            } 
-            elseif (strpos($program, "B") == 0) {
-               
-                $level = "100BTT";
-                $year = "100BTT";
-            }
-            
-            else {
-               $level = "100NT";
-                $year = '100NT';
-            }
+        if (strpos($program, "H") == 0) {
+            $level = "100H";
+            $year = '100H';
+        } elseif (strpos($program, "D") == 0 || strpos($program, "C") == 0) {
+            $level = "100NT";
+            $year = '100NT';
+        } elseif (strpos($program, "A") == 0) {
+            $level = "100NT";
+            $year = '100NT';
+        }
+        elseif (strpos($program, "B") == 0) {
+
+            $level = "100BTT";
+            $year = "100BTT";
+        }
+
+        else {
+            $level = "100NT";
+            $year = '100NT';
+        }
 //dd($level);
         $fee = @$sys->getYearBillLevel100($fiscalYear, $level, $program);
         $user = @\Auth::user()->fund;
         $capacity=@$sys->hallData($hall);
         $size=@$capacity->HALL_CAPACITY;
-        
+
         $spaceLeft=$sys->hallRoomConsumed($hall);
         $left= $spaceLeft;
-       
+
         if($left<=$size && $resident==1){
-           @Models\HallModel::where("HALL_NAME",$hall)->update(array("SPACE_USED"=>$left));
-          
+            @Models\HallModel::where("HALL_NAME",$hall)->update(array("SPACE_USED"=>$left));
+
         }
         if ($fee > 0) {
 
 
             if ($admit =="admit") {
-               
+
                 @Models\OutreachModel::where("applicationNumber", $applicant)
-                        ->update(
-                                array(
-                                    "programmeAdmitted" => $program,
-                                    "admissionFees" => $fee,
-                                    "admissionType" => $type,
-                                    "hallAdmitted" => strtoupper($hall),
-                                    "status" => "ADMITTED",
-                                    "admitted" => "1",
-                                     "residentialStatus"=>$resident,
-                                    "dateAdmitted" => date("D M d, Y"),
-                                    "admitedBy" => $user
-                                )
-                );
-                
-                
+                    ->update(
+                        array(
+                            "programmeAdmitted" => $program,
+                            "admissionFees" => $fee,
+                            "admissionType" => $type,
+                            "hallAdmitted" => strtoupper($hall),
+                            "status" => "ADMITTED",
+                            "admitted" => "1",
+                            "residentialStatus"=>$resident,
+                            "dateAdmitted" => date("D M d, Y"),
+                            "admitedBy" => $user
+                        )
+                    );
+
+
             } else {
-                 
+
             }
         } else {
             return response()->json(['status' => 'error', 'message' => $programName . ' does not have fees set. please contact finance']);
@@ -735,95 +735,95 @@ public function admitOutreach(Request $request, SystemController $sys) {
 
     public function index(Request $request, SystemController $sys) {
         if(\Auth::user()->department=="Admissions"){
-      ini_set('max_execution_time', 9000); //300 seconds = 5 minutes
-       // $this->updateApplicantStatus();
-        $student = Models\ApplicantModel::query();
+            ini_set('max_execution_time', 9000); //300 seconds = 5 minutes
+            // $this->updateApplicantStatus();
+            $student = Models\ApplicantModel::query();
 
 
-        if ($request->has('department') && trim($request->input('department')) != "") {
-            $student->whereHas('programme', function($q)use ($request) {
-                $q->whereHas('departments', function($q)use ($request) {
-                    $q->whereIn('DEPTCODE', [$request->input('department')]);
-                });
-            });
-        }
-        if ($request->has('type') && trim($request->input('type')) != "") {
-            $student->whereHas('programme', function($q)use ($request) {
-
-                $q->where('TYPE', [$request->input('type')]);
-            });
-        }
-
-        if ($request->has('school') && trim($request->input('school')) != "") {
-            $student->whereHas('programme', function($q)use ($request) {
-                $q->whereHas('departments', function($q)use ($request) {
-
-                    $q->whereHas('school', function($q)use ($request) {
-                        $q->whereIn('FACCODE', [$request->input('school')]);
+            if ($request->has('department') && trim($request->input('department')) != "") {
+                $student->whereHas('programme', function($q)use ($request) {
+                    $q->whereHas('departments', function($q)use ($request) {
+                        $q->whereIn('DEPTCODE', [$request->input('department')]);
                     });
                 });
-            });
-        }
+            }
+            if ($request->has('type') && trim($request->input('type')) != "") {
+                $student->whereHas('programme', function($q)use ($request) {
+
+                    $q->where('TYPE', [$request->input('type')]);
+                });
+            }
+
+            if ($request->has('school') && trim($request->input('school')) != "") {
+                $student->whereHas('programme', function($q)use ($request) {
+                    $q->whereHas('departments', function($q)use ($request) {
+
+                        $q->whereHas('school', function($q)use ($request) {
+                            $q->whereIn('FACCODE', [$request->input('school')]);
+                        });
+                    });
+                });
+            }
 
 
 
-        if ($request->has('search') && trim($request->input('search')) != "") {
-            // dd($request);
-            $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%");
-        }
-        if ($request->has('program') && trim($request->input('program')) != "") {
-            $student->where("PROGRAMME_ADMITTED", $request->input("program", ""))
-                    
-            ;
-        }
+            if ($request->has('search') && trim($request->input('search')) != "") {
+                // dd($request);
+                $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%");
+            }
+            if ($request->has('program') && trim($request->input('program')) != "") {
+                $student->where("PROGRAMME_ADMITTED", $request->input("program", ""))
 
-        if ($request->has('status') && trim($request->input('status')) != "") {
-            $student->where("STATUS", $request->input("status", ""));
-        }
-        if ($request->has('group') && trim($request->input('group')) != "") {
-            $student->where("YEAR_ADMISION", $request->input("group", ""));
-        }
-        if ($request->has('nationality') && trim($request->input('nationality')) != "") {
-            $student->where("NATIONALITY", $request->input("nationality", ""));
-        }
-        if ($request->has('region') && trim($request->input('region')) != "") {
-            $student->where("REGION", $request->input("region", ""));
-        }
-        if ($request->has('gender') && trim($request->input('gender')) != "") {
-            $student->where("GENDER", $request->input("gender", ""));
-        }
+                ;
+            }
 
-        if ($request->has('hall') && trim($request->input('hall')) != "") {
-            $student->where("PREFERED_HALL", $request->input("hall", ""));
-        }
-        if ($request->has('religion') && trim($request->input('religion')) != "") {
-            $student->where("RELIGION", $request->input("religion", ""));
-        }
-        if ($request->has('search') && trim($request->input('search')) != "" && trim($request->input('by')) != "") {
-            // dd($request);
-            $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
+            if ($request->has('status') && trim($request->input('status')) != "") {
+                $student->where("STATUS", $request->input("status", ""));
+            }
+            if ($request->has('group') && trim($request->input('group')) != "") {
+                $student->where("YEAR_ADMISION", $request->input("group", ""));
+            }
+            if ($request->has('nationality') && trim($request->input('nationality')) != "") {
+                $student->where("NATIONALITY", $request->input("nationality", ""));
+            }
+            if ($request->has('region') && trim($request->input('region')) != "") {
+                $student->where("REGION", $request->input("region", ""));
+            }
+            if ($request->has('gender') && trim($request->input('gender')) != "") {
+                $student->where("GENDER", $request->input("gender", ""));
+            }
+
+            if ($request->has('hall') && trim($request->input('hall')) != "") {
+                $student->where("PREFERED_HALL", $request->input("hall", ""));
+            }
+            if ($request->has('religion') && trim($request->input('religion')) != "") {
+                $student->where("RELIGION", $request->input("religion", ""));
+            }
+            if ($request->has('search') && trim($request->input('search')) != "" && trim($request->input('by')) != "") {
+                // dd($request);
+                $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
                     ->orWhere("APPLICATION_NUMBER", "LIKE", "%" . $request->input("search", "") . "%");
-        }
-        $data = $student->orderBy('NAME')->orderBy('APPLICATION_NUMBER')->orderBy('FIRST_CHOICE')->paginate(100);
+            }
+            $data = $student->orderBy('NAME')->orderBy('APPLICATION_NUMBER')->orderBy('FIRST_CHOICE')->paginate(100);
 
-        $request->flashExcept("_token");
+            $request->flashExcept("_token");
 
-        \Session::put('students', $data);
-        return view('admissions.applicants.index')->with("data", $data)
-                        ->with('year', $sys->years())
-                        ->with('nationality', $sys->getCountry())
-                        ->with('halls', $sys->getHalls())
-                        ->with('religion', $sys->getReligion())
-                        ->with('region', $sys->getRegions())
-                        ->with('department', $sys->getDepartmentList())
-                        ->with('school', $sys->getSchoolList())
-                        ->with('programme', $sys->getProgramList())
-                        ->with('type', $sys->getProgrammeTypes());
+            \Session::put('students', $data);
+            return view('admissions.applicants.index')->with("data", $data)
+                ->with('year', $sys->years())
+                ->with('nationality', $sys->getCountry())
+                ->with('halls', $sys->getHalls())
+                ->with('religion', $sys->getReligion())
+                ->with('region', $sys->getRegions())
+                ->with('department', $sys->getDepartmentList())
+                ->with('school', $sys->getSchoolList())
+                ->with('programme', $sys->getProgramList())
+                ->with('type', $sys->getProgrammeTypes());
         }elseif(\Auth::user()->department=="PRO"){
             return redirect("/pro");
         }
         else{
-             return redirect("/dashboard");
+            return redirect("/dashboard");
         }
     }
 
@@ -860,34 +860,34 @@ public function admitOutreach(Request $request, SystemController $sys) {
 
     public function letter($id, SystemController $sys, Request $request) {
         $array=$sys->getSemYear();
-                  $sem=$array[0]->SEMESTER;
-                  $year="2017/2018";
+        $sem=$array[0]->SEMESTER;
+        $year="2017/2018";
         $sql= Models\ApplicantModel::where("APPLICATION_NUMBER",$id)->where("STATUS","ADMITTED")
-                ->where("ADMITTED","1")
-                ->where("ADMISSION_FEES",">","0")
-                ->first();
+            ->where("ADMITTED","1")
+            ->where("ADMISSION_FEES",">","0")
+            ->first();
         if($sql->PROGRAMME_ADMITTED=="MTECHT"||$sql->PROGRAMME_ADMITTED=="MTECHP"||$sql->PROGRAMME_ADMITTED=="MTECHG"){
-              return view("admissions.applicants.postgraLetter")->with("data", $sql)->with('year',$year);;
-    
+            return view("admissions.applicants.postgraLetter")->with("data", $sql)->with('year',$year);;
+
         }
         else{
-        return view("admissions.applicants.letter")->with("data", $sql)->with('year',$year);;
-    
+            return view("admissions.applicants.letter")->with("data", $sql)->with('year',$year);;
+
         }
-     }
+    }
     public function letterOutreach($id, SystemController $sys, Request $request) {
         $array=$sys->getSemYear();
-                  $sem=$array[0]->SEMESTER;
-                  $year="2017/2018";
+        $sem=$array[0]->SEMESTER;
+        $year="2017/2018";
         $sql= Models\OutreachModel::where("id",$id)->where("status","ADMITTED")
-                ->where("admitted","1")
-                ->where("admissionFees",">","0")
-                ->first();
-        
+            ->where("admitted","1")
+            ->where("admissionFees",">","0")
+            ->first();
+
         return view("admissions.applicants.outReachLetter")->with("data", $sql)->with('year',$year);;
     }
-    
-    
+
+
     /**
      * Display a listing of the resource.
      *
@@ -901,7 +901,7 @@ public function admitOutreach(Request $request, SystemController $sys) {
      * @return \Illuminate\Http\Response
      */
     public function show($id, SystemController $sys, Request $request) {
-        
+
 
 
         $query = Models\ApplicantModel::where('APPLICATION_NUMBER', $id)->first();
@@ -910,7 +910,7 @@ public function admitOutreach(Request $request, SystemController $sys) {
 
 
         return view('admissions.applicants.show')->with('student', $query)
-                        ->with('data', $grades);
+            ->with('data', $grades);
     }
 
     public function search() {
@@ -1031,5 +1031,35 @@ public function admitOutreach(Request $request, SystemController $sys) {
 
             }
         }
+    }
+    public function generateResultApplicants(Request $request, SystemController $sys){
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE",'regular');
+        if ($request->has('program') && trim($request->input('program')) != "") {
+            $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
+        }
+        $data = $sql->paginate(100);
+
+        $request->flashExcept("_token");
+        return view("admissions.reports.results")->With("data",$data)->with('programme', $sys->getProgramList());
+    }
+    public function generateResultConditionalApplicants(Request $request, SystemController $sys){
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE","Conditional");
+        if ($request->has('program') && trim($request->input('program')) != "") {
+            $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
+        }
+        $data = $sql->paginate(100);
+
+        $request->flashExcept("_token");
+        return view("admissions.reports.conditionalResult")->With("data",$data)->with('programme', $sys->getProgramList());
+    }
+    public function generateResultMatureApplicants(Request $request, SystemController $sys){
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE","Mature");
+        if ($request->has('program') && trim($request->input('program')) != "") {
+            $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
+        }
+        $data = $sql->paginate(100);
+
+        $request->flashExcept("_token");
+        return view("admissions.reports.matureResult")->With("data",$data)->with('programme', $sys->getProgramList());
     }
 }

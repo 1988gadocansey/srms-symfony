@@ -25,12 +25,12 @@
  * API route of quality assurance
  * 
  */
- Route::get('student/{indexno}/qa', 'APIController@qualityAssurance');
+Route::get('student/{indexno}/qa', 'APIController@qualityAssurance');
 Route::get('delete/wrong', 'StudentController@showWrong');
 
-  Route::get('student/{indexno}/liaison', 'APIController@liaison');
-  Route::post('receivePayment', 'APIController@payFee');
-   Route::post('/api/hall', 'APIController@getStudentHall');
+Route::get('student/{indexno}/liaison', 'APIController@liaison');
+Route::post('receivePayment', 'APIController@payFee');
+Route::post('/api/hall', 'APIController@getStudentHall');
 Route::post('/api/local', 'APIController@getLocalData');
 Route::post('/api/kojo', 'APIController@getStudentKojo');
 Route::post('/api/kojo/name', 'APIController@getStudentKojoName');
@@ -38,11 +38,11 @@ Route::post('/api/send', 'APIController@pushToSrms');
 Route::post('/api/student', 'APIController@getStudentID');
 
 Route::group(['middleware' => ['web']], function () {
- Route::auth();
+    Route::auth();
     Route::get('/', function () {
         return view('auth/login');
     })->middleware('guest');
-    
+
     Route::get('/sms/kojo', function () {
         return view('kojo');
     });
@@ -55,42 +55,42 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/upload/fees', function () {
         return view('feeUpload');
     });
-     Route::post('/sms_kojo', 'StudentController@sendOwingSMS');
+    Route::post('/sms_kojo', 'StudentController@sendOwingSMS');
     Route::post('missHapp', 'LostPasswordController@sendNewPassword');
     Route::get('/lock', function () {
         return view('auth/screenLock');
     });
     Route::get('/indexno/gen', 'StudentController@generateIndexNo');
-     Route::get('/generate', 'BankController@generateAccounts');
-   
+    Route::get('/generate', 'BankController@generateAccounts');
+
     Route::controller('search_password', 'PasswordController', [
         'anyData' => 'search_password.data',
         'getIndex' => 'search_password',
     ]);
-     Route::controller('power_users', 'UserController', [
+    Route::controller('power_users', 'UserController', [
         'anyData' => 'power_users.data',
         'getIndex' => 'power_users',
     ]);
-    
-   Route::get('dashboard', 'HomeController@index');
-  Route::get('/change_password', 'PasswordController@showChange');
+
+    Route::get('dashboard', 'HomeController@index');
+    Route::get('/change_password', 'PasswordController@showChange');
     Route::post('/change_password', 'PasswordController@reset');
-   Route::get( '/finance/upload', "FeeController@showUploadBalance");
-    
+    Route::get( '/finance/upload', "FeeController@showUploadBalance");
+
     Route::post( 'finance/upload', "FeeController@uploadFeesBalance");
     Route::post( 'load/fees', "StudentController@uploadPaymentZenith");
 
     Route::get( '/api/student', "APIController@getStudentData");
-   
-    
+
+
     Route::get('laracharts', 'HomeController@getLaraChart');
-      Route::get('/graph', 'HomeController@buildChart');
+    Route::get('/graph', 'HomeController@buildChart');
     // student routes
     Route::controller('students', 'StudentController', [
         'anyData' => 'students.data',
         'getIndex' => 'students',
     ]);
-    
+
     Route::get('tpoly', 'StudentController@tpoly');
     Route::match(array("get", "post"), '/outreach/add', "ApplicantController@addOutreach");
     Route::match(array("get", "post"), '/pro', "SupportController@index");
@@ -100,7 +100,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('outreach/view', 'ApplicantController@outreachs');
     Route::post('outreach/sms', 'ApplicantController@fireOutreach');
     Route::get('outreach/auto/sms', 'ApplicantController@fireAutomaticOutreach');
-      Route::delete('/outreach/delete', 'ApplicantController@destroy');
+    Route::delete('/outreach/delete', 'ApplicantController@destroy');
     Route::get('students', 'StudentController@index');
     Route::post('/sms', 'StudentController@sms');
     Route::get('/add_students', 'StudentController@create');
@@ -109,12 +109,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/upload_applicants', 'StudentController@applicantUploadForm');
     Route::post('/upload_applicants', 'StudentController@uploadApplicants');
     Route::post('/create_account', 'PasswordController@createStudentAccount');
-    
+
     Route::post('/add_students', 'StudentController@store');
     Route::get('/student_show/{id}/id', 'StudentController@show'); // for printout
     Route::get('/edit_student/{id}/id', 'StudentController@edit');
     Route::post('/edit_student/{id}/id', 'StudentController@update');
-    
+
     // routes for learning
     Route::get('autocomplete', 'SearchController@index');
     Route::get('clone', function () {
@@ -124,13 +124,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::controller('/banks', 'BankController', [
         'anyData' => 'banks.data',
         'getIndex' => 'banks',
-        
+
     ]);
     Route::get('/create_bank', 'BankController@form');
     Route::post('/create_bank', 'BankController@store');
     Route::get('/edit_bank/{id}/id', 'BankController@edit');
     Route::post('/edit_bank/{id}/id', 'BankController@update');
-    
+
     // fees route
     Route::get('/view_fees', 'FeeController@getIndex');
     Route::get('/create_fees', 'FeeController@createform');
@@ -138,9 +138,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/upload_fees', 'FeeController@showUpload');
     Route::post('/upload_fees', 'FeeController@uploadStudentsFee');
     Route::delete('/delete_fees', 'FeeController@destroy');
-     
+
     Route::get('/run_bill/{id}/id', 'FeeController@approve');
-     
+
     Route::get('/pay_fees', 'FeeController@showPayform');
     Route::post('/pay_fees', 'FeeController@showStudent');
     // late fee payment ie fee penalty
@@ -148,7 +148,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/pay_fees_penalty', 'FeeController@showStudentPenalty');
     Route::post('/processPayment', 'FeeController@processPayment');
     Route::delete('/delete_payment', 'FeeController@destroyPayment');
-    
+
     Route::get('/printreceipt/{receiptno}', 'FeeController@printreceipt');
 
     Route::post('/indexno/load', 'StudentController@loadIndexNo');
@@ -156,40 +156,40 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/printreceiptLate/{receiptno}', 'FeeController@printreceiptLate');
     Route::match(array("get", "post"), '/uploadDetailFees','FeeController@uploadFeesComponent');
-     Route::match(array("get", "post"), '/print/receipt','FeeController@printOldReceipt');
-        Route::match(array("get", "post"), '/print/password','FeeController@printPasswordReceipt');
-  
-     
-     Route::match(array("get", "post"), '/finance/protocol','FeeController@allowRegister');
-       Route::post('/processProtocol', 'FeeController@processProtocol');
-   
+    Route::match(array("get", "post"), '/print/receipt','FeeController@printOldReceipt');
+    Route::match(array("get", "post"), '/print/password','FeeController@printPasswordReceipt');
 
-   /* Route::controller('/view_payments', 'PaymentController', [
-        'anyData' => 'view_payments.data',
-        'getIndex' => 'view_payments',
-        
-    ]);*/
-     Route::get('/view_payments', 'PaymentController@payments');
-     Route::get('/view_payments_master', 'FeeController@masterLedger');
-     // this route will process both get and post so am using route match
-     Route::match(array("get", "post"), '/fee_summary', "FeeController@feeSummary");
-     Route::get('/owing_paid', 'FeeController@owingAndPaid');
-     Route::post('/fireOwingSMS', 'FeeController@sendFeeSMS');
+
+    Route::match(array("get", "post"), '/finance/protocol','FeeController@allowRegister');
+    Route::post('/processProtocol', 'FeeController@processProtocol');
+
+
+    /* Route::controller('/view_payments', 'PaymentController', [
+         'anyData' => 'view_payments.data',
+         'getIndex' => 'view_payments',
+
+     ]);*/
+    Route::get('/view_payments', 'PaymentController@payments');
+    Route::get('/view_payments_master', 'FeeController@masterLedger');
+    // this route will process both get and post so am using route match
+    Route::match(array("get", "post"), '/fee_summary', "FeeController@feeSummary");
+    Route::get('/owing_paid', 'FeeController@owingAndPaid');
+    Route::post('/fireOwingSMS', 'FeeController@sendFeeSMS');
     Route::get('search/autocomplete', 'SearchController@autocomplete');
-    
-    
+
+
     // updating students levels based on indexno
     Route::get('/gad', 'StudentController@gad');
     Route::get('/push/srms', 'ApplicantController@pushToSRMS');
     Route::post('/gad', 'StudentController@updateLevel');
-    
-    
-    
+
+
+
     // load staff csv -STAFF ROUTES
     Route::controller('/staff', 'StaffController', [
         'anyData' => 'staff.data',
         'getIndex' => 'staff',
-        
+
     ]);
     Route::get('/getStaffCSV', 'StaffController@showFileUpload');
     Route::post('/uploadStaff', 'StaffController@uploadStaff');
@@ -197,44 +197,44 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/add_staff', 'StaffController@create');
     Route::post('/add_staff', 'StaffController@store');
     Route::post('/power_users', 'UserController@createStaffAccount');
-    
-     Route::get('/index/upload', 'StudentController@indexNumberUploadForm');
+
+    Route::get('/index/upload', 'StudentController@indexNumberUploadForm');
     Route::post('/index/upload', 'StudentController@uploadIndexNumber');
-   
+
     // Academic routes
-     Route::post('/upload_mounted','CourseController@processMountedUpload');
+    Route::post('/upload_mounted','CourseController@processMountedUpload');
     Route::controller('programmes', 'ProgrammeController', [
         'anyData' => 'programmes.data',
         'getIndex' => 'programmes',
     ]);
     Route::get('/create_programme','ProgrammeController@create');
     Route::post('/create_programme','ProgrammeController@store');
-    
+
     Route::get('/edit_programme/{id}/id','ProgrammeController@edit');
     Route::post('/edit_programme/{id}/id','ProgrammeController@update');
     Route::get('/classes/create','ProgrammeController@createClass');
     Route::post('/classes/create','ProgrammeController@storeClass');
     Route::get('/classes/view','ProgrammeController@viewClasses');
-    
+
     Route::get('/create_grade','GradeController@create');
     Route::post('/create_grade','GradeController@store');
-    
+
     Route::get('/grade_system','GradeController@index');
     Route::delete('/delete_grade', 'GradeController@destroy');
-   
+
     Route::get('/grade_system/{type}/slug','GradeController@show');
     Route::post('/update_grades/','GradeController@update');
-    
-     Route::get('/systems/grades/delete', "CourseController@gradeModification");
-     Route::post('/grades/process/delete', "CourseController@ProcessGradeModification");
-    
-     Route::get('/systems/grades/recover', "CourseController@gradeRecovery");
-     Route::post('/grades/process/recover', "CourseController@ProcessGradeRecovery");
-    
+
+    Route::get('/systems/grades/delete', "CourseController@gradeModification");
+    Route::post('/grades/process/delete', "CourseController@ProcessGradeModification");
+
+    Route::get('/systems/grades/recover', "CourseController@gradeRecovery");
+    Route::post('/grades/process/recover', "CourseController@ProcessGradeRecovery");
+
     //Academic Modules
-    
+
     Route::get('/courses','CourseController@index');
-    
+
     Route::get('/create_course','CourseController@create');
     Route::match(array("get", "post"), '/course/{id}/edit', "CourseController@edit");
     Route::post('/createCourse','CourseController@store');
@@ -257,26 +257,26 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/upload/mounted', "CourseController@uploadMounted");
     Route::match(array("get", "post"), '/upload/legacy1', "CourseController@uploadLegacy");
     Route::get('/mounted/{id}/edit', "CourseController@updateMounted");
-    
-     Route::post('/mounted/{id}/edit', "CourseController@processUpdateMounted");
-    
-    
+
+    Route::post('/mounted/{id}/edit', "CourseController@processUpdateMounted");
+
+
     //Route::match(array("get", "post"), '/upload/legacy', "CourseController@uploadGad2");
-    
+
     Route::get( 'legacy', "CourseController@uploadGad2");
     Route::match(array("get", "post"),'/print/cards', "CourseController@printCards");
     Route::get('/printCards/{program}/program/{level}/level','CourseController@processCards');
-  
+
     Route::post( 'process_legacy', "CourseController@processsUploadLegacy");
     Route::post( 'load_legacy', "CourseController@processsUploadLegacy");
-    
-    
+
+
     Route::get('/printAttendance/{semester}/sem/{course}/course/{code}/code/{level}/level/{id}/id','CourseController@printAttendance');
     Route::get( 'resit', "CourseController@uploadResit");
-     Route::post('/upload_resit', "CourseController@processResit");
+    Route::post('/upload_resit', "CourseController@processResit");
     Route::get('/system/registration/batch', "CourseController@batchRegistration");
     Route::post( '/system/registration/batch/process', "CourseController@processBatchRegistration");
-   
+
     Route::get('/calender','AcademicCalenderController@index');
     Route::get('/create_calender','AcademicCalenderController@createCalender');
     Route::post('/create_calender','AcademicCalenderController@storeCalender');
@@ -288,76 +288,78 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/pay_transcript', 'PaymentController@showStudent');
     Route::post('/process_transcript', 'PaymentController@processTranscript');
     Route::get('/printreceiptTranscript/{receiptno}', 'PaymentController@printreceiptTranscript');
-    
-    
+
+
     Route::get('/view_payments_master', 'FeeController@masterLedger');
     Route::get('/createproduct', "PaymentProductController@createPaymentItem");
     Route::post('/createproduct', "PaymentTransactonsController@savePaymentItem");
-     // system settings
-    
+    // system settings
+
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('/systems/view','SettingsController@index');
     Route::get('/systems/sms','SettingsController@smsLogs');
-   Route::get('/systems/user/logs','SettingsController@logs');
-   
+    Route::get('/systems/user/logs','SettingsController@logs');
+
     Route::get('/systems/synchronizations','SettingsController@showSync');
-     Route::get('/syncSMS','SystemController@sysSMS');
-   
+    Route::get('/syncSMS','SystemController@sysSMS');
+
     Route::get('/systems/user/logs','SettingsController@logs');
     Route::match(array("get", "post"),'/report/registration','CourseController@registrationInfo');
     Route::get('/finance/reports/summary/','ReportController@summaryPayment');
-   Route::get('/finance/reports/programs/','ReportController@summaryPaymentPrograms2');
-   Route::get('/finance/reports/owing/','ReportController@summaryOwingsPrograms');
+    Route::get('/finance/reports/programs/','ReportController@summaryPaymentPrograms2');
+    Route::get('/finance/reports/owing/','ReportController@summaryOwingsPrograms');
     Route::get('/finance/reports/fees/','ReportController@showBills');
-   Route::post('finance/bills/create','FeeController@createBill');
-   Route::get('/finance/reports/ledger/student','FeeController@showPayform');
-   Route::post('/finance/reports/ledger/student','ReportController@studentLedger');
+    Route::post('finance/bills/create','FeeController@createBill');
+    Route::get('/finance/reports/ledger/student','FeeController@showPayform');
+    Route::post('/finance/reports/ledger/student','ReportController@studentLedger');
     Route::match(array("get", "post"), '/finance/reports/cummulative', "ReportController@programLedger");
     Route::get( '/broadsheet/noticeboard', "CourseController@noticeBoardBroadsheet");
     Route::post( '/process_broadsheet', "CourseController@processBroadsheet");
-   
-    
+
+
     Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");
-    
+
     Route::match(array("get", "post"), '/groups/create', "GroupController@createGroup");
-     Route::delete('/delete_group', 'GroupController@destroy');
+    Route::delete('/delete_group', 'GroupController@destroy');
     Route::get('/groups/run','GroupController@run');
     Route::post('/groups/activate','GroupController@assign');
     Route::get('/groups/view','GroupController@index');
-    
-    
-    // system setting routes
-    
-    
- Route::post('/accept/bulk', 'SyncController@sendBulk');
-   
- Route::get('/auth/send', 'SystemController@sendAuthOutreach');
- 
 
-    
-     Route::get( '/check/course','CourseController@checkMountedCourses');
-  Route::post('/check/course','CourseController@checkMountedCourses');
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      Route::match(array("get", "post"),'/systems/users/update','SettingsController@updateUsers');
-      Route::post('users/update/phone','SettingsController@updateProfile');
-   Route::get('/applicants/view/','ApplicantController@index');
-   Route::get('/applicants/sms/','ApplicantController@admitMessage');
-   Route::get('/admissions/voucher','ApplicantController@cards');
-   Route::post('/applicants/admit','ApplicantController@admit');
+
+    // system setting routes
+
+
+    Route::post('/accept/bulk', 'SyncController@sendBulk');
+
+    Route::get('/auth/send', 'SystemController@sendAuthOutreach');
+
+
+
+    Route::get( '/check/course','CourseController@checkMountedCourses');
+    Route::post('/check/course','CourseController@checkMountedCourses');
+
+
+       Route::get( '/results', "ApplicantController@generateResultApplicants");
+
+    Route::get( '/results/conditional', "ApplicantController@generateResultConditionalApplicants");
+    Route::get( '/results/mature', "ApplicantController@generateResultMatureApplicants");
+
+
+
+
+
+
+
+    Route::match(array("get", "post"),'/systems/users/update','SettingsController@updateUsers');
+    Route::post('users/update/phone','SettingsController@updateProfile');
+    Route::get('/applicants/view/','ApplicantController@index');
+    Route::get('/applicants/sms/','ApplicantController@admitMessage');
+    Route::get('/admissions/voucher','ApplicantController@cards');
+    Route::post('/applicants/admit','ApplicantController@admit');
     Route::post('/applicants/admitOutreach','ApplicantController@admitOutreach');
-   Route::get('/applicant_show/{id}/id', 'ApplicantController@show'); // for printout
-   
-   
+    Route::get('/applicant_show/{id}/id', 'ApplicantController@show'); // for printout
+
+
     ////////////////////////////////////////////////////////////////////
     // Admissions//
 //    Route::group(['middleware' => 'RoleMiddleware'], function()
@@ -365,42 +367,42 @@ Route::group(['middleware' => ['web']], function () {
 //             Route::match(array("get", "post"), '/admissions/upload/cards', "FormController@uploadCards");
 //
 //        });applicant/auto/sms
-  Route::get('/updateApplicants','ApplicantController@updateApplicantStatus');
-  Route::get('/admissions/applicant/settings','ApplicantController@search');
-  
-  Route::get('/admissions/statistics/program','ReportController@statProgram');
-  Route::get('/admissions/statistics/comprehensive','ReportController@statProgram');
-  
-  Route::get('/admissions/statistics/hall','ReportController@statHall');
-  Route::get('/admissions/statistics/admission/type','ReportController@statType');
-  
-  
-  
-  
-  Route::post('/admissions/applicant/settings','ApplicantController@showApplicant');
-  Route::post('/admissions/applicant/fire','ApplicantController@action');
-  Route::get('/applicant/auto/sms','ApplicantController@fireAutomaticApplicant');
-  Route::get('/applicant/letter/outreach/{id}/printout', 'ApplicantController@letterOutreach');
-  
-  Route::get('/applicant/letter/{id}/printout', 'ApplicantController@letter');
-  Route::get('/phone/{phone}/receipient/{receipient}/type/{type}/name/{name}/', 'SystemController@sendSingleSMS');
-    
-  Route::get('out/phone/{phone}/id/{id}/type/{type}/name/{name}/', 'SystemController@sendOutreachSingleSMS');
+    Route::get('/updateApplicants','ApplicantController@updateApplicantStatus');
+    Route::get('/admissions/applicant/settings','ApplicantController@search');
+
+    Route::get('/admissions/statistics/program','ReportController@statProgram');
+    Route::get('/admissions/statistics/comprehensive','ReportController@statProgram');
+
+    Route::get('/admissions/statistics/hall','ReportController@statHall');
+    Route::get('/admissions/statistics/admission/type','ReportController@statType');
+
+
+
+
+    Route::post('/admissions/applicant/settings','ApplicantController@showApplicant');
+    Route::post('/admissions/applicant/fire','ApplicantController@action');
+    Route::get('/applicant/auto/sms','ApplicantController@fireAutomaticApplicant');
+    Route::get('/applicant/letter/outreach/{id}/printout', 'ApplicantController@letterOutreach');
+
+    Route::get('/applicant/letter/{id}/printout', 'ApplicantController@letter');
+    Route::get('/phone/{phone}/receipient/{receipient}/type/{type}/name/{name}/', 'SystemController@sendSingleSMS');
+
+    Route::get('out/phone/{phone}/id/{id}/type/{type}/name/{name}/', 'SystemController@sendOutreachSingleSMS');
 
     Route::get('delete/wrong', function () {
         return view('wrong');
     });
     Route::post('delete/wrong', 'StudentController@deleteWrong');
-    });
-    
-  
-  
-  
-  
-  
-  
-  
-  
+});
+
+
+
+
+
+
+
+
+
 Route::get('importExport', 'MaatwebsiteDemoController@importExport');
 
 Route::get('downloadExcel/{type}', 'MaatwebsiteDemoController@downloadExcel');
