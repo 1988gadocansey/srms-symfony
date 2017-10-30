@@ -1099,7 +1099,8 @@ class ApplicantController extends Controller {
         return view("admissions.reports.conditionalResult")->With("data",$data)->with('programme', $sys->getProgramList());
     }
     public function generateResultMatureApplicants(Request $request, SystemController $sys){
-        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE","Mature");
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE","Mature")
+        ->where("AGE",">=","25");
         if ($request->has('program') && trim($request->input('program')) != "") {
             $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
         }
@@ -1107,5 +1108,16 @@ class ApplicantController extends Controller {
 
         $request->flashExcept("_token");
         return view("admissions.reports.matureResult")->With("data",$data)->with('programme', $sys->getProgramList());
+    }
+
+    public function generateResultTechnicalApplicants(Request $request, SystemController $sys){
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE","Technical");
+        if ($request->has('program') && trim($request->input('program')) != "") {
+            $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
+        }
+        $data = $sql->paginate(300);
+
+        $request->flashExcept("_token");
+        return view("admissions.reports.technicalResult")->With("data",$data)->with('programme', $sys->getProgramList());
     }
 }

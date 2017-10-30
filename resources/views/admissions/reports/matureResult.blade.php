@@ -129,11 +129,7 @@
                                     <td><b>{{ $row->admitedProgram->PROGRAMME }}</b></td>
                                     <td><b style="color:royalblue">AGE: {{ $row->AGE }}</b></td>
                                  <tr>           
-                                    </tr>
-                        <td class=' '><?php  print_r($sys->getSittingGrade($row->APPLICATION_NUMBER,'FIRST SITTING'))?></td>
-                        <td class=' '><?php if(!empty($sys->getSittingGrade($row->APPLICATION_NUMBER,'SECOND SITTING'))){ print_r($sys->getSittingGrade($row->APPLICATION_NUMBER,'SECOND SITTING'));}?></td>
-                        <td class=' '><?php print_r ($sys->getSittingGrade($row->APPLICATION_NUMBER,'THIRD SITTING'))?> </td>
-                    </tr>
+
 
                     @endforeach
 

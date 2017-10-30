@@ -340,6 +340,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
        Route::get( '/results', "ApplicantController@generateResultApplicants");
+    Route::get( '/results/technical', "ApplicantController@generateResultTechnicalApplicants");
 
     Route::get( '/results/conditional', "ApplicantController@generateResultConditionalApplicants");
     Route::get( '/results/mature', "ApplicantController@generateResultMatureApplicants");

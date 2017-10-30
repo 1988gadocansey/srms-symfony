@@ -2394,8 +2394,8 @@ class SystemController extends Controller
                 ?>
 
                 <?php echo $no;?>
-                <?php echo $value->subject->NAME;?>
-                <?php echo $value->GRADE; ?>
+                <?php echo @$value->subject->NAME;?>
+                <?php echo @$value->GRADE; ?>
                 <br/>
 
 

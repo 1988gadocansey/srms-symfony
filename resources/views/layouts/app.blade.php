@@ -396,6 +396,7 @@
 
                                 <li><a href='{!! url("/results") !!}'>Accreditation Board Regular Results</a></li>
                                 <li><a href='{!! url("/results/mature") !!}'>Accreditation Board Mature Results</a></li>
+                                <li><a href='{!! url("/results/technical") !!}'>Accreditation Board Technical Results</a></li>
                                 <li><a href='{!! url("/results/conditional") !!}'>Accreditation Board Conditional Results</a></li>
 
                             <!--                           <li><a href='{!! url("/admissions/statistics/faculties") !!}'>Report by Faculties</a></li>
