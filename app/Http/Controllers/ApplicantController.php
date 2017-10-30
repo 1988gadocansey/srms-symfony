@@ -225,13 +225,59 @@ class ApplicantController extends Controller {
     }
 
     public function updateApplicantStatus() {
-        $query = @Models\ApplicantModel::all();
+        $query = @Models\ApplicantModel::where("GRADE","")->get();
 
         foreach ($query as $row) {
             $this->CheckFails($row->APPLICATION_NUMBER);
         }
     }
+    public function CountPass($array) {
+        $pass = 0;
+        $values=array_values($array);
+        foreach ($values AS  $value) {
+            // echo "value:$value</br>";
+            if ($value <=7) {
 
+                $pass++;
+
+            }
+
+        }
+        return $pass;
+    }
+    public function countC6($applicant){
+        $result= @Models\ExamResultsModel::where("APPLICATION_NUMBER", $applicant)->orderBy("GRADE", "ASC")->select("GRADE")->get();
+        $count = 0;
+        foreach ($result as $item) {
+            if ($item->GRADE === 'C6') {
+                $count++;
+            }
+        }
+        return $count;
+    }
+    public function decorateResult($applicant){
+        $grades=array();
+        $resultData=array();
+        $resultQuery = @Models\ExamResultsModel::where("APPLICATION_NUMBER", $applicant)->orderBy("GRADE_VALUE", "ASC")->select("GRADE_VALUE")->get() ;
+        foreach ($resultQuery as $y){
+            array_push($resultData,$y->GRADE_VALUE);
+        }
+        $a=$this->CountPass(  $resultData);
+        ;
+        if($a>=6 && $this->countC6($applicant)>=3){
+            Models\ApplicantModel::where("APPLICATION_NUMBER",$applicant)->update(array("PASS"=>"Requirement Met"));
+        }
+        else{
+            Models\ApplicantModel::where("APPLICATION_NUMBER",$applicant)->update(array("PASS"=>"Requirement Not Met"));
+        }
+    }
+    public function updateApplicantPassCondition(){
+        $data= Models\ApplicantModel::where("ADMITTED",1)->where("ADMISSION_TYPE","Regular")
+            ->where("ENTRY_QUALIFICATION","WASSSCE")->orWhere("ENTRY_QUALIFICATION","SSSCE")->get();
+        foreach ($data as $row){
+            $this->decorateResult($row->APPLICATION_NUMBER);
+        }
+    }
     /*
      * @param array of grades
      * count the number of failed subjects
@@ -736,7 +782,7 @@ class ApplicantController extends Controller {
     public function index(Request $request, SystemController $sys) {
         if(\Auth::user()->department=="Admissions"){
             ini_set('max_execution_time', 9000); //300 seconds = 5 minutes
-            // $this->updateApplicantStatus();
+            //$this->updateApplicantStatus();
             $student = Models\ApplicantModel::query();
 
 
@@ -1033,7 +1079,7 @@ class ApplicantController extends Controller {
         }
     }
     public function generateResultApplicants(Request $request, SystemController $sys){
-        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE",'regular');
+        $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE",'regular')->where("PASS","Requirement Met");
         if ($request->has('program') && trim($request->input('program')) != "") {
             $sql->where("PROGRAMME_ADMITTED", $request->input("program", ""));
         }

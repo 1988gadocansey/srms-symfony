@@ -2386,31 +2386,25 @@ class SystemController extends Controller
         if(!empty($data)) {
 
 
-            echo"<table border='0'>
-                                <thead>
-                                <th>NO</th>
-                                <th>COURSE</th>
-                                <th>GRADE</th>
-                                </thead>
-                                <tbody>";
+
             $no = 1;
             foreach ($data as $value) {
                 //array_push($subjects,@$value->subject->NAME . "=" . @$value->GRADE) ;
 
                 ?>
-                <tr>
-                    <td><?php echo $no; ?></td>
-                    <td><?php echo $value->subject->NAME; ?></td>
-                    <td><?php echo $value->GRADE; ?></td>
 
-                </tr>
+                <?php echo $no;?>
+                <?php echo $value->subject->NAME;?>
+                <?php echo $value->GRADE; ?>
+                <br/>
+
 
 
                 <?php
                 $no++;
             }
 
-            echo '</tbody></table>';
+
             if (!empty($subjects)) {
                 return $subjects;
             }

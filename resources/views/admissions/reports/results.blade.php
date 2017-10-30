@@ -56,14 +56,14 @@
                     <button class="md-btn md-btn-small md-btn-success uk-margin-right">Export <i class="uk-icon-caret-down"></i></button>
                     <div class="uk-dropdown">
                         <ul class="uk-nav uk-nav-dropdown">
-                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'csv',escape:'false'});"><img src='{!! url("public/assets/icons/csv.png")!!}' width="24"/> CSV</a></li>
+                            <li><a href="#" onClick ="$('#regular').tableExport({type:'csv',escape:'false'});"><img src='{!! url("public/assets/icons/csv.png")!!}' width="24"/> CSV</a></li>
 
-                            <li class="uk-nav-divider"></li>
-                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'excel',escape:'false'});"><img src='{!! url("public/assets/icons/xls.png")!!}' width="24"/> XLS</a></li>
-                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'doc',escape:'false'});"><img src='{!! url("public/assets/icons/word.png")!!}' width="24"/> Word</a></li>
-                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'powerpoint',escape:'false'});"><img src='{!! url("public/assets/icons/ppt.png")!!}' width="24"/> PowerPoint</a></li>
-                            <li class="uk-nav-divider"></li>
-
+                          <li class="uk-nav-divider"></li>
+                                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'excel',escape:'false'});"><img src='{!! url("public/assets/icons/xls.png")!!}' width="24"/> XLS</a></li>
+                                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'doc',escape:'false'});"><img src='{!! url("public/assets/icons/word.png")!!}' width="24"/> Word</a></li>
+                                            <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type:'powerpoint',escape:'false'});"><img src='{!! url("public/assets/icons/ppt.png")!!}' width="24"/> PowerPoint</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                           
                         </ul>
                     </div>
                 </div>
@@ -109,9 +109,9 @@
 
                     <div class="uk-overflow-container" id='print'>
                         <center><span class="uk-text-success uk-text-bold">{!! $data->total()!!} Records</span></center>
-                        <table border="1" class="uk-table uk-table-hover uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id=" ">
+                        <table border="0" class="uk-table uk-table-hover uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
                             <thead>
-                            <tr>
+                            <tr><!--
                                 <th>NO</th>
                                 <th class="uk-width-1-10">PERSONAL DETAILS</th>
 
@@ -127,22 +127,21 @@
                                 <tr>
                                     <td> {{ $data->perPage()*($data->currentPage()-1)+($index+1) }} </td>
 
-                                    <td>
-                                        <table border="0">
-
-                                            <tr>
+                                    
                                                 <td>{{ $row->NAME }}</td>
                                                 <td>{{ $row->APPLICATION_NUMBER }}</td>
                                                 <td><b>{{ $row->admitedProgram->PROGRAMME }}</b></td>
-                                                <td><b style="color:royalblue">Grade: {{ $row->GRADE }}</b></td>
-                                            </tr>
-                                        </table>
-                                    </td>
+                                </tr>          
+                                <tr>
+                                	<td></td>
                                     <td class=' '><?php  print_r($sys->getSittingGrade($row->APPLICATION_NUMBER,'FIRST SITTING'))?></td>
                                     <td class=' '><?php if(!empty($sys->getSittingGrade($row->APPLICATION_NUMBER,'SECOND SITTING'))){ print_r($sys->getSittingGrade($row->APPLICATION_NUMBER,'SECOND SITTING'));}?></td>
                                     <td class=' '><?php print_r ($sys->getSittingGrade($row->APPLICATION_NUMBER,'THIRD SITTING'))?> </td>
                                 </tr>
-
+                                </tr>
+                                	<td></td>
+                                    <td></td>
+                                </tr>
                             @endforeach
 
 
