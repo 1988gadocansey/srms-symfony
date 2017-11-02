@@ -476,6 +476,7 @@ class SystemController extends Controller
     }
     // this is purposely for select box
     public function getProgramList() {
+        $departmentArray=explode(",",@\Auth::user()->department);
         if( @\Auth::user()->department=='top' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
             $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
@@ -489,8 +490,8 @@ class SystemController extends Controller
 
         }
         else{
-            $user_department= @\Auth::user()->department;
-            $program = \DB::table('tpoly_programme')->where('DEPTCODE',$user_department)->orderby("PROGRAMME")
+           // $user_department= @\Auth::user()->department;
+            $program = \DB::table('tpoly_programme')->whereIn('DEPTCODE', $departmentArray)->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
         }

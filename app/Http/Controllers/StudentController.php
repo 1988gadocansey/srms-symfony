@@ -106,11 +106,12 @@ class StudentController extends Controller
         }) ;
         }
          else{
-        $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q) {
-            $q->whereHas('departments', function($q) {
-                $q->whereIn('DEPTCODE', array(@\Auth::user()->department));
-            });
-        }) ;
+             $departmentArray=explode(",",@\Auth::user()->department);
+             $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q)use($departmentArray) {
+                 $q->whereHas('departments', function($q)use($departmentArray) {
+                     $q->whereIn('DEPTCODE',  $departmentArray);
+                 });
+             }) ;
          }
          
          if ($request->has('department') && trim($request->input('department')) != "") {
@@ -1262,6 +1263,7 @@ public function gad()
 
     public function uploadPaymentZenith(Request $request, SystemController $sys)
     {
+        //dd($request);
 
         $academicDetails = $sys->getSemYear();
         $sem = $academicDetails[0]->SEMESTER;

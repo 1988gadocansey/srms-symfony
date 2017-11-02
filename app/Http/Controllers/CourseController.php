@@ -1837,12 +1837,12 @@ return redirect("/dashboard");
         
         $resultOpen=$array[0]->ENTER_RESULT;
         if($resultOpen==1){
-        $mark = Models\AcademicRecordsModel::where('code',$code)
+        $mark = Models\AcademicRecordsModel::where('codel',$code)
                 
                 ->where('lecturer',$lecturer)
                 ->where('year',$year)
                 ->where('sem',$sem)
-                ->orwhereIn('groups',$group)
+              //  ->orwhereIn('groups',$group)
                 ->paginate(70);
         $total=count($mark);
         $th=$sys->getCourseCodeByIDArray2($code);
@@ -2714,101 +2714,9 @@ return redirect("/dashboard");
         
    // naptex broadsheet view
          public function naptexBroadsheet(Request $request, SystemController $sys){
-             if ($request->isMethod("get")) {
-                 return view('courses.naptex')->with('year', $sys->years())
-                     ->with('level', $sys->getLevelList())
-                     ->with("program", $sys->getProgramList());
-             }
-             else{
-
-                 \Session::put('level', $request->input("level", ""));
-                 \Session::put('year', $request->input("year", ""));
-                 \Session::put('program', $request->input("program", ""));
-                 \Session::put('sem', $request->input("semester", ""));
-                 $program=$request->input("program", "");
-
-                 $level=$request->input("level", "");
-                 $semester=$request->input("semester", "");
-                 $year=$request->input("year", "");
 
 
-                 if ($request->has('search') && trim($request->input('search')) != "") {
-                     // dd($request);
-                     $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
-                         ->where("indexno",$request->input('search'))
-                         ->where("year",$year)->whereHas('student', function($q)use ($program) {
-                             $q->whereHas('programme', function($q)use ($program) {
-                                 $q->whereIn('PROGRAMMECODE',  array($program));
-                             });
-                         })->orderBy("code")
-                         ->groupBy("code")
-                         ->get()->toArray();
-                 }
-                 else{
-                     $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
-                         ->where("year",$year)->whereHas('student', function($q)use ($program) {
-                             $q->whereHas('programme', function($q)use ($program) {
-                                 $q->whereIn('PROGRAMMECODE',  array($program));
-                             });
-                         })->orderBy("code")
-                         ->groupBy("code")
-                         ->get()->toArray();
-                 }
-                 //dd($headerQuery);
-
-
-                 $courseArray=array();
-                 foreach($headerQuery as $row){
-                     //$courseArray=array();$course=$row['courseId'];
-                     $course=$row['code'];
-                     if($course!=""||$course==0){
-
-                         $courseArray[]=$course;
-                     }
-                     else{
-                         $courseArray[]="N/A";
-                     }
-                 }
-                 if ($request->has('search') && trim($request->input('search')) != "") {
-                     $studentData= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
-                         ->where("indexno",$request->input('search'))
-                         ->where("year",$year)->whereHas('student', function($q)use ($program) {
-                             $q->whereHas('programme', function($q)use ($program) {
-                                 $q->whereIn('PROGRAMMECODE',  array($program));
-                             });
-                         })->orderBy("indexno")
-                         ->groupBy("indexno")
-                         ->select("indexno","level")
-                         ->get();
-
-                 }
-                 else{
-                     $studentData=Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
-                         ->where("year",$year)->whereHas('student', function($q)use ($program) {
-                             $q->whereHas('programme', function($q)use ($program) {
-                                 $q->whereIn('PROGRAMMECODE',  array($program));
-                             });
-                         })->orderBy("indexno")
-                         ->groupBy("indexno")
-                         ->select("indexno","level")
-                         ->get();
-                 }
-
-
-                 return view('courses.naptex')->with('year', $sys->years())
-                     ->with('level', $sys->getLevelList())
-                     ->with("program", $sys->getProgramList())
-                     ->with("headers", $headerQuery)
-                     ->with("course",   $courseArray)
-                     ->with("years", $request->input("year", ""))
-                     ->with("programs", $request->input("program", ""))
-                     ->with("levels", $request->input("level", ""))
-                     ->with("term", $request->input("semester", ""))
-                     ->with("student", $studentData);
-
-             }
-
-         }
+    }
     
     // noticeboard broadsheet
      
@@ -2859,7 +2767,6 @@ return redirect("/dashboard");
                 ->groupBy("code")
                  ->get()->toArray();
         }
-        //dd($headerQuery);
              
              
              $courseArray=array();
