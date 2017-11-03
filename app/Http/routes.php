@@ -23,7 +23,7 @@
  */
 /*
  * API route of quality assurance
- * 
+ *
  */
 Route::get('student/{indexno}/qa', 'APIController@qualityAssurance');
 Route::get('delete/wrong', 'StudentController@showWrong');
@@ -339,12 +339,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/check/course','CourseController@checkMountedCourses');
 
 
-       Route::get( '/results', "ApplicantController@generateResultApplicants");
+    Route::get( '/results', "ApplicantController@generateResultApplicants");
     Route::get( '/results/technical', "ApplicantController@generateResultTechnicalApplicants");
 
     Route::get( '/results/conditional', "ApplicantController@generateResultConditionalApplicants");
     Route::get( '/results/mature', "ApplicantController@generateResultMatureApplicants");
 
+
+    Route::get('/download_registered','CourseController@showFileUploadRegistered');
+
+    Route::post('/download_registered','CourseController@downloadRegisteredExcel');
 
 
 

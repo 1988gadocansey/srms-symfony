@@ -1623,7 +1623,8 @@ return redirect("/dashboard");
         }
         elseif($request->user()->isSupperAdmin){
              
-             $courses= Models\AcademicRecordsModel::query() ;
+             $courses= Models\AcademicRecordsModel::query()->where("year".$year)
+             ->where("sem",$sem);
      
         }
         else{
@@ -1837,7 +1838,7 @@ return redirect("/dashboard");
         
         $resultOpen=$array[0]->ENTER_RESULT;
         if($resultOpen==1){
-        $mark = Models\AcademicRecordsModel::where('codel',$code)
+        $mark = Models\AcademicRecordsModel::where('code',$code)
                 
                 ->where('lecturer',$lecturer)
                 ->where('year',$year)
@@ -1870,6 +1871,7 @@ return redirect("/dashboard");
     public function marksDownloadExcel( $code, SystemController $sys )
 
   {
+
         $array=$sys->getSemYear();
         $sem=$array[0]->SEMESTER;
         $year=$array[0]->YEAR;
@@ -1882,7 +1884,9 @@ return redirect("/dashboard");
                 ->where('tpoly_academic_record.lecturer',$lecturer)
                 ->where('tpoly_academic_record.year',$year)
                 ->where('tpoly_academic_record.sem',$sem)
-                ->select('tpoly_students.INDEXNO','tpoly_students.NAME','tpoly_academic_record.quiz1','tpoly_academic_record.quiz2','tpoly_academic_record.midsem1','tpoly_academic_record.exam')->get();
+                ->select('tpoly_students.INDEXNO','tpoly_students.NAME','tpoly_academic_record.quiz1','tpoly_academic_record.quiz2','tpoly_academic_record.midsem1','tpoly_academic_record.exam')
+              ->orderBy("tpoly_students.INDEXNO")
+              ->get();
              
     return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
 
@@ -1898,6 +1902,50 @@ return redirect("/dashboard");
 
 
   }
+
+    public function downloadRegisteredExcel(Request $request, SystemController $sys )
+
+    {
+
+        $this->validate($request, [
+
+
+            'course' => 'required',
+            'sem' => 'required',
+            'year' => 'required',
+            'level' => 'required',
+        ]);
+
+
+            $array = $sys->getSemYear();
+            $sem = $request->input("sem");
+            $year = $request->input("year");
+            $level = $request->input("level");
+            $course = $request->input("course");
+            $lecturer = @\Auth::user()->fund;
+
+            $data = Models\AcademicRecordsModel::
+            join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
+                ->where('tpoly_academic_record.code', $course)
+                ->where('tpoly_academic_record.lecturer', $lecturer)
+                ->where('tpoly_academic_record.year', $year)
+                ->where('tpoly_academic_record.sem', $sem)
+                ->select('tpoly_students.INDEXNO', 'tpoly_students.NAME', 'tpoly_academic_record.quiz1', 'tpoly_academic_record.quiz2', 'tpoly_academic_record.midsem1', 'tpoly_academic_record.exam', 'tpoly_academic_record.total')
+                ->orderBy("tpoly_students.INDEXNO")
+                ->get();
+
+            return Excel::create($course, function ($excel) use ($data,$course){
+
+                $excel->sheet($course, function ($sheet) use ($data) {
+
+                    $sheet->fromArray($data);
+
+                });
+
+            })->download('xls');
+
+
+    }
         public function processMark(SystemController $sys,Request $request) {
            // dd($request);
              set_time_limit(36000);
@@ -1985,6 +2033,7 @@ return redirect("/dashboard");
                             $programme=$sys->getCourseProgrammeMounted($course);
                            // dd($total);
                             $program=$sys->getProgramArray($programme);
+
                             $gradeArray = @$sys->getGrade($total, $program[0]->GRADING_SYSTEM);
                               $grade = @$gradeArray[0]->grade;
 
@@ -2116,6 +2165,18 @@ return redirect("/dashboard");
          ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years());
        }
        else{
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
+        }
+    }
+    public function showFileUploadRegistered(SystemController $sys){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
+            $programme=$sys->getProgramList();
+            $course=$sys->getMountedCourseList();
+
+            return view('courses.downloadRegistered')->with('programme', $programme)
+                ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years());
+        }
+        else{
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
         }
     }
@@ -2368,19 +2429,20 @@ return redirect("/dashboard");
                             $midsem=$value->midsem1;
                             $exam=$value->exam;
                             $total= round(($quiz2+$quiz1+$midsem+$exam),2);
-                            $programmeDetail=$sys->getCourseProgrammeMounted($courseDb);
-                            
+                            $programmeDetail=$sys->getCourseProgrammeMounted($displayCode);
+
                             $program=$sys->getProgramArray($programmeDetail);
+                            //dd($program);
                             $gradeArray = @$sys->getGrade($total, $program[0]->GRADING_SYSTEM);
                             $grade = @$gradeArray[0]->grade;
 
                            // dd($gradeArray );
                             $gradePoint =round(( @$gradeArray[0]->value * @$courseArr[0]->COURSE_CREDIT),2);
-                            $cgpa= number_format(@(( $gradePoint)/$credit), 2, '.', ',');
-                                $oldCgpa= @Models\StudentModel::where("INDEXNO",$studentDb)->select("CGPA","CLASS")->first();
-                                $newCgpa=@$cgpa+$oldCgpa->CGPA;
-                                 $class=@$sys->getClass($newCgpa);
-                                Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
+                            //$cgpa= number_format(@(( $gradePoint)/@$courseArr[0]->COURSE_CREDIT), 2, '.', ',');
+                              //  $oldCgpa= @Models\StudentModel::where("INDEXNO",$studentDb)->select("CGPA","CLASS")->first();
+                               // $newCgpa=@$cgpa+$oldCgpa->CGPA;
+                                 //$class=@$sys->getClass($newCgpa);
+                                //Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
                            
                             Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade, 'gpoint' => $gradePoint));
 

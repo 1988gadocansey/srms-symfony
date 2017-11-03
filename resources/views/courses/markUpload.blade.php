@@ -94,7 +94,7 @@
                     <p></p>
                   <table align="center">
        
-        <tr><td><input type="submit" value="Upload" id='save'   class="md-btn   md-btn-success uk-margin-small-top">
+        <tr><td><input type="submit" value="Upload" id='savess'   class="md-btn   md-btn-success uk-margin-small-top">
       <input type="reset" value="Clear" class="md-btn   md-btn-default uk-margin-small-top">
     </td></tr></table>
             </form>

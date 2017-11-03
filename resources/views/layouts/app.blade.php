@@ -592,25 +592,14 @@
                     @endif
 
                     @if( @Auth::user()->department=='Rector' )
-
-                        <li data-uk-dropdown class="uk-hidden-small">
-
-
-                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">attach_file</i><span>File</span></a>
-                            <div class="uk-dropdown uk-dropdown-scrollable">
-                                <ul class="uk-nav uk-nav-dropdown">
-                                    <li><a href='{!! url("/students") !!}'>Students</a></li>
-                                    <li><a href='{!! url("staff") !!}'>View Staff</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
                         <li data-uk-dropdown class="uk-hidden-small">
 
 
                             <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_list</i><span>View</span></a>
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("staff") !!}'>View Staff</a></li>
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
                                     <li><a href='{!! url("/grade_system") !!}'>View Grading Systems</a></li>
@@ -812,7 +801,7 @@
                             <a href="#"><i class="sidebar-menu-icon material-icons md-18">phone</i><span>Results</span></a>
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
-                                    <li><a href='{!! url("/registered_courses") !!}'>Enter Semester Marks</a></li>
+                                    <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
                                     <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
 
                                 </ul>
@@ -821,6 +810,58 @@
 
 
                     @endif
+
+                    @if( @Auth::user()->role=='Lecturer' )
+
+           
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_list</i><span>View</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
+                                    <li><a href='{!! url("staff") !!}'>View Staff</a></li>
+                                    <li><a href='{!! url("/grade_system") !!}'>View Grading Systems</a></li>                                    
+                                    <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>  
+                                    <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_headline</i><span>Reports</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">phone</i><span>Results</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
+
+                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                    @endif
+
+
 
                     @if( @Auth::user()->department=='Registrar' )
 

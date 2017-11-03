@@ -439,7 +439,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
                 <i class="material-icons"></i> Previous
             </a>
         </li>
-        <li class="button_next button"   v-on:click="go_to_payment_section()"  aria-hidden="false" aria-disabled="false"  v-show="updateForm.$valid && in_payment_section==false"  > 
+        <li class="button_next button"   v-on:click="go_to_payment_section()"  aria-hidden="false" aria-disabled="false"    > 
             <a role="menuitem" href="#next"  >Next 
                 <i class="material-icons">
                 </i>

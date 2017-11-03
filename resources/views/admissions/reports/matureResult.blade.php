@@ -129,7 +129,7 @@
                                     <td><b>{{ $row->admitedProgram->PROGRAMME }}</b></td>
                                     <td><b style="color:royalblue">AGE: {{ $row->AGE }}</b></td>
                                  <tr>           
-
+                                  
 
                     @endforeach
 

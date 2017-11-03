@@ -521,7 +521,7 @@ class SystemController extends Controller
     }
     public function years() {
 
-        for ($i = 2008; $i <= 2030; $i++) {
+        for ($i = date("Y"); $i <= 2030; $i++) {
             $year = $i - 1 . "/" . $i;
             $years[$year] = $year;
         }
@@ -1309,7 +1309,7 @@ class SystemController extends Controller
     }
     public function getCourseProgrammeMounted($course) {
 
-        $programme= \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$course)->get();
+        $programme= \DB::table('tpoly_courses')->where('COURSE_CODE',$course)->get();
 
         return @$programme[0]->PROGRAMME;
     }
