@@ -41,7 +41,7 @@ class HomeController extends Controller
             return view("users.updateProfile");
         }
         else{
-            //ini_set('max_execution_time', 50000);
+         ini_set('max_execution_time', 500000);
          // $sys->getZenith();
            // $sys->generateIndexNumbers();
            /* $dataGenerator=Models\StudentModel::where("LEVEL","100H")->orWhere("LEVEL","100NTT")
@@ -54,11 +54,11 @@ class HomeController extends Controller
 
 
 
+        error_reporting(1);
 
 
 
-
-        $lastVisit=\Carbon\Carbon::createFromTimeStamp(strtotime(@\Auth::user()->last_login))->diffForHumans();
+        $lastVisit=\Carbon\Carbon::createmFromTimeStamp(strtotime(@\Auth::user()->last_login))->diffForHumans();
 
         $academicDetails=$sys->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
@@ -71,11 +71,16 @@ class HomeController extends Controller
                      ->get();
                $totalRegistered =count($totalRegistered );
 
-       $registered= @Models\AcademicRecordsModel::query()->where('lecturer',@\Auth::user()->fund)->count("id");
+               /*
+                Gad--- i added the academic year and sem to reduce query weight
+               */
+       $registered= @Models\AcademicRecordsModel::query()->where('lecturer',@\Auth::user()->fund)
+       ->where('sem',$sem)->where('year',$year)
+       ->count("id");
 
         $totalOwing=@$sys->formatMoney($studentDetail);
         //Payment details
-        $totalPaid=Models\FeePaymentModel::query()->where('SEMESTER',$sem)->where('YEAR',$year)->sum("AMOUNT");
+        $totalPaid=Models\FeePaymentModel::query()->where('SEMESTER',$sem)->where('YEAR',$year)->where('PAYMENTTYPE','School Fees')->sum("AMOUNT");
 
         $paid=@$sys->formatMoney($totalPaid);
 

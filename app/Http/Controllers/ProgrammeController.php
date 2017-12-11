@@ -77,7 +77,7 @@ class ProgrammeController extends Controller
 
      
     public function create(SystemController $sys) {
-       if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top'){
+       if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tptop'){
         $department=$sys->department();
          return view('programme.create')->with('department', $department)
                  ->with('grade', $sys->getGradeSystemIDList());
@@ -88,7 +88,7 @@ class ProgrammeController extends Controller
          
     }
     public function createClass(SystemController $sys) {
-       if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top'){
+       if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tptop'){
        
         // return view('programme.create_class');
                   $this->validate($request, [
@@ -130,7 +130,7 @@ class ProgrammeController extends Controller
          
     }
     public function storeClass(Request $request){
-        if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top'){
+        if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'  || @\Auth::user()->department=='Tptop'){
        
           
                   $this->validate($request, [
@@ -171,7 +171,7 @@ class ProgrammeController extends Controller
         }
     }
     public function viewClasses(Request $request ) {
-         if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top'){
+         if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tptop'){
        
          $data= Models\ClassModel::where('id','!=','')->paginate(100);
          return view('programme.classes')->with('data',$data);
@@ -189,7 +189,7 @@ class ProgrammeController extends Controller
     public function store(Request $request)
     {
          
-      if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top'){
+      if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tptop'){
         $this->validate($request, [
             'name' => 'required',
             'department'=>'required',
@@ -239,7 +239,7 @@ class ProgrammeController extends Controller
     }
     // show form for edit resource
     public function edit($id, SystemController $sys){
-        if(@\Auth::user()->role=='Dean'||@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top'){
+        if(@\Auth::user()->role=='Dean'||@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'){
         $programme= ProgrammeModel::where("ID", $id)->firstOrFail();
         $department=$sys->department();
          return view('programme.edit')->with('department', $department)
@@ -252,7 +252,7 @@ class ProgrammeController extends Controller
     }
 
     public function update(Request $request, $id){
-         if(@\Auth::user()->role=='Dean'||@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top'){
+         if(@\Auth::user()->role=='Dean'||@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'){
      
         \DB::beginTransaction();
         try {

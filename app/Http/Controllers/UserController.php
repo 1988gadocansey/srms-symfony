@@ -38,7 +38,7 @@ class UserController extends Controller
     }
     public function anyData(Request $request)
     {
-         if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Admin"){
+         if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role=="Admin"){
         
        
        $staffs = User::join('tpoly_workers', 'users.staffID', '=', 'tpoly_workers.id')->join('tpoly_department', 'tpoly_department.DEPTCODE', '=', 'tpoly_workers.department')
@@ -76,7 +76,7 @@ class UserController extends Controller
     }
       public function createStaffAccount(Request $request, SystemController $sys)
     { 
-        if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Admin"){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role=="Admin"){
         $staffID = $request['staffID'];
          
             $checker = $sys->getStaffAccount($staffID);
@@ -127,7 +127,7 @@ class UserController extends Controller
 
 //     public function createStudentAccount(Request $request, SystemController $sys)
 //    { 
-//        if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Admin"){
+//        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role=="Admin"){
 //        
 //       $checker=  $sys->getStaffAccount($request['username']);
 //      

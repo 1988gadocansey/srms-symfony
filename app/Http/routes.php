@@ -81,6 +81,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( 'load/fees', "StudentController@uploadPaymentZenith");
 
     Route::get( '/api/student', "APIController@getStudentData");
+     Route::get( '/api/student/{program}', "APIController@getStudentProgram");
 
 
     Route::get('laracharts', 'HomeController@getLaraChart');
@@ -398,6 +399,11 @@ Route::group(['middleware' => ['web']], function () {
         return view('wrong');
     });
     Route::post('delete/wrong', 'StudentController@deleteWrong');
+
+    Route::get('report/service/gender', 'ReportController@reportServiceGender');
+
+    Route::get('/admissions/statistics/nationality','ReportController@nationalityReport');
+    Route::get('/admissions/letter/bulk','ReportController@showBulkReport');
 });
 
 

@@ -27,7 +27,7 @@
                 {!! Session::get('error') !!}
             </div>
  @endif
-  <h3 class="heading_c uk-margin-bottom">Upload   Grades (Excel file format only) <a href="{{url('public/uploads/marks/mark.xlsx')}}">Click to download sample upload template</a></h3>
+  <h3 class="heading_c uk-margin-bottom">Upload   Grades (Excel file format only)  </h3>
         
 <div class="uk-width-xLarge-1-10">
     

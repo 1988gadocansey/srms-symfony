@@ -399,15 +399,35 @@
                                 <li><a href='{!! url("/results/technical") !!}'>Accreditation Board Technical Results</a></li>
                                 <li><a href='{!! url("/results/conditional") !!}'>Accreditation Board Conditional Results</a></li>
 
-                            <!--                           <li><a href='{!! url("/admissions/statistics/faculties") !!}'>Report by Faculties</a></li>
-                            <li><a href='{!! url("/admissions/statistics/gender") !!}'>Report by Gender</a></li>    
-                            <li><a href='{!! url("/admissions/statistics/groupings") !!}'>Successful and Unsuccessful Applicants</a></li>    
-                          -->
-                            <!--  <li><a href='{!! url("admissions/waec/download/grades") !!}'>Grades to excel</a></li>
-                            <li><a href='{!! url("/admissions/waec/verifications") !!}'>WAEC Verifications</a></li>
-                          
-                             -->
+                           
+                                  <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Mode(regular,conditional)</a></li>    
+                            
+                                 <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Faculty</a></li> 
+                                  <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Department</a></li>
+                                   <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Program</a></li>  
+                                    <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Gender</a></li> 
+                                     <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Nationality</a></li> 
+                                      <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Applicants by Former School</a></li> 
+                                       <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Statistics by completion of filling form</a></li> 
+                             <li><a href='{!! url("/admissions/statistics/regions") !!}'>Admissions  by Regions</a></li>    
+                           
+                                <li><a href='{!! url("/admissions/statistics/regions") !!}'>Admissions  by Faculty</a></li>
 
+
+     
+                            <li><a href='{!! url("/admissions/statistics/faculties") !!}'>Report by Faculties</a></li>
+                            <li><a href='{!! url("/admissions/statistics/gender") !!}'>Admissions by Gender</a></li>    
+                               
+                            <li><a href='{!! url("/admissions/statistics/nationality") !!}'>Admissions by Nationality</a></li>    
+                            
+                             <li><a href='{!! url("/admissions/statistics/regions") !!}'>Admissions  by Regions</a></li>    
+                           
+                                
+
+                                 <li><a href='{!! url("/admissions/statistics/case/faculty") !!}'>Admitted and Registered by Faculty</a></li>
+       
+                                <li><a href='{!! url("/admissions/statistics/case/department") !!}'>Admitted and Registered by Department</a></li>
+                                <li><a href='{!! url("/admissions/statistics/case/program") !!}'>Admitted and Registered by Program</a></li>
 
                             </ul>
                         </div>
@@ -491,7 +511,183 @@
                                     <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
                                     <li><a href='{!! url("/systems/grades/recover") !!}'>Recover Deleted grades</a></li>
                                     <li><a href='{!! url("/systems/grades/delete") !!}'>Delete uploaded grades</a></li>
-                                    <li><a href='{!! url("/search_account") !!}'>Search student password</a></li>
+                                    
+                                    <li><a href='{!! url("/finance/protocol") !!}'>Protocols/Policies</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_list</i><span>View</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
+                                    <li><a href='{!! url("staff") !!}'>View Staff</a></li>
+                                    <li><a href='{!! url("/grade_system") !!}'>View Grading Systems</a></li>
+                                    <li><a href='{!! url("/classes/view") !!}'>View Classing System</a></li>
+                                    <li><a href='{!! url("/groups/view") !!}'>View Class Groups</a></li>
+                                    <li><a href='{!! url("/courses") !!}'>View Courses</a></li>
+                                    <li><a href='{!! url("/power_users") !!}'>View Users</a></li>
+                                    <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>
+                                    
+                                    <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">file_upload</i><span>Upload</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/upload_students") !!}'>Upload bulk Student data</a></li>
+                                    <li><a href='{!! url("/index/upload") !!}'>Upload Index Number</a></li>
+                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/upload/courses") !!}'>Upload Bulk Courses</a></li>
+                                    <li><a href='{!! url("/upload/mounted") !!}'>Upload Bulk Mounted Courses</a></li>
+                                    <li><a href='{!! url("/legacy") !!}'>Upload Old Results</a></li>
+                                    <li><a href='{!! url("/finance/upload") !!}'>Upload Students Fees Balance</a></li>
+                                    <li><a href='{!! url("/resit") !!}'>Upload Resit</a></li>
+                                    <li><a href='{!! url("/getStaffCSV") !!}'>Upload Staff Data</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">control_point</i><span>Mount/Add</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/add_students") !!}'>Add Students</a></li>
+                                    <li><a href='{!! url("/create_grade") !!}'>Create Grading System</a></li>
+                                    <li><a href='{!! url("/classes/create") !!}'>Create Classing System</a></li>
+                                    <li><a href='{!! url("/registered_courses") !!}'>Enter Semester Marks</a></li>
+                                    <li><a href='{!! url("/create_programme") !!}'>Add Programmes</a></li>
+                                    <li><a href='{!! url("/groups/create") !!}'>Create Class Groups</a></li>
+                                    <li><a href='{!! url("/create_course") !!}'>Add Courses</a></li>
+                                    <li><a href='{!! url("/mount_course") !!}'>Mount Courses</a></li>
+                                    <li><a href='{!! url("/system/registration/batch") !!}'>Bulk Registration</a></li>
+                                    <li><a href='{!! url("/add_staff") !!}'>Add Staff</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+                            <a href="#"> <span class="menu_icon"><i class="material-icons">search</i></span><span>Search</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+
+                                    <li><a href='{!! url("/search_password") !!}'>Search student passwords</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+                            <a href="#"> <span class="menu_icon"><i class="material-icons">view_headline</i></span><span>Reports</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
+                                    <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
+                                    <li><a href='{!! url("/admissions/statistics/admission/type") !!}'>Report by Admission Type</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
+                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+
+                    @if( @Auth::user()->department=='Tptop' )
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">attach_money</i><span>Finance</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/finance/reports/fees/") !!}'>View Fees</a></li>
+                                    <li><a href='{!! url("banks") !!}'>View Banks</a></li>
+                                    <li><a href='{!! url("view_payments") !!}'>Payments Ledger</a></li>
+                                    <li><a href='{!! url("view_payments") !!}'>Transactions Ledger</a></li>
+                                    <li><a href='{!! url("view_payments_master") !!}'>Master Fee Payment Report</a></li>
+                                    <li><a href='{!! url("owing_paid") !!}'>Owing reports</a></li>
+
+
+
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li data-uk-dropdown class="uk-hidden-small">
+                        <a href="#"> <i class="sidebar-menu-icon material-icons">attach_file</i><span>File</span></a>
+                        <div class="uk-dropdown uk-dropdown-scrollable">
+                            <ul class="uk-nav uk-nav-dropdown">
+                                <li><a href='{!! url("/transcript") !!}'>Transcript</a></li>
+                                <li><a href='{!! url("pay_fees") !!}'>Pay Fees</a></li>
+
+                                <li><a href='{!! url("banks") !!}'>View Banks</a></li>
+
+                                <li><a href='{!! url("/finance/reports/fees") !!}'>View Fees</a></li>
+
+                                <li><a href='{!! url("/print/receipt") !!}'>Print Fee Receipt</a></li>
+                                <li><a href='{!! url("/print/password") !!}'>Print Password Receipt</a></li>
+                                <li><a href='{!! url("view_payments") !!}'>Payments Ledger</a></li>
+                                <li><a href='{!! url("pay_fees_penalty") !!}'>Late Registration payment</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li data-uk-dropdown class="uk-hidden-small">
+                        <a href="#"> <i class="sidebar-menu-icon material-icons">view_headline</i><span>Reports</span></a>
+                        <div class="uk-dropdown uk-dropdown-scrollable">
+                            <ul class="uk-nav uk-nav-dropdown">
+                                <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
+                                <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
+
+                                <li><a href='{!! url("/view_payments_master") !!}'>Fee Payment by Students Report</a></li>
+                                <li><a href='{!! url("/finance/reports/programs") !!}'>Fee Payment by Programs Report</a></li>
+                                <li><a href='{!! url("/owing_paid") !!}'>Fees Owings By Students Reports</a></li>
+                                <li><a href='{!! url("/finance/reports/programs") !!}'>Fees Owings By Programs Reports</a></li>
+                                <li><a href='{!! url("/finance/reports/ledger/student") !!}'>Print Student Ledger</a></li>
+                                <li><a href='{!! url("/finance/reports/cummulative") !!}'>Fees Cummulative Reports by Program</a></li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">attach_file</i><span>File</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    <li><a href='{!! url("/search_password") !!}'>Search student password</a></li>
+                                    <li><a href='{!! url("/print/receipt") !!}'>Print Fee Receipt</a></li>
+                                    <li><a href='{!! url("/print/password") !!}'>Print Password Receipt</a></li>
+                                    <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
+                                    <li><a href='{!! url("/systems/grades/recover") !!}'>Recover Deleted grades</a></li>
+                                    <li><a href='{!! url("/systems/grades/delete") !!}'>Delete uploaded grades</a></li>
+                                    
                                     <li><a href='{!! url("/finance/protocol") !!}'>Protocols/Policies</a></li>
 
 
@@ -590,6 +786,8 @@
                             </div>
                         </li>
                     @endif
+
+
 
                     @if( @Auth::user()->department=='Rector' )
                         <li data-uk-dropdown class="uk-hidden-small">

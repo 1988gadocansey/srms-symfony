@@ -13,6 +13,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Excel;
+use App\User;
+use Charts;
 class ReportController extends Controller
 {
     
@@ -23,7 +25,7 @@ class ReportController extends Controller
          
     }
      public function studentLedger(Request $request, SystemController $sys) {
-          if(@\Auth::user()->role=='FO' || @\Auth::user()->department=='Finance' || @\Auth::user()->department=='top'){
+          if(@\Auth::user()->role=='FO' || @\Auth::user()->department=='Finance' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'){
               $array=$sys->getSemYear();
               $sem=$array[0]->SEMESTER;
               $year=$array[0]->YEAR;
@@ -96,7 +98,7 @@ class ReportController extends Controller
         }
     }
      public function showBills(Request $request, SystemController $sys) {
-          //if(@\Auth::user()->role=='FO' || @\Auth::user()->department=='Finance' || @\Auth::user()->department=='top'){
+          //if(@\Auth::user()->role=='FO' || @\Auth::user()->department=='Finance' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'){
               $array=$sys->getSemYear();
               $sem=$array[0]->SEMESTER;
               $year=$array[0]->YEAR;
@@ -301,5 +303,50 @@ class ReportController extends Controller
                         ->with('programme', $sys->getProgramList())
                         ->with('type', $sys->getProgrammeTypes());
     }
-    
+    public function reportServiceNationality(){
+        $users = \DB::table('tpoly_applicants')
+            ->select(\DB::raw("  NATIONALITY, COUNT(id) AS count "))->groupBy("NATIONALITY")->get();
+        $data=json_encode($users);
+        return $data;
+    }
+    public function reportServiceGender(){
+        header('Content-Type: application/json');
+        $dataRaw= \DB::table('tpoly_applicants')
+            ->select(\DB::raw("GENDER, COUNT(id) AS TOTAL "))->groupBy("GENDER")->get();
+        $data=json_encode($dataRaw);
+        return $data;
+    }
+    public function nationalityReport()
+    {
+        // to display a number of years behind, pass a int parameter. For example to display the last 10 years:
+
+       // $sql=Models\ApplicantModel::select("NATIONALITY")->groupBy("NATIONALITY")->get()->toArray();
+
+         $users = \DB::table('tpoly_applicants')
+          ->select(\DB::raw("  NATIONALITY, COUNT(id) AS count "))->groupBy("NATIONALITY")->get();
+         //dd($users);
+
+//       /* $chart = Charts::database(Models\ApplicantModel::all(), 'donut', 'highcharts')
+//            ->title('Applicants by Nationality')
+//            ->labels(['Ghana', 'Cameron', 'Nigeria'])
+//            ->values([5476,1,2])
+//            ->dimensions(1000,500)
+//            ->responsive(false);*/
+//       /* $chart = Charts::database(User::all(), 'bar', 'highcharts')
+//            ->elementLabel("Total")
+//            ->dimensions(1000, 500)
+//            ->responsive(false)
+//            ->groupBy('game');*/
+//        $users = User::where(\DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+//            ->get();
+//        $chart = Charts::database($users, 'bar', 'highcharts')
+//            ->title("Monthly new Register Users")
+//            ->elementLabel("Total Users")
+//            ->dimensions(1000, 500)
+//            ->responsive(false)
+//            ->groupByMonth(date('Y'), true);
+//       // return view('chart',compact('chart'));
+
+        return view('admissions.reports.nationality');
+    }
 }

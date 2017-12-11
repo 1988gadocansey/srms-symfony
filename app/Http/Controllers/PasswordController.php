@@ -38,7 +38,7 @@ class PasswordController extends Controller
     }
     public function anyData(Request $request)
     {
-         if( @\Auth::user()->department=='top' || @\Auth::user()->role=="Dean"|| @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Admin"){
+         if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role=="Dean"|| @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Admin"){
         
        
         $students = Models\StudentModel::join('tpoly_programme', 'tpoly_students.PROGRAMMECODE', '=', 'tpoly_programme.PROGRAMMECODE')->join('tpoly_log_portal', 'tpoly_log_portal.username', '=', 'tpoly_students.INDEXNO')

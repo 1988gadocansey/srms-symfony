@@ -476,7 +476,7 @@ class FeeController extends Controller
           }
     }
     public function processPayment(Request $request){
-      if(@\Auth::user()->department=="Finance"){
+      if(@\Auth::user()->department=="Finance" || @\Auth::user()->department=="Tptop"){
         $sys=new SystemController();
         $array = $sys->getSemYear();
         $sem = $array[0]->SEMESTER;
@@ -720,7 +720,7 @@ class FeeController extends Controller
     }
     public function printOldReceipt(Request $request) {
          
-      if(@\Auth::user()->department=="Finance"){
+      if(@\Auth::user()->department=="Finance" || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop"){
           if ($request->isMethod("get")) {
    	 	return view("finance.fees.printLostReceipt");
    	 }
@@ -766,7 +766,7 @@ class FeeController extends Controller
     
     public function printPasswordReceipt(Request $request) {
          
-      if(@\Auth::user()->department=="Finance"){
+      if(@\Auth::user()->department=="Finance" || @\Auth::user()->department=="Tptop"){
           if ($request->isMethod("get")) {
    	 	return view("finance.fees.payfee");
    	 }

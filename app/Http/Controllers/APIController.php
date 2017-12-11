@@ -29,6 +29,14 @@ class APIController extends Controller {
         return response()->json(array('data'=>$data));
          
       }
+       public function getStudentProgram(Request $request,$program) {
+        header('Content-Type: application/json');
+        $indexno=$request->input("student");
+        $data=@Models\StudentModel::where("PROGRAMMECODE",$program)->get();
+        return response()->json(array('data'=>$data));
+         
+      }
+
       public function getStudentHall(Request $request) {
         header('Content-Type: application/json');
         $indexno=$request->input("student");

@@ -90,7 +90,7 @@ class SystemController extends Controller
         return $region;
     }
     public function getProgramByIDList() {
-        if( @\Auth::user()->department=='top' || @\Auth::user()->role=='FO'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role=='FO'){
 
             $program = \DB::table('tpoly_programme')->orderBy("PROGRAMME")
                 ->lists('PROGRAMME', 'ID');
@@ -106,7 +106,7 @@ class SystemController extends Controller
     }
     public function getDepartmentByIDList() {
 
-        if( @\Auth::user()->department=='top'|| @\Auth::user()->role=='FO'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='FO'){
             $department = \DB::table('tpoly_department')->orderBy("DEPARTMENT")
                 ->lists('DEPARTMENT', 'ID');
             return $department;
@@ -265,11 +265,11 @@ class SystemController extends Controller
 
 
     }
-    public function getYearBillLevelPostgraduate($year,$level,$program) {
+   public function getYearBillLevelPostgraduate($year,$level,$program) {
 
 
         $fee = \DB::table('tpoly_bills')->where("PROGRAMME",$program)
-            ->where('LEVEL', '500')
+            ->where('LEVEL', '500MT')
             ->where('YEAR',$year)
             ->first();
 
@@ -454,7 +454,7 @@ class SystemController extends Controller
 
 
     public function getProgramListEvening() {
-        if( @\Auth::user()->department=='top' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
             $program = \DB::table('tpoly_programme')->where("PROGRAMME","!LIKE","%"."Evening"."%")->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
@@ -477,7 +477,7 @@ class SystemController extends Controller
     // this is purposely for select box
     public function getProgramList() {
         $departmentArray=explode(",",@\Auth::user()->department);
-        if( @\Auth::user()->department=='top' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
             $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
@@ -521,7 +521,7 @@ class SystemController extends Controller
     }
     public function years() {
 
-        for ($i = date("Y"); $i <= 2030; $i++) {
+        for ($i =1998; $i <= 3030; $i++) {
             $year = $i - 1 . "/" . $i;
             $years[$year] = $year;
         }
@@ -861,6 +861,65 @@ class SystemController extends Controller
         return count($total);
     }
 
+    public function getStudentsTotalOverAll($level){
+        $array = $this->getSemYear();
+
+        $year = $array[0]->YEAR;
+        $sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_levelgender')
+            //->where('STATUS','In School')
+            //->where('tpoly_students.PROGRAMMECODE', $program)
+            ->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            //->get();
+            //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
+            //->value('Total');
+            ->first();
+            return $total;
+    }
+
+    public function getPaidTotalOverAll(){
+        $array = $this->getSemYear();
+
+        $year = $array[0]->YEAR;
+        $sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_levelgender')
+            //->where('STATUS','In School')
+            //->where('tpoly_students.PROGRAMMECODE', $program)
+            //->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            //->get();
+            //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
+            //->value('Total');
+            ->sum('Paid');
+            return ($total);
+    }
+
+    public function getOweTotalOverAll(){
+        $array = $this->getSemYear();
+
+        $year = $array[0]->YEAR;
+        $sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_levelgender')
+            //->where('STATUS','In School')
+            //->where('tpoly_students.PROGRAMMECODE', $program)
+            //->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_levelgender.LEVEL', "LIKE", "%". $level . "%")
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            //->get();
+            //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
+            //->value('Total');
+            ->sum('Owing');
+            return ($total);
+    }
 
     public function getStudentsTotalPerLevelAll($level){
         $array = $this->getSemYear();
@@ -1937,7 +1996,7 @@ class SystemController extends Controller
         $academicDetails=$this->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
         $year=$academicDetails[0]->YEAR;
-        $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
+       // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
         foreach ($data->records as $item)
         {
 
@@ -2108,7 +2167,7 @@ class SystemController extends Controller
         $academicDetails=$this->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
         $year=$academicDetails[0]->YEAR;
-        $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
+       // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
         foreach ($data->records as $item)
         {
             //freshers

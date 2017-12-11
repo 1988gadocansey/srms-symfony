@@ -37,7 +37,7 @@ class CourseController extends Controller
         );
     }
         public function printCards(Request $request,SystemController $sys){
-    if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+    if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
            if ($request->isMethod("get")) {
              $program=$sys->getProgramList();
 
@@ -745,7 +745,7 @@ public function processResit(SystemController $sys,Request $request) {
            
 }
 public function uploadResit(SystemController $sys,Request $request){
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
        
       if ($request->isMethod("get")) {
 
@@ -949,7 +949,7 @@ public function processsUploadLegacy(SystemController $sys,Request $request) {
 }
 
  public function uploadGad2(SystemController $sys,Request $request){
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
        
        
          
@@ -1022,7 +1022,7 @@ return redirect("/dashboard");
      // recover deleted grades
       public function gradeRecovery(SystemController $sys,Request $request){
 
-        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' ||  @\Auth::user()->fund== '755991'||  @\Auth::user()->fund== '1201610') {
+        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' ||  @\Auth::user()->fund== '755991'||  @\Auth::user()->fund== '1201610' || @\Auth::user()->fund== '701088') {
 
            if ($request->isMethod("get")) {
 
@@ -1123,7 +1123,7 @@ return redirect("/dashboard");
     
     public function gradeModification(SystemController $sys,Request $request){
 
-        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' ||  @\Auth::user()->fund== '755991'||  @\Auth::user()->fund== '1201610') {
+        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' ||  @\Auth::user()->fund== '755991'||  @\Auth::user()->fund== '1201610' || @\Auth::user()->fund== '701088') {
 
            if ($request->isMethod("get")) {
 
@@ -1136,7 +1136,7 @@ return redirect("/dashboard");
             } 
             
         }
-        elseif(@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top' ||  @\Auth::user()->department== 'Tpmid' || @\Auth::user()->department== 'Tptop'){
+        elseif(@\Auth::user()->role=='Admin' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' ||  @\Auth::user()->department== 'Tpmid' || @\Auth::user()->department== 'Tptop'){
              return view('courses.deleteGrades')->with('year', $sys->years())
                                 ->with("course",$sys->getMountedCourseList())
                                 ->with("level",$sys->getLevelList())
@@ -1689,7 +1689,7 @@ return redirect("/dashboard");
     }
     
     public function create(SystemController $sys) {
-       if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->role == 'Admin'){
+       if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role == 'Admin'){
         $programme=$sys->getProgramList();
          return view('courses.create')->with('level', $sys->getLevelList())->with('programme', $programme);
        }
@@ -1708,7 +1708,7 @@ return redirect("/dashboard");
      */
     public function store(Request $request)
     {
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->department=='top' || @\Auth::user()->role == 'Admin'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->role == 'Admin'){
          
             $this->validate($request, [
                 'name' => 'required',
@@ -2099,7 +2099,7 @@ return redirect("/dashboard");
         
     }
      public function attendanceSheet(Request $request,SystemController $sys){
-    if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Rector' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+    if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Rector' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
            if ($request->isMethod("get")) {
              $course=$sys->getMountedCourseList();
 
@@ -2186,7 +2186,7 @@ return redirect("/dashboard");
      */
     public function uploadLegacy(Request $request, SystemController $sys){
         
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
            if ($request->isMethod("get")) {
              
              $programme = $sys->getProgramList();
@@ -2370,7 +2370,7 @@ return redirect("/dashboard");
             'level' => 'required',
         ]);
      // dd($request);
-         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
+         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $array = $sys->getSemYear();
             $sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
@@ -2686,7 +2686,7 @@ return redirect("/dashboard");
     public function destroy(Request $request,   SystemController $sys, Models\CourseModel $course)
     {
         //dd($request->input("id"));
-       if(@\Auth::user()->role=='HOD' ||  @\Auth::user()->role=='Support'||  @\Auth::user()->role=='Admin' ||  @\Auth::user()->department=='top' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+       if(@\Auth::user()->role=='HOD' ||  @\Auth::user()->role=='Support'||  @\Auth::user()->role=='Admin' ||  @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
            $hod=@\Auth::user()->id;
         $array=$sys->getSemYear();
         $sem=$array[0]->SEMESTER;
@@ -2726,7 +2726,7 @@ return redirect("/dashboard");
     // delete mounted courses
     public function destroy_mounted(Request $request,   SystemController $sys, Models\CourseModel $course)
     {
-      if(@\Auth::user()->role=='HOD' ||  @\Auth::user()->role=='Support'||  @\Auth::user()->role=='Admin' ||  @\Auth::user()->department=='top' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+      if(@\Auth::user()->role=='HOD' ||  @\Auth::user()->role=='Support'||  @\Auth::user()->role=='Admin' ||  @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
       
         $array=$sys->getSemYear();
         $sem=$array[0]->SEMESTER;

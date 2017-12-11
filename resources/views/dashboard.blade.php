@@ -51,13 +51,13 @@
                         </div>
                     </div>
                 </div>
-                  @if( @Auth::user()->department=='top' || @Auth::user()->department=='Rector'  || @Auth::user()->department=='Tpmid')
+                  @if( @Auth::user()->department=='top' || @Auth::user()->department=='Rector'  || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
                 <div>
                     <div class="md-card">
                         <div class="md-card-content">
                             <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class=" "><i class="sidebar-menu-icon material-icons md-36">account_balance</i></span></div>
-                            <span class="uk-text-muted uk-text-small">Owing - <span class="uk-text-bold uk-text-danger ">GH{{$owing}} </span></span><br/>
-                            <span class="uk-text-muted uk-text-small">Paid (live) - <span class="uk-text-bold uk-text-success ">GH{{$paid}} </span></span>
+                            <span class="uk-text-muted uk-text-small">Owing - <span class="uk-text-bold uk-text-danger ">GH<?php echo $sys->formatMoney($sys->getOweTotalOverAll()); ?> </span></span><br/>
+                            <span class="uk-text-muted uk-text-small">Paid - <span class="uk-text-bold uk-text-success ">GH <?php echo $sys->formatMoney($sys->getPaidTotalOverAll()); ?> </span></span>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 @endif
             </div>
 
-           @if( @Auth::user()->role=='Lecturer' || @Auth::user()->role=='HOD' || @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid')
+           @if( @Auth::user()->role=='Lecturer' || @Auth::user()->role=='HOD' || @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
             <div class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-5 uk-text-center uk-sortable sortable-handler" id="dashboard_sortable_cards" data-uk-sortable data-uk-grid-margin>
                       @if( @Auth::user()->role=='Support')
                 <div>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                       @endif
-                 @if( @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid')
+                 @if( @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
                         <div class="md-card-content">
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                  @endif
-                    @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid')
+                    @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
                         <div class="md-card-content">
@@ -159,7 +159,7 @@
                     </div>
                 </div>
                     @endif
-                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid')
+                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
                 
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
@@ -233,7 +233,7 @@
                     </div>
                 </div>
                 
-                   @if( @Auth::user()->department=='top'  || @Auth::user()->department=='Tpmid'|| @Auth::user()->department=='Rector')  
+                   @if( @Auth::user()->department=='top' || @Auth::user()->department=='Tpmid'|| @Auth::user()->department=='Rector' || @Auth::user()->department=='Tptop')  
                         <div>
                             <div class="md-card md-card-hover md-card-overlay">
                                 <div class="md-card-content">
@@ -256,100 +256,9 @@
             </div> 
          
         
-
-           
-
             <!-- tasks -->
-            <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
-                <div class="uk-width-medium-1-2">
-                    <div class="md-card">
-                        <div class="md-card-content">
-                            <div class="uk-overflow-container">
-                                <table class="uk-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="uk-text-nowrap">Level</th>
-                                            <th class="uk-text-nowrap">Students</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                     
-                                        <tr class="uk-table-middle">
-                                            <td>Level 100 HND</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('100H')}}</td>
-                                            
-                                        </tr>
-                                      <tr class="uk-table-middle">
-                                            <td>Level 200 HND</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('200H')}}</td>
-                                            
-                                        </tr>
-                                      <tr class="uk-table-middle">
-                                            <td>Level 300 HND</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('300H')}}</td>
-                                            
-                                        </tr>
-                                   
-                                         <tr class="uk-table-middle">
-                                            <td>Level 100 BTECH TOP UP</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('100BTT')}}</td>
-                                            
-                                        </tr>
-                                          <tr class="uk-table-middle">
-                                            <td>Level 200 BTECH TOP UP</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('200BTT')}}</td>
-                                            
-                                        </tr>
-                                        
-                                        <tr class="uk-table-middle">
-                                            <td>Non Tertiary Level 100 </td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('100NT')}}</td>
-                                            
-                                        </tr>
-                                        <tr class="uk-table-middle">
-                                            <td>Non Tertiary Level 200</td>
-                                            <td class=''>{{$sys->getStudentsTotalPerLevelAll('200NT')}}</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td><p style="uk-text-bold">Total</p></td>
-                                            <td><p style="uk-text-bold">{{$sys->getStudentsTotalPerLevelAll('200NT')+$sys->getStudentsTotalPerLevelAll('100NT')+$sys->getStudentsTotalPerLevelAll('200BTT')
-                                            + $sys->getStudentsTotalPerLevelAll('100BTT')+$sys->getStudentsTotalPerLevelAll('300H')
-                                            +$sys->getStudentsTotalPerLevelAll('200H')+$sys->getStudentsTotalPerLevelAll('100H')}}
-                                            </p></td>
-                                           
-                                        </tr>
-                                        
-                                    </tbody>
-                                      
-                                    </tbody>
-                                </table>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-width-medium-1-2">
-                    <div class="md-card">
-                        <div class="md-card-content">
-                            <h3 class="heading_a uk-margin-bottom">Statistics</h3>
-                            <div id="ct-chart" class="chartist"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-          
-
-  
-
-         
-         
-       
-
- @endsection
+@endsection
 @section('js')
   <!-- d3 -->
         <script src="public/assets/plugins/d3/d3.min.js"></script>

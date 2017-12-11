@@ -184,7 +184,7 @@ class StudentController extends Controller
             $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
                ;
         }
-        $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(400);
+        $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(500);
 
         $request->flashExcept("_token");
 
