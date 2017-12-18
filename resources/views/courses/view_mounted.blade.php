@@ -162,7 +162,7 @@
                      <th style="text-align:center">ACADEMIC YEAR</th>
                      <th style="text-align:center">TYPE</th>
                      <th style="text-align:center">LECTURER</th> 
-                        @if(@\Auth::user()->role=='HOD'|| @\Auth::user()->role=='Admin'|| @\Auth::user()->department=='top')
+                        @if(@\Auth::user()->role=='HOD'|| @\Auth::user()->role=='Support'|| @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop')
                      <th  class="filter-false remove sorter-false uk-text-center" colspan="2" data-priority="1">ACTION</th>   
                        @endif
                 </tr>
@@ -185,7 +185,7 @@
                                            <td> {{ @$row->COURSE_YEAR }}</td>
                                            <td> {{ @$row->COURSE_TYPE }}</td>
                                            <td> {{ @$row->lecturer->fullName }}</td>
-                                           @if(@\Auth::user()->role=='HOD' || @\Auth::user()->role=='Admin'|| @\Auth::user()->department=='top'|| @\Auth::user()->role=='Support')
+                                           @if(@\Auth::user()->role=='HOD' || @\Auth::user()->role=='Support'|| @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Support')
                                             <td>
                                                  <a href='{{url("/mounted/$row->ID/edit")}}'><i  title="click to edit mounted course" class="md-icon material-icons">&#xE254;</i></a>
                                               {!!Form::open(['action' =>['CourseController@destroy_mounted', 'id'=>$row->ID], 'method' => 'DELETE','name'=>'myform' ,'style' => 'display: inline;'])  !!}

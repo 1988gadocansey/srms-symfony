@@ -265,7 +265,7 @@ class SystemController extends Controller
 
 
     }
-   public function getYearBillLevelPostgraduate($year,$level,$program) {
+    public function getYearBillLevelPostgraduate($year,$level,$program) {
 
 
         $fee = \DB::table('tpoly_bills')->where("PROGRAMME",$program)
@@ -490,7 +490,7 @@ class SystemController extends Controller
 
         }
         else{
-           // $user_department= @\Auth::user()->department;
+            // $user_department= @\Auth::user()->department;
             $program = \DB::table('tpoly_programme')->whereIn('DEPTCODE', $departmentArray)->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
@@ -795,8 +795,10 @@ class SystemController extends Controller
         return @$programme;
 
     }
-    public function getCreditHour($courseCode,$sem,$level) {
-        $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$courseCode)->where('COURSE_SEMESTER',$sem)->where('COURSE_LEVEL',$level)->get();
+    public function getCreditHour($courseCode,$sem,$level,$program) {
+        $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$courseCode)->where('COURSE_SEMESTER',$sem)->where('COURSE_LEVEL',$level)
+            ->where("PROGRAMME",$program)
+            ->get();
 
         return @$course[0]->COURSE_CREDIT;
     }
@@ -878,7 +880,7 @@ class SystemController extends Controller
             //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
             //->value('Total');
             ->first();
-            return $total;
+        return $total;
     }
 
     public function getPaidTotalOverAll(){
@@ -898,7 +900,7 @@ class SystemController extends Controller
             //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
             //->value('Total');
             ->sum('Paid');
-            return ($total);
+        return ($total);
     }
 
     public function getOweTotalOverAll(){
@@ -918,7 +920,7 @@ class SystemController extends Controller
             //return view('Male.getStudentsTotalOverAll', ['tpoly_levelgender'=>$total]);
             //->value('Total');
             ->sum('Owing');
-            return ($total);
+        return ($total);
     }
 
     public function getStudentsTotalPerLevelAll($level){
@@ -930,6 +932,40 @@ class SystemController extends Controller
         $total = \DB::table('tpoly_students')
             ->where('STATUS','In School')
             //->where('tpoly_students.PROGRAMMECODE', $program)
+            ->where('tpoly_students.LEVEL', "LIKE", "%". $level . "%")
+            // ->where('tpoly_academic_record.year', $year)
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            ->get();
+        return count($total);
+    }
+
+    public function getStudentsTotalPerLevelAllGen($level,$gen){
+        $array = $this->getSemYear();
+
+        $year = $array[0]->YEAR;
+        $sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_students')
+            ->where('STATUS','In School')
+            ->where('tpoly_students.SEX', $gen)
+            ->where('tpoly_students.LEVEL', "LIKE", "%". $level . "%")
+            // ->where('tpoly_academic_record.year', $year)
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            ->get();
+        return count($total);
+    }
+
+    public function getStudentsTotalPerLevelAllRegistered($level){
+        $array = $this->getSemYear();
+
+        $year = $array[0]->YEAR;
+        $sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_students')
+            ->where('STATUS','In School')
+            ->where('tpoly_students.REGISTERED',1)
             ->where('tpoly_students.LEVEL', "LIKE", "%". $level . "%")
             // ->where('tpoly_academic_record.year', $year)
             //->where('tpoly_academic_record.sem', $sem)
@@ -1996,7 +2032,7 @@ class SystemController extends Controller
         $academicDetails=$this->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
         $year=$academicDetails[0]->YEAR;
-       // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
+        // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
         foreach ($data->records as $item)
         {
 
@@ -2167,7 +2203,7 @@ class SystemController extends Controller
         $academicDetails=$this->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
         $year=$academicDetails[0]->YEAR;
-       // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
+        // $data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
         foreach ($data->records as $item)
         {
             //freshers

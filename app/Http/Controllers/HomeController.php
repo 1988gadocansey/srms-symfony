@@ -18,11 +18,15 @@ class HomeController extends Controller
 
     public function __construct()
     {
+        
         $this->middleware('auth');
-
+        ini_set('max_execution_time', 180000);  
+       
         $user=@\Auth::user()->id;
         $date=new \Datetime();
         @User::where("id", $user)->update(array("last_login"=>$date));
+      
+        
     }
 
     /**
@@ -31,7 +35,7 @@ class HomeController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index(SystemController $sys)
+    public function index(Request $request,SystemController $sys)
     {   if(@\Auth::user()->department=="Admissions"){
             //$sys->getZenith();
             return redirect("applicants/view");
@@ -41,7 +45,8 @@ class HomeController extends Controller
             return view("users.updateProfile");
         }
         else{
-         ini_set('max_execution_time', 500000);
+           
+            //ini_set('max_execution_time', 50000);
          // $sys->getZenith();
            // $sys->generateIndexNumbers();
            /* $dataGenerator=Models\StudentModel::where("LEVEL","100H")->orWhere("LEVEL","100NTT")
@@ -52,24 +57,22 @@ class HomeController extends Controller
                 Models\PortalPasswordModel::where("username",$row->STNO)->update(array("username"=>$index));
             }*/
 
+ 
 
 
-        error_reporting(1);
-
-
-
-        $lastVisit=\Carbon\Carbon::createmFromTimeStamp(strtotime(@\Auth::user()->last_login))->diffForHumans();
+        $lastVisit=\Carbon\Carbon::createFromTimeStamp(strtotime(@\Auth::user()->last_login))->diffForHumans();
 
         $academicDetails=$sys->getSemYear();
         $sem=$academicDetails[0]->SEMESTER;
         $year=$academicDetails[0]->YEAR;
 
-        $studentDetail=Models\StudentModel::query()->where('STATUS','In School')->sum("BILLS");
+        $studentDetail=Models\StudentModel::query()->where('STATUS','In School')->sum("BILL_OWING");
         $total=@Models\StudentModel::query()->where('STATUS','In School')->count("ID");
 
         $totalRegistered =Models\StudentModel::query()->where('REGISTERED','1')
-                     ->get();
-               $totalRegistered =count($totalRegistered );
+                     ->count();
+                      
+              // $totalRegistered =count($totalRegistered );
 
                /*
                 Gad--- i added the academic year and sem to reduce query weight
@@ -83,7 +86,7 @@ class HomeController extends Controller
         $totalPaid=Models\FeePaymentModel::query()->where('SEMESTER',$sem)->where('YEAR',$year)->where('PAYMENTTYPE','School Fees')->sum("AMOUNT");
 
         $paid=@$sys->formatMoney($totalPaid);
-
+ 
         // statistics
          $totalProgram=@Models\StudentModel::query()->where('SYSUPDATE','1')->groupBy("LEVEL")->get();
 

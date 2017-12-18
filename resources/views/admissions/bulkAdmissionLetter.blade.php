@@ -56,7 +56,7 @@
             </form>
         </div>
     </div>
-    <h3 class="heading_b uk-margin-bottom">Applicants List</h3>
+    <h3 class="heading_b uk-margin-bottom">Bulk Admission Letter Printing</h3>
     <div style="" class="">
 
         <!--    <div class="uk-margin-bottom" style="margin-left:910px" >-->
@@ -75,28 +75,10 @@
 
 
 
-            <div style="margin-top: -5px" class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
-                <button class="md-btn md-btn-small md-btn-success uk-margin-small-top">Export <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type: 'csv', escape: 'false'});"><img src='{!! url("assets/icons/csv.png")!!}' width="24"/> CSV</a></li>
-
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type: 'excel', escape: 'false'});"><img src='{!! url("assets/icons/xls.png")!!}' width="24"/> XLS</a></li>
-                        <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type: 'doc', escape: 'false'});"><img src='{!! url("assets/icons/word.png")!!}' width="24"/> Word</a></li>
-                        <li><a href="#" onClick ="$('#ts_pager_filter').tableExport({type: 'powerpoint', escape: 'false'});"><img src='{!! url("assets/icons/ppt.png")!!}' width="24"/> PowerPoint</a></li>
-                        <li class="uk-nav-divider"></li>
-
-                    </ul>
-                </div>
-            </div>
 
 
 
 
-            <i title="click to print" onclick="javascript:printDiv('print')" class="material-icons md-36 uk-text-success"   >print</i>
-
-            <a  href="{{url('/applicant/auto/sms')}}"  onclick="return alert('This will send bulk admission notification to all applicants')"  title="sent bulk admission notification to applicants"> <i   title="click to sent bulk admission notification to applicants"  class="material-icons md-36 uk-text-success"   >phonelink_ring</i></a>
 
 
         </div>
@@ -108,152 +90,38 @@
         <div class="md-card">
             <div class="md-card-content">
 
-                <form action=" "  method="get" accept-charset="utf-8" novalidate id="group">
+                <form action="{{url('/admissions/letter/bulk/process')}}"  method="post" accept-charset="utf-8" novalidate id="group">
                     {!!  csrf_field()  !!}
                     <div class="uk-grid" data-uk-grid-margin="">
 
                         <div class="uk-width-medium-1-5">
                             <div class="uk-margin-small-top">
                                 {!! Form::select('program',
-                                (['' => 'All programs'] + $programme ),
+                                (['' => 'All programs'] + $data ),
                                 old("program",""),
-                                ['class' => 'md-input parent','id'=>"parent",'placeholder'=>'select program'] )  !!}
+                                ['class' => 'md-input parent','id'=>"parent",'placeholder'=>'select program','required'=>''] )  !!}
                             </div>
                         </div>
+
+
+
+
 
                         <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-
-                                {!!  Form::select('gender', array('MALE'=>'Male','FEMALE' => 'Female'), null, ['placeholder' => 'select gender','id'=>'parent','class'=>'md-input parent'],old("level","")); !!}
-
-                            </div>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('school',
-                                (['' => 'by schools'] +$school  ),
-                                old("school",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('department',
-                                (['' => 'departments'] +$department  ),
-                                old("department",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-
-                                {!!  Form::select('status', array('Admitted'=>'Admitted','APPLICANT' => 'Applicants','In School'=>'In school'), null, ['placeholder' => 'select status of applicant','id'=>'parent','class'=>'md-input parent'],old("level","")); !!}
-
-                            </div>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('hall',
-                                (['' => 'Search by Halls'] +$halls  ),
-                                old("hall",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('nationality',
-                                (['' => 'Nationality'] +$nationality  ),
-                                old("nationality",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('region',
-                                (['' => 'Search by Regions'] +$region  ),
-                                old("region",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('religion',
-                                (['' => 'Search by Religions'] +$religion  ),
-                                old("religion",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('group',
-                                (['' => 'by admission year'] +$year  ),
-                                old("group",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                {!! Form::select('type',
-                                (['' => 'by form types'] +$type  ),
-                                old("type",""),
-                                ['class' => 'md-input parent','id'=>"parent"] )  !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-
-                                {!!  Form::select('completed', array(''=>'- select status -','1'=>'Form Completed','0'=>'Not Completed'), null, ['placeholder' => 'select form status','id'=>'parent','class'=>'md-input parent'],old("level","")); !!}
-
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-
-                                {!!  Form::select('by', array('APPLICATION_NUMBER'=>'Search by Index Number','NAME'=>'Search by Name','required'=>''), null, ['placeholder' => 'select search type','class'=>'md-input'], old("","")); !!}
-                            </div>
-                        </div>
-
-                        <div class="uk-width-medium-1-5">
-                            <div class="uk-margin-small-top">
-                                <input type="text" style=" " required=""  name="search"  class="md-input" placeholder="search student by index number or name">
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                    <center>   <div class="uk-width-medium-1-10" style=" ">
                             <div class="uk-margin-small-top">
 
                                 <button class="md-btn  md-btn-small md-btn-success uk-margin-small-top" type="submit"><i class="material-icons">search</i></button>
                             </div>
-                        </div></center>
+                        </div>
+
+
+
+                    </div>
+
                 </form>
             </div>
         </div>
-    <!--    <div class="md-card">
-        <div class="md-card-content">
-             <form   method="GET" accept-charset="utf8">
-                                    {!!  csrf_field() !!}
-            <center>   <div class="uk-width-medium-1-10" style=" ">
-<div class="uk-margin-small-top">
 
-
- <a  href="{{url('applicants/sms')}}" > <i title="send sms to admitted applicants" onclick="return confirm('This action will send sms to all the admitted applicants. It is the final stage of the admission and you cannot revoke the applicant admission status again.')"  class="material-icons md-36 uk-text-success"   >phonelink_ring</i></a>
-
-                        </div>
-                    </div></center>
-             </form>
-        </div>
-    </div>-->
     </div>
 
     <!-- end filters -->
@@ -263,155 +131,10 @@
 
 
                 <div class="uk-overflow-container" id='print'>
-                    <center><span class="uk-text-success uk-text-bold">{!! $data->total()!!} Records</span></center>
-                    <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-                        <thead>
-                        <tr>
-                            <th class="filter-false remove sorter-false" >NO</th>
 
-                            <th data-priority="6">NAME</th>
-                            <th>CODE</th>
-                            <th>PHOTO</th>
-
-
-                            <th>ADMISSION N<u>O</u></th>
-
-                            <th>GENDER</th>
-
-                            <th>AGE</th>
-
-                            <th>PHONE <u>NO</u></th>
-
-                            <th>FIRST CHOICE</th>
-                            <th>SECOND CHOICE</th>
-                            <th>THIRD CHOICE</th>
-                            <th>QUALIFICATION</th>
-
-                            <th>ELIGIBILTY</th>
-                            <th>BEST AGGREGATE</th>
-                            <th>RESULTS</th>
-                            <th>QUALIFY?</th>
-                            <th>PROGRAMME ADMITTED</th>
-                            <th>ADMISSION FEES</th>
-                            <th>HALL ADMITTED</th>
-                            <th>STATUS</th>
-
-                            <th>ADMISSION TYPE</th>
-                            <th>SMS SENT</th>
-
-                            <th colspan="4" class="filter-false remove sorter-false uk-text-center" data-priority="1">STEP 1 - SELECT HALL</th>
-                            <th colspan="4" class="filter-false remove sorter-false uk-text-center" data-priority="1">STEP 2 - SELECT PROGRAM</th>
-                            <th colspan="4" class="filter-false remove sorter-false uk-text-center" data-priority="1">STEP 3- SELECT ADMISSION TYPE</th>
-                            <th>STEP4-RESIDENTIAL STATUS</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach($data as $index=> $row)
-
-
-
-
-                            <tr align="">
-
-                                <td> {{ $data->perPage()*($data->currentPage()-1)+($index+1) }} </td>
-                                <td> {{ @$row->NAME }}</td>
-                                <td>PIN CODE: {{ @$row->formDetails->PIN }}  &nbsp;SERIAL: {{@$row->formDetails->serial}}</td>
-                                <td> <img class="" style="width:77px;height: auto" src="http://application.ttuportal.com/public/uploads/photos/{{$row->APPLICATION_NUMBER}}.jpg"alt="photo"    /></td>
-
-
-                                <td> {{ @$row->APPLICATION_NUMBER }}</td>
-
-                                <td> {{ @strtoupper($row->GENDER) }}</td>
-
-                                <td> {{ @$row->AGE }}yrs</td>
-
-                                <td> {{ @$row->PHONE }}</td>
-
-                                <td> {{ strtoupper(@$sys->getProgram($row->FIRST_CHOICE)) }}</td>
-                                <td> {{  strtoupper(@$sys->getProgram(@$row->SECOND_CHOICE)) }}</td>
-                                <td> {{ strtoupper(@$sys->getProgram(@$row->THIRD_CHOICE)) }}</td>
-                                <td> {{ @$row->ENTRY_QUALIFICATION }}</td>
-
-                                <td class="uk-text-primary  uk-text-bold uk-text-nowrap"> {!! nl2br(e(@$row->ELIGIBILTY)) !!}</td>
-                                <td class="uk-text-success  uk-text-bold"> {{ @$row->GRADE }}</td>
-                                <td class="uk-text-success  uk-text-bold"  >{!!wordwrap(@$row->GRADES, 60, "<br />\n")!!}</td>
-                                <td class="uk-text-primary  uk-text-bold"> {{ @$row->QUALIFY }}</td>
-                                <td> {{ strtoupper(@$sys->getProgram($row->PROGRAMME_ADMITTED)) }}</td>
-                                <td>GHC {{ @$row->ADMISSION_FEES }}</td>
-                                <td> {{ @$row->HALL_ADMITTED }}</td>
-                                <td> {{ @$row->STATUS }}</td>
-                                <td class="uk-tex-successt"> {{ strtoupper(@$row->ADMISSION_TYPE) }}</td>
-                                <td class="uk-tex-successt">{!!wordwrap($sys->getMessage($row->APPLICATION_NUMBER), 60, "<br />\n")!!}</td>
-
-
-                                <form id="gads" method="Post" accept-charset="utf8">
-                                    {!!  csrf_field() !!}
-                                    <td style="width:300px">
-                                        {!! Form::select('halls', 
-                                        (['' => 'Search by Halls'] +$halls  ), 
-                                        old("hall",""),
-                                        ['class' => 'md-input halls', 'style'=>"width:300px"] )  !!}
-                                    </td>
-                                    <td style="width:300px">
-
-                                        {!! Form::select('programs', 
-                                        (['' => 'select program to admit'] + $programme ), 
-                                        old("",""),
-                                        ['class' => 'md-input programs','style'=>"width:300px",'placeholder'=>'select program'] )  !!}
-
-                                        <input type="hidden" name="<?php echo @$row->APPLICATION_NUMBER ?>" id="<?php echo @$row->APPLICATION_NUMBER ?>" value="<?php echo @$row->APPLICATION_NUMBER ?>" class="app"/>
-
-                                    </td>
-                                    <td>
-                                        <select name="type" required="" class="type">
-                                            <option>select admission type</option>
-                                            <option value="regular">Regular</option>
-                                            <option value="conditional">Conditional</option>
-                                            <option value="mature">Mature</option>
-                                            <option value="provisional">Provisional</option>
-                                            <option value="technical">Technical</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="resident" required="" class="resident">
-                                            <option value="">select residential status</option>
-                                            <option value="1">Resident</option>
-                                            <option value="0">Affiliated</option>
-
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input title="click to admit" type="checkbox" <?php
-
-                                        ?> class="admit" value="admit" db_id="<?php echo @$row->APPLICATION_NUMBER ?>" name="<?php echo @$row->APPLICATION_NUMBER ?>" id="<?php echo @$row->APPLICATION_NUMBER ?>" class="admit"  />
-
-
-
-                                    </td>
-
-
-                                </form>
-
-
-
-                                <td>
-                                    <a onclick="return MM_openBrWindow('{{url("/applicant_show/$row->APPLICATION_NUMBER/id")}}', 'mark', 'width=800,height=500')" ><i title='Click to view applicant .. please allow popups on browser' class="md-icon material-icons">&#xE8F4;</i></a>
-
-
-                                    <a onclick="return MM_openBrWindow('{{url("/applicant/letter/$row->APPLICATION_NUMBER/printout")}}', 'mark', 'width=800,height=500')" ><i title='Click to print letter .. please allow popups on browser' class="md-icon material-icons">book</i></a>
-
-                                    @if($row->SMS_SENT==0 &&$row->ADMITTED==1 )
-                                        <a onclick="return confirm('This will send sms notification to this applicant. Are you sure you want to continue?')"href='{{url("/phone/$row->PHONE/receipient/$row->APPLICATION_NUMBER/type/$row->ADMISSION_TYPE/name/$row->FIRSTNAME/")}}'  ><i title='Click to send sms' class="md-icon material-icons">phonelink_ring</i></a>
-                                    @endif
-                                </td>
-
-                            </tr>
-                        @endforeach
-                        </tbody>
-
-                    </table>
-                    {!! (new Landish\Pagination\UIKit($data->appends(old())))->render() !!}
+                    @if(Request::isMethod('post'))
+                            gg
+                    @endif
                 </div>
             </div>
 

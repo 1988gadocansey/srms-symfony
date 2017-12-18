@@ -81,7 +81,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( 'load/fees', "StudentController@uploadPaymentZenith");
 
     Route::get( '/api/student', "APIController@getStudentData");
-     Route::get( '/api/student/{program}', "APIController@getStudentProgram");
+    Route::get( '/api/student/{program}', "APIController@getStudentProgram");
 
 
     Route::get('laracharts', 'HomeController@getLaraChart');
@@ -317,6 +317,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get( '/broadsheet/noticeboard', "CourseController@noticeBoardBroadsheet");
     Route::post( '/process_broadsheet', "CourseController@processBroadsheet");
 
+    Route::get( '/broadsheet/napbtex', "CourseController@naptexBroadsheet");
+    Route::post( '/process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
+
 
     Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");
 
@@ -399,11 +402,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('wrong');
     });
     Route::post('delete/wrong', 'StudentController@deleteWrong');
-
-    Route::get('report/service/gender', 'ReportController@reportServiceGender');
-
-    Route::get('/admissions/statistics/nationality','ReportController@nationalityReport');
     Route::get('/admissions/letter/bulk','ReportController@showBulkReport');
+    Route::post('/admissions/letter/bulk/process', 'ReportController@showBulkLetter');
 });
 
 

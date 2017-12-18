@@ -63,9 +63,11 @@
     <div style="" class="">
         <!--    <div class="uk-margin-bottom" style="margin-left:910px" >-->
         <div class="uk-margin-bottom" style="">
+             @if(@\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop")
             <a href="#new_task" data-uk-modal="{ center:true }"> <i title="click to send sms to students"
                                                                     class="material-icons md-36 uk-text-success">phonelink_ring
                     message</i></a>
+                    @endif
 
             <a href="#" class="md-btn md-btn-small md-btn-success uk-margin-right" id="printTable">Print Table</a>
             <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
@@ -154,7 +156,7 @@
                         <div class="uk-width-medium-1-5">
                             <div class="uk-margin-small-top">
 
-                                {!!  Form::select('status', array('Admitted'=>'Admitted','In School'=>'In school','Alumni' => 'Completed','Deferred' => 'Deferred','Dead' => 'Dead','Rasticated' => 'Rasticated'), null, ['placeholder' => 'select status of student','id'=>'parent','class'=>'md-input parent'],old("level","")); !!}
+                                {!!  Form::select('status', array('Admitted'=>'Admitted','In School'=>'In school','Alumni' => 'Completed','Deferred' => 'Deferred','Dead' => 'Dead','Rusticated' => 'Rusticated','Unknown' => 'Unknown'), null, ['placeholder' => 'select status of student','id'=>'parent','class'=>'md-input parent'],old("level","")); !!}
 
                             </div>
                         </div>
@@ -287,7 +289,7 @@
                                 <th>AGE</th>
 
 
-                            @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
+                            @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
                                 <th>PHONE</th>
                             @endif
                             <th>NATIONALITY</th>
@@ -350,7 +352,7 @@
                         <td> {{ strtoupper(@$row->SEX) }}</td>
                         <td> {{ @$row->AGE }}yrs</td>
 
-                @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
+                @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
 
                     <td> {{ @$row->TELEPHONENO }}</td>
                 @endif

@@ -56,8 +56,8 @@
                     <div class="md-card">
                         <div class="md-card-content">
                             <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class=" "><i class="sidebar-menu-icon material-icons md-36">account_balance</i></span></div>
-                            <span class="uk-text-muted uk-text-small">Owing - <span class="uk-text-bold uk-text-danger ">GH<?php echo $sys->formatMoney($sys->getOweTotalOverAll()); ?> </span></span><br/>
-                            <span class="uk-text-muted uk-text-small">Paid - <span class="uk-text-bold uk-text-success ">GH <?php echo $sys->formatMoney($sys->getPaidTotalOverAll()); ?> </span></span>
+                            <span class="uk-text-muted uk-text-small">Owing - <span class="uk-text-bold uk-text-danger ">GH{{$owing}}</span></span><br/>
+                            <span class="uk-text-muted uk-text-small">Paid - <span class="uk-text-bold uk-text-success ">GH{{$paid}}</span></span>
                         </div>
                     </div>
                 </div>
@@ -257,7 +257,133 @@
          
         
             <!-- tasks -->
+            <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
+                <div class="uk-width-medium-1-2">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-overflow-container">
+                                <table class="uk-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-text-nowrap">Level</th>
+                                            <th class="uk-text-nowrap">M</th>
+                                            <th class="uk-text-nowrap">F</th>
+                                            <th class="uk-text-nowrap">?</th>
+                                            <th class="uk-text-nowrap">Total</th>
+                                            <th class="uk-text-nowrap">Reg</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                       <tr class="uk-table-middle">
+                                            <td>Non Tertiary Level 100 </td>
+                                            <td class=''><?php $am=$sys->getStudentsTotalPerLevelAllGen('100NT','Male'); echo $am;?></td>
+                                            <td class=''><?php $af=$sys->getStudentsTotalPerLevelAllGen('100NT','Female'); echo $af;?></td>
+                                            <td class=''><?php $au=$sys->getStudentsTotalPerLevelAllGen('100NT',''); echo $au;?></td>
+                                            <td class=''><?php $at=$sys->getStudentsTotalPerLevelAll('100NT'); echo $at;?></td>
+                                            <td class=''><?php $ar=$sys->getStudentsTotalPerLevelAllRegistered('100NT'); echo $ar;?></td>
+                                        </tr>
+                                        <tr class="uk-table-middle">
+                                            <td>Non Tertiary Level 200</td>
+                                            <td class=''><?php $bm=$sys->getStudentsTotalPerLevelAllGen('200NT','Male'); echo $bm;?></td>
+                                            <td class=''><?php $bf=$sys->getStudentsTotalPerLevelAllGen('200NT','Female'); echo $bf;?></td>
+                                            <td class=''><?php $bu=$sys->getStudentsTotalPerLevelAllGen('200NT',''); echo $bu;?></td>
+                                            <td class=''><?php $bt=$sys->getStudentsTotalPerLevelAll('200NT'); echo $bt;?></td>
+                                            <td class=''><?php $br=$sys->getStudentsTotalPerLevelAllRegistered('200NT'); echo $br;?></td>
+                                        </tr>
+                                        <tr class="uk-table-middle">
+                                            <td>Level 100 HND</td>
+                                            <td class=''><?php $cm=$sys->getStudentsTotalPerLevelAllGen('100H','Male'); echo $cm;?></td>
+                                            <td class=''><?php $cf=$sys->getStudentsTotalPerLevelAllGen('100H','Female'); echo $cf;?></td>
+                                            <td class=''><?php $cu=$sys->getStudentsTotalPerLevelAllGen('100H',''); echo $cu;?></td>
+                                            <td class=''><?php $ct=$sys->getStudentsTotalPerLevelAll('100H'); echo $ct;?></td>
+                                            <td class=''><?php $cr=$sys->getStudentsTotalPerLevelAllRegistered('100H'); echo $cr;?></td>
+                                        </tr>
+                                      <tr class="uk-table-middle">
+                                            <td>Level 200 HND</td>
+                                            <td class=''><?php $dm=$sys->getStudentsTotalPerLevelAllGen('200H','Male'); echo $dm;?></td>
+                                            <td class=''><?php $df=$sys->getStudentsTotalPerLevelAllGen('200H','Female'); echo $df;?></td>
+                                            <td class=''><?php $du=$sys->getStudentsTotalPerLevelAllGen('200H',''); echo $du;?></td>
+                                            <td class=''><?php $dt=$sys->getStudentsTotalPerLevelAll('200H'); echo $dt;?></td>
+                                            <td class=''><?php $dr=$sys->getStudentsTotalPerLevelAllRegistered('200H'); echo $dr;?></td>
+                                        </tr>
+                                      <tr class="uk-table-middle">
+                                            <td>Level 300 HND</td>
+                                            <td class=''><?php $em=$sys->getStudentsTotalPerLevelAllGen('300H','Male'); echo $em;?></td>
+                                            <td class=''><?php $ef=$sys->getStudentsTotalPerLevelAllGen('300H','Female'); echo $ef;?></td>
+                                            <td class=''><?php $eu=$sys->getStudentsTotalPerLevelAllGen('300H',''); echo $eu;?></td>
+                                            <td class=''><?php $et=$sys->getStudentsTotalPerLevelAll('300H'); echo $et;?></td>
+                                            <td class=''><?php $er=$sys->getStudentsTotalPerLevelAllRegistered('300H'); echo $er;?></td>
+                                        </tr>
+                                   
+                                         <tr class="uk-table-middle">
+                                            <td>Level 100 BTECH TOP UP</td>
+                                            <td class=''><?php $fm=$sys->getStudentsTotalPerLevelAllGen('100BTT','Male'); echo $fm;?></td>
+                                            <td class=''><?php $ff=$sys->getStudentsTotalPerLevelAllGen('100BTT','Female'); echo $ff;?></td>
+                                            <td class=''><?php $fu=$sys->getStudentsTotalPerLevelAllGen('100BTT',''); echo $fu;?></td>
+                                            <td class=''><?php $ft=$sys->getStudentsTotalPerLevelAll('100BTT'); echo $ft;?></td>
+                                            <td class=''><?php $fr=$sys->getStudentsTotalPerLevelAllRegistered('100BTT'); echo $fr;?></td>
+                                        </tr>
+                                          <tr class="uk-table-middle">
+                                            <td>Level 200 BTECH TOP UP</td>
+                                            <td class=''><?php $gm=$sys->getStudentsTotalPerLevelAllGen('200BTT','Male'); echo $gm;?></td>
+                                            <td class=''><?php $gf=$sys->getStudentsTotalPerLevelAllGen('200BTT','Female'); echo $gf;?></td>
+                                            <td class=''><?php $gu=$sys->getStudentsTotalPerLevelAllGen('200BTT',''); echo $gu;?></td>
+                                            <td class=''><?php $gt=$sys->getStudentsTotalPerLevelAll('200BTT'); echo $gt;?></td>
+                                            <td class=''><?php $gr=$sys->getStudentsTotalPerLevelAllRegistered('200BTT'); echo $gr;?></td>
+                                        </tr>
+                                        <tr class="uk-table-middle">
+                                            <td>Level 100 MASTERS</td>
+                                            <td class=''><?php $hm=$sys->getStudentsTotalPerLevelAllGen('500MT','Male'); echo $hm;?></td>
+                                            <td class=''><?php $hf=$sys->getStudentsTotalPerLevelAllGen('500MT','Female'); echo $hf;?></td>
+                                            <td class=''><?php $hu=$sys->getStudentsTotalPerLevelAllGen('500MT',''); echo $hu;?></td>
+                                            <td class=''><?php $ht=$sys->getStudentsTotalPerLevelAll('500MT'); echo $ht;?></td>
+                                            <td class=''><?php $hr=$sys->getStudentsTotalPerLevelAllRegistered('500MT'); echo $hr;?></td>
+                                        </tr>
+                                        <tr class="uk-table-middle">
+                                            <td>Level 200 MASTERS</td>
+                                            <td class=''><?php $im=$sys->getStudentsTotalPerLevelAllGen('600MT','Male'); echo $im;?></td>
+                                            <td class=''><?php $if=$sys->getStudentsTotalPerLevelAllGen('600MT','Female'); echo $if;?></td>
+                                            <td class=''><?php $iu=$sys->getStudentsTotalPerLevelAllGen('600MT',''); echo $iu;?></td>
+                                            <td class=''><?php $it=$sys->getStudentsTotalPerLevelAll('600MT'); echo $it;?></td>
+                                            <td class=''><?php $ir=$sys->getStudentsTotalPerLevelAllRegistered('600MT'); echo $ir;?></td>
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td><p style="uk-text-bold">Total</p></td>
+                                            <td><p style="uk-text-bold"><?php echo $am+$bm+$cm+$dm+$em+$fm+$gm+$hm+$im?>
+                                            </p></td>
+                                            <td><p style="uk-text-bold"><?php echo $bf+$bf+$cf+$df+$ef+$ff+$gf+$hf+$if?>
+                                            </p></td>
+                                            <td><p style="uk-text-bold"><?php echo $au+$bu+$cu+$du+$eu+$fu+$gu+$hu+$iu?>
+                                            </p></td>
+                                            <td><p style="uk-text-bold"><?php echo $at+$bt+$ct+$dt+$et+$ft+$gt+$ht+$it?>
+                                            </p></td> 
+                                            <td><p style="uk-text-bold"><?php echo $ar+$br+$cr+$dr+$er+$fr+$gr+$hr+$ir?>
+                                            </p></td>                                          
+                                        </tr>
+                                        
+                                    </tbody>
+                                      
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-medium-1-2">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <h3 class="heading_a uk-margin-bottom">Statistics</h3>
+                            <div id="ct-chart" class="chartist"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+          
 @endsection
 @section('js')
   <!-- d3 -->
