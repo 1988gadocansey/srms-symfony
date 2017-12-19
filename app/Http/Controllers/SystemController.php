@@ -55,6 +55,34 @@ class SystemController extends Controller
 
         return @$programme[0]->DURATION;
     }
+    public function getCreditBySem($indexno,$sem,$level) {
+
+        $total = \DB::table('tpoly_academic_record')->where('indexno', $indexno)
+            ->where("level",$level)
+            ->where("sem",$sem)
+            ->sum('credits');
+
+        return $total;
+    }
+    public function getGPBySem($indexno,$sem,$level) {
+
+        $total = \DB::table('tpoly_academic_record')->where('indexno', $indexno)
+            ->where("level",$level)
+            ->where("sem",$sem)
+            ->sum('gpoint');
+
+        return $total;
+    }
+    public function getGPABySem($indexno,$sem,$level) {
+
+       $totalCR=@$this->getCreditBySem($indexno,$sem,$level);
+       $totalGP=@$this->getGPBySem($indexno,$sem,$level);
+
+       if($totalCR<=0 ||  $totalGP<=0){
+           return 0;
+       }
+        return round( $totalGP/$totalCR,2);
+    }
     public function age($birthdate, $pattern = 'eu')
     {
         $patterns = array(
@@ -338,6 +366,18 @@ class SystemController extends Controller
 
         return @$class->class;
 
+    }
+    public function getTrails($indexno){
+        $resultData=array();
+        $trailsArray = \DB::table('tpoly_academic_record')->where('indexno',$indexno)
+                ->where("grade","E")
+            ->get();
+        foreach ($trailsArray as $row){
+            array_push($resultData,$row->grade);
+        }
+
+
+        return implode(",",$resultData);
     }
     public function getLecturer($lecturer){
 

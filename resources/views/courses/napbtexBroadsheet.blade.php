@@ -80,12 +80,12 @@
 
         </div>
     </div>
-
+    <h6 class="heading_c">Naptex Broadsheet Generation</h6>
     <div class="uk-width-xLarge-1-1">
         <div class="md-card">
             <div class="md-card-content">
 
-                <form action="{{url('/process_broadsheet')}}"  method="POST" accept-charset="utf-8"  >
+                <form action="{{url('/process_broadsheet_napbtex')}}"  method="POST" accept-charset="utf-8"  >
                     {!!  csrf_field()  !!}
                     <div class="uk-grid" data-uk-grid-margin="">
 
@@ -105,8 +105,12 @@
                                 ['class' => 'md-input parents','required'=>'','id'=>"parents",'placeholder'=>'select level'] )  !!}
                             </div>
                         </div>
+                        <div  align='center'>
 
-                        <div class="uk-width-medium-1-5">
+                            <button class="md-btn  md-btn-small md-btn-success uk-margin-small-top" type="submit"><i class="material-icons">search</i></button>
+
+                        </div>
+                       {{-- <div class="uk-width-medium-1-5">
                             <div class="uk-margin-small-top">
 
                                 {!!  Form::select('semester', array('1'=>'1st sem','2'=>'2nd sem','3' => '3rd sem'), null, ['placeholder' => 'select semester','id'=>'parents','class'=>'md-input parents','required'=>''],old("semester","")); !!}
@@ -120,7 +124,7 @@
                           (['' => 'Select year'] +$year ),
                             old("year",""),
                               ['class' => 'md-input parenst','id'=>"parents" ,'required'=>''] )  !!}   </div>
-                        </div>
+                        </div>--}}
 
                         <!--                         <div class="uk-width-medium-1-5">
                                                     <div class="uk-margin-small-top">
@@ -135,11 +139,7 @@
 
 
                     </div>
-                    <div  align='center'>
 
-                        <button class="md-btn  md-btn-small md-btn-success uk-margin-small-top" type="submit"><i class="material-icons">search</i></button>
-
-                    </div>
 
                 </form>
             </div>
@@ -158,18 +158,47 @@
                         <table border='1' class="uk-table uk-table-hover uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
                             <thead>
                             <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 1</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 2</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 3</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 4</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 5</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 6</th>
+                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">COMMULATIVE</th>
+                                <th>AWARD</th>
+                                <th>TRAILS</th>
+                            </tr>
+                            <tr>
                                 <th class="filter-false remove sorter-false"  >NO</th>
-                                <th>STUDENT</th>
-                                <?php
+                                <th>CANDIDATE NO</th>
+                                <th>CANDIDATE NAME</th>
 
-                                $count=0;
-                                $mark=array();
-                                ?>
-                                @foreach($headers as $header=> $td)
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
+                                <th>CR</th>
+                                <th>GP</th>
+                                <th>GPA</th>
 
-                                    <th> {{  strtoupper(@$td['code'])	 }}</th>
 
-                                @endforeach
                             </tr>
                             </thead>
                             <tbody>
@@ -177,31 +206,74 @@
 
 
 
-
+                            <?php $count=0;?>
                             @foreach($student as $stud=> $pupil)  <?php  $count++;?>
                             <tr>
                                 <td><?php $students[]=$pupil->indexno;
                                     \Session::put('students', $students);echo $count?></td>
+                                <td> {{  strtoupper(@$pupil->student->INDEXNO)	 }}</td>
                                 <td> {{  strtoupper(@$pupil->student->NAME)	 }}</td>
+                                <td> <?php $semArray11=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $gpArray11=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $gpaArray11=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $semArray12=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
+                                <td> <?php $gpArray12=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
+                                <td> <?php $gpaArray12=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
 
-                                <?php
-                                $a=$pupil->student->INDEXNO;
-                                for($i=0;$i<count($course);$i++){
-                                    $markm=@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level);
-                                    //dd($markm);
-                                    // print_r($courseArray); "<td>$courseArray[$i]</td>";
-                                    print_r("<td>".  round(@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level))."% - ".@$sys->getGradeLetter(@$markm,'HND')."</td>");
+                                <!-- 2nd year -->
 
-                                }
-                                ?>
+                                <td> <?php $semArray21=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $gpArray21=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $gpaArray21=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $semArray22=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $gpArray22=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $gpaArray22=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
 
+                                <!-- 3rd year -->
 
+                                <td> <?php $semArray31=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $gpArray31=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $gpaArray31=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $semArray32=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
+                                <td> <?php $gpArray32=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
+                                <td> <?php $gpaArray32=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
+
+                                <!-- cummulative total -->
+
+                                <td> <?php $totalCredit=  $semArray11+$semArray12+$semArray21
+                                        +$semArray22+$semArray31+$semArray32;
+                                        echo round( $totalCredit,2);
+                                     	 ?>
+
+                                </td>
+                                <td> <?php $totalGP= $gpArray32+$gpArray31+$gpArray22
+                                        +$gpArray21+$gpArray12+$gpArray11;
+                                    echo round( $totalGP,2);
+                                    ?>
+
+                                </td>
+                                <td> <?php $totalGPA=$gpaArray32+$gpaArray31+$gpaArray22
+                                        +$gpaArray21+$gpaArray12+$gpaArray11;
+                                    echo @round( $totalGP/$totalCredit,2);
+                                    ?>
+
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $sys->getClass(round($totalGP/$totalCredit,2));
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $sys->getTrails(@$pupil->student->INDEXNO);
+                                    ?>
+                                </td>
 
                             </tr>
 
 
                             @endforeach
-
+                            <?php  $gpArray32=0;$gpArray31=0;$gpArray22=0;$gpArray21;$gpArray12;$gpArray11?>
 
                             </tbody>
 

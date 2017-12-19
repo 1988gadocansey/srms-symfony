@@ -2776,7 +2776,7 @@ class CourseController extends Controller
 
     // naptex broadsheet view
     public function naptexBroadsheet(Request $request, SystemController $sys){
-        return view('courses.noticeboard')->with('year', $sys->years())
+        return view('courses.napbtexBroadsheet')->with('year', $sys->years())
             ->with('level', $sys->getLevelList())
             ->with("program", $sys->getProgramList());
 
@@ -2785,6 +2785,90 @@ class CourseController extends Controller
     }
     // naptex broadsheet view
     public function processNaptexBroadsheet(Request $request, SystemController $sys){
+
+
+        \Session::put('level', $request->input("level", ""));
+        \Session::put('year', $request->input("year", ""));
+        \Session::put('program', $request->input("program", ""));
+        \Session::put('sem', $request->input("semester", ""));
+        $program=$request->input("program", "");
+
+        $level=$request->input("level", "");
+        $semester=$request->input("semester", "");
+        $year=$request->input("year", "");
+
+
+        if ($request->has('search') && trim($request->input('search')) != "") {
+            // dd($request);
+            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
+                ->where("indexno",$request->input('search'))
+                ->where("year",$year)->whereHas('student', function($q)use ($program) {
+                    $q->whereHas('programme', function($q)use ($program) {
+                        $q->whereIn('PROGRAMMECODE',  array($program));
+                    });
+                })->orderBy("code")
+                ->groupBy("code")
+                ->get()->toArray();
+        }
+        else{
+            $headerQuery= Models\AcademicRecordsModel::where("level",$level)
+                 ->whereHas('student', function($q)use ($program) {
+                    $q->whereHas('programme', function($q)use ($program) {
+                        $q->whereIn('PROGRAMMECODE',  array($program));
+                    });
+                })->orderBy("code")
+                ->groupBy("code")
+                ->get()->toArray();
+        }
+
+
+        $courseArray=array();
+        foreach($headerQuery as $row){
+            //$courseArray=array();$course=$row['courseId'];
+            $course=$row['code'];
+            if($course!=""||$course==0){
+
+                $courseArray[]=$course;
+            }
+            else{
+                $courseArray[]="N/A";
+            }
+        }
+        if ($request->has('search') && trim($request->input('search')) != "") {
+            $studentData= Models\AcademicRecordsModel::where("level",$level)
+                ->where("indexno",$request->input('search'))
+                 ->whereHas('student', function($q)use ($program) {
+                    $q->whereHas('programme', function($q)use ($program) {
+                        $q->whereIn('PROGRAMMECODE',  array($program));
+                    });
+                })->orderBy("indexno")
+                ->groupBy("indexno")
+                ->select("indexno","level")
+                ->get();
+
+        }
+        else{
+            $studentData=Models\AcademicRecordsModel::where("level",$level)->whereHas('student', function($q)use ($program) {
+                    $q->whereHas('programme', function($q)use ($program) {
+                        $q->whereIn('PROGRAMMECODE',  array($program));
+                    });
+                })->orderBy("indexno")
+                ->groupBy("indexno")
+                ->select("indexno","level")
+                ->get();
+        }
+
+
+        return view('courses.napbtexBroadsheet')->with('year', $sys->years())
+            ->with('level', $sys->getLevelList())
+            ->with("program", $sys->getProgramList())
+            ->with("headers", $headerQuery)
+            ->with("course",   $courseArray)
+            ->with("years", $request->input("year", ""))
+            ->with("programs", $request->input("program", ""))
+            ->with("levels", $request->input("level", ""))
+            ->with("term", $request->input("semester", ""))
+            ->with("student", $studentData);
 
 
     }
