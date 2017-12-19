@@ -168,9 +168,10 @@
                                 <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 5</th>
                                 <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 6</th>
                                 <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">COMMULATIVE</th>
-                                <th>AWARD</th>
-                                <th>TRAILS</th>
+
                             </tr>
+
+
                             <tr>
                                 <th class="filter-false remove sorter-false"  >NO</th>
                                 <th>CANDIDATE NO</th>
@@ -198,6 +199,8 @@
                                 <th>GP</th>
                                 <th>GPA</th>
 
+                                <th>AWARDS</th>
+                                <th>TRAILS</th>
 
                             </tr>
                             </thead>
@@ -260,7 +263,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    echo $sys->getClass(round($totalGP/$totalCredit,2));
+                                    echo $sys->getClass(@round($totalGP/$totalCredit,2));
                                     ?>
                                 </td>
                                 <td>

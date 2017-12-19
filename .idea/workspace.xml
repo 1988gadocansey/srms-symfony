@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3359a2f-c5e4-4bd2-9d25-344ae685ff0e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Controllers/routes.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,23 +20,24 @@
       <file leaf-file-name="napbtexBroadsheet.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="168" column="94" lean-forward="false" selection-start-line="168" selection-start-column="94" selection-end-line="168" selection-end-column="94" />
+            <state relative-caret-position="525">
+              <caret line="202" column="47" lean-forward="false" selection-start-line="202" selection-start-column="47" selection-end-line="202" selection-end-column="47" />
               <folding>
                 <element signature="e#7305#7348#0#HTML" expanded="true" />
                 <element signature="e#7432#7475#0#HTML" expanded="true" />
                 <element signature="e#7559#7602#0#HTML" expanded="true" />
                 <element signature="e#7686#7729#0#HTML" expanded="true" />
                 <element signature="e#7813#7856#0#HTML" expanded="true" />
+                <element signature="e#7940#7983#0#HTML" expanded="true" />
                 <element signature="e#8067#8110#0#HTML" expanded="true" />
-                <marker date="1513647539000" expanded="true" signature="4016:4262" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="4030:4259" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="4487:4725" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="4501:4722" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="5194:5399" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="5209:5396" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="5626:5848" ph="..." />
-                <marker date="1513647539000" expanded="true" signature="5640:5845" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="4016:4262" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="4030:4259" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="4487:4725" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="4501:4722" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="5194:5399" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="5209:5396" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="5626:5848" ph="..." />
+                <marker date="1513649282000" expanded="true" signature="5640:5845" ph="..." />
               </folding>
             </state>
           </provider>
@@ -449,7 +446,7 @@
       <workItem from="1513338710399" duration="433000" />
       <workItem from="1513454489780" duration="100000" />
       <workItem from="1513596559728" duration="1437000" />
-      <workItem from="1513625265548" duration="10451000" />
+      <workItem from="1513625265548" duration="11249000" />
     </task>
     <task id="LOCAL-00001" summary="financial platform">
       <created>1503653729378</created>
@@ -591,11 +588,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513626164296</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Napbtex Broadsheet integrations">
+      <created>1513648648400</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1513648648400</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221663000" />
+    <option name="totallyTimeSpent" value="222461000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="35" width="1440" height="795" extended-state="0" />
@@ -1070,23 +1074,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="168" column="94" lean-forward="false" selection-start-line="168" selection-start-column="94" selection-end-line="168" selection-end-column="94" />
+        <state relative-caret-position="525">
+          <caret line="202" column="47" lean-forward="false" selection-start-line="202" selection-start-column="47" selection-end-line="202" selection-end-column="47" />
           <folding>
             <element signature="e#7305#7348#0#HTML" expanded="true" />
             <element signature="e#7432#7475#0#HTML" expanded="true" />
             <element signature="e#7559#7602#0#HTML" expanded="true" />
             <element signature="e#7686#7729#0#HTML" expanded="true" />
             <element signature="e#7813#7856#0#HTML" expanded="true" />
+            <element signature="e#7940#7983#0#HTML" expanded="true" />
             <element signature="e#8067#8110#0#HTML" expanded="true" />
-            <marker date="1513647539000" expanded="true" signature="4016:4262" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="4030:4259" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="4487:4725" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="4501:4722" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="5194:5399" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="5209:5396" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="5626:5848" ph="..." />
-            <marker date="1513647539000" expanded="true" signature="5640:5845" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="4016:4262" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="4030:4259" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="4487:4725" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="4501:4722" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="5194:5399" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="5209:5396" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="5626:5848" ph="..." />
+            <marker date="1513649282000" expanded="true" signature="5640:5845" ph="..." />
           </folding>
         </state>
       </provider>
