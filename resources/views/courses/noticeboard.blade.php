@@ -159,6 +159,7 @@
                <thead>
                  <tr>
                      <th class="filter-false remove sorter-false"  >NO</th>
+                     <th class="filter-false remove sorter-false"  >INDEX NO.</th>
                       <th>STUDENT</th>
                       <?php   
                       
@@ -170,7 +171,11 @@
                        <th> {{  strtoupper(@$td['code'])	 }}</th>
                        
                        @endforeach
+                     <th> SEMESTER GPA</th>
                 </tr>
+
+
+
              </thead>
       <tbody>
           
@@ -179,9 +184,12 @@
        
           
             @foreach($student as $stud=> $pupil)  <?php  $count++;?>
+            @if($pupil->grade!="E")
             <tr>
-                <td><?php $students[]=$pupil->indexno;
+
+                <td><?php  $students[]=$pupil->indexno;
                                                  \Session::put('students', $students);echo $count?></td>
+                <td><?php echo $pupil->indexno;?></td>
             <td> {{  strtoupper(@$pupil->student->NAME)	 }}</td>
             
             <?php
@@ -190,16 +198,18 @@
                              $markm=@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level);
                            //dd($markm);
                                            // print_r($courseArray); "<td>$courseArray[$i]</td>";
-                                        print_r("<td>".  round(@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level))."% - ".@$sys->getGradeLetter(@$markm,'HND')."</td>");
+                                        print_r("<td>".  round(@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level)). "&nbsp;&nbsp;  - &nbsp;&nbsp; " .@$sys->getGradeLetter(@$markm,'HND')."</td>");
 
                }            
                ?>
-            
-            
-            
+
+
+                <td>{{$sys->getGPABySem(@$a,$term,$pupil->level)}}</td>
             </tr>
-                       
-            
+
+
+            @endif
+
             @endforeach
             
        

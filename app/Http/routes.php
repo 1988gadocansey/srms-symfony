@@ -247,7 +247,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/process_mark','CourseController@processMark');
     Route::delete('/delete_course', 'CourseController@destroy');
     Route::delete('/delete_mounted', 'CourseController@destroy_mounted');
-    Route::get('/upload/marks','CourseController@showFileUpload');
+    Route::get('/upload_marks','CourseController@showFileUpload');
     Route::post('/upload_marks','CourseController@uploadMarks');
     Route::match(array("get", "post"), '/attendanceSheet', "CourseController@attendanceSheet");
     Route::match(array("get", "post"), '/transcript', "CourseController@transcript");
@@ -321,7 +321,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( '/process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
 
 
-    Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");
+    //Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");
 
     Route::match(array("get", "post"), '/groups/create', "GroupController@createGroup");
     Route::delete('/delete_group', 'GroupController@destroy');

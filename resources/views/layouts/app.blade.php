@@ -532,7 +532,7 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/upload_students") !!}'>Upload bulk Student data</a></li>
                                     <li><a href='{!! url("/index/upload") !!}'>Upload Index Number</a></li>
-                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/upload_marks") !!}'>Upload Semester Marks</a></li>
                                     <li><a href='{!! url("/upload/courses") !!}'>Upload Bulk Courses</a></li>
                                     <li><a href='{!! url("/upload/mounted") !!}'>Upload Bulk Mounted Courses</a></li>
                                     <li><a href='{!! url("/legacy") !!}'>Upload Old Results</a></li>
@@ -697,7 +697,7 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/upload_students") !!}'>Upload bulk Student data</a></li>
                                     <li><a href='{!! url("/index/upload") !!}'>Upload Index Number</a></li>
-                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/upload_marks") !!}'>Upload Semester Marks</a></li>
                                     <li><a href='{!! url("/upload/courses") !!}'>Upload Bulk Courses</a></li>
                                     <li><a href='{!! url("/upload/mounted") !!}'>Upload Bulk Mounted Courses</a></li>
                                     <li><a href='{!! url("/legacy") !!}'>Upload Old Results</a></li>
@@ -957,7 +957,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
-                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/upload_marks") !!}'>Upload Semester Marks</a></li>
 
                                 </ul>
                             </div>
@@ -1007,7 +1007,7 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
 
-                                    <li><a href='{!! url("/upload/marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/upload_marks") !!}'>Upload Semester Marks</a></li>
 
                                 </ul>
                             </div>

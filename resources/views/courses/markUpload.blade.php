@@ -43,7 +43,7 @@
                                     <div class="uk-width-medium-1-2">
                                         <label class="">Semester</label>
                                         <p></p>
-                   {{ Form::select('sem', array(''=>'select semester','1'=>'1', '2'=>'2','3'=>'3'), null, ["required"=>"required",'class' => 'md-input label-fixed','v-model'=>'semester','v-form-ctrl'=>'','v-select'=>'']) }}
+                   {{ Form::select('sem', array(''=>'select semester','1'=>'1'), null, ["required"=>"required",'class' => 'md-input label-fixed','v-model'=>'semester','v-form-ctrl'=>'','v-select'=>'']) }}
                    
 
                                     </div>

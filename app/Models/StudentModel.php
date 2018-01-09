@@ -30,5 +30,8 @@ class StudentModel extends Model
      public function levels(){
         return $this->belongsTo('App\Models\LevelModel', "LEVEL","name");
     }
+    public function academic(){
+        return $this->hasMany('App\Models\AcademicRecordsModel', "indexno","INDEXNO");
+    }
      
 }

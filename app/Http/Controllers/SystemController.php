@@ -537,6 +537,33 @@ class SystemController extends Controller
         }
 
     }
+
+
+    // this is purposely for select box
+    public function getProgramList5() {
+        $departmentArray=explode(",",@\Auth::user()->department);
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+            $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
+                ->lists('PROGRAMME', 'PROGRAMMECODE');
+            return $program;
+        }
+        elseif( @\Auth::user()->role=='Registrar' ){
+            $user_school= @\Auth::user()->department;
+            $program = \DB::table('tpoly_programme')->join('tpoly_department','tpoly_department.DEPTCODE', '=', 'tpoly_programme.DEPTCODE')->where('tpoly_department.FACCODE',$user_school)->orderby("tpoly_programme.PROGRAMME")->lists('tpoly_programme.PROGRAMME', 'tpoly_programme.PROGRAMMECODE');
+            return $program;
+
+
+        }
+        else{
+            // $user_department= @\Auth::user()->department;
+            $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
+                ->lists('PROGRAMME', 'PROGRAMMECODE');
+            return $program;
+        }
+
+    }
+
+
     public function totalRegistered($sem,$year,$course,$level,$lecturer) {
         if(@\Auth::user()->role=='Lecturer' || @\Auth::user()->role=='HOD' ||@\Auth::user()->role=='Dean'){
 
@@ -562,6 +589,15 @@ class SystemController extends Controller
     public function years() {
 
         for ($i =1998; $i <= 3030; $i++) {
+            $year = $i - 1 . "/" . $i;
+            $years[$year] = $year;
+        }
+        return $years;
+    }
+
+    public function years22() {
+
+        for ($i =2018; $i <= 2018; $i++) {
             $year = $i - 1 . "/" . $i;
             $years[$year] = $year;
         }
@@ -1420,6 +1456,33 @@ class SystemController extends Controller
         }
 
     }
+
+
+    // return course array based on mouted courses
+    public function getCourseByCodeProgramObject($id,$program) {
+
+        $courseObject = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->select
+        ("COURSE")->get();
+        if(!empty($courseObject)){
+            $courseMount=$courseObject[0]->COURSE;
+            $course = \DB::table('tpoly_courses')->where('ID',$courseMount)->get();
+            if(!empty($course)){
+                return @$course;
+                }
+                else{
+        //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
+          $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();  
+          return @$course;
+        }
+        }
+        else{
+        //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
+          $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();  
+          return @$course;
+        }
+    }
+
+
     public function getCourseByCode($code) {
         $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$code)->get();
 

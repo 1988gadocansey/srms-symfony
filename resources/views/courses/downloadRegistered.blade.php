@@ -71,12 +71,12 @@
                             </div>
                             <div class="uk-width-medium-1-2">
                                 <div class="uk-form-row">
-                                    <label>Course</label>
+                                    <label>Program</label>
                                     <p></p>
-                                    {!! Form::select('course',
-                                 (['' => 'select course'] +$courses ),
-                                   old("course",""),
-                                     ['class' => 'md-input parent','required'=>"required",'placeholder'=>'select course'] )  !!}
+                                    {!! Form::select('program',
+                                 (['' => 'select program'] +$programme ),
+                                   old("program",""),
+                                     ['class' => 'md-input parent','required'=>"required",'placeholder'=>'select program'] )  !!}
 
                                 </div>
 

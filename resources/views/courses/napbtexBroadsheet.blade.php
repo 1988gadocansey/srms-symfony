@@ -148,7 +148,7 @@
 
     @if(Request::isMethod('post'))
         <p></p>
-        <h4 class="heading_c"><center>Broadsheet for {{$sys->getProgram($programs) }} {{$years}}, Semester-{{$term}}  Level {{$levels}}</center></h4>
+        <h4 class="heading_c uk-text-upper"><center>Broadsheet for {{$sys->getProgram($programs) }}    Level {{$levels}}</center></h4>
         <p></p>
         <div class="uk-width-xLarge-1-1">
             <div class="md-card">
@@ -211,35 +211,36 @@
 
                             <?php $count=0;?>
                             @foreach($student as $stud=> $pupil)  <?php  $count++;?>
+
                             <tr>
                                 <td><?php $students[]=$pupil->indexno;
                                     \Session::put('students', $students);echo $count?></td>
-                                <td> {{  strtoupper(@$pupil->student->INDEXNO)	 }}</td>
-                                <td> {{  strtoupper(@$pupil->student->NAME)	 }}</td>
-                                <td> <?php $semArray11=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
-                                <td> <?php $gpArray11=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
-                                <td> <?php $gpaArray11=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'100H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'100H')	 ?></td>
-                                <td> <?php $semArray12=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
-                                <td> <?php $gpArray12=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
-                                <td> <?php $gpaArray12=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'100H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'100H')	 ?></td>
+                                <td> {{  strtoupper(@$pupil->INDEXNO)	 }}</td>
+                                <td> {{  strtoupper(@$pupil->NAME)	 }}</td>
+                                <td> <?php $semArray11=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $gpArray11=  $sys->getGPBySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $gpaArray11=  $sys->getGPABySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $semArray12=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
+                                <td> <?php $gpArray12=  $sys->getGPBySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
+                                <td> <?php $gpaArray12=  $sys->getGPABySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
 
                                 <!-- 2nd year -->
 
-                                <td> <?php $semArray21=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
-                                <td> <?php $gpArray21=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
-                                <td> <?php $gpaArray21=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'200H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'200H')	 ?></td>
-                                <td> <?php $semArray22=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
-                                <td> <?php $gpArray22=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
-                                <td> <?php $gpaArray22=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'200H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $semArray21=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $gpArray21=  $sys->getGPBySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $gpaArray21=  $sys->getGPABySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $semArray22=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $gpArray22=  $sys->getGPBySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $gpaArray22=  $sys->getGPABySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
 
                                 <!-- 3rd year -->
 
-                                <td> <?php $semArray31=  $sys->getCreditBySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
-                                <td> <?php $gpArray31=  $sys->getGPBySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
-                                <td> <?php $gpaArray31=  $sys->getGPABySem(@$pupil->student->INDEXNO,1,'300H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,1,'300H')	 ?></td>
-                                <td> <?php $semArray32=  $sys->getCreditBySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getCreditBySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
-                                <td> <?php $gpArray32=  $sys->getGPBySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getGPBySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
-                                <td> <?php $gpaArray32=  $sys->getGPABySem(@$pupil->student->INDEXNO,2,'300H');echo @$sys->getGPABySem(@$pupil->student->INDEXNO,2,'300H')	 ?></td>
+                                <td> <?php $semArray31=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $gpArray31=  $sys->getGPBySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $gpaArray31=  $sys->getGPABySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $semArray32=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
+                                <td> <?php $gpArray32=  $sys->getGPBySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
+                                <td> <?php $gpaArray32=  $sys->getGPABySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
 
                                 <!-- cummulative total -->
 
@@ -268,7 +269,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                        echo $sys->getTrails(@$pupil->student->INDEXNO);
+                                        echo $sys->getTrails(@$pupil->INDEXNO);
                                     ?>
                                 </td>
 

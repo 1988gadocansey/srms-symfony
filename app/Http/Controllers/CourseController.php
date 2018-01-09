@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Models;
 use App\User;
 use App\Models\AcademicRecordsModel;
+use PhpParser\Node\Expr\AssignOp\Mod;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -1268,11 +1269,11 @@ class CourseController extends Controller
                 $sql=Models\StudentModel::where("INDEXNO",$student)->first();
 
 
-                if(count($sql)==0){
+                //if(count($sql)==0){
 
-                    return redirect("/transcript")->with("error","<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
-                }
-                else{
+                //    return redirect("/transcript")->with("error","<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
+               // }
+               // else{
 
                     $array=$sys->getSemYear();
                     $sem=$array[0]->SEMESTER;
@@ -1286,7 +1287,7 @@ class CourseController extends Controller
 
 
 
-                }
+                //}
             }
 
         }
@@ -1348,7 +1349,7 @@ class CourseController extends Controller
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <td class="uk-text-left" colspan="3">&nbsp;<br/>For HND only. &nbsp;&nbsp;Grade &nbsp;= &nbsp;Value, &nbsp;&nbsp;&nbsp;A+ &nbsp;= &nbsp;5.0, &nbsp;&nbsp;&nbsp;A &nbsp;= &nbsp;4.5, &nbsp;&nbsp;&nbsp;B+ &nbsp;= &nbsp;4.0, &nbsp;&nbsp;&nbsp;B &nbsp;= &nbsp;3.5, &nbsp;&nbsp;&nbsp;C+ &nbsp;= &nbsp;3, &nbsp;&nbsp;&nbsp;C &nbsp;= &nbsp;2.5, &nbsp;&nbsp;&nbsp;D+ &nbsp;= &nbsp;2, &nbsp;&nbsp;&nbsp;D &nbsp;= &nbsp;1.5, &nbsp;&nbsp;&nbsp;F &nbsp;= &nbsp;0,  <br/>&nbsp;&nbsp; red asterisk means resited</td>
+                                                                        <td class="uk-text-left" colspan="3">&nbsp;<br/>For HND only. &nbsp;&nbsp;Grade &nbsp;= &nbsp;Value, &nbsp;&nbsp;&nbsp;A+ &nbsp;= &nbsp;5.0, &nbsp;&nbsp;&nbsp;A &nbsp;= &nbsp;4.5, &nbsp;&nbsp;&nbsp;B+ &nbsp;= &nbsp;4.0, &nbsp;&nbsp;&nbsp;B &nbsp;= &nbsp;3.5, &nbsp;&nbsp;&nbsp;C+ &nbsp;= &nbsp;3, &nbsp;&nbsp;&nbsp;C &nbsp;= &nbsp;2.5, &nbsp;&nbsp;&nbsp;D+ &nbsp;= &nbsp;2, &nbsp;&nbsp;&nbsp;D &nbsp;= &nbsp;1.5, &nbsp;&nbsp;&nbsp;F &nbsp;= &nbsp;0, &nbsp;&nbsp;&nbsp;red asterisk means resit</td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -1374,6 +1375,8 @@ class CourseController extends Controller
 
     }
     public function generateTranscript($sql,  SystemController $sys){
+        $programObject=Models\StudentModel::where('ID',$sql)->select("PROGRAMMECODE")->get();
+        $program=$programObject[0]->PROGRAMMECODE;
 
         $records=  Models\AcademicRecordsModel::where("student",$sql)->groupBy("year")->groupBy("level")->orderBy("level")->get();
 
@@ -1404,11 +1407,6 @@ class CourseController extends Controller
                                 echo ", SEMESTER : ".$i;
                                 echo ", LEVEL :  " .$row->level." <hr/></div>";
 
-
-
-
-
-
                                 ?>
 
                                 <div class="uk-overflow-container">
@@ -1424,6 +1422,7 @@ class CourseController extends Controller
                                     </thead>
                                     <tbody>
                                     <?php
+                                    //$program=$student->program->PROGRAMME;
 
                                     foreach ($query as $rs){
 
@@ -1432,7 +1431,7 @@ class CourseController extends Controller
 
                                     ?>
                                     <tr>
-                                        <td <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>> <?php $object=$sys->getCourseByCodeObject($rs['code']); echo @$object[0]->COURSE_CODE; ?></td>
+                                        <td <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>> <?php $object=$sys->getCourseByCodeProgramObject($rs['code'],$program); echo @$object[0]->COURSE_CODE; ?></td>
                                         <td <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>> <?php
                                             if($rs['resit']=="yes"){
                                                 echo @$object[0]->COURSE_NAME."<span style='color:red'>*</span>";}else{echo @$object[0]->COURSE_NAME;}?> </td>
@@ -1910,21 +1909,21 @@ class CourseController extends Controller
         $this->validate($request, [
 
 
-            'course' => 'required',
+            'program' => 'required',
             'sem' => 'required',
             'year' => 'required',
             'level' => 'required',
         ]);
 
-
+          $kojoSense = 0;
         $array = $sys->getSemYear();
         $sem = $request->input("sem");
         $year = $request->input("year");
         $level = $request->input("level");
-        $course = $request->input("course");
+        $program = $request->input("program");
         $lecturer = @\Auth::user()->fund;
 
-        $data = Models\AcademicRecordsModel::
+       /* $data = Models\AcademicRecordsModel::
         join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
             ->where('tpoly_academic_record.code', $course)
             ->where('tpoly_academic_record.lecturer', $lecturer)
@@ -1932,14 +1931,53 @@ class CourseController extends Controller
             ->where('tpoly_academic_record.sem', $sem)
             ->select('tpoly_students.INDEXNO', 'tpoly_students.NAME', 'tpoly_academic_record.quiz1', 'tpoly_academic_record.quiz2', 'tpoly_academic_record.midsem1', 'tpoly_academic_record.exam', 'tpoly_academic_record.total')
             ->orderBy("tpoly_students.INDEXNO")
-            ->get();
+            ->get();*/
 
-        return Excel::create($course, function ($excel) use ($data,$course){
+        $data = Models\StudentModel::where("PROGRAMMECODE",$program)
+        ->where("LEVEL",$level)
+        ->where("STATUS","In school")
+        ->orderBy("INDEXNO")
+        ->select('INDEXNO', 'NAME')
+        ->get();
 
-            $excel->sheet($course, function ($sheet) use ($data) {
+        $kojoSense = count($data)+1;
 
-                $sheet->fromArray($data);
+        return Excel::create($program, function ($excel) use ($data,$program,$kojoSense){
 
+            $excel->sheet($program, function ($sheet) use ($data,$kojoSense) {
+                $sheet->setWidth(array(
+    'A'     =>  15,
+    'B'     =>  35,
+    'C'     =>  8,
+    'D'     =>  8,
+    'E'     =>  8,
+    'F'     =>  8,
+    'G'     =>  8
+));
+                $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total'));
+                $sheet->fromArray($data);$sheet->setBorder('A1:G'.$kojoSense.'', 'thin');
+                //$sheet->setCellsValue('C2:F'.$kojoSense.'','0');
+                //$sheet->cells('C2:C5', function($cells) {
+
+    // $cells->setValue('0');
+
+//});
+               //$sheet->cells('C2:C5', function($cell) {
+
+     //manipulate the cell
+    //$cell->setValue('0');
+    //});
+               // $sheet->setCellValue('G5','=SUM(C5:F5)');
+
+                 for($k=2;$k<$kojoSense+1;$k++){
+                $sheet->setCellValue('C'.$k.'','0');
+                $sheet->setCellValue('D'.$k.'','0'); 
+                $sheet->setCellValue('E'.$k.'','0');
+                $sheet->setCellValue('F'.$k.'','0');   
+                $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+                    }
+
+//});
             });
 
         })->download('xls');
@@ -2162,7 +2200,7 @@ class CourseController extends Controller
             $course=$sys->getMountedCourseList();
 
             return view('courses.markUpload')->with('programme', $programme)
-                ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years());
+                ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years22());
         }
         else{
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
@@ -2170,11 +2208,11 @@ class CourseController extends Controller
     }
     public function showFileUploadRegistered(SystemController $sys){
         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
-            $programme=$sys->getProgramList();
-            $course=$sys->getMountedCourseList();
+            $programme=$sys->getProgramList5();
+           // $course=$sys->getProgramList5();
 
             return view('courses.downloadRegistered')->with('programme', $programme)
-                ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years());
+                ->with('level', $sys->getLevelList())->with('year',$sys->years());
         }
         else{
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
@@ -2407,7 +2445,7 @@ class CourseController extends Controller
 
 
 
-                            //$studentDb= $sys->getStudentIDfromIndexno('0'.$value->index_no);
+                            $studentId= $sys->getStudentIDfromIndexno($value->index_no);
                             //print_r($value);
 
                             $studentDb=$value->indexno  ;
@@ -2423,14 +2461,14 @@ class CourseController extends Controller
                             $studentSearch = $sys->studentSearchByCode($year,$semester,$courseDb,$studentDb); // check if the students in the file tally with registered students
                             //dd($studentDb);
 //                        if (@in_array($studentDb, $studentSearch)) {
-                            $indexNo=$value->index_no;
-                            $quiz1=$value->quiz1;
-                            $quiz2=$value->quiz2;
-                            $midsem=$value->midsem1;
+                            $indexNo=$value->INDEXNO;
+                            $quiz1=$value->assignment;
+                            $quiz2=$value->quiz;
+                            $midsem=$value->midsem;
                             $exam=$value->exam;
                             $total= round(($quiz2+$quiz1+$midsem+$exam),2);
                             $programmeDetail=$sys->getCourseProgrammeMounted($displayCode);
-
+                            //$creditHour=$sys->getCourseMountedCredit($displayCode);
                             $program=$sys->getProgramArray($programmeDetail);
                             //dd($program);
                             $gradeArray = @$sys->getGrade($total, $program[0]->GRADING_SYSTEM);
@@ -2444,13 +2482,38 @@ class CourseController extends Controller
                             //$class=@$sys->getClass($newCgpa);
                             //Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
+                            $checker=Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->first();
+
+                            if(!empty($checker)){
+
                             Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade, 'gpoint' => $gradePoint));
+                            }
+                            else{
 
-                            \DB::commit();
+
+                                $record=new Models\AcademicRecordsModel();
+                                $record->indexno=$studentDb;
+                                $record->student=$studentId;
+                                $record->credits=$courseCreditDb;
+                                $record->code=$course;
+                                $record->sem=$sem;
+                                $record->year=$year1;
+                                $record->quiz1=$quiz1;
+                                $record->quiz2=$quiz2;
+                                $record->midSem1=$midsem;
+                                $record->exam=$exam;
+                                $record->total=$total;
+                                $record->lecturer=$courseLecturerDb;
+                                $record->grade=$grade;
+                                $record->gpoint=$gradePoint;
+                                $record->save();
+
+                            
+                          
 
 
 
-//                       } else {
+              } //else {
 //                                return redirect('/upload/marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contain unrecognized students for $displayCourse - $displayCode.please upload only registered students for  $displayCourse - $displayCode  as downloaded from the system!</span> ");
 //                            
 //                                  
@@ -2458,15 +2521,15 @@ class CourseController extends Controller
                         }
 
 
-                        return redirect('/registered_courses')->with("success",  " <span style='font-weight:bold;font-size:13px;'> $totalRecords Marks  successfully uploaded for  $displayCourse - $displayCode!</span> ");
+                        return redirect('/upload_marks')->with("success",  " <span style='font-weight:bold;font-size:13px;'> $totalRecords Marks  successfully uploaded for  $displayCourse - $displayCode!</span> ");
 
 
                     } else {
-                        return redirect('/upload/marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>File is empty</span> ");
+                        return redirect('/upload_marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>File is empty</span> ");
 
                     }
                 } else {
-                    return redirect('/upload/marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload only Excel file!</span> ");
+                    return redirect('/upload_marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload only Excel file!</span> ");
 
                 }
 
@@ -2800,25 +2863,14 @@ class CourseController extends Controller
 
         if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
-            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
-                ->where("indexno",$request->input('search'))
-                ->where("year",$year)->whereHas('student', function($q)use ($program) {
-                    $q->whereHas('programme', function($q)use ($program) {
-                        $q->whereIn('PROGRAMMECODE',  array($program));
-                    });
-                })->orderBy("code")
-                ->groupBy("code")
-                ->get()->toArray();
+            $headerQuery=
+            Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("indexno",$request->input('search'))->get();
         }
         else{
-            $headerQuery= Models\AcademicRecordsModel::where("level",$level)
-                 ->whereHas('student', function($q)use ($program) {
-                    $q->whereHas('programme', function($q)use ($program) {
-                        $q->whereIn('PROGRAMMECODE',  array($program));
-                    });
-                })->orderBy("code")
-                ->groupBy("code")
-                ->get()->toArray();
+            $headerQuery=Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
+
+
+           // dd($headerQuery);
         }
 
 
@@ -2835,27 +2887,14 @@ class CourseController extends Controller
             }
         }
         if ($request->has('search') && trim($request->input('search')) != "") {
-            $studentData= Models\AcademicRecordsModel::where("level",$level)
-                ->where("indexno",$request->input('search'))
-                 ->whereHas('student', function($q)use ($program) {
-                    $q->whereHas('programme', function($q)use ($program) {
-                        $q->whereIn('PROGRAMMECODE',  array($program));
-                    });
-                })->orderBy("indexno")
-                ->groupBy("indexno")
-                ->select("indexno","level")
-                ->get();
+            $studentData=  Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("INDEXNO",$request->input('search'))->get();
+
 
         }
         else{
-            $studentData=Models\AcademicRecordsModel::where("level",$level)->whereHas('student', function($q)use ($program) {
-                    $q->whereHas('programme', function($q)use ($program) {
-                        $q->whereIn('PROGRAMMECODE',  array($program));
-                    });
-                })->orderBy("indexno")
-                ->groupBy("indexno")
-                ->select("indexno","level")
-                ->get();
+            $studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
+
+
         }
 
 
@@ -2868,7 +2907,7 @@ class CourseController extends Controller
             ->with("programs", $request->input("program", ""))
             ->with("levels", $request->input("level", ""))
             ->with("term", $request->input("semester", ""))
-            ->with("student", $studentData);
+            ->with("student",  $headerQuery);
 
 
     }
