@@ -2941,7 +2941,7 @@ class CourseController extends Controller
 
         if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
-            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
+            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
                 ->where("indexno",$request->input('search'))
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
@@ -2952,7 +2952,7 @@ class CourseController extends Controller
                 ->get()->toArray();
         }
         else{
-            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
+            $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
                         $q->whereIn('PROGRAMMECODE',  array($program));
@@ -2976,7 +2976,7 @@ class CourseController extends Controller
             }
         }
         if ($request->has('search') && trim($request->input('search')) != "") {
-            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
+            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
                 ->where("indexno",$request->input('search'))
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
@@ -2989,7 +2989,7 @@ class CourseController extends Controller
 
         }
         else{
-            $studentData=Models\AcademicRecordsModel::where("level",$level)->where("sem",$semester)
+            $studentData=Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
                         $q->whereIn('PROGRAMMECODE',  array($program));
