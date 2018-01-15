@@ -1252,7 +1252,7 @@ class CourseController extends Controller
 
     public function transcript(SystemController $sys,Request $request){
 
-        if (@\Auth::user()->role == 'HOD' || @\Auth::user()->role == 'Lecturer' || @\Auth::user()->role == 'Registrar' || @\Auth::user()->department == 'top' || @\Auth::user()->department == 'Rector' || @\Auth::user()->department == 'Tpmid' || @\Auth::user()->department == 'Tptop' || @\Auth::user()->role == 'Admin') {
+        if (@\Auth::user()->role == 'HOD' || @\Auth::user()->role == 'Support' || @\Auth::user()->role == 'Lecturer' || @\Auth::user()->role == 'Registrar' || @\Auth::user()->department == 'top' || @\Auth::user()->department == 'Rector' || @\Auth::user()->department == 'Tpmid' || @\Auth::user()->department == 'Tptop' || @\Auth::user()->role == 'Admin') {
 
             if ($request->isMethod("get")) {
 
@@ -1942,7 +1942,7 @@ class CourseController extends Controller
 
         $kojoSense = count($data)+1;
 
-        return Excel::create($program, function ($excel) use ($data,$program,$kojoSense){
+        return Excel::create($program.$level, function ($excel) use ($data,$program,$kojoSense){
 
             $excel->sheet($program, function ($sheet) use ($data,$kojoSense) {
                 $sheet->setWidth(array(
@@ -2207,7 +2207,7 @@ class CourseController extends Controller
         }
     }
     public function showFileUploadRegistered(SystemController $sys){
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->role=='Support' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $programme=$sys->getProgramList5();
            // $course=$sys->getProgramList5();
 
@@ -2486,7 +2486,7 @@ class CourseController extends Controller
 
                             if(!empty($checker)){
 
-                            Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade, 'gpoint' => $gradePoint));
+                            Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade, 'gpoint' => $gradePoint));
                             }
                             else{
 
@@ -2506,6 +2506,7 @@ class CourseController extends Controller
                                 $record->lecturer=$courseLecturerDb;
                                 $record->grade=$grade;
                                 $record->gpoint=$gradePoint;
+                                $record->level=$level;
                                 $record->save();
 
                             

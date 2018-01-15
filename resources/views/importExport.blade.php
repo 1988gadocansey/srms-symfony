@@ -58,3 +58,27 @@
  
  
 @endsection
+<div>
+    <p class="uk-text-center">Statistical Data</p>
+    <table border="1" class="uk-table uk-tab-center uk-table-striped">
+        <thead>
+        <th>Grade</th>
+        <th>Count</th>
+        </thead>
+        <tbody>
+        <?php
+
+
+        sort($grades);
+        foreach (array_count_values($grades) as  $key=>$val){
+            echo "<tr>";
+
+            echo "<td>$key</td>";
+            echo "<td>$val</td>";
+            echo "</tr>";
+
+        }
+        ?>
+        </tbody>
+    </table>
+</div>

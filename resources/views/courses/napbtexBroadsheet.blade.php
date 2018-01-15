@@ -80,7 +80,7 @@
 
         </div>
     </div>
-    <h6 class="heading_c">Naptex Broadsheet Generation</h6>
+    <h6 class="heading_c">Nabptex Broadsheet Generation</h6>
     <div class="uk-width-xLarge-1-1">
         <div class="md-card">
             <div class="md-card-content">

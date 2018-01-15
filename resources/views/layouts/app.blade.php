@@ -466,8 +466,8 @@
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
 
 
                                 </ul>
@@ -487,6 +487,7 @@
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/search_password") !!}'>Search student password</a></li>
+                                    <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
                                     <li><a href='{!! url("/print/receipt") !!}'>Print Fee Receipt</a></li>
                                     <li><a href='{!! url("/print/password") !!}'>Print Password Receipt</a></li>
                                     <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
@@ -584,8 +585,8 @@
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
                                     <li><a href='{!! url("/admissions/statistics/admission/type") !!}'>Report by Admission Type</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
 
                                 </ul>
                             </div>
@@ -626,7 +627,7 @@
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/search_password") !!}'>Search student password</a></li>
-
+                                    <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
                                     <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
                                     <li><a href='{!! url("/systems/grades/recover") !!}'>Recover Deleted grades</a></li>
                                     <li><a href='{!! url("/systems/grades/delete") !!}'>Delete uploaded grades</a></li>
@@ -654,8 +655,8 @@
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
                                     <li><a href='{!! url("/admissions/statistics/admission/type") !!}'>Report by Admission Type</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
 
 
                                 </ul>
@@ -798,8 +799,8 @@
 
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
                                     <li><a href='{!! url("/admissions/statistics/admission/type") !!}'>Report by Admission Type</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
 
                                 </ul>
                             </div>
@@ -818,6 +819,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
                                     <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
 
                                 </ul>
@@ -832,13 +834,11 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
-                                    <li><a href='{!! url("staff") !!}'>View Staff</a></li>
-                                    <li><a href='{!! url("/grade_system") !!}'>View Grading Systems</a></li>
-                                    <li><a href='{!! url("/classes/view") !!}'>View Classing System</a></li>
-                                    <li><a href='{!! url("/groups/view") !!}'>View Class Groups</a></li>
+                                   
+                                   
                                     <li><a href='{!! url("/courses") !!}'>View Courses</a></li>
                                     <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>
-                                    <li><a href='{!! url("/power_users") !!}'>View Users</a></li>
+                                    
                                     <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
 
 
@@ -869,8 +869,8 @@
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
 
 
                                 </ul>
@@ -942,8 +942,8 @@
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
 
 
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
 
 
                                 </ul>
@@ -1063,8 +1063,8 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
-                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>Broadsheet Noticeboard</a></li>
-                                    <li><a href='{!! url("/broadsheet/naptex") !!}'>Broadsheet Naptex</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
                                     <li><a href='{!! url("owing_paid") !!}'>Owing reports</a></li>
                                     <li><a href='{!! url("fee_summary") !!}'>Fee Summary</a></li>
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>

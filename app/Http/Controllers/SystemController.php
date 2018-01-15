@@ -59,16 +59,38 @@ class SystemController extends Controller
 
         $total = \DB::table('tpoly_academic_record')->where('indexno', $indexno)
             ->where("level",$level)
-            ->where("sem",$sem)
+            ->where("sem",$sem)->where("grade","!=","E")
             ->sum('credits');
 
         return $total;
+    }
+    public function getLecturerAverage($course,$sem,$level,$year,$totalStudent) {
+        $total = \DB::table('tpoly_academic_record')
+            ->join('tpoly_grade_system','tpoly_academic_record.grade', '=', 'tpoly_grade_system.grade')
+            ->where('tpoly_academic_record.code', $course)
+            ->where("tpoly_academic_record.level",$level)
+            ->where("tpoly_academic_record.sem",$sem)->where("tpoly_academic_record.grade","!=","E")
+            ->where("tpoly_academic_record.year",$year)
+            ->select('tpoly_grade_system.value')->get();
+
+        $total=$total[0]->value;
+
+
+        return round($total/$totalStudent,2);
+    }
+    function array_push_assoc($array, $key, $value){
+        $array[$key] = $value;
+        return $array;
+    }
+    public function arrayFrequencyCounter( $array,$needle){
+        return count(array_keys($array,$needle));
+
     }
     public function getGPBySem($indexno,$sem,$level) {
 
         $total = \DB::table('tpoly_academic_record')->where('indexno', $indexno)
             ->where("level",$level)
-            ->where("sem",$sem)
+            ->where("sem",$sem)->where("grade","!=","E")
             ->sum('gpoint');
 
         return $total;
@@ -81,6 +103,17 @@ class SystemController extends Controller
        if($totalCR<=0 ||  $totalGP<=0){
            return 0;
        }
+        return round( $totalGP/$totalCR,2);
+    }
+    public function getCGPA($indexno) {
+
+        $totalCR=Models\AcademicRecordsModel::where("indexno",$indexno)->where("grade","!=","E")->sum("credits");
+        $totalGP=Models\AcademicRecordsModel::where("indexno",$indexno)->where("grade","!=","E")->sum("gpoint");
+
+
+        if($totalCR<=0 ||  $totalGP<=0){
+            return 0;
+        }
         return round( $totalGP/$totalCR,2);
     }
     public function age($birthdate, $pattern = 'eu')
