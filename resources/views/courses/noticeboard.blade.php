@@ -369,7 +369,8 @@
        
 
           
-            <?php $grades= array();
+            <?php
+            $grades= array();
             $courseCode=array();
             $gradeArray=array("A+","A","B+","B","C+","C","D+","D","F");
             $countGrade=array();
