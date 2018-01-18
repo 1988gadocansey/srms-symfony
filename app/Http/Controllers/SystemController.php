@@ -49,6 +49,40 @@ class SystemController extends Controller
         return @$data->total;
 
     }
+    public function getCourseGradeCounter($course,$sem,$level,$year,$program,$grade) {
+
+       /* $data= @\DB::table('tpoly_academic_record')
+            ->where("year",$year)
+            ->where("sem",$sem)
+            ->where("level",$level)
+            ->where("code",$course)
+            ->select("grade")
+            ->get();*/
+    $row=array();
+        $data= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$sem)
+
+            ->where("year",$year)->where("grade",$grade)->where("code",$course)->whereHas('student', function($q)use ($program) {
+                $q->whereHas('programme', function($q)use ($program) {
+                    $q->whereIn('PROGRAMMECODE',  array($program));
+                });
+            })
+            ->count();
+      /* foreach ($data as $col=>$val){
+           array_push($row,$val->grade);
+
+       }
+
+        foreach (array_count_values($row) as  $key=>$val){
+
+
+
+            echo " $val ";
+
+
+        }*/
+
+      return $data;
+    }
     public function getProgramDuration($code) {
 
         $programme = \DB::table('tpoly_programme')->where('PROGRAMMECODE', $code)->get();
@@ -83,7 +117,9 @@ class SystemController extends Controller
         return $array;
     }
     public function arrayFrequencyCounter( $array,$needle){
+
         return count(array_keys($array,$needle));
+
 
     }
     public function getGPBySem($indexno,$sem,$level) {

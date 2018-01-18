@@ -407,13 +407,12 @@
 
                                         print_r("<td>".  round(@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level)). "&nbsp;&nbsp;  - &nbsp;&nbsp; " .@$sys->getGradeLetter(@$markm,'HND')."</td>");
 
-                   array_push($countGrade, $sys->getGradeLetter(@$markm,'HND'));
+                  // array_push($countGrade, $sys->getGradeLetter(@$markm,'HND'));
 
 
-                   @$grades[$course[$i]] = $countGrade;
-
-
-
+                   //@$grades[$course[$i]] = $countGrade;
+                  // array_push($grades,$sys->getCourseGradeCounter($course[$i],$term,$pupil->level,$years,$programs));
+                   // $grades[]=$sys->getCourseGradeCounter($course[$i],$term,$pupil->level,$years,$programs);
                }
 
                ?>
@@ -437,18 +436,19 @@
 
             @endforeach
 
-
+   {{-- {{dd($grades)}}--}}
 
             <tr><td>Grades Counter</td></tr>
-                {{dd(@$grades)}}
+
                 @foreach($gradeArray as  $col)
 
                     <tr>
                         <td></td><td></td>  <td>{{$col}} </td>
 
-                        @foreach($course as  $item=>$needle)
-                        <td>{{$sys->arrayFrequencyCounter(@$grades,$col)}}</td>
+                       @foreach($course as  $item=>$needle)
+                        <td>{{$sys->getCourseGradeCounter($needle,$term,$levels,$years,$programs,$col)}}</td>
                         @endforeach
+
 
                     </tr>
 
