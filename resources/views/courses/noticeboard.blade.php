@@ -463,7 +463,7 @@
                 <td>Lecturer Averages</td>
                 @foreach($course as  $key=>$val)
 
-                    <td>{{$sys->getLecturerAverage($val,$term,$pupil->level,$years,count($students))}} </td>
+                    <td>{{$sys->getLecturerAverage($sys->getCourseGradeArray($val,$term,$levels,$years,$programs))}} </td>
 
 
                 @endforeach

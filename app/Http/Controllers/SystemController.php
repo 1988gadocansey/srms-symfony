@@ -24,6 +24,81 @@ class SystemController extends Controller
 
 
     }
+    public function getCourseGradeCounter($course,$sem,$level,$year,$program,$grade) {
+
+        /* $data= @\DB::table('tpoly_academic_record')
+             ->where("year",$year)
+             ->where("sem",$sem)
+             ->where("level",$level)
+             ->where("code",$course)
+             ->select("grade")
+             ->get();*/
+        $row=array();
+        $data= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$sem)
+
+            ->where("year",$year)->where("grade",$grade)->where("code",$course)->whereHas('student', function($q)use ($program) {
+                $q->whereHas('programme', function($q)use ($program) {
+                    $q->whereIn('PROGRAMMECODE',  array($program));
+                });
+            })
+            ->count();
+        /* foreach ($data as $col=>$val){
+             array_push($row,$val->grade);
+
+         }
+
+          foreach (array_count_values($row) as  $key=>$val){
+
+
+
+              echo " $val ";
+
+
+          }*/
+
+        return $data;
+    }
+    public function getCourseGradeArray($course,$sem,$level,$year,$program) {
+
+        $rows=array();
+        $data= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$sem)
+
+            ->where("year",$year)->where("code",$course)->whereHas('student', function($q)use ($program) {
+                $q->whereHas('programme', function($q)use ($program) {
+                    $q->whereIn('PROGRAMMECODE',  array($program));
+                });
+            })
+            ->select("grade")->get();
+        foreach ($data as $row){
+            array_push($rows,$row->grade);
+        }
+        return $rows;
+
+    }
+    public function getLecturerAverage($grades) {
+
+        $total=0.0;
+        for($i=0;$i<count($grades);$i++) {
+            $data = Models\GradeSystemModel::
+            where("grade", $grades[$i])->select("value")->first();
+
+
+            $total+= $data->value;
+
+        }
+
+        return round($total/count($grades),2);
+    }
+    function array_push_assoc($array, $key, $value){
+        $array[$key] = $value;
+        return $array;
+    }
+    public function arrayFrequencyCounter( $array,$needle){
+
+        return count(array_keys($array,$needle));
+
+
+    }
     public function sync_to_online($url,$data){
         $ch = \curl_init();
         \curl_setopt($ch, CURLOPT_URL,$url);
@@ -49,40 +124,6 @@ class SystemController extends Controller
         return @$data->total;
 
     }
-    public function getCourseGradeCounter($course,$sem,$level,$year,$program,$grade) {
-
-       /* $data= @\DB::table('tpoly_academic_record')
-            ->where("year",$year)
-            ->where("sem",$sem)
-            ->where("level",$level)
-            ->where("code",$course)
-            ->select("grade")
-            ->get();*/
-    $row=array();
-        $data= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$sem)
-
-            ->where("year",$year)->where("grade",$grade)->where("code",$course)->whereHas('student', function($q)use ($program) {
-                $q->whereHas('programme', function($q)use ($program) {
-                    $q->whereIn('PROGRAMMECODE',  array($program));
-                });
-            })
-            ->count();
-      /* foreach ($data as $col=>$val){
-           array_push($row,$val->grade);
-
-       }
-
-        foreach (array_count_values($row) as  $key=>$val){
-
-
-
-            echo " $val ";
-
-
-        }*/
-
-      return $data;
-    }
     public function getProgramDuration($code) {
 
         $programme = \DB::table('tpoly_programme')->where('PROGRAMMECODE', $code)->get();
@@ -98,30 +139,6 @@ class SystemController extends Controller
 
         return $total;
     }
-    public function getLecturerAverage($course,$sem,$level,$year,$totalStudent) {
-        $total = \DB::table('tpoly_academic_record')
-            ->join('tpoly_grade_system','tpoly_academic_record.grade', '=', 'tpoly_grade_system.grade')
-            ->where('tpoly_academic_record.code', $course)
-            ->where("tpoly_academic_record.level",$level)
-            ->where("tpoly_academic_record.sem",$sem)->where("tpoly_academic_record.grade","!=","E")
-            ->where("tpoly_academic_record.year",$year)
-            ->select('tpoly_grade_system.value')->get();
-
-        $total=$total[0]->value;
-
-
-        return round($total/$totalStudent,2);
-    }
-    function array_push_assoc($array, $key, $value){
-        $array[$key] = $value;
-        return $array;
-    }
-    public function arrayFrequencyCounter( $array,$needle){
-
-        return count(array_keys($array,$needle));
-
-
-    }
     public function getGPBySem($indexno,$sem,$level) {
 
         $total = \DB::table('tpoly_academic_record')->where('indexno', $indexno)
@@ -133,12 +150,12 @@ class SystemController extends Controller
     }
     public function getGPABySem($indexno,$sem,$level) {
 
-       $totalCR=@$this->getCreditBySem($indexno,$sem,$level);
-       $totalGP=@$this->getGPBySem($indexno,$sem,$level);
+        $totalCR=@$this->getCreditBySem($indexno,$sem,$level);
+        $totalGP=@$this->getGPBySem($indexno,$sem,$level);
 
-       if($totalCR<=0 ||  $totalGP<=0){
-           return 0;
-       }
+        if($totalCR<=0 ||  $totalGP<=0){
+            return 0;
+        }
         return round( $totalGP/$totalCR,2);
     }
     public function getCGPA($indexno) {
@@ -439,7 +456,7 @@ class SystemController extends Controller
     public function getTrails($indexno){
         $resultData=array();
         $trailsArray = \DB::table('tpoly_academic_record')->where('indexno',$indexno)
-                ->where("grade","E")
+            ->where("grade","E")
             ->get();
         foreach ($trailsArray as $row){
             array_push($resultData,$row->grade);
@@ -1537,17 +1554,17 @@ class SystemController extends Controller
             $course = \DB::table('tpoly_courses')->where('ID',$courseMount)->get();
             if(!empty($course)){
                 return @$course;
-                }
-                else{
-        //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
-          $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();  
-          return @$course;
-        }
+            }
+            else{
+                //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
+                $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();
+                return @$course;
+            }
         }
         else{
-        //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
-          $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();  
-          return @$course;
+            //$course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$id)->where("PROGRAMME",$program)->get();
+            $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$id)->get();
+            return @$course;
         }
     }
 
