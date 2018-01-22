@@ -834,11 +834,11 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
-                                   
-                                   
+
+
                                     <li><a href='{!! url("/courses") !!}'>View Courses</a></li>
                                     <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>
-                                    
+
                                     <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
 
 

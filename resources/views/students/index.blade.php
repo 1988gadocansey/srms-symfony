@@ -63,11 +63,11 @@
     <div style="" class="">
         <!--    <div class="uk-margin-bottom" style="margin-left:910px" >-->
         <div class="uk-margin-bottom" style="">
-             @if(@\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop")
-            <a href="#new_task" data-uk-modal="{ center:true }"> <i title="click to send sms to students"
-                                                                    class="material-icons md-36 uk-text-success">phonelink_ring
-                    message</i></a>
-                    @endif
+            @if(@\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop")
+                <a href="#new_task" data-uk-modal="{ center:true }"> <i title="click to send sms to students"
+                                                                        class="material-icons md-36 uk-text-success">phonelink_ring
+                        message</i></a>
+            @endif
 
             <a href="#" class="md-btn md-btn-small md-btn-success uk-margin-right" id="printTable">Print Table</a>
             <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
@@ -160,7 +160,7 @@
 
                             </div>
                         </div>
-                       @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin' || @\Auth::user()->department == 'top')
+                        @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin' || @\Auth::user()->department == 'top')
                             <div class="uk-width-medium-1-5">
                                 <div class="uk-margin-small-top">
                                     {!! Form::select('hall',
@@ -235,6 +235,13 @@
                                 {!!  Form::select('by', array('INDEXNO'=>'Search by Index Number','STNO'=>'Search by Admission Number','NAME'=>'Search by Name','required'=>''), null, ['placeholder' => 'select search type','class'=>'md-input'], old("","")); !!}
                             </div>
                         </div>
+                        <div class="uk-width-medium-1-5">
+                            <div class="uk-margin-small-top">
+
+                                {!!  Form::select('qa', array('1'=>'Students who have access their lecturers','0' => 'Students yet to access'), null, ['placeholder' => 'Quality Assurance Status','id'=>'parent','class'=>'md-input parent'],old("qa","")); !!}
+
+                            </div>
+                        </div>
 
                         <div class="uk-width-medium-1-5">
                             <div class="uk-margin-small-top">
@@ -283,10 +290,10 @@
 
                             <th>LEVEL</th>
 
-                                    <th>GENDER</th>
+                            <th>GENDER</th>
 
 
-                                <th>AGE</th>
+                            <th>AGE</th>
 
 
                             @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
@@ -295,10 +302,11 @@
                             <th>NATIONALITY</th>
                             <th>YEAR BILLS</th>
                             @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
-                            <th>OWINGS</th>
-                            <th>PASSWORD</th>
-                             @endif
+                                <th>OWINGS</th>
+                                <th>PASSWORD</th>
+                            @endif
                             <th>YEAR GROUP</th>
+                            <th>QUALITY ASSURANCE</th>
 
 
                             <th>STATUS</th>
@@ -337,20 +345,20 @@
                                         <img style="width:165px;height:auto;margin-left:-5px"
                                              {!! $sys->picture('{{url("public/albums/students/$row->INDEXNO")}}',210) !!} src='{{url("public/albums/students/$row->INDEXNO".'.JPG')}}'
                                              alt=" Picture of Student Here"/>
-                                    @endif
-                                </div>
+                    @endif
+                </div>
 
 
 
-                              </td>
+                </td>
                 <td> {{ @$row->INDEXNO }}</td>
                 <td> {{ @$row->STNO }}</td>
 
                 <td>{!! strtoupper(@$row->program->PROGRAMME) !!}</td>
                 <td> {{ strtoupper(@$row->levels->slug) }}</td>
 
-                        <td> {{ strtoupper(@$row->SEX) }}</td>
-                        <td> {{ @$row->AGE }}yrs</td>
+                <td> {{ strtoupper(@$row->SEX) }}</td>
+                <td> {{ @$row->AGE }}yrs</td>
 
                 @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
 
@@ -360,12 +368,21 @@
 
                 <td>GHC {{ @$row->BILLS }}</td>
                 @if(@\Auth::user()->role=='Dean' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->role=="Accountant"  || @\Auth::user()->department == 'top')
-                <td>GHC {{ @$row->BILL_OWING }}</td>
+                    <td>GHC {{ @$row->BILL_OWING }}</td>
 
 
-                <td> {{ @$sys->getStudentPassword(@$row->INDEXNO) }}</td>
+                    <td> {{ @$sys->getStudentPassword(@$row->INDEXNO) }}</td>
                 @endif
                 <td> {{ @$row->GRADUATING_GROUP }}</td>
+                <td>
+                    @if($row->QUALITY_ASSURANCE=='1')
+                        Yes
+                    @else
+                        No
+                    @endif
+
+                </td>
+
 
                 <td> {{ strtoupper(@$row->STATUS) }}</td>
                 @if( @\Auth::user()->department=="Tptop"|| @\Auth::user()->department=="Tpmid")

@@ -17,7 +17,7 @@ class StudentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-       //$this->generateAccounts();
+        //$this->generateAccounts();
 //        $query=  \App\Models\StudentModel::where("LEVEL","!=","")->get();
 //        foreach($query as $index=>$row){
 //        $que=Models\PortalPasswordModel::where("username",$row->STNO)->first();  
@@ -35,32 +35,32 @@ class StudentController extends Controller
 //        }
     }
     public function tpoly(Request $request) {
-             ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
+        ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
         $query=  \DB::table('table79')->get();
         foreach($query as $index=>$row){
-       
+
             if($row->COL5){
                 $gender="Male";
             }
             else{
-              $gender="Female";   
+                $gender="Female";
             }
             $new_bedroom=array(
-           'indexno' => $row->COL2,
-                        'stno' => $row->COL2,
-                     'surname' =>$row->COL3,
-                       'firstname' =>$row->COL4,
-                        'sex' =>$gender,
-                       'address' =>$row->COL8,
-                       'telephoneno' =>$row->COL7,
-                          'LEVEL' =>"100H",
-                         'YEAR' =>"100H",
-                         'PROGRAMMECODE' =>"HIT",
-                    'NAME' => $row->COL3." , ".$row->COL4,
+                'indexno' => $row->COL2,
+                'stno' => $row->COL2,
+                'surname' =>$row->COL3,
+                'firstname' =>$row->COL4,
+                'sex' =>$gender,
+                'address' =>$row->COL8,
+                'telephoneno' =>$row->COL7,
+                'LEVEL' =>"100H",
+                'YEAR' =>"100H",
+                'PROGRAMMECODE' =>"HIT",
+                'NAME' => $row->COL3." , ".$row->COL4,
             );
-        $bedroom = new Models\StudentModel($new_bedroom);
-        $bedroom->save();
-                
+            $bedroom = new Models\StudentModel($new_bedroom);
+            $bedroom->save();
+
         }
     }
     public function generateAccounts() {
@@ -75,76 +75,76 @@ class StudentController extends Controller
 //             Models\PortalPasswordModel::where('username',$student)->where('level','100')->update(array("password" => $hashedPassword,'real_password'=>$password));
 //             
 //         } 
-         $query=  \App\Models\StudentModel::where("LEVEL","100H")->where("PROGRAMMECODE","HIT")->get();
+        $query=  \App\Models\StudentModel::where("LEVEL","100H")->where("PROGRAMMECODE","HIT")->get();
         foreach($query as $index=>$row){
-        $que=Models\PortalPasswordModel::where("username",$row->INDEXNO)->first();  
-                  if(empty($que)){
-                    $str = 'abcdefhkmnprtuvwxyz234678';
-                    $shuffled = str_shuffle($str);
-                    $vcode = substr($shuffled,0,9);
-                   $real=strtoupper($vcode);
-                    
-                    Models\PortalPasswordModel::create([
+            $que=Models\PortalPasswordModel::where("username",$row->INDEXNO)->first();
+            if(empty($que)){
+                $str = 'abcdefhkmnprtuvwxyz234678';
+                $shuffled = str_shuffle($str);
+                $vcode = substr($shuffled,0,9);
+                $real=strtoupper($vcode);
+
+                Models\PortalPasswordModel::create([
                     'username' => $row->INDEXNO,
-                     'real_password' =>$real,
-                          'level' =>$row->LEVEL,
-                         'programme' =>$row->PROGRAMMECODE,
+                    'real_password' =>$real,
+                    'level' =>$row->LEVEL,
+                    'programme' =>$row->PROGRAMMECODE,
                     'password' => bcrypt($real),
-                  ]);}
+                ]);}
         }
     }
     public function index(Request $request, SystemController $sys) {
-        
-          if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'){
-             $student = StudentModel::query();
-         }
-          elseif (@\Auth::user()->role=="Registrar") {
+
+        if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'){
+            $student = StudentModel::query();
+        }
+        elseif (@\Auth::user()->role=="Registrar") {
             $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q) {
-            $q->whereHas('departments', function($q) {
-                $q->whereIn('FACCODE', array(@\Auth::user()->department));
-            });
-        }) ;
+                $q->whereHas('departments', function($q) {
+                    $q->whereIn('FACCODE', array(@\Auth::user()->department));
+                });
+            }) ;
         }
-         elseif (@\Auth::user()->department=="Finance") {
-          $student = StudentModel::where("STATUS","In School");
+        elseif (@\Auth::user()->department=="Finance") {
+            $student = StudentModel::where("STATUS","In School");
         }
-         else{
-             $departmentArray=explode(",",@\Auth::user()->department);
-             $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q)use($departmentArray) {
-                 $q->whereHas('departments', function($q)use($departmentArray) {
-                     $q->whereIn('DEPTCODE',  $departmentArray);
-                 });
-             }) ;
-         }
-         
-         if ($request->has('department') && trim($request->input('department')) != "") {
-               $student->whereHas('programme', function($q)use ($request) {
-            $q->whereHas('departments', function($q)use ($request) {
-                $q->whereIn('DEPTCODE', [$request->input('department')]);
+        else{
+            $departmentArray=explode(",",@\Auth::user()->department);
+            $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q)use($departmentArray) {
+                $q->whereHas('departments', function($q)use($departmentArray) {
+                    $q->whereIn('DEPTCODE',  $departmentArray);
+                });
+            }) ;
+        }
+
+        if ($request->has('department') && trim($request->input('department')) != "") {
+            $student->whereHas('programme', function($q)use ($request) {
+                $q->whereHas('departments', function($q)use ($request) {
+                    $q->whereIn('DEPTCODE', [$request->input('department')]);
+                });
             });
-        });
         }
         if ($request->has('type') && trim($request->input('type')) != "") {
-               $student->whereHas('programme', function($q)use ($request) {
-         
-                $q->where('TYPE', [$request->input('type')]);
-            
-        });
-        }
-        
-         if ($request->has('school') && trim($request->input('school')) != "") {
-               $student->whereHas('programme', function($q)use ($request) {
-                               $q->whereHas('departments', function($q)use ($request) {
+            $student->whereHas('programme', function($q)use ($request) {
 
-            $q->whereHas('school', function($q)use ($request) {
-                $q->whereIn('FACCODE', [$request->input('school')]);
+                $q->where('TYPE', [$request->input('type')]);
+
             });
-             });
-        });
         }
-        
-         
-         
+
+        if ($request->has('school') && trim($request->input('school')) != "") {
+            $student->whereHas('programme', function($q)use ($request) {
+                $q->whereHas('departments', function($q)use ($request) {
+
+                    $q->whereHas('school', function($q)use ($request) {
+                        $q->whereIn('FACCODE', [$request->input('school')]);
+                    });
+                });
+            });
+        }
+
+
+
         if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
             $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%");
@@ -155,6 +155,10 @@ class StudentController extends Controller
         if ($request->has('level') && trim($request->input('level')) != "") {
             $student->where("LEVEL", $request->input("level", ""));
         }
+        if ($request->has('qa') && trim($request->input('qa')) != "") {
+            $student->where("QUALITY_ASSURANCE", $request->input("qa", ""));
+        }
+
         if ($request->has('status') && trim($request->input('status')) != "") {
             $student->where("STATUS", $request->input("status", ""));
         }
@@ -185,7 +189,7 @@ class StudentController extends Controller
         if ($request->has('search') && trim($request->input('search')) != "" && trim($request->input('by')) != "") {
             // dd($request);
             $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
-               ;
+            ;
         }
         $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(500);
 
@@ -193,23 +197,23 @@ class StudentController extends Controller
 
         \Session::put('students', $data);
         return view('students.index')->with("data", $data)
-                        ->with('year', $sys->years())
-                        ->with('nationality', $sys->getCountry())
-                        ->with('halls', $sys->getHalls())
-                        ->with('level', $sys->getLevelList())
-                        ->with('religion', $sys->getReligion())
-                        ->with('region', $sys->getRegions())
-                        ->with('department', $sys->getDepartmentList())
-                        ->with('school', $sys->getSchoolList())
-                        ->with('programme', $sys->getProgramList())
-                        ->with('type', $sys->getProgrammeTypes());
-         
+            ->with('year', $sys->years())
+            ->with('nationality', $sys->getCountry())
+            ->with('halls', $sys->getHalls())
+            ->with('level', $sys->getLevelList())
+            ->with('religion', $sys->getReligion())
+            ->with('region', $sys->getRegions())
+            ->with('department', $sys->getDepartmentList())
+            ->with('school', $sys->getSchoolList())
+            ->with('programme', $sys->getProgramList())
+            ->with('type', $sys->getProgrammeTypes());
+
     }
-     public function sms(Request $request, SystemController $sys){
-         ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
-         $message = $request->input("message", "");
+    public function sms(Request $request, SystemController $sys){
+        ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
+        $message = $request->input("message", "");
         $query = \Session::get('students');
-        
+
 
 
         foreach($query as $rtmt=> $member) {
@@ -225,55 +229,55 @@ class StudentController extends Controller
             $newstring = str_replace("]", "", "$message");
             $finalstring = str_replace("[", "$", "$newstring");
             eval("\$finalstring =\"$finalstring\" ;");
-             if ($sys->firesms($finalstring,$member->TELEPHONENO,$member->INDEXNO)) {
+            if ($sys->firesms($finalstring,$member->TELEPHONENO,$member->INDEXNO)) {
 
-                 StudentModel::where("INDEXNO",$INDEXNO)->update(array("SMS_SENT","1"));
-               
+                StudentModel::where("INDEXNO",$INDEXNO)->update(array("SMS_SENT","1"));
+
             } else {
-               // return redirect('/students')->withErrors("SMS could not be sent.. please verify if you have sms data and internet access.");
+                // return redirect('/students')->withErrors("SMS could not be sent.. please verify if you have sms data and internet access.");
             }
         }
-          return redirect('/students')->with('success','Message sent to students successfully');
-         
-         \Session::forget('students');
+        return redirect('/students')->with('success','Message sent to students successfully');
+
+        \Session::forget('students');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function getIndex(Request $request)
+    public function getIndex(Request $request)
     {
-        
+
         return view('students.index');
     }
     public function anyData(Request $request)
     {
-         
+
         $students = StudentModel::join('tpoly_programme', 'tpoly_students.PROGRAMMECODE', '=', 'tpoly_programme.PROGRAMMECODE')
-           ->select(['tpoly_students.ID', 'tpoly_students.NAME','tpoly_students.INDEXNO', 'tpoly_programme.PROGRAMME','tpoly_students.LEVEL','tpoly_students.INDEXNO','tpoly_students.SEX','tpoly_students.AGE','tpoly_students.TELEPHONENO','tpoly_students.COUNTRY','tpoly_students.GRADUATING_GROUP','tpoly_students.STATUS']);
-         
+            ->select(['tpoly_students.ID', 'tpoly_students.NAME','tpoly_students.INDEXNO', 'tpoly_programme.PROGRAMME','tpoly_students.LEVEL','tpoly_students.INDEXNO','tpoly_students.SEX','tpoly_students.AGE','tpoly_students.TELEPHONENO','tpoly_students.COUNTRY','tpoly_students.GRADUATING_GROUP','tpoly_students.STATUS']);
+
 
 
         return Datatables::of($students)
-                         
+
             ->addColumn('action', function ($student) {
-                 return "<a href=\"edit_student/$student->INDEXNO/id\" class=\"\"><i title='Click to view student details' class=\"md-icon material-icons\">&#xE88F;</i></a>";
-                 // use <i class=\"md-icon material-icons\">&#xE254;</i> for showing editing icon
+                return "<a href=\"edit_student/$student->INDEXNO/id\" class=\"\"><i title='Click to view student details' class=\"md-icon material-icons\">&#xE88F;</i></a>";
+                // use <i class=\"md-icon material-icons\">&#xE254;</i> for showing editing icon
                 //return' <td> <a href=" "><img class="" style="width:70px;height: auto" src="public/Albums/students/'.$student->INDEXNO.'.JPG" alt=" Picture of Employee Here"    /></a>df</td>';
-                          
-                                         
+
+
             })
-               ->editColumn('id', '{!! $ID!!}')
+            ->editColumn('id', '{!! $ID!!}')
             ->addColumn('Photo', function ($student) {
-               // return '<a href="#edit-'.$student->ID.'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light">View</a>';
-            
+                // return '<a href="#edit-'.$student->ID.'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light">View</a>';
+
                 return' <a href="show_student/'.$student->INDEXNO.'/id"><img class="md-user-image-large" style="width:60px;height: auto" src="Albums/students/'.$student->INDEXNO.'.JPG" alt=" Picture of Student Here"    /></a>';
-                          
-                                         
+
+
             })
-              
-            
+
+
             ->setRowId('id')
             ->setRowClass(function ($student) {
                 return $student->ID % 2 == 0 ? 'uk-text-success' : 'uk-text-warning';
@@ -284,11 +288,11 @@ class StudentController extends Controller
             ->setRowAttr([
                 'color' => 'red',
             ])
-                  
+
             ->make(true);
-             
-            //flash the request so it can still be available to the view or search form and the search parameters shown on the form 
-      //$request->flash();
+
+        //flash the request so it can still be available to the view or search form and the search parameters shown on the form
+        //$request->flash();
     }
 
     /**
@@ -299,7 +303,7 @@ class StudentController extends Controller
     public function create(SystemController $sys)
     {
         $region=$sys->getRegions();
-             $programme=$sys->getProgramList();
+        $programme=$sys->getProgramList();
         $hall=$sys->getHalls();
         $religion=$sys->getReligion();
         return view('students.create')
@@ -307,7 +311,7 @@ class StudentController extends Controller
             ->with('country', $sys->getCountry())
             ->with('region', $region)
             ->with('hall',$hall)
-             ->with('level', $sys->getLevelList())
+            ->with('level', $sys->getLevelList())
             ->with('religion',$religion);
     }
 
@@ -319,140 +323,140 @@ class StudentController extends Controller
      */
     public function store(Request $request, SystemController $sys)
     {
-      
-          set_time_limit(36000);
+
+        set_time_limit(36000);
         /*transaction is used here so that any errror rolls
          *  back the whole process and prevents any inserts or updates
          */
- if($request->user()->isSupperAdmin || @\Auth::user()->role=="Dean" || @\Auth::user()->department=="top"|| @\Auth::user()->role=="HOD" || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department == "Admissions"){
-       
-  \DB::beginTransaction();
+        if($request->user()->isSupperAdmin || @\Auth::user()->role=="Dean" || @\Auth::user()->department=="top"|| @\Auth::user()->role=="HOD" || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department == "Admissions"){
 
-        $user = @\Auth::user()->id;
-        
-        $year=$request->input('year');
-         
-           $level= $year;
-        
-       $array=$sys->getSemYear();
-                  
-        $fiscalYear=$array[0]->YEAR;
-         $indexno = $request->input('indexno');
-         $program = $request->input('programme');
-        $gender = $request->input('gender');
-        $category = $request->input('category');
-        $hostel = $request->input('hostel');
-        $hall = $request->input('halls');
-        $dob = $request->input('dob');
-        $gname = $request->input('gname');
-        $gphone = $request->input('gphone');
-        $goccupation = $request->input('goccupation');
-        $gaddress = $request->input('gaddress');
-        $email = $request->input('email');
-        $phone = $request->input('phone');
-        $marital_status = $request->input('marital_status');
-        $region = $request->input('region');
-        $country = $request->input('nationality');
-        $religion = $request->input('religion');
-        $residentAddress = $request->input('contact');
-        $address = $request->input('address');
-        $hometown = $request->input('hometown');
-        $nhis = $request->input('nhis');
-        $type = $request->input('type');
-        $disability = $request->input('disabilty');
-        $title = $request->input('title');
-        $age = $sys->age($dob, 'eu');
-        $group = "";
-        $fname = $request->input('fname');
-        $bill= $request->input('bill');
-        $lname = $request->input('surname');
-        $othername = $request->input('othernames');
-      
-        $sql=  StudentModel::where("STNO",$indexno)->first();
-        if(empty($sql)){
-            /////////////////////////////////////////////////////
-        
-        $name = $lname . ' ' . $othername . ' ' . $fname;
-        $query = new StudentModel();
-        $query->YEAR = $year;
-        $query->LEVEL = $level;
-        $query->FIRSTNAME = $fname;
-        $query->SURNAME = $lname;
-        $query->OTHERNAMES = $othername;
-        $query->TITLE = $title;
-        $query->SEX = $gender;
-        $query->DATEOFBIRTH = $dob;
-        $query->NAME = $name;
-        $query->AGE = $age;
-        $query->GRADUATING_GROUP = $group;
-        $query->MARITAL_STATUS = $marital_status;
-        $query->HALL = $hall;
-        $query->ADDRESS = $address;
-        $query->RESIDENTIAL_ADDRESS = $residentAddress;
-        $query->EMAIL = $email;
-        $query->PROGRAMMECODE = $program;
-        $query->TELEPHONENO = $phone;
-        $query->COUNTRY = $country;
-        $query->REGION = $region;
-        $query->RELIGION = $religion;
-        $query->HOMETOWN = $hometown;
-        $query->GUARDIAN_NAME = $gname;
-        $query->GUARDIAN_ADDRESS = $gaddress;
-        $query->GUARDIAN_PHONE = $gphone;
-        $query->GUARDIAN_OCCUPATION = $goccupation;
-        $query->DISABILITY = $disability;
-        $query->STATUS = "In School";
-        $query->SYSUPDATE = "1";
-        $query->NHIS = $nhis;
-        $query->STUDENT_TYPE = $type;
-        $query->TYPE = $category;
+            \DB::beginTransaction();
 
-        $query->HOSTEL = $hostel;
-         //$query->BILLS=$sys->getYearBill( $fiscalYear, $level, $program);
-        // $query->BILL_OWING=$sys->getYearBill( $fiscalYear, $level, $program);
-        $query->STNO =$indexno;
-        $query->INDEXNO =$indexno;
+            $user = @\Auth::user()->id;
 
-        if($query->save()){
-             \DB::commit();
-               $que=Models\PortalPasswordModel::where("username",$indexno)->first();  
-                  if(empty($que)){
-                    $program=$program;
-                    $str = 'abcdefhkmnprtuvwxyz234678';
-                    $shuffled = str_shuffle($str);
-                    $vcode = substr($shuffled,0,9);
-                   $real=strtoupper($vcode);
-                   $level= $level;
-                    Models\PortalPasswordModel::create([
-                    'username' => $indexno,
-                     'real_password' =>$real,
-                          'level' =>$level,
-                         'programme' =>$program,
-                        'biodata_update' =>'1',
-                    'password' => bcrypt($real),
-                ]);
-                  
-                     $message = "Hi $fname, Please visit ttuportal.com to do update your biodata with $indexno as your username  and $real as password   ";
-                   
-                     \DB::commit();
-                    if ($sys->firesms($message, $phone, $indexno)) {
-                        
+            $year=$request->input('year');
+
+            $level= $year;
+
+            $array=$sys->getSemYear();
+
+            $fiscalYear=$array[0]->YEAR;
+            $indexno = $request->input('indexno');
+            $program = $request->input('programme');
+            $gender = $request->input('gender');
+            $category = $request->input('category');
+            $hostel = $request->input('hostel');
+            $hall = $request->input('halls');
+            $dob = $request->input('dob');
+            $gname = $request->input('gname');
+            $gphone = $request->input('gphone');
+            $goccupation = $request->input('goccupation');
+            $gaddress = $request->input('gaddress');
+            $email = $request->input('email');
+            $phone = $request->input('phone');
+            $marital_status = $request->input('marital_status');
+            $region = $request->input('region');
+            $country = $request->input('nationality');
+            $religion = $request->input('religion');
+            $residentAddress = $request->input('contact');
+            $address = $request->input('address');
+            $hometown = $request->input('hometown');
+            $nhis = $request->input('nhis');
+            $type = $request->input('type');
+            $disability = $request->input('disabilty');
+            $title = $request->input('title');
+            $age = $sys->age($dob, 'eu');
+            $group = "";
+            $fname = $request->input('fname');
+            $bill= $request->input('bill');
+            $lname = $request->input('surname');
+            $othername = $request->input('othernames');
+
+            $sql=  StudentModel::where("STNO",$indexno)->first();
+            if(empty($sql)){
+                /////////////////////////////////////////////////////
+
+                $name = $lname . ' ' . $othername . ' ' . $fname;
+                $query = new StudentModel();
+                $query->YEAR = $year;
+                $query->LEVEL = $level;
+                $query->FIRSTNAME = $fname;
+                $query->SURNAME = $lname;
+                $query->OTHERNAMES = $othername;
+                $query->TITLE = $title;
+                $query->SEX = $gender;
+                $query->DATEOFBIRTH = $dob;
+                $query->NAME = $name;
+                $query->AGE = $age;
+                $query->GRADUATING_GROUP = $group;
+                $query->MARITAL_STATUS = $marital_status;
+                $query->HALL = $hall;
+                $query->ADDRESS = $address;
+                $query->RESIDENTIAL_ADDRESS = $residentAddress;
+                $query->EMAIL = $email;
+                $query->PROGRAMMECODE = $program;
+                $query->TELEPHONENO = $phone;
+                $query->COUNTRY = $country;
+                $query->REGION = $region;
+                $query->RELIGION = $religion;
+                $query->HOMETOWN = $hometown;
+                $query->GUARDIAN_NAME = $gname;
+                $query->GUARDIAN_ADDRESS = $gaddress;
+                $query->GUARDIAN_PHONE = $gphone;
+                $query->GUARDIAN_OCCUPATION = $goccupation;
+                $query->DISABILITY = $disability;
+                $query->STATUS = "In School";
+                $query->SYSUPDATE = "1";
+                $query->NHIS = $nhis;
+                $query->STUDENT_TYPE = $type;
+                $query->TYPE = $category;
+
+                $query->HOSTEL = $hostel;
+                //$query->BILLS=$sys->getYearBill( $fiscalYear, $level, $program);
+                // $query->BILL_OWING=$sys->getYearBill( $fiscalYear, $level, $program);
+                $query->STNO =$indexno;
+                $query->INDEXNO =$indexno;
+
+                if($query->save()){
+                    \DB::commit();
+                    $que=Models\PortalPasswordModel::where("username",$indexno)->first();
+                    if(empty($que)){
+                        $program=$program;
+                        $str = 'abcdefhkmnprtuvwxyz234678';
+                        $shuffled = str_shuffle($str);
+                        $vcode = substr($shuffled,0,9);
+                        $real=strtoupper($vcode);
+                        $level= $level;
+                        Models\PortalPasswordModel::create([
+                            'username' => $indexno,
+                            'real_password' =>$real,
+                            'level' =>$level,
+                            'programme' =>$program,
+                            'biodata_update' =>'1',
+                            'password' => bcrypt($real),
+                        ]);
+
+                        $message = "Hi $fname, Please visit ttuportal.com to do update your biodata with $indexno as your username  and $real as password   ";
+
+                        \DB::commit();
+                        if ($sys->firesms($message, $phone, $indexno)) {
+
+                        }
                     }
-                  }
-       return redirect("/students")->with("success"," <span style='font-weight:bold;font-size:13px;'> student successfully added!</span> ");
-             
-          }else{
-           
-             return redirect("/add_students")->with("error"," <span style='font-weight:bold;font-size:13px;'> student could not be added try again!</span>");
-           
-              
-          }
-        }
-        else{
-             return redirect("/add_students")->with("error"," <span style='font-weight:bold;font-size:13px;'>Please student exist in the system already!</span>");
-           
-        }
-    } else{
+                    return redirect("/students")->with("success"," <span style='font-weight:bold;font-size:13px;'> student successfully added!</span> ");
+
+                }else{
+
+                    return redirect("/add_students")->with("error"," <span style='font-weight:bold;font-size:13px;'> student could not be added try again!</span>");
+
+
+                }
+            }
+            else{
+                return redirect("/add_students")->with("error"," <span style='font-weight:bold;font-size:13px;'>Please student exist in the system already!</span>");
+
+            }
+        } else{
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
         }
     }
@@ -465,18 +469,18 @@ class StudentController extends Controller
      */
     public function show($id,  SystemController $sys,Request $request)
     {
-        
-         $region=$sys->getRegions();
-        
-        
+
+        $region=$sys->getRegions();
+
+
         // make sure only students who are currently in school can update their data
         $query = StudentModel::where('ID', $id)->first();
         $programme=$sys->getProgramList();
         $hall=$sys->getHalls();
         $religion=$sys->getReligion();
-        
+
         $trails=  Models\AcademicRecordsModel::where('student', $id)->where("grade","E")->paginate(100);
-      
+
         return view('students.show')->with('student', $query)
             ->with('programme', $programme)
             ->with('country', $sys->getCountry())
@@ -486,48 +490,48 @@ class StudentController extends Controller
             ->with('religion',$religion);
     }
     public function uploadStaff(Request $request) {
-       if($request->hasFile('file')){
+        if($request->hasFile('file')){
             $file=$request->file('file');
             $user = \Auth::user()->id;
-             
+
             $ext = strtolower($file->getClientOriginalExtension());
             $valid_exts = array('csv','xlx','xlsx'); // valid extensions
-            
+
             $path = $request->file('file')->getRealPath();
-         if (in_array($ext, $valid_exts)) {
-            $data = Excel::load($path, function($reader) {
-                        
-                    })->get();
+            if (in_array($ext, $valid_exts)) {
+                $data = Excel::load($path, function($reader) {
 
-                    dd($data);
-            if(!empty($data) && $data->count()){
+                })->get();
 
-				foreach ($data as $key => $value) {
+                dd($data);
+                if(!empty($data) && $data->count()){
 
-		$insert[] = ['fullName' => $value->name, 'staffID' => $value->staffID,'department'=>$value->Department,'grade'=>$value->grade,'designation'=>$value->position,'phone'=>$value->phone];
+                    foreach ($data as $key => $value) {
 
-				}
+                        $insert[] = ['fullName' => $value->name, 'staffID' => $value->staffID,'department'=>$value->Department,'grade'=>$value->grade,'designation'=>$value->position,'phone'=>$value->phone];
 
-                               // dd($insert);
-				if(!empty($insert)){
+                    }
 
-					\DB::table('tpoly_workers')->insert($insert);
- 
-					// return redirect('/dashboard')->with("success",  " <span style='font-weight:bold;font-size:13px;'>Staff  successfully uploaded!</span> " );
-                              
+                    // dd($insert);
+                    if(!empty($insert)){
 
-				}
+                        \DB::table('tpoly_workers')->insert($insert);
 
-			}
+                        // return redirect('/dashboard')->with("success",  " <span style='font-weight:bold;font-size:13px;'>Staff  successfully uploaded!</span> " );
 
-	}
-        else{
-            //  return redirect('/getStaffCSV')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload file format must be xlx,csv,xslx!</span> ");
-                             
+
+                    }
+
+                }
+
+            }
+            else{
+                //  return redirect('/getStaffCSV')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload file format must be xlx,csv,xslx!</span> ");
+
+            }
         }
-       }
-		 
-       }
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -538,23 +542,23 @@ class StudentController extends Controller
     {
         //
         if($request->user()->isSupperAdmin || @\Auth::user()->department=="top"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Support" ||   @\Auth::user()->role=="Dean" || @\Auth::user()->department=="Rector" || @\Auth::user()->department=="Admissions" || @\Auth::user()->department=="Planning"){
-             
-               $query = StudentModel::where('ID', $id)->where('STATUS','In School')->first();
-               //dd( $query );
-         }
-         else{  
-        $query = StudentModel::where('ID', $id)->whereHas('programme', function($q) {
-            $q->whereHas('departments', function($q) {
-                $q->whereIn('DEPTCODE', array(@\Auth::user()->department));
-            });
-        })->first();
-       
-         }
-         $region=$sys->getRegions();
-        
-        
+
+            $query = StudentModel::where('ID', $id)->where('STATUS','In School')->first();
+            //dd( $query );
+        }
+        else{
+            $query = StudentModel::where('ID', $id)->whereHas('programme', function($q) {
+                $q->whereHas('departments', function($q) {
+                    $q->whereIn('DEPTCODE', array(@\Auth::user()->department));
+                });
+            })->first();
+
+        }
+        $region=$sys->getRegions();
+
+
         // make sure only students who are currently in school can update their data
-         $programme=$sys->getProgramList();
+        $programme=$sys->getProgramList();
         $hall=$sys->getHalls();
         $religion=$sys->getReligion();
         return view('students.edit')->with('data', $query)
@@ -565,7 +569,7 @@ class StudentController extends Controller
             ->with('hall',$hall)
             ->with('religion',$religion);
     }
-public function gad()
+    public function gad()
     {
         //
         return view('autocomplete');
@@ -574,31 +578,31 @@ public function gad()
     public function updateLevel()
     {
         $students=  StudentModel::query()->where('level'," ")->get();
-            
-         foreach ($students as $key => $row) {
-              //$student= new StudentModel();
-                  $indexno=$row->INDEXNO;
-                 
-                  $level= substr($indexno, 2,2);
-                   //dd($level);
-                  if($level=='15'){
-                      StudentModel::where('INDEXNO','LIKE','0715%')->update(array("LEVEL"=>'100',"YEAR"=>'1'));
-                  }
-                  elseif($level=='14'){
-                      
-                      StudentModel::where('INDEXNO','LIKE','0714%')->update(array("LEVEL"=>'200',"YEAR"=>'2'));
-                      
-                  }
-                  elseif($level=='13'){
-                         
-                       StudentModel::where('INDEXNO','LIKE','0713%')->update(array("LEVEL"=>'300',"YEAR"=>'3'));
-                  }
-                  else{
-                         
-                        //StudentModel::where('LEVEL','=','')->update(array("STATUS"=>'Alumni'));
-                  }
-               
-         }
+
+        foreach ($students as $key => $row) {
+            //$student= new StudentModel();
+            $indexno=$row->INDEXNO;
+
+            $level= substr($indexno, 2,2);
+            //dd($level);
+            if($level=='15'){
+                StudentModel::where('INDEXNO','LIKE','0715%')->update(array("LEVEL"=>'100',"YEAR"=>'1'));
+            }
+            elseif($level=='14'){
+
+                StudentModel::where('INDEXNO','LIKE','0714%')->update(array("LEVEL"=>'200',"YEAR"=>'2'));
+
+            }
+            elseif($level=='13'){
+
+                StudentModel::where('INDEXNO','LIKE','0713%')->update(array("LEVEL"=>'300',"YEAR"=>'3'));
+            }
+            else{
+
+                //StudentModel::where('LEVEL','=','')->update(array("STATUS"=>'Alumni'));
+            }
+
+        }
     }
 
     /**
@@ -611,61 +615,61 @@ public function gad()
     public function update(Request $request, $id, SystemController $sys)
     {
         if($request->user()->isSupperAdmin || @\Auth::user()->role=="HOD" || @\Auth::user()->role=="Dean"||@\Auth::user()->department=="top"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->role=="Support" || @\Auth::user()->department=="Rector"){
-        {
-       set_time_limit(36000);
-        /*transaction is used here so that any errror rolls
-         *  back the whole process and prevents any inserts or updates
-         */
+            {
+                set_time_limit(36000);
+                /*transaction is used here so that any errror rolls
+                 *  back the whole process and prevents any inserts or updates
+                 */
 
-  \DB::beginTransaction();
-         $year=$request->input('year');
-            $id=$request->input('id');
-        
-        $level=$request->input('year');
-        $indexno=$request->input('indexno');
-     
-        $program=$request->input('programme');
-        $gender=$request->input('gender');
-        $category=$request->input('category');
-        $hostel=$request->input('hostel');
-        $hall=$request->input('halls');
-        $dob=$request->input('dob');
-        $gname=$request->input('gname');
-        $gphone=$request->input('gphone');
-        $goccupation=$request->input('goccupation');
-        $gaddress=$request->input('gaddress');
-        $email=$request->input('email');
-        $phone=$request->input('phone');
-        $status=$request->input('status');
-        $marital_status=$request->input('marital_status');
-        $region=$request->input('region');
-        $country=$request->input('nationality');
-        $religion=$request->input('religion');
-        $residentAddress=$request->input('contact');
-        $address=$request->input('address');
-        $hometown=$request->input('hometown');
-        $nhis=$request->input('nhis');
-        $type=$request->input('type');
-        $disability=$request->input('disabilty');
-        $title=$request->input('title');
-        $age=$sys->age($dob,'eu');
-        $group=$sys->graduatingGroup($indexno);
-        $firstname=$request->input('fname');
-        $surname=$request->input('surname');
-        $othername=$request->input('othernames');
-        if( @\Auth::user()->role=="Support"){
-             $query= StudentModel::where("ID",$id)->update(array(
-                 "FIRSTNAME"=>$firstname,
-                 "SURNAME"=>$surname,
-                 "NAME"=>$surname." ".$othername." ".$firstname,
-                "OTHERNAMES"=>$othername));
-             
-        }
-        else{
-            $array=$sys->getSemYear();
-                  
-                  $fiscalYear=$array[0]->YEAR;
-                   $sem=$array[0]->SEMESTER;
+                \DB::beginTransaction();
+                $year=$request->input('year');
+                $id=$request->input('id');
+
+                $level=$request->input('year');
+                $indexno=$request->input('indexno');
+
+                $program=$request->input('programme');
+                $gender=$request->input('gender');
+                $category=$request->input('category');
+                $hostel=$request->input('hostel');
+                $hall=$request->input('halls');
+                $dob=$request->input('dob');
+                $gname=$request->input('gname');
+                $gphone=$request->input('gphone');
+                $goccupation=$request->input('goccupation');
+                $gaddress=$request->input('gaddress');
+                $email=$request->input('email');
+                $phone=$request->input('phone');
+                $status=$request->input('status');
+                $marital_status=$request->input('marital_status');
+                $region=$request->input('region');
+                $country=$request->input('nationality');
+                $religion=$request->input('religion');
+                $residentAddress=$request->input('contact');
+                $address=$request->input('address');
+                $hometown=$request->input('hometown');
+                $nhis=$request->input('nhis');
+                $type=$request->input('type');
+                $disability=$request->input('disabilty');
+                $title=$request->input('title');
+                $age=$sys->age($dob,'eu');
+                $group=$sys->graduatingGroup($indexno);
+                $firstname=$request->input('fname');
+                $surname=$request->input('surname');
+                $othername=$request->input('othernames');
+                if( @\Auth::user()->role=="Support"){
+                    $query= StudentModel::where("ID",$id)->update(array(
+                        "FIRSTNAME"=>$firstname,
+                        "SURNAME"=>$surname,
+                        "NAME"=>$surname." ".$othername." ".$firstname,
+                        "OTHERNAMES"=>$othername));
+
+                }
+                else{
+                    $array=$sys->getSemYear();
+
+                    $fiscalYear=$array[0]->YEAR;
+                    $sem=$array[0]->SEMESTER;
 //            // $bill=$sys->getYearBill($fiscalYear, $level, $program);
 //        // $bill_owing=$sys->getYearBill($fiscalYear, $level, $program);
 //         $test=@StudentModel::where("ID",$id)->select("BILLS","BILL_OWING","PROGRAMMECODE")->first();
@@ -677,60 +681,60 @@ public function gad()
 //                  "BILL_OWING"=>$owe
 //                  ));
 //         }
-        $query= StudentModel::where("ID",$id)->update(array(
-                 "FIRSTNAME"=>strtoupper($firstname),
-                 "SURNAME"=>strtoupper($surname),
-                 "NAME"=>strtoupper($surname." ".$othername." ".$firstname),
-                "OTHERNAMES"=>strtoupper($othername),
-                "TITLE"=>strtoupper($title),
-                 "SEX"=>strtoupper($gender),
-                 "DATEOFBIRTH"=>$dob,
-                 "AGE"=>$age,
-                 "LEVEL"=>$level,
-                 "GRADUATING_GROUP"=>$group,
-                 "MARITAL_STATUS"=>strtoupper($marital_status),
-                 "HALL"=>strtoupper($hall),
-                 "ADDRESS"=>strtoupper($address),
-                 "RESIDENTIAL_ADDRESS"=>strtoupper($residentAddress),
-                 "EMAIL"=>strtoupper($email),
-                 "TELEPHONENO"=>$phone,
-                 "COUNTRY"=>strtoupper($country),
-                 "REGION"=>strtoupper($region),
-                 "RELIGION"=>strtoupper($religion),
-                 "HOMETOWN"=>strtoupper($hometown),
-                 "GUARDIAN_NAME"=>strtoupper($gname),
-                 "GUARDIAN_ADDRESS"=>strtoupper($gaddress),
-                 "GUARDIAN_PHONE"=>$gphone,  
-                 "GUARDIAN_OCCUPATION"=>strtoupper($goccupation),
-                 "DISABILITY"=>strtoupper($disability),
-                "PROGRAMMECODE"=>strtoupper($program),
-                 "STATUS"=>"In School",
-                 "NHIS"=>$nhis,
-                 "STUDENT_TYPE"=>strtoupper($type),
-                 "TYPE"=>strtoupper($category),
-                 "HOSTEL"=>$hostel,
-                 "INDEXNO"=>$indexno,
-                  
-                 "SYSUPDATE"=>"1",
-            
-            
-                ));
-            Models\PortalPasswordModel::where("username",$indexno)->update(array("level"=>$level,"programme"=>$program));
-            Models\FeePaymentModel::where("INDEXNO",$indexno)->update(array("LEVEL"=>$level,"PROGRAMME"=>$program));
+                    $query= StudentModel::where("ID",$id)->update(array(
+                        "FIRSTNAME"=>strtoupper($firstname),
+                        "SURNAME"=>strtoupper($surname),
+                        "NAME"=>strtoupper($surname." ".$othername." ".$firstname),
+                        "OTHERNAMES"=>strtoupper($othername),
+                        "TITLE"=>strtoupper($title),
+                        "SEX"=>strtoupper($gender),
+                        "DATEOFBIRTH"=>$dob,
+                        "AGE"=>$age,
+                        "LEVEL"=>$level,
+                        "GRADUATING_GROUP"=>$group,
+                        "MARITAL_STATUS"=>strtoupper($marital_status),
+                        "HALL"=>strtoupper($hall),
+                        "ADDRESS"=>strtoupper($address),
+                        "RESIDENTIAL_ADDRESS"=>strtoupper($residentAddress),
+                        "EMAIL"=>strtoupper($email),
+                        "TELEPHONENO"=>$phone,
+                        "COUNTRY"=>strtoupper($country),
+                        "REGION"=>strtoupper($region),
+                        "RELIGION"=>strtoupper($religion),
+                        "HOMETOWN"=>strtoupper($hometown),
+                        "GUARDIAN_NAME"=>strtoupper($gname),
+                        "GUARDIAN_ADDRESS"=>strtoupper($gaddress),
+                        "GUARDIAN_PHONE"=>$gphone,
+                        "GUARDIAN_OCCUPATION"=>strtoupper($goccupation),
+                        "DISABILITY"=>strtoupper($disability),
+                        "PROGRAMMECODE"=>strtoupper($program),
+                        "STATUS"=>"In School",
+                        "NHIS"=>$nhis,
+                        "STUDENT_TYPE"=>strtoupper($type),
+                        "TYPE"=>strtoupper($category),
+                        "HOSTEL"=>$hostel,
+                        "INDEXNO"=>$indexno,
 
-            \DB::commit();
-        }
-    
-         if(!$query){
-            return redirect("/students")->withErrors("  N<u>o</u> :<span style='font-weight:bold;font-size:13px;'> data</span>could not be updated!");
-          }else{
+                        "SYSUPDATE"=>"1",
+
+
+                    ));
+                    Models\PortalPasswordModel::where("username",$indexno)->update(array("level"=>$level,"programme"=>$program));
+                    Models\FeePaymentModel::where("INDEXNO",$indexno)->update(array("LEVEL"=>$level,"PROGRAMME"=>$program));
+
+                    \DB::commit();
+                }
+
+                if(!$query){
+                    return redirect("/students")->withErrors("  N<u>o</u> :<span style='font-weight:bold;font-size:13px;'> data</span>could not be updated!");
+                }else{
 
 //           Models\FeePaymentModel::where("INDEXNO",$indexno)->where("YEAR",$fiscalYear)->where("SEMESTER",$sem)->update(array("LEVEL"=>$level,"PROGRAMME"=>$program));
 //         \DB::commit();
-           return redirect("/students")->with("success"," <span style='font-weight:bold;font-size:13px;'>data successfully updated!</span> ");
-              
-        }}}
-           else{
+                    return redirect("/students")->with("success"," <span style='font-weight:bold;font-size:13px;'>data successfully updated!</span> ");
+
+                }}}
+        else{
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
         }
     }
@@ -738,181 +742,181 @@ public function gad()
         return view("students.upload");
     }
     public function applicantUploadForm() {
-         return view("students.applicantUpload");
+        return view("students.applicantUpload");
     }
-     public function indexNumberUploadForm() {
-         return view("students.indexUpload");
+    public function indexNumberUploadForm() {
+        return view("students.indexUpload");
     }
     /*
      * upload continuing students 
      */
-      public function uploadIndexNumber(Request $request, SystemController $sys) {
+    public function uploadIndexNumber(Request $request, SystemController $sys) {
         set_time_limit(36000);
 
-         
-            $user = \Auth::user()->id;
-            $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
-            $file = $request->file('file');
-            $path = $request->file('file')->getRealPath();
 
-            $ext = strtolower($file->getClientOriginalExtension());
-            
-            if (in_array($ext, $valid_exts)) {
+        $user = \Auth::user()->id;
+        $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
+        $file = $request->file('file');
+        $path = $request->file('file')->getRealPath();
 
-                $data = Excel::load($path, function($reader) {
-                            
-                        })->get();
+        $ext = strtolower($file->getClientOriginalExtension());
 
-          
-                    foreach ($data as $key => $value) {
+        if (in_array($ext, $valid_exts)) {
 
-                        $num = count($data);
-                         $stno =$value->stno;
-                        $indexno =$value->indexno;
-                         
-                    
+            $data = Excel::load($path, function($reader) {
 
-                                @StudentModel::where('STNO', $stno)->update(array("INDEXNO"=>$indexno));
-                                @Models\AcademicRecordsModel::where('indexno', $stno)->update(array("indexno"=>$indexno));
-                                @Models\FeePaymentModel::where('INDEXNO', $stno)->update(array("INDEXNO"=>$indexno));
-                    }
-                    
-                     return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>$num student(s) index numbers uploaded  successfully!</span> ");
-           
-               
+            })->get();
 
 
-                } else {
-                return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>Only excel file is accepted!</span> ");
+            foreach ($data as $key => $value) {
+
+                $num = count($data);
+                $stno =$value->stno;
+                $indexno =$value->indexno;
+
+
+
+                @StudentModel::where('STNO', $stno)->update(array("INDEXNO"=>$indexno));
+                @Models\AcademicRecordsModel::where('indexno', $stno)->update(array("indexno"=>$indexno));
+                @Models\FeePaymentModel::where('INDEXNO', $stno)->update(array("INDEXNO"=>$indexno));
             }
-        
+
+            return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>$num student(s) index numbers uploaded  successfully!</span> ");
+
+
+
+
+        } else {
+            return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>Only excel file is accepted!</span> ");
+        }
+
     }
-  
+
     public function uploadData(Request $request, SystemController $sys) {
         set_time_limit(36000);
 
-         
-            $user = \Auth::user()->id;
-            $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
-            $file = $request->file('file');
-            $path = $request->file('file')->getRealPath();
 
-            $ext = strtolower($file->getClientOriginalExtension());
-            
-            if (in_array($ext, $valid_exts)) {
+        $user = \Auth::user()->id;
+        $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
+        $file = $request->file('file');
+        $path = $request->file('file')->getRealPath();
 
-                $data = Excel::load($path, function($reader) {
-                            
-                        })->get();
+        $ext = strtolower($file->getClientOriginalExtension());
 
-          
-                    foreach ($data as $key => $value) {
+        if (in_array($ext, $valid_exts)) {
 
-                        $num = count($data);
-                         $stno =$value->stno;
-                        $indexno =$value->indexno;
-                        $gender= $value->gender;
-                         $balance= $value->balance;
-                         $fname= $value->fname;
-                          $lname= $value->surname;
-                           $phone= $value->telephone;
-                           $password= $value->pass;
-                        $name = $value->name;
-                        $program = $value->program;
-                        $level= $value->level;
-                        $address= $value->address;
-                        $group = $sys->graduatingGroup($indexno);
-                         
-                   
-                        // first check if the students exist in the system if true then update else insert
-                        $programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
-                        if (in_array($program, $programme)) {
- 
-                            $testQuery = StudentModel::where('INDEXNO', $indexno)->first();
-                            if (empty($testQuery)) {
-     // dd($level);
+            $data = Excel::load($path, function($reader) {
 
-                                $student = new StudentModel();
-                                $student->INDEXNO = $indexno;
-                                $student->STNO = $stno;
-                                $student->LEVEL = $level;
-                                $student->YEAR = $level;
-                                $student->SEX = $gender;
-                                $student->NAME = $name;
-                                $student->FIRSTNAME= $fname;
-                                $student->SURNAME= $lname;
-                                $student->TELEPHONENO= $phone;
-                                $student->BILL_OWING = $balance;
-                                $student->NAME = $name;
-                                $student->PROGRAMMECODE = $program;
-                                $student->STATUS = "In School";
-                                $student->SYSUPDATE = "1";
-                                $student->ADDRESS= $address;
-                                $student->GRADUATING_GROUP = $group;
-                                $student->save();
-                                 Models\PortalPasswordModel::create([
-                    'username' => $indexno,
-                     'real_password' =>$password,
-                          'level' =>$level,
-                         'programme' =>$program,
-                    'password' => bcrypt($password),
-                  ]);
-                            } else {
+            })->get();
 
-                                StudentModel::where('INDEXNO', $indexno)->update(array("STNO"=>$stno,"ADDRESS"=>$address,"LEVEL" => @$level, "YEAR" => $level, "PROGRAMMECODE" => $program, "SYSUPDATE" => "1", "STATUS" => 'In School', "NAME" => $name, "GRADUATING_GROUP" => $group,  "BILL_OWING" => $balance));
-                          
-                            }
-                        } else {
-                            return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contain unrecognize programme.please try again!</span> ");
-                        }
+
+            foreach ($data as $key => $value) {
+
+                $num = count($data);
+                $stno =$value->stno;
+                $indexno =$value->indexno;
+                $gender= $value->gender;
+                $balance= $value->balance;
+                $fname= $value->fname;
+                $lname= $value->surname;
+                $phone= $value->telephone;
+                $password= $value->pass;
+                $name = $value->name;
+                $program = $value->program;
+                $level= $value->level;
+                $address= $value->address;
+                $group = $sys->graduatingGroup($indexno);
+
+
+                // first check if the students exist in the system if true then update else insert
+                $programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
+                if (in_array($program, $programme)) {
+
+                    $testQuery = StudentModel::where('INDEXNO', $indexno)->first();
+                    if (empty($testQuery)) {
+                        // dd($level);
+
+                        $student = new StudentModel();
+                        $student->INDEXNO = $indexno;
+                        $student->STNO = $stno;
+                        $student->LEVEL = $level;
+                        $student->YEAR = $level;
+                        $student->SEX = $gender;
+                        $student->NAME = $name;
+                        $student->FIRSTNAME= $fname;
+                        $student->SURNAME= $lname;
+                        $student->TELEPHONENO= $phone;
+                        $student->BILL_OWING = $balance;
+                        $student->NAME = $name;
+                        $student->PROGRAMMECODE = $program;
+                        $student->STATUS = "In School";
+                        $student->SYSUPDATE = "1";
+                        $student->ADDRESS= $address;
+                        $student->GRADUATING_GROUP = $group;
+                        $student->save();
+                        Models\PortalPasswordModel::create([
+                            'username' => $indexno,
+                            'real_password' =>$password,
+                            'level' =>$level,
+                            'programme' =>$program,
+                            'password' => bcrypt($password),
+                        ]);
+                    } else {
+
+                        StudentModel::where('INDEXNO', $indexno)->update(array("STNO"=>$stno,"ADDRESS"=>$address,"LEVEL" => @$level, "YEAR" => $level, "PROGRAMMECODE" => $program, "SYSUPDATE" => "1", "STATUS" => 'In School', "NAME" => $name, "GRADUATING_GROUP" => $group,  "BILL_OWING" => $balance));
+
                     }
-                     return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>$num student(s) uploaded  successfully!</span> ");
-           
-               
-
-
                 } else {
-                return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>Only excel file is accepted!</span> ");
+                    return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contain unrecognize programme.please try again!</span> ");
+                }
             }
-        
+            return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>$num student(s) uploaded  successfully!</span> ");
+
+
+
+
+        } else {
+            return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>Only excel file is accepted!</span> ");
+        }
+
     }
     public function uploadApplicants(Request $request,  SystemController $sys) {
-       
-      if($request->hasFile('file')){
-             $file = $request->file('file');
-           
+
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+
             $user = \Auth::user()->fund;
-           $ext = strtolower($file->getClientOriginalExtension());
+            $ext = strtolower($file->getClientOriginalExtension());
             $valid_exts = array('csv','xls','xlsx'); // valid extensions
-             
+
             $path = $request->file('file')->getRealPath();
-            
-         if (in_array($ext, $valid_exts)) {
-            $data = Excel::load($path, function($reader) {
-                        
-                    })->get();
 
-            if(!empty($data) && $data->count()){
-            $programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
-              
-        foreach($data as $key => $value) {
+            if (in_array($ext, $valid_exts)) {
+                $data = Excel::load($path, function($reader) {
 
-	$name=$value->surname." ".$value->othernames." ".$value->firstname;
-				  
-            if (in_array($value->program_code, $programme)) {
-               
-                  $testQuery=StudentModel::where('STNO', $value->admission_number)->first();
-                          if(empty($testQuery)){
-                              
+                })->get();
+
+                if(!empty($data) && $data->count()){
+                    $programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
+
+                    foreach($data as $key => $value) {
+
+                        $name=$value->surname." ".$value->othernames." ".$value->firstname;
+
+                        if (in_array($value->program_code, $programme)) {
+
+                            $testQuery=StudentModel::where('STNO', $value->admission_number)->first();
+                            if(empty($testQuery)){
+
                                 if($value->gender=="M"){
                                     $gender="Male";
                                 }
                                 else{
                                     $gender="Female";
                                 }
-                                 
+
                                 $student=new StudentModel();
-                               // $student->INDEXNO=$indexno;
+                                // $student->INDEXNO=$indexno;
                                 $student->LEVEL=$value->level;
                                 $student->YEAR= $value->year;
                                 $student->NAME=$name;
@@ -930,36 +934,36 @@ public function gad()
                                 $student->BILLS=$value->bill;
                                 $student->BILL_OWING=$value->owing;
                                 $student->save();
-                                
-                                 \DB::commit();
-                              }
-                             else{
-                                
-                                         StudentModel::where('STNO', $value->admission_number)->update(array( "YEAR" =>$value->year, "PROGRAMMECODE" =>$value->program_code, "SYSUPDATE"=>"1", "STATUS" => 'Admitted',"NAME"=>$name,"BILLS"=>$value->bill,"BILL_OWING"=>$value->owing,"SEX"=>$value->gender,"FIRSTNAME"=>$value->firstname,"TELEPHONENO"=>$value->phone,"ADDRESS"=>$value->address,"SURNAME"=>$value->surname,"RESIDENTIAL_ADDRESS"=>$value->residential));
-                                     \DB::commit();
-                               }
-                             
+
+                                \DB::commit();
                             }
-                             else{
-                                  
-                               return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contains unrecognised programme codes.. please check your programme code!</span> ");
-                      
-                             }
-                            
-	    }
-            
-               
-                                           return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>File upload successfull</span> ");
-       
-	}
-        else{
-              return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload an excel file!</span> ");
-                                      
+                            else{
+
+                                StudentModel::where('STNO', $value->admission_number)->update(array( "YEAR" =>$value->year, "PROGRAMMECODE" =>$value->program_code, "SYSUPDATE"=>"1", "STATUS" => 'Admitted',"NAME"=>$name,"BILLS"=>$value->bill,"BILL_OWING"=>$value->owing,"SEX"=>$value->gender,"FIRSTNAME"=>$value->firstname,"TELEPHONENO"=>$value->phone,"ADDRESS"=>$value->address,"SURNAME"=>$value->surname,"RESIDENTIAL_ADDRESS"=>$value->residential));
+                                \DB::commit();
+                            }
+
+                        }
+                        else{
+
+                            return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contains unrecognised programme codes.. please check your programme code!</span> ");
+
+                        }
+
+                    }
+
+
+                    return redirect('/students')->with("success", " <span style='font-weight:bold;font-size:13px;'>File upload successfull</span> ");
+
+                }
+                else{
+                    return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload an excel file!</span> ");
+
+                }
+            }
         }
-      }
-     }
-    
-       
+
+
     }
 //    public function uploadApplicants(Request $request, SystemController $sys) {
 //        set_time_limit(36000);
@@ -1070,7 +1074,7 @@ public function gad()
 //            \DB::rollback();
 //        }
 //    }
-   /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -1080,9 +1084,9 @@ public function gad()
     {
         //
     }
-    
+
     public function sendOwingSMS(Request $request, SystemController $sys) {
-         if ($request->hasFile('file')) {
+        if ($request->hasFile('file')) {
             $file = $request->file('file');
 
             $user = \Auth::user()->fund;
@@ -1093,35 +1097,35 @@ public function gad()
 
             if (in_array($ext, $valid_exts)) {
                 $data = Excel::load($path, function($reader) {
-                            
-                        })->get();
+
+                })->get();
 
 
                 if (!empty($data) && $data->count()) {
                     //$programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
 
                     foreach ($data as $key => $value) {
-                        
-                        
+
+
                         $name= $value->name;
-                         
-                    
-                         $owing=$value->owing;
-                        
-                         $level= $value->level;
-                          $program= $value->program;
-                       $testQuery=StudentModel::where("name","LIKE"."%".$name."%")->where("level",$level)->where("programmecode",$program)->first();
+
+
+                        $owing=$value->owing;
+
+                        $level= $value->level;
+                        $program= $value->program;
+                        $testQuery=StudentModel::where("name","LIKE"."%".$name."%")->where("level",$level)->where("programmecode",$program)->first();
                         // dd($testQuery);
-                          if(!empty($testQuery)){
-                               @StudentModel::where("name","LIKE"."%".$name."%")->where("level",$level)->where("programmecode",$program)->update(array("BILL_OWING"=>$owing));
- 
-                              $name=$testQuery->FIRSTNAME;
-                              $index=$testQuery->INDEXNO;
-                              $phone=$testQuery->PHONE;
-                              print_r($name);
-                              $message="Hi $name, please pay your remaining fees, $owing, before this Wednesday 14th June,2017 so as to be registered for the exams";
-                             $sys->firesms($message, $phone, $index);
-                          }
+                        if(!empty($testQuery)){
+                            @StudentModel::where("name","LIKE"."%".$name."%")->where("level",$level)->where("programmecode",$program)->update(array("BILL_OWING"=>$owing));
+
+                            $name=$testQuery->FIRSTNAME;
+                            $index=$testQuery->INDEXNO;
+                            $phone=$testQuery->PHONE;
+                            print_r($name);
+                            $message="Hi $name, please pay your remaining fees, $owing, before this Wednesday 14th June,2017 so as to be registered for the exams";
+                            $sys->firesms($message, $phone, $index);
+                        }
                     }
                 }
             }
@@ -1178,8 +1182,8 @@ public function gad()
                         $program=$value->program;
 
 
-                            @StudentModel::where("indexno", $indexno)->update(array("PROGRAMMECODE" => $program));
-                            @Models\PortalPasswordModel::where("username", $indexno)->update(array("programme" => $program));
+                        @StudentModel::where("indexno", $indexno)->update(array("PROGRAMMECODE" => $program));
+                        @Models\PortalPasswordModel::where("username", $indexno)->update(array("programme" => $program));
 
 
                     }
@@ -1213,11 +1217,11 @@ public function gad()
 
 
                         $stno=$value->stno;
-    $check= @StudentModel::where("stno", $stno)->get();
-                if(empty( $check)) {
-                    @StudentModel::where("stno", $stno)->update(array("INDEXNO" => $indexno));
-                    @Models\PortalPasswordModel::where("username", $stno)->update(array("username" => $indexno));
-                }
+                        $check= @StudentModel::where("stno", $stno)->get();
+                        if(empty( $check)) {
+                            @StudentModel::where("stno", $stno)->update(array("INDEXNO" => $indexno));
+                            @Models\PortalPasswordModel::where("username", $stno)->update(array("username" => $indexno));
+                        }
 
                     }
                 }
@@ -1291,7 +1295,7 @@ public function gad()
 
                     foreach ($data as $key => $item) {
 
-                            //dd($data);
+                        //dd($data);
                         //freshers
                         //dd($item->studentId);
                         $indexno=$item->studentid;
@@ -1303,64 +1307,64 @@ public function gad()
                             $indexno =   $indexno;
                         }
 
-                            $oldStudent = Models\StudentModel::where("STNO", $indexno)->orWhere("INDEXNO", $indexno)->first();
-                            if(!empty($oldStudent)) {
-                                $level = $oldStudent->LEVEL;
-                                $index = $oldStudent->INDEXNO;
-                                $program = $oldStudent->PROGRAMMECODE;
-                                $bill = $sys->getYearBill($year, $level, $program);
+                        $oldStudent = Models\StudentModel::where("STNO", $indexno)->orWhere("INDEXNO", $indexno)->first();
+                        if(!empty($oldStudent)) {
+                            $level = $oldStudent->LEVEL;
+                            $index = $oldStudent->INDEXNO;
+                            $program = $oldStudent->PROGRAMMECODE;
+                            $bill = $sys->getYearBill($year, $level, $program);
 
-                                $bill_owing = $bill - $item->amount;
-                                if ($bill <= $item->amount) {
-                                    $details = "Full payment";
+                            $bill_owing = $bill - $item->amount;
+                            if ($bill <= $item->amount) {
+                                $details = "Full payment";
 
-                                } else {
-                                    $details = "Part payment";
-                                }
+                            } else {
+                                $details = "Part payment";
+                            }
 
-                                $date = $item->PaymentDate;
+                            $date = $item->PaymentDate;
 
-                                $checker=Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->get();
-                                if(empty($checker)){
-                                    $feeLedger = new Models\FeePaymentModel();
-                                    $feeLedger->INDEXNO = $index;
-                                    $feeLedger->PROGRAMME = $program;
-                                    $feeLedger->AMOUNT = $item->amount;
-                                    $feeLedger->PAYMENTTYPE = "School Fees";
-                                    $feeLedger->PAYMENTDETAILS = $details;
-                                    $feeLedger->BANK_DATE = $item->paymentdate;
-                                    $feeLedger->CHECKER = rand();
-                                    $feeLedger->LEVEL = $level;
-                                    $feeLedger->RECIEPIENT = 751999;
-                                    $feeLedger->BANK = $item->accountnumber;
-                                    if(empty($item->transaction)){
+                            $checker=Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->get();
+                            if(empty($checker)){
+                                $feeLedger = new Models\FeePaymentModel();
+                                $feeLedger->INDEXNO = $index;
+                                $feeLedger->PROGRAMME = $program;
+                                $feeLedger->AMOUNT = $item->amount;
+                                $feeLedger->PAYMENTTYPE = "School Fees";
+                                $feeLedger->PAYMENTDETAILS = $details;
+                                $feeLedger->BANK_DATE = $item->paymentdate;
+                                $feeLedger->CHECKER = rand();
+                                $feeLedger->LEVEL = $level;
+                                $feeLedger->RECIEPIENT = 751999;
+                                $feeLedger->BANK = $item->accountnumber;
+                                if(empty($item->transaction)){
                                     $feeLedger->TRANSACTION_ID = rand();
-                                     }
-                                     else{
-                                         $feeLedger->TRANSACTION_ID =$item->transaction;
-                                     }
-                                    $feeLedger->RECEIPTNO = $sys->getReceipt();
-                                    $feeLedger->YEAR = $year;
-                                    $feeLedger->FEE_TYPE = "School Fees";
-                                    $feeLedger->SEMESTER = $sem;
-                                    $feeLedger->save();
-                                    if ($feeLedger->save()) {
-                                        @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $indexno)->update(array("BILL_OWING" => $bill_owing, "BILLS" => $bill));
-
-                                        $sys->updateReceipt();
-                                    }
-
                                 }
-                                 else{
-                                    
-                               dd( Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->update(array("AMOUNT"=>$item->amount)));
+                                else{
+                                    $feeLedger->TRANSACTION_ID =$item->transaction;
+                                }
+                                $feeLedger->RECEIPTNO = $sys->getReceipt();
+                                $feeLedger->YEAR = $year;
+                                $feeLedger->FEE_TYPE = "School Fees";
+                                $feeLedger->SEMESTER = $sem;
+                                $feeLedger->save();
+                                if ($feeLedger->save()) {
+                                    @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $indexno)->update(array("BILL_OWING" => $bill_owing, "BILLS" => $bill));
 
+                                    $sys->updateReceipt();
                                 }
 
+                            }
+                            else{
 
-                                }
-                               
-                             
+                                dd( Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->update(array("AMOUNT"=>$item->amount)));
+
+                            }
+
+
+                        }
+
+
                     }
                 }
 

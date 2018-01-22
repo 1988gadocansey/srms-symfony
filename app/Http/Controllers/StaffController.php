@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
-use App\Models\WorkerModel;
+use App\Models;
  
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Collection;
@@ -253,4 +253,102 @@ class StaffController extends Controller
 
         return redirect('/tasks');
     }
+    public function create(Request $request, SystemController $sys) {
+        $region = $sys->getRegions();
+        $department = $sys->getDepartmentList();
+        $religion = $sys->getReligion();
+        return view('staff.create')
+            ->with('region', $region)->with("department", $department)
+            ->with('religion', $religion);
+    }
+
+    public function store(Request $request, SystemController $sys) {
+
+            $user = @\Auth::user()->organization;
+
+            $real='1111111';
+            $dob = $request->input('name');
+            $kname = $request->input('');
+
+            $grade = $request->input('grade');
+            $staffNo = $request->input('staffid');
+
+            $designation = $request->input('designation');
+            $education = $request->input('education');
+            $department = $request->input('department');
+            $leave = $request->input('leave');
+
+            $residence = $request->input('residence');
+            $phone = $request->input('phone');
+            $region = $request->input('region');
+            $religion = $request->input('religion');
+            $residentAddress = $request->input('contact');
+
+            $hometown = $request->input('hometown');
+
+            $title = $request->input('title');
+
+            $fname = $request->input('fname');
+
+
+            $lname = $request->input('surname');
+            $othername = $request->input('othernames');
+            $position = $request->input('position');
+            $marital = $request->input('marital_status');
+            $ssnit = $request->input('ssnit');
+            $dependent = $request->input('dependents');
+            $joined = $request->input('joined');
+            $name = $lname . ' ' . $othername . ' ' . $fname;
+            $email = $request->input('email');
+
+
+
+            $query = new Models\WorkerModel();
+
+            $query->address = $residentAddress;
+            $query->region = $region;
+            $query->religion = $religion;
+            $query->hometown = $hometown;
+            $query->staffID = $ssnit;
+
+
+            $query->department = $department;
+            $query->education = $education;
+            $query->grade = $grade;
+            $query->position = $position;
+            $query->phone = $phone;
+
+            $query->nationality = "GHANAIAN";
+            $query->dependentsNo = $dependent;
+
+            $query->designation = $designation;
+            $query->ssnit = $ssnit;
+            $query->marital = $marital;
+
+            $query->email = $email;
+
+
+
+            if ($query->save()) {
+
+                User::create([
+                    'name' => $name,
+                    'department' =>$department,
+                    'fund'=>$ssnit,
+                    'staffID' =>$query->id,
+                    'phone' =>$phone,
+                    'role' =>$designation,
+                    'email' =>$email,
+                    'password' => bcrypt($real),
+                ]);
+
+
+                return response()->json(['status' => 'success', 'message' => $name . ' added successfully ']);
+            } else {
+
+                return response()->json(['status' => 'error', 'message' => 'Error adding staff ']);
+            }
+
+
+}
 }
