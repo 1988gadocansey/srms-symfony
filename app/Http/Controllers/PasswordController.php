@@ -91,7 +91,7 @@ class PasswordController extends Controller
        $username=$request['username'];
        $confirm=$request['confirm'];
         $level=$request['level'];
-         $program=$request['program'];
+         $program=$sys->getProgramCodeByID($request['program']);
        $real=strtoupper($request['password']);
        if(!empty($checker)){
           //$this->validate($request, [
