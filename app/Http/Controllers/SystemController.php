@@ -56,7 +56,7 @@ class SystemController extends Controller
 
           }*/
 
-        return $data;
+        return @$data;
     }
     public function getCourseGradeArray($course,$sem,$level,$year,$program) {
 
@@ -72,7 +72,9 @@ class SystemController extends Controller
         foreach ($data as $row){
             array_push($rows,$row->grade);
         }
+
         return $rows;
+
 
     }
     public function getLecturerAverage($grades) {
@@ -118,6 +120,7 @@ class SystemController extends Controller
             ->where("sem",$term)
             ->where("level",$level)
             ->where("code",$courseId)
+            ->where("grade","!=","E")
             ->select("total")
             ->first();
 
@@ -1581,6 +1584,15 @@ class SystemController extends Controller
 
         return @$course[0]->ID;
     }
+
+    public function getCourseByCodeCourse($code, $course) {
+        $course = \DB::table('tpoly_courses')->where('COURSE_CODE',$code)
+            ->where("COURSE_NAME",$course)
+            ->get();
+
+        return @$course[0]->ID;
+
+    }
     public function getProgramByID($id) {
         $programme = \DB::table('tpoly_programme')->where('ID',$id)->get();
 
@@ -1627,6 +1639,7 @@ class SystemController extends Controller
             ->where('lower','<=',$mark)
             ->where('upper','>=',$mark)
             ->where('type',$type)
+            ->where("grade","!=","E")
             ->get();
 
         return @$grade[0]->grade;

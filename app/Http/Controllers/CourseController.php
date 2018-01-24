@@ -463,12 +463,11 @@ class CourseController extends Controller
             $course=$sys->getCourseList();
             $user=@\Auth::user()->fund;
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
-            $year = $array[0]->YEAR;
+           /* $sem = $array[0]->SEMESTER;
+            $year = $array[0]->YEAR;*/
             $query=  @Models\MountedCourseModel::query()
-                ->where("COURSE_YEAR",$year)
-                ->where("ID",$id)
-                ->where("COURSE_SEMESTER",$sem)->paginate(20);
+
+                ->where("ID",$id)->paginate(20);
 
 
             return view('courses.editMounted')->with("data",@$query)
@@ -1553,12 +1552,12 @@ class CourseController extends Controller
 //          $courses= Models\MountedCourseModel::query()->where('MOUNTED_BY',$hod) ;
 //      }
 
-        if($request->user()->isSupperAdmin  ||  @\Auth::user()->department=="top" || @\Auth::user()->role=="Admin"){
+        if($request->user()->isSupperAdmin  ||  @\Auth::user()->department=="top" || @\Auth::user()->role=="Admin" ||  @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Lecturer"){
 
             $courses= Models\MountedCourseModel::query() ;
         }
         elseif(@\Auth::user()->role=="HOD" || @\Auth::user()->role=="Support" || @\Auth::user()->role=="Registrar") {
-            $courses =Models\MountedCourseModel::where('COURSE', '!=', '')->whereHas('courses', function($q) {
+            $courses =Models\MountedCourse2Model::where('COURSE', '!=', '')->whereHas('courses', function($q) {
                 $q->whereHas('programs', function($q) {
                     $q->whereIn('DEPTCODE', array(@\Auth::user()->department));
                 });
@@ -1670,7 +1669,7 @@ class CourseController extends Controller
 
     }
     public function mountCourse(SystemController $sys) {
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->role == 'Admin'|| @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar'){
+        if(@\Auth::user()->role == 'Admin'|| @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar'){
             $programme=$sys->getProgramList();
 
             $course=$sys->getCourseList();
@@ -1751,7 +1750,7 @@ class CourseController extends Controller
         }
     }
     public function mountCourseStore(Request $request, SystemController $sys) {
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Registrar' || @\Auth::user()->role == 'Admin'){
+        if(@\Auth::user()->role=='Registrar' || @\Auth::user()->role == 'Admin'){
             \DB::beginTransaction();
             try {
                 $this->validate($request, [
@@ -1767,6 +1766,7 @@ class CourseController extends Controller
 
 
                 $course = $request->input('course');
+                $kojo2 = explode(',', $course);
                 $program = $request->input('program');
                 $level = $request->input('level');
                 $semester = $request->input('semester');
@@ -1780,11 +1780,14 @@ class CourseController extends Controller
                 else{
                     $type = $request->input('type');
                 }
+                //dd($course);
+                //dd($kojo2[1]);
                 $hod = @\Auth::user()->fund;
-                $courseDetail=$sys->getCourseByCode($course);
+                $courseDetail=$sys->getCourseByCodeCourse($kojo2[0],$kojo2[1]);
                 $mountedCourse = new Models\MountedCourseModel();
-                $mountedCourse->COURSE = $sys->getCourseByCode($course);
-                $mountedCourse->COURSE_CODE = $course;
+                $mountedCourse->COURSE = $sys->getCourseByCodeCourse($kojo2[0],$kojo2[1]);
+                //dd($courseDetail);
+                $mountedCourse->COURSE_CODE = $kojo2[0];
                 $mountedCourse->COURSE_CREDIT = $credit;
                 $mountedCourse->COURSE_SEMESTER = $semester;
                 $mountedCourse->COURSE_LEVEL = $level;
@@ -1812,7 +1815,7 @@ class CourseController extends Controller
 //                $message="Hi, $lecturerName, you have been assigned $courseName, $courseCode, $programCode, year $level, $year, sem $semester";
 //                //dd($message);
                     // $sys->firesms($message, $lecturePhone,$lectureStaffID );
-                    return redirect("/mounted_view")->with("success", "well done:<span style='font-weight:bold;font-size:13px;'> course mounted</span>successfully  ");
+                    return redirect("/mounted_view?&program=$program&level=$level&semester=$semester&year=$year")->with("success", "Course mounted</span>successfully  ");
                 } else {
 
                     return redirect("/mounted_view")->withErrors("Whoops N<u>o</u> :<span style='font-weight:bold;font-size:13px;'> course could not be mounted </span>could not be added!");
@@ -2486,7 +2489,7 @@ class CourseController extends Controller
 
                             if(!empty($checker)){
 
-                            Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade, 'gpoint' => $gradePoint));
+                            Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade,'course' => $courseDb, 'gpoint' => $gradePoint));
                             }
                             else{
 
@@ -2507,6 +2510,7 @@ class CourseController extends Controller
                                 $record->grade=$grade;
                                 $record->gpoint=$gradePoint;
                                 $record->level=$level;
+                                $record->course=$courseDb;
                                 $record->save();
 
                             
@@ -2954,6 +2958,7 @@ class CourseController extends Controller
         }
         else{
             $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
+
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
                         $q->whereIn('PROGRAMMECODE',  array($program));
@@ -2961,6 +2966,8 @@ class CourseController extends Controller
                 })->orderBy("code")
                 ->groupBy("code")
                 ->get()->toArray();
+
+
         }
 
 
@@ -2975,6 +2982,7 @@ class CourseController extends Controller
             else{
                 $courseArray[]="N/A";
             }
+            //dd($courseArray);
         }
         if ($request->has('search') && trim($request->input('search')) != "") {
             $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
@@ -2990,7 +2998,10 @@ class CourseController extends Controller
 
         }
         else{
-            $studentData=Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
+            // $studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
+
+            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
+
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
                         $q->whereIn('PROGRAMMECODE',  array($program));
@@ -2999,6 +3010,9 @@ class CourseController extends Controller
                 ->groupBy("indexno")
                 ->select("indexno","level")
                 ->get();
+
+
+
         }
 
 
