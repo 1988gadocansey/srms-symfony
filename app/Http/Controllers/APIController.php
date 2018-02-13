@@ -29,6 +29,20 @@ class APIController extends Controller {
         return response()->json(array('data'=>$data));
          
       }
+      public function fireVoucher(Request $request,SystemController $sys){
+          $data=Models\FormModel::where("PHONE",$request->input('phone'))->first();
+
+            $pin=$data->serial;
+            $serial=$data->PIN;
+            $phone=$request->input('phone');
+          $message = "Admission voucher: serial: $serial  pin code: $pin . Login at admissions.ttuportal.com Thanks";
+
+
+           $sys->firesms($message, $phone, $phone);
+           //return redirect("http://admissions.ttuportal.com");
+           return redirect()->back();
+
+      }
        public function getStudentProgram(Request $request,$program) {
         header('Content-Type: application/json');
         $indexno=$request->input("student");

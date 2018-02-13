@@ -834,11 +834,11 @@
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/programmes") !!}'>View Programmes</a></li>
-
-
+                                   
+                                   
                                     <li><a href='{!! url("/courses") !!}'>View Courses</a></li>
                                     <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>
-
+                                    
                                     <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
 
 
@@ -871,6 +871,61 @@
                                     <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
                                     <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
                                     <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                    @endif
+
+                    @if( @Auth::user()->department=='qa' )
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">attach_file</i><span>File</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/students") !!}'>Students</a></li>
+
+                                    <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_list</i><span>View</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    
+                                    <li><a href='{!! url("/mounted_view") !!}'>View Mounted Courses</a></li>
+                                    
+                                    <li><a href='{!! url("/directory") !!}'>Staff Directory</a></li>
+
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li data-uk-dropdown class="uk-hidden-small">
+
+
+                            <a href="#"><i class="sidebar-menu-icon material-icons md-18">view_headline</i><span>Reports</span></a>
+                            <div class="uk-dropdown uk-dropdown-scrollable">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
+                                    <li><a href='{!! url("admissions/statistics/comprehensive") !!}'>Applied/Registered</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
+                                    <li><a href='{!! url("/broadsheet/napbtex") !!}'>Broadsheet Nabptex</a></li>
+                                    <li><a href='{!! url("qa/report/single") !!}'>Lecturer Assessment Report</a></li>
 
 
                                 </ul>
@@ -994,6 +1049,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
+                                    <li><a href='{!! url("/broadsheet/noticeboard") !!}'>GPA Academic Board</a></li>
                                     <li><a href='{!! url("/report/registration") !!}'>Registration</a></li>
                                 </ul>
                             </div>
@@ -1006,8 +1062,8 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
-
                                     <li><a href='{!! url("/upload_marks") !!}'>Upload Semester Marks</a></li>
+                                    <li><a href='{!! url("/view/edit") !!}'>View / Edit Results</a></li>
 
                                 </ul>
                             </div>

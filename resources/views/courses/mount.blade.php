@@ -96,7 +96,7 @@
 
                                         
 
-                                          <option value="{{$item->COURSE_CODE}}">{{$item->COURSE_NAME}} - {{ $item->COURSE_CODE }} - {{ $item->COURSE_LEVEL }} - Sem{{ $item->COURSE_SEMESTER}})</option>
+                                          <option value="{{$item->COURSE_CODE.','.$item->COURSE_NAME}}">{{$item->COURSE_NAME}} - {{ $item->COURSE_CODE }} - {{ $item->COURSE_LEVEL }} - Sem{{ $item->COURSE_SEMESTER}})</option>
 
                                         @endforeach
 

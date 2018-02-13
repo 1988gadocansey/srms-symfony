@@ -25,8 +25,9 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        set_time_limit(36000);
-        ini_set('max_input_vars', '9000');
+        //set_time_limit(36000);
+        ini_set('max_input_vars', '90000');
+        ini_set('max_execution_time', 180000);
         $this->middleware('auth');
 
 
@@ -463,8 +464,12 @@ class CourseController extends Controller
             $course=$sys->getCourseList();
             $user=@\Auth::user()->fund;
             $array = $sys->getSemYear();
-           /* $sem = $array[0]->SEMESTER;
-            $year = $array[0]->YEAR;*/
+            $sem = $array[0]->SEMESTER;
+            $year = $array[0]->YEAR;
+            /*$query=  @Models\MountedCourseModel::query()
+                ->where("COURSE_YEAR",$year)
+                ->where("ID",$id)
+                ->where("COURSE_SEMESTER",$sem)->paginate(20);*/
             $query=  @Models\MountedCourseModel::query()
 
                 ->where("ID",$id)->paginate(20);
@@ -1271,17 +1276,17 @@ class CourseController extends Controller
                 //if(count($sql)==0){
 
                 //    return redirect("/transcript")->with("error","<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
-               // }
-               // else{
+                // }
+                // else{
 
-                    $array=$sys->getSemYear();
-                    $sem=$array[0]->SEMESTER;
-                    $year=$array[0]->YEAR;
+                $array=$sys->getSemYear();
+                $sem=$array[0]->SEMESTER;
+                $year=$array[0]->YEAR;
 
 
-                    $data=$this->transcriptHeader($sql, $sys)  ;
-                    $record=$this->generateTranscript($sql->ID,$sys);
-                    return view("courses.transcript")->with('grade',$record)->with("student",$data);
+                $data=$this->transcriptHeader($sql, $sys)  ;
+                $record=$this->generateTranscript($sql->ID,$sys);
+                return view("courses.transcript")->with('grade',$record)->with("student",$data);
 
 
 
@@ -1554,7 +1559,7 @@ class CourseController extends Controller
 
         if($request->user()->isSupperAdmin  ||  @\Auth::user()->department=="top" || @\Auth::user()->role=="Admin" ||  @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Lecturer"){
 
-            $courses= Models\MountedCourseModel::query() ;
+            $courses= Models\MountedCourse2Model::query() ;
         }
         elseif(@\Auth::user()->role=="HOD" || @\Auth::user()->role=="Support" || @\Auth::user()->role=="Registrar") {
             $courses =Models\MountedCourse2Model::where('COURSE', '!=', '')->whereHas('courses', function($q) {
@@ -1828,17 +1833,18 @@ class CourseController extends Controller
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
         }
     }
-    public function enterMark($course,$code, SystemController $sys ,Models\AcademicRecordsModel $record ){
+    public function enterMark($course,$code,$year,$sem, SystemController $sys ,Models\AcademicRecordsModel $record ){
         //$this->authorize('update',$record); // in Controllers
         if(@\Auth::user()->role=='HOD' ||@\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Tpmid'  ){
-            $array=$sys->getSemYear();
-            $sem=$array[0]->SEMESTER;
-            $year=$array[0]->YEAR;
+             $array=explode("_",$year);
+            $array2 = $sys->getSemYear();
+
+            $year=$array[0]."/".$array[1];
 
             $lecturer=@\Auth::user()->fund;
             $group=  @explode(',', @\Auth::user()->student_groups);
 
-            $resultOpen=$array[0]->ENTER_RESULT;
+            $resultOpen=$array2[0]->ENTER_RESULT;
             if($resultOpen==1){
                 $mark = Models\AcademicRecordsModel::where('code',$code)
 
@@ -1918,7 +1924,7 @@ class CourseController extends Controller
             'level' => 'required',
         ]);
 
-          $kojoSense = 0;
+        $kojoSense = 0;
         $array = $sys->getSemYear();
         $sem = $request->input("sem");
         $year = $request->input("year");
@@ -1926,22 +1932,22 @@ class CourseController extends Controller
         $program = $request->input("program");
         $lecturer = @\Auth::user()->fund;
 
-       /* $data = Models\AcademicRecordsModel::
-        join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
-            ->where('tpoly_academic_record.code', $course)
-            ->where('tpoly_academic_record.lecturer', $lecturer)
-            ->where('tpoly_academic_record.year', $year)
-            ->where('tpoly_academic_record.sem', $sem)
-            ->select('tpoly_students.INDEXNO', 'tpoly_students.NAME', 'tpoly_academic_record.quiz1', 'tpoly_academic_record.quiz2', 'tpoly_academic_record.midsem1', 'tpoly_academic_record.exam', 'tpoly_academic_record.total')
-            ->orderBy("tpoly_students.INDEXNO")
-            ->get();*/
+        /* $data = Models\AcademicRecordsModel::
+         join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
+             ->where('tpoly_academic_record.code', $course)
+             ->where('tpoly_academic_record.lecturer', $lecturer)
+             ->where('tpoly_academic_record.year', $year)
+             ->where('tpoly_academic_record.sem', $sem)
+             ->select('tpoly_students.INDEXNO', 'tpoly_students.NAME', 'tpoly_academic_record.quiz1', 'tpoly_academic_record.quiz2', 'tpoly_academic_record.midsem1', 'tpoly_academic_record.exam', 'tpoly_academic_record.total')
+             ->orderBy("tpoly_students.INDEXNO")
+             ->get();*/
 
         $data = Models\StudentModel::where("PROGRAMMECODE",$program)
-        ->where("LEVEL",$level)
-        ->where("STATUS","In school")
-        ->orderBy("INDEXNO")
-        ->select('INDEXNO', 'NAME')
-        ->get();
+            ->where("LEVEL",$level)
+            ->where("STATUS","In school")
+            ->orderBy("INDEXNO")
+            ->select('INDEXNO', 'NAME')
+            ->get();
 
         $kojoSense = count($data)+1;
 
@@ -1949,36 +1955,36 @@ class CourseController extends Controller
 
             $excel->sheet($program, function ($sheet) use ($data,$kojoSense) {
                 $sheet->setWidth(array(
-    'A'     =>  15,
-    'B'     =>  35,
-    'C'     =>  8,
-    'D'     =>  8,
-    'E'     =>  8,
-    'F'     =>  8,
-    'G'     =>  8
-));
+                    'A'     =>  15,
+                    'B'     =>  35,
+                    'C'     =>  8,
+                    'D'     =>  8,
+                    'E'     =>  8,
+                    'F'     =>  8,
+                    'G'     =>  8
+                ));
                 $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total'));
                 $sheet->fromArray($data);$sheet->setBorder('A1:G'.$kojoSense.'', 'thin');
                 //$sheet->setCellsValue('C2:F'.$kojoSense.'','0');
                 //$sheet->cells('C2:C5', function($cells) {
 
-    // $cells->setValue('0');
+                // $cells->setValue('0');
 
 //});
-               //$sheet->cells('C2:C5', function($cell) {
+                //$sheet->cells('C2:C5', function($cell) {
 
-     //manipulate the cell
-    //$cell->setValue('0');
-    //});
-               // $sheet->setCellValue('G5','=SUM(C5:F5)');
+                //manipulate the cell
+                //$cell->setValue('0');
+                //});
+                // $sheet->setCellValue('G5','=SUM(C5:F5)');
 
-                 for($k=2;$k<$kojoSense+1;$k++){
-                $sheet->setCellValue('C'.$k.'','0');
-                $sheet->setCellValue('D'.$k.'','0'); 
-                $sheet->setCellValue('E'.$k.'','0');
-                $sheet->setCellValue('F'.$k.'','0');   
-                $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
-                    }
+                for($k=2;$k<$kojoSense+1;$k++){
+                    $sheet->setCellValue('C'.$k.'','0');
+                    $sheet->setCellValue('D'.$k.'','0');
+                    $sheet->setCellValue('E'.$k.'','0');
+                    $sheet->setCellValue('F'.$k.'','0');
+                    $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+                }
 
 //});
             });
@@ -2200,7 +2206,7 @@ class CourseController extends Controller
     public function showFileUpload(SystemController $sys){
         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $programme=$sys->getProgramList();
-            $course=$sys->getMountedCourseList();
+            $course=$sys->getMountedCourseList2();
 
             return view('courses.markUpload')->with('programme', $programme)
                 ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years22());
@@ -2212,7 +2218,7 @@ class CourseController extends Controller
     public function showFileUploadRegistered(SystemController $sys){
         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->role=='Support' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $programme=$sys->getProgramList5();
-           // $course=$sys->getProgramList5();
+            // $course=$sys->getProgramList5();
 
             return view('courses.downloadRegistered')->with('programme', $programme)
                 ->with('level', $sys->getLevelList())->with('year',$sys->years());
@@ -2489,7 +2495,7 @@ class CourseController extends Controller
 
                             if(!empty($checker)){
 
-                            Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade,'course' => $courseDb, 'gpoint' => $gradePoint));
+                                Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade,'course' => $courseDb, 'gpoint' => $gradePoint));
                             }
                             else{
 
@@ -2499,7 +2505,7 @@ class CourseController extends Controller
                                 $record->student=$studentId;
                                 $record->credits=$courseCreditDb;
                                 $record->code=$course;
-                                $record->sem=$sem;
+                                $record->sem=1;
                                 $record->year=$year1;
                                 $record->quiz1=$quiz1;
                                 $record->quiz2=$quiz2;
@@ -2513,16 +2519,16 @@ class CourseController extends Controller
                                 $record->course=$courseDb;
                                 $record->save();
 
-                            
-                          
 
 
 
-              } //else {
+
+
+                            } //else {
 //                                return redirect('/upload/marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contain unrecognized students for $displayCourse - $displayCode.please upload only registered students for  $displayCourse - $displayCode  as downloaded from the system!</span> ");
-//                            
-//                                  
-//                            } 
+//
+//
+//                            }
                         }
 
 
@@ -2869,13 +2875,13 @@ class CourseController extends Controller
         if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
             $headerQuery=
-            Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("indexno",$request->input('search'))->get();
+                Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("indexno",$request->input('search'))->get();
         }
         else{
             $headerQuery=Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
 
 
-           // dd($headerQuery);
+            // dd($headerQuery);
         }
 
 
@@ -2921,18 +2927,15 @@ class CourseController extends Controller
 
     public function noticeBoardBroadsheet(Request $request, SystemController $sys){
 
-
-
         return view('courses.noticeboard')->with('year', $sys->years())
             ->with('level', $sys->getLevelList())
             ->with("program", $sys->getProgramList());
 
-
-
     }
+
+
     public function processBroadsheet(Request $request, SystemController $sys) {
-
-
+        ini_set('max_execution_time', 180000);
         \Session::put('level', $request->input("level", ""));
         \Session::put('year', $request->input("year", ""));
         \Session::put('program', $request->input("program", ""));
@@ -2958,8 +2961,7 @@ class CourseController extends Controller
         }
         else{
             $headerQuery= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
-
-                ->where("year",$year)->whereHas('student', function($q)use ($program) {
+                ->where("year",$year)->whereHas('academic', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
                         $q->whereIn('PROGRAMMECODE',  array($program));
                     });
@@ -2993,14 +2995,14 @@ class CourseController extends Controller
                     });
                 })->orderBy("indexno")
                 ->groupBy("indexno")
-                ->select("indexno","level")
+                ->select("indexno","level","grade")
                 ->get();
 
         }
         else{
             // $studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
 
-            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
+            /*$studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
 
                 ->where("year",$year)->whereHas('student', function($q)use ($program) {
                     $q->whereHas('programme', function($q)use ($program) {
@@ -3008,9 +3010,17 @@ class CourseController extends Controller
                     });
                 })->orderBy("indexno")
                 ->groupBy("indexno")
-                ->select("indexno","level")
-                ->get();
+                ->select("indexno","level","grade")
+                ->paginate(350);*/
 
+            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")->where("sem",$semester)
+                ->where("programme",$program)
+                ->where("year",$year)
+
+                ->orderBy("indexno")
+                ->groupBy("indexno")
+                ->select("indexno","level","grade")
+                ->get();
 
 
         }
@@ -3030,9 +3040,21 @@ class CourseController extends Controller
 
     }
 
-    public function generateIndexNumber(Request $request, SystemController $sys){
+    public function editResult(Request $request, SystemController $sys){
+        $array = $sys->getSemYear();
+        $sem = $array[0]->SEMESTER;
+        $year = $array[0]->YEAR;
+        //$courses =Models\MountedCourse2Model::where('LECTURER',   \Auth::user()->fund)
+            //->where("COURSE_SEMESTER",1)->where("COURSE_YEAR",$year)->paginate(100);
+        $courses= Models\AcademicRecordsModel::query()->where('lecturer',   \Auth::user()->fund)
+        ->where("sem",1)->where("year",$year)->where("grade","!=","E")->groupBy("code")->paginate(100);
+
+        return view('courses.edit_result')->with("data", $courses)
+            ->with('program', $sys->getProgramList())
+            ->with('level', $sys->getLevelList())
+            ->with('year',$sys->years());
+
 
     }
 
 }
-

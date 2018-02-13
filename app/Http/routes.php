@@ -36,6 +36,7 @@ Route::post('/api/kojo', 'APIController@getStudentKojo');
 Route::post('/api/kojo/name', 'APIController@getStudentKojoName');
 Route::post('/api/send', 'APIController@pushToSrms');
 Route::post('/api/student', 'APIController@getStudentID');
+Route::post('fireVoucher', 'APIController@fireVoucher');
 
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
@@ -243,7 +244,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/mount_course','CourseController@mountCourseStore');
     Route::get('/mounted_view','CourseController@viewMounted');
     Route::get('/registered_courses','CourseController@viewRegistered');
-    Route::get('/enter_mark/{course}/course/{code}/code','CourseController@enterMark');
+    Route::get('/enter_mark/{course}/course/{code}/code/year/{year}/sem/{sem}','CourseController@enterMark');
     Route::post('/process_mark','CourseController@processMark');
     Route::delete('/delete_course', 'CourseController@destroy');
     Route::delete('/delete_mounted', 'CourseController@destroy_mounted');
@@ -404,6 +405,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('delete/wrong', 'StudentController@deleteWrong');
     Route::get('/admissions/letter/bulk','ReportController@showBulkReport');
     Route::post('/admissions/letter/bulk/process', 'ReportController@showBulkLetter');
+
+
+
+    /**
+     * quality assurance
+     */
+    Route::get('qa/report/single', 'QualityAssuranceController@printIndividualLecturer');
+    Route::get('view/edit', 'CourseController@editResult');
+
 });
 
 

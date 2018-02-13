@@ -73,11 +73,19 @@
                             <div class="uk-form-row">
                                 <label>Course</label>
                                 <p></p>
-                                   {!! Form::select('course', 
-                                (['' => 'select course'] +$courses ), 
-                                  old("course",""),
-                                    ['class' => 'md-input parent','required'=>"required",'placeholder'=>'select course'] )  !!}
-                        
+                                  <select placeholder='type courses' class="form-control" style="width:490px" name="course" required="required" class= 'md-input'v-model='course' v-form-ctrl='' v-select=''>
+
+                                           <option selected="">type course name here</option>
+
+                                           @foreach($courses as $item)
+
+                                        
+
+                                          <option value="{{$item->COURSE_CODE}}">{{$item->COURSE_NAME}} - {{ $item->COURSE_CODE }} - Sem{{ $item->COURSE_SEMESTER}}</option>
+
+                                        @endforeach
+
+                                      </select>
                             </div>
                             <div class="uk-form-row">
                                 <label>CSV File(csv comma delimited)</label>

@@ -787,7 +787,7 @@ class ReportController extends Controller
 
                                         <div style="margin-left: 0px;text-align: justify">
 
-                                            <centerd><b><p class="">OFFER OF ADMISSION(<b>CONDITIONAL</b>)
+                                            <center><b><p class="">OFFER OF ADMISSION(<b>CONDITIONAL</b>)
                                                         - <?php echo strtoupper(@$data->admitedProgram->department->schools->FACULTY) ?>
                                                         - ADMISSION N<u>O </u>: <?php echo $data->APPLICATION_NUMBER ?>
                                                     </p></b></center>

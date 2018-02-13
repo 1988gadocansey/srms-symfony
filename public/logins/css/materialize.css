@@ -1493,7 +1493,7 @@
   color: #78909c !important; }
 
 .blue-grey {
-  background-color: #607d8b !important; }
+  background-color: #FAFAFA !important; }
 
 .blue-grey-text {
   color: #607d8b !important; }
@@ -2045,7 +2045,7 @@ ul {
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); }
 
 .z-depth-4, .modal {
-  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); }
+  box-shadow: px 0px 0px 0px rgba(0, 0, 0, 0), 0 1px 1px 0px rgba(0, 0, 0, 0.1); }
 
 .z-depth-5 {
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22); }
@@ -6436,7 +6436,7 @@ textarea.materialize-textarea {
     position: absolute;
     top: 0.8rem;
     left: 0.75rem;
-    font-size: 1rem;
+    font-size: 0.7rem;
     cursor: text;
     -webkit-transition: 0.2s ease-out;
     -moz-transition: 0.2s ease-out;
@@ -6670,7 +6670,7 @@ form p:last-child {
     display: inline-block;
     height: 25px;
     line-height: 25px;
-    font-size: 1rem;
+    font-size: 0.7rem;
     -webkit-user-select: none;
     /* webkit (safari, chrome) browsers */
     -moz-user-select: none;

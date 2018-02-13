@@ -266,66 +266,25 @@ class StaffController extends Controller
 
             $user = @\Auth::user()->organization;
 
-            $real='1111111';
-            $dob = $request->input('name');
-            $kname = $request->input('');
 
-            $grade = $request->input('grade');
-            $staffNo = $request->input('staffid');
-
-            $designation = $request->input('designation');
-            $education = $request->input('education');
+            $name= $request->input('name');
+            $phone= $request->input('phone');
             $department = $request->input('department');
-            $leave = $request->input('leave');
-
-            $residence = $request->input('residence');
-            $phone = $request->input('phone');
-            $region = $request->input('region');
-            $religion = $request->input('religion');
-            $residentAddress = $request->input('contact');
-
-            $hometown = $request->input('hometown');
-
-            $title = $request->input('title');
-
-            $fname = $request->input('fname');
-
-
-            $lname = $request->input('surname');
-            $othername = $request->input('othernames');
-            $position = $request->input('position');
-            $marital = $request->input('marital_status');
-            $ssnit = $request->input('ssnit');
-            $dependent = $request->input('dependents');
-            $joined = $request->input('joined');
-            $name = $lname . ' ' . $othername . ' ' . $fname;
-            $email = $request->input('email');
-
-
+            $staffNo = $request->input('staff');
+            $real='1111111';
 
             $query = new Models\WorkerModel();
 
-            $query->address = $residentAddress;
-            $query->region = $region;
-            $query->religion = $religion;
-            $query->hometown = $hometown;
-            $query->staffID = $ssnit;
+            $query->staffID = $staffNo;
 
 
-            $query->department = $department;
-            $query->education = $education;
-            $query->grade = $grade;
-            $query->position = $position;
             $query->phone = $phone;
+            $query->department = $department;
 
             $query->nationality = "GHANAIAN";
-            $query->dependentsNo = $dependent;
 
-            $query->designation = $designation;
-            $query->ssnit = $ssnit;
-            $query->marital = $marital;
 
-            $query->email = $email;
+            $query->name = $name;
 
 
 
@@ -333,12 +292,13 @@ class StaffController extends Controller
 
                 User::create([
                     'name' => $name,
+                     'fullName' => $name,
                     'department' =>$department,
-                    'fund'=>$ssnit,
+                    'fund'=>$staffNo,
                     'staffID' =>$query->id,
                     'phone' =>$phone,
-                    'role' =>$designation,
-                    'email' =>$email,
+                    'role' =>'Lecturer',
+
                     'password' => bcrypt($real),
                 ]);
 

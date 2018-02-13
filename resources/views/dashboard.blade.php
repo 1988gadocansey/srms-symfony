@@ -61,6 +61,18 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if( @Auth::user()->department=='Planning' || @Auth::user()->role=='Support')
+                <div>
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class=" "><i class="sidebar-menu-icon material-icons md-36">account_balance</i></span></div>
+                            <span class="uk-text-muted uk-text-small">Total Fees Owed</span><br/>
+                            <span class="uk-text-muted uk-text-small"><span class="uk-text-bold uk-text-success ">GH{{$owing}}</span></span>
+                        </div>
+                    </div>
+                </div>
+                @endif
              <div>
                     <div class="md-card">
                         <div class="md-card-content">
@@ -70,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-             @endif
+             
                 <div>
                     <div class="md-card">
                         <div class="md-card-content">
@@ -81,15 +93,7 @@
                     </div>
                 </div>
                   @if( @Auth::user()->role=='Lecturer' || @Auth::user()->role=='HOD')
-             <div>
-                    <div class="md-card">
-                        <div class="md-card-content">
-                         <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class=""><i class="sidebar-menu-icon material-icons md-36">event_note</i></span></div>
-                            <span class="uk-text-muted uk-text-small">Total Students</span>
-                            <h5 class="uk-margin-remove"><span class="uk-text-small uk-text-success "> Students = {{$total}}  </span></h5>
-                        </div>
-                    </div>
-                </div>
+             
                <div>
                     <div class="md-card">
                         <div class="md-card-content">
@@ -102,13 +106,13 @@
                 @endif
             </div>
 
-           @if( @Auth::user()->role=='Lecturer' || @Auth::user()->role=='HOD' || @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
+           
             <div class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-5 uk-text-center uk-sortable sortable-handler" id="dashboard_sortable_cards" data-uk-sortable data-uk-grid-margin>
-                      @if( @Auth::user()->role=='Support')
+              @if(@Auth::user()->department=='Planning' || @Auth::user()->role=='HOD' || @Auth::user()->department=='top' || @Auth::user()->department=='Rector')        
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
                         <div class="md-card-content">
-                            <a target="_" href='{{url("http://portal.tpolyonline/course_registration")}}'>  <img src="{{url('public/assets/img/dashboard/registration.png')}}"/></a>
+                            <a target="_" href='{{url("http://records.ttuportal.com/course_registration")}}'>  <img src="{{url('public/assets/img/dashboard/registration.png')}}"/></a>
                         </div>
                         <div class="md-card-overlay-content">
                             <div class="uk-clearfix md-card-overlay-header">
@@ -117,12 +121,182 @@
                                     REGISTER STUDENTS
                                 </h3>
                             </div>
-                           Click here to register students
+                           Assist students to register
                         </div>
                     </div>
                 </div>
                       @endif
-                 @if( @Auth::user()->department=='top' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
+                      @if(@Auth::user()->department=='Planning')        
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/students")}}'>  <img src="{{url('public/assets/img/dashboard/classlist.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                    CLASS LIST
+                                </h3>
+                            </div>
+                           View students
+                        </div>
+                    </div>
+                </div>
+                      @endif
+                      @if(@Auth::user()->department=='Planning')        
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/upload_marks")}}'>  <img src="{{url('public/assets/img/dashboard/classgroup.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                    STAFF DIRECTORY
+                                </h3>
+                            </div>
+                           View students
+                        </div>
+                    </div>
+                </div>
+                      @endif
+                 
+                    @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD')
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/upload_marks")}}'>  <img src="{{url('public/assets/img/dashboard/results.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                   UPLOAD RESULTS
+                                </h3>
+                            </div>
+                            <p>Upload semester results here.</p>
+                            <button class="md-btn md-btn-primary">More</button>
+                        </div>
+                    </div>
+                </div>
+                    @endif
+                    @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/download_registered")}}'>  <img src="{{url('public/assets/img/dashboard/downloadexcel.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                   DOWNLOAD EXCEL
+                                </h3>
+                            </div>
+                            <p>Download student list</p>
+                            <button class="md-btn md-btn-primary">More</button>
+                        </div>
+                    </div>
+                </div>
+                    @endif
+                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop' || @Auth::user()->role=='Support')
+                
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/mounted_view")}}'>  <img src="{{url('public/assets/img/dashboard/uploadnotes.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content uk-badge-success">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper uk-text-red">
+                                  MOUNTED COURSES
+                                </h3>
+                            </div>
+                           <p>View mounted courses here</p>
+                        </div>
+                    </div>
+                </div>
+                 @endif
+                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop' || @Auth::user()->role=='Support' || @Auth::user()->department=='Planning')
+                
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/broadsheet/napbtex")}}'>  <img src="{{url('public/assets/img/dashboard/nabptex.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content uk-badge-success">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper uk-text-red">
+                                  NABPTEX BROADSHEET
+                                </h3>
+                            </div>
+                           <p>NABPTEX broadsheet</p>
+                        </div>
+                    </div>
+                </div>
+                 @endif
+                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop' || @Auth::user()->role=='Support')
+                
+                <div>
+                    <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  href='{{url("/broadsheet/noticeboard")}}'>  <img src="{{url('public/assets/img/dashboard/academicboard.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content uk-badge-success">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper uk-text-red">
+                                  GPA ACADEMIC BOARD
+                                </h3>
+                            </div>
+                           <p>Academic board report</p>
+                        </div>
+                    </div>
+                </div>
+                 @endif
+                  @if( @Auth::user()->role=='Lecturer'  || @Auth::user()->role=='HOD')
+                <div>
+                     <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a  >  <img src="{{url('public/assets/img/dashboard/uploadvideos.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                    UPLOAD VIDEOS
+                                </h3>
+                            </div>
+                           Upload lecture videos
+                        </div>
+                    </div>
+                </div>
+                 
+                  
+                <div>
+                     <div class="md-card md-card-hover md-card-overlay">
+                        <div class="md-card-content">
+                            <a>  <img src="{{url('public/assets/img/dashboard/uploadnotes.png')}}"/></a>
+                        </div>
+                        <div class="md-card-overlay-content">
+                            <div class="uk-clearfix md-card-overlay-header">
+                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
+                                <h3 class="uk-text-center uk-text-upper">
+                                   UPLOAD NOTES
+                                </h3>
+                            </div>
+                           Upload lecture notes
+                        </div>
+                    </div>
+                </div>
+                  
+                   
+                @endif
+                
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
                         <div class="md-card-content">
@@ -135,105 +309,13 @@
                                     TRANSCRIPTS
                                 </h3>
                             </div>
-                            Print Official transcript for students after they have paid at the Accounts Office
-                        </div>
-                    </div>
-                </div>
-                 @endif
-                    @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <a  href='{{url("/upload/marks")}}'>  <img src="{{url('public/assets/img/dashboard/results.png')}}"/></a>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
-                                <h3 class="uk-text-center uk-text-upper">
-                                   UPLOAD RESULTS
-                                </h3>
-                            </div>
-                            <p>Upload semester results here. Only registered students results can be uploaded</p>
-                            <button class="md-btn md-btn-primary">More</button>
-                        </div>
-                    </div>
-                </div>
-                    @endif
-                 @if( @Auth::user()->department=='top' ||  @Auth::user()->role=='Lecturer' ||  @Auth::user()->role=='HOD' || @Auth::user()->department=='Rector' || @Auth::user()->department=='Tpmid' || @Auth::user()->department=='Tptop')
-                
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <a  href='{{url("/check/course")}}'>  <img src="{{url('public/assets/img/dashboard/uploadnotes.png')}}"/></a>
-                        </div>
-                        <div class="md-card-overlay-content uk-badge-success">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
-                                <h3 class="uk-text-center uk-text-upper uk-text-red">
-                                  CLICK TO VERIFY YOUR COURSES MOUNTED FOR REGISTRATION
-                                </h3>
-                            </div>
-                           Click to verify all mounted courses for your department for this semester
-                        </div>
-                    </div>
-                </div>
-                 @endif
-                  @if( @Auth::user()->role=='Lecturer'  || @Auth::user()->role=='HOD')
-                <div>
-                     <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <a  href='{{url("/registered_courses")}}'>  <img src="{{url('public/assets/img/dashboard/classlist.png')}}"/></a>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
-                                <h3 class="uk-text-center uk-text-upper">
-                                    CLASS LIST
-                                </h3>
-                            </div>
-                           View registered students for your courses and enter marks
+                            Check performance of students
                         </div>
                     </div>
                 </div>
                  
-                  
-                <div>
-                     <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <a  href='{{url("/transcript")}}'>  <img src="{{url('public/assets/img/dashboard/classgroup.png')}}"/></a>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
-                                <h3 class="uk-text-center uk-text-upper">
-                                   CLASS GROUPS
-                                </h3>
-                            </div>
-                           View your class groups
-                        </div>
-                    </div>
-                </div>
-                  
-                   @endif
-                @endif
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <a  href='{{url("http://www.ttu.edu.gh/webmail")}}'>  <img src="{{url('public/assets/img/dashboard/email.png')}}"/></a>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <i class="md-icon material-icons md-card-overlay-toggler">&#xE5D4;</i>
-                                <h3 class="uk-text-center uk-text-upper">
-                                  STAFF EMAILS
-                                </h3>
-                            </div>
-                           Click to go access your emails
-                        </div>
-                    </div>
-                </div>
                 
-                   @if( @Auth::user()->department=='top' || @Auth::user()->department=='Tpmid'|| @Auth::user()->department=='Rector' || @Auth::user()->department=='Tptop')  
+                   @if( @Auth::user()->department=='top')  
                         <div>
                             <div class="md-card md-card-hover md-card-overlay">
                                 <div class="md-card-content">

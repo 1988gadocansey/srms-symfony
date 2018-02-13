@@ -54,7 +54,7 @@ border-radius: 0;
                     <div class="uk-grid" data-uk-grid-margin="">
 
                          
-                        <div class="uk-width-medium-1-5">
+                        {{--<div class="uk-width-medium-1-5">
                             <div class="uk-margin-small-top">
                                   <span>{{ Form::select('sem', array(''=>'select semester','1'=>'1', '2'=>'2','3'=>'3'), null, ["style"=>"width:100px",'class' => 'md-input label-fixed parent','v-model'=>'semester','v-form-ctrl'=>'','v-select'=>''],old("sem","")) }}</span>
                  
@@ -71,7 +71,7 @@ border-radius: 0;
                                   old("years",""),
                                     ['class' => 'md-input parent'] )  !!}
                             </div>
-                        </div>
+                        </div>--}}
                         
                          
                           <div class="uk-width-medium-1-5">

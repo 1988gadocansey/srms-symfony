@@ -58,6 +58,31 @@ class SystemController extends Controller
 
         return @$data;
     }
+
+    public function getCourseGradeCounterTotal($course,$sem,$level,$year,$program,$grade) {
+
+        $total=0;
+        foreach($grade as $grades) {
+
+            $data = Models\AcademicRecordsModel::where("level", $level)->where("grade", "!=", "E")->where("sem", $sem)
+                ->where("year", $year)->where("grade", $grades)->where("code", $course)->whereHas('student', function ($q) use ($program) {
+                    $q->whereHas('programme', function ($q) use ($program) {
+                        $q->whereIn('PROGRAMMECODE', array($program));
+                    });
+                })
+                ->count();
+            $total+= $data;
+        }
+        return $total;
+    }
+
+
+
+
+
+
+
+
     public function getCourseGradeArray($course,$sem,$level,$year,$program) {
 
         $rows=array();
@@ -125,6 +150,20 @@ class SystemController extends Controller
             ->first();
 
         return @$data->total;
+
+    }
+    public function getCourseGradeNoticeBoard($courseId,$year,$term,$student,$level) {
+
+        $data= @\DB::table('tpoly_academic_record')->where("indexno",$student)
+            ->where("year",$year)
+            ->where("sem",$term)
+            ->where("level",$level)
+            ->where("code",$courseId)
+            ->where("grade","!=","E")
+            ->select("total","grade")
+            ->first();
+
+        return @$data;
 
     }
     public function getProgramDuration($code) {
@@ -606,7 +645,7 @@ class SystemController extends Controller
     // this is purposely for select box
     public function getProgramList() {
         $departmentArray=explode(",",@\Auth::user()->department);
-        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin'){
+        if( @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop' || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Finance" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning"  || @\Auth::user()->role=="Accountant" || @\Auth::user()->department == 'Examination' || @\Auth::user()->role == 'Admin' || @\Auth::user()->role == 'Lecturer'|| @\Auth::user()->department=="qa"){
             $program = \DB::table('tpoly_programme')->orderby("PROGRAMME")
                 ->lists('PROGRAMME', 'PROGRAMMECODE');
             return $program;
@@ -720,6 +759,21 @@ class SystemController extends Controller
         else {
             $course=@\DB::table('tpoly_mounted_courses')
                 ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->lists('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE');
+            return $course;
+        }
+    }
+
+     public function getMountedCourseList2() {
+
+        if(@\Auth::user()->role=='Lecturer'){
+            $course=@\DB::table('tpoly_mounted_courses')
+                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->where('tpoly_mounted_courses.Lecturer',@\Auth::user()->fund )->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->get();
+            return $course;
+
+        }
+        else {
+            $course=@\DB::table('tpoly_mounted_courses')
+                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->get();
             return $course;
         }
     }
@@ -1643,6 +1697,18 @@ class SystemController extends Controller
             ->get();
 
         return @$grade[0]->grade;
+
+    }
+    public function getGradeValue($mark,$type){
+
+        $grade = \DB::table('tpoly_grade_system')
+            ->where('lower','<=',$mark)
+            ->where('uppers','>=',$mark)
+            ->where('type',$type)
+            ->where("grade","!=","E")
+            ->select('value')->get();
+
+        return @$grade[0]->value;
 
     }
 

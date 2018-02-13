@@ -43,7 +43,4 @@ class AcademicRecordsModel extends Model
       public function levels(){
         return $this->belongsTo('App\Models\LevelModel', "LEVEL","name");
     }
-    public function grades(){
-        return $this->belongsTo('App\Models\GradeSystemModel', "grade","GRADE");
-    }
 }

@@ -95,7 +95,7 @@ class StudentController extends Controller
     }
     public function index(Request $request, SystemController $sys) {
 
-        if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'){
+        if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'||  @\Auth::user()->department=="qa"){
             $student = StudentModel::query();
         }
         elseif (@\Auth::user()->role=="Registrar") {
@@ -653,7 +653,7 @@ class StudentController extends Controller
                 $disability=$request->input('disabilty');
                 $title=$request->input('title');
                 $age=$sys->age($dob,'eu');
-                $group=$sys->graduatingGroup($indexno);
+                $group=0;
                 $firstname=$request->input('fname');
                 $surname=$request->input('surname');
                 $othername=$request->input('othernames');
@@ -691,7 +691,7 @@ class StudentController extends Controller
                         "DATEOFBIRTH"=>$dob,
                         "AGE"=>$age,
                         "LEVEL"=>$level,
-                        "GRADUATING_GROUP"=>$group,
+                       // "GRADUATING_GROUP"=>$group,
                         "MARITAL_STATUS"=>strtoupper($marital_status),
                         "HALL"=>strtoupper($hall),
                         "ADDRESS"=>strtoupper($address),

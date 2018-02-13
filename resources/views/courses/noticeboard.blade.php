@@ -295,12 +295,12 @@
 
 
     @if(Request::isMethod('post'))
+                            <p></p>
 
-        <p></p>
+                            <h4 class="heading_c"><center>Broadsheet for Academic Board, {{$years}}, Semester {{$term}} <br/><br/>{{$sys->getProgram($programs) }},   Level {{$levels}}</center></h4>
 
-        <h4 class="heading_c"><center>Broadsheet for Academic Board, {{$years}}, Semester {{$term}} <br/><br/>{{$sys->getProgram($programs) }},   Level {{$levels}}</center></h4>
+                            <p></p>
 
-        <p></p>
 
         <div class="uk-width-xLarge-1-1">
 
@@ -311,11 +311,10 @@
                     <div class="uk-overflow-container" id='print'>
 
 
-
                         <table border='1' class="uk-table uk-table-hover uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-
+                            
                             <thead>
-
+                               
                             <tr>
 
                                 <th class="filter-false remove sorter-false"  >NO</th>
@@ -370,12 +369,15 @@
 
 
                             <?php
+                            $totalCount=0;
+
                             $grades= array();
                             $courseCode=array();
                             $gradeArray=array("A+","A","B+","B","C+","C","D+","D","F");
                             $countGrade=array();
                             ?>
                             @foreach($student as $stud=> $pupil)  <?php  $count++;?>
+                            
 
                             @if($pupil->grade!="E")
 
@@ -397,31 +399,22 @@
 
                                     $a=$pupil->student->INDEXNO;
 
+
+
                                     for($i=0;$i<count($course);$i++){
 
-                                        $markm=@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level);
-                                        // array_push($courseCode,$course[$i]);
-                                        //dd($markm);
 
-                                        // print_r($courseArray); "<td>$courseArray[$i]</td>";
-
-                                        print_r("<td>".  round(@$sys->getCourseGrade($course[$i],$years,$term,$a,$pupil->level)). "&nbsp;&nbsp;  - &nbsp;&nbsp; " .@$sys->getGradeLetter(@$markm,'HND')."</td>");
-
-                                        // array_push($countGrade, $sys->getGradeLetter(@$markm,'HND'));
+                                            $gradeObject=$sys->getCourseGradeNoticeBoard($course[$i],$years,$term,$a,$pupil->level);
+                                        print_r("<td>".  @round(@$gradeObject->total). "&nbsp;&nbsp;  - &nbsp;&nbsp; " .@$gradeObject->grade."</td>");
 
 
-                                        //@$grades[$course[$i]] = $countGrade;
-                                        // array_push($grades,$sys->getCourseGradeCounter($course[$i],$term,$pupil->level,$years,$programs));
-                                        // $grades[]=$sys->getCourseGradeCounter($course[$i],$term,$pupil->level,$years,$programs);
                                     }
 
                                     ?>
 
 
 
-
-
-                                    <td>{{$sys->getGPABySem(@$a,$term,$pupil->level)}}</td>
+                                     <td>{{$sys->getGPABySem(@$a,$term,$pupil->level)}}</td>
 
                                     <td>{{$sys->getCGPA(@$a)}}</td>
 
@@ -436,7 +429,6 @@
 
                             @endforeach
 
-                            {{-- {{dd($grades)}}--}}
 
                             <tr><td colspan="<?php echo count($course) + 5; ?>" align="center">Grades Count</td></tr>
 
@@ -446,7 +438,16 @@
                                     <td></td><td></td>  <td>{{$col}} </td>
 
                                     @foreach($course as  $item=>$needle)
-                                        <td>{{$sys->getCourseGradeCounter($needle,$term,$levels,$years,$programs,$col)}}</td>
+                                        <td>
+
+
+                                            {{@$sys->getCourseGradeCounter($needle,$term,$levels,$years,$programs,$col)}}
+
+
+
+
+
+                                        </td>
                                     @endforeach
 
 
@@ -460,15 +461,47 @@
                             <tr>
                                 <td></td>
                                 <td></td>
+                                <td>Total</td>
+                                @foreach($course as  $item=>$needle)
+                                    <td>
+
+
+                                    <?php echo $sys->getCourseGradeCounterTotal($needle,$term,$levels,$years,$programs,$gradeArray);?>
+
+                                    </td>
+                                @endforeach
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
                                 <td>CPA</td>
                                 @foreach($course as  $key=>$val)
 
-                                    <td>{{$sys->getLecturerAverage($sys->getCourseGradeArray($val,$term,$levels,$years,$programs))}} </td>
+                                    <td>{{@$sys->getLecturerAverage(@$sys->getCourseGradeArray($val,$term,$levels,$years,$programs))}} </td>
 
 
                                 @endforeach
 
                             </tr>
+                            <tr><td colspan="<?php echo count($course) + 5; ?>" align="center">Courses</td></tr>
+
+                            <tr>
+                            <td>NO</td>
+                            <td>CODE</td>
+                            <td>COURSE NAME</td>
+                            
+
+                            <?php $n=0;?>
+                            @foreach($course as  $key)
+                                <?php $n++; $courseDetail=$sys->getCourseByCodeObject($key)?>
+                                <tr>
+                                    <td>{{$n}}</td>
+
+                                    <td>{{ $key }} </td>
+                                    <td>{{ strtoupper(@$courseDetail[0]->COURSE_NAME)}} </td>
+
+                                </tr>
+                            @endforeach
 
 
                             </tbody>
@@ -476,6 +509,9 @@
 
                         </table>
 
+
+
+                    
 
 
 
