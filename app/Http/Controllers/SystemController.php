@@ -7,6 +7,7 @@ use App\Models\MessagesModel;
 use App\Models;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use PhpParser\Node\Expr\AssignOp\Mod;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SystemController extends Controller
@@ -529,6 +530,156 @@ class SystemController extends Controller
         return @$department[0]->DEPARTMENT;
 
     }
+    function selectcount($table_field, $Yes_or_No, $lecturer, $coursecode)
+    {
+        $array = $this->getSemYear();
+
+        $qa= $array[0]->QA;
+
+        $data=explode(",",$qa);
+
+        $year=$data[0];
+
+        $sem=$data[1];
+
+
+
+        //$query="SELECT count($table_field)  from questionnaire_table where lecturer='$lecturer' AND programmecode='$programmecode'";
+        //$query="SELECT COUNT($table_field) from questionnaire_table as total WHERE  $table_field='$Yes_or_No' and lecturer='$lecturer' and coursecode='$coursecode'";
+        $total=Models\QAquestionModel::
+            where("$table_field","$Yes_or_No")
+            ->where("lecturer",$lecturer)
+            ->where("coursecode",$coursecode)
+            ->where("academic_year",$year)
+            ->where("semester",$sem)
+            ->count("$table_field");
+
+
+        return $total;
+    }
+/*//counting the lecturer involved
+$queryc="SELECT COUNT(lecturer) from questionnaire_table as total2 WHERE coursecode='$coursecode' and lecturer='$lecturer'";
+echo  $queryc;
+$query_resultc=mysql_query($queryc) or die("error in counting lecturer1");
+$datac =mysql_fetch_row($query_resultc) or die('Error here too');
+$total_course_assessed= $datac[0];*/
+
+
+    function remark($percentage_score)
+    {
+        if ($percentage_score >=80)
+        {
+            $remark_var="Excellent";
+        }
+        else if($percentage_score >=70)
+        {
+            $remark_var="Very Good";
+        }
+        else if($percentage_score >=60)
+        {
+            $remark_var="Good";
+        }
+        else if($percentage_score >=50)
+        {
+            $remark_var="Satisfactory";
+        }
+        else
+        {
+            $remark_var="Poor";
+        }
+        return $remark_var; //return remark of lecturer
+    }
+
+    function count_poor($remark_seen,$question_no)
+    {
+        if  ($remark_seen =="Poor")
+        {
+            return $question_no;
+        }
+        else
+        {
+            //echo "";
+        }
+    }// end of count_poor function
+
+
+    function total_mark_remark($value)
+    {
+        if ($value >= 16)
+        {
+            $t_remark_var="Excellent";
+        }
+        else if($value >=14)
+        {
+            $t_remark_var="Very Good";
+        }
+        else if($value >=12)
+        {
+            $t_remark_var="Good";
+        }
+        else if($value >=10)
+        {
+            $t_remark_var = "Satisfactory";
+        }
+        else
+        {
+            $t_remark_var="Poor";
+        }
+        return $t_remark_var; //return remark of lecturer
+    }
+    public  function qaStatistics(){
+        $comprehensive_outline ='comprehensive_outline';
+        $outline_based_on_sylla= 'outline_based_on_sylla';   //to be removed
+        $outline_recommended_books='outline_recommended_books';
+        $lecturer_person_details ='lecturer_person_details';
+        $course_objective_spelt='course_objective_spelt';
+        $course_material_list ='course_material_list';
+
+        $class_start_week='class_start_week';
+        $class_met_regularly='class_met_regularly';
+        $lecturer_punctual='lecturer_punctual';
+        $lecturer_missed_reason='lecturer_missed_reason';
+
+        $lecturer_stays_period = 'lecturer_stays_period';    //recently added
+
+        $demonstrate_knowledge='demonstrate_knowledge';
+        $well_organised_delivery='well_organised_delivery';
+        $communicate_effectively='communicate_effectively';
+        $class_time_prom_learn='class_time_prom_learn';
+        $varying_teaching_meth = 'varying_teaching_meth';
+        $encourage_stud_participation='encourage_stud_participation';
+        $encourage_problem_solving='encourage_problem_solving';
+        $respond_to_stud_concerns='respond_to_stud_concerns';
+        $other_media_delivery='other_media_delivery';
+        $room_for_question='room_for_question';
+        $adequate_assignment='adequate_assignment';
+        $state_feedback_time='state_feedback_time';
+        $mark_assignment='mark_assignment';
+        $discuss_in_class='discuss_in_class';
+        $stud_progress_concern='stud_progress_concern';
+        $stud_responsibility='stud_responsibility';
+        $deadline_assignment='deadline_assignment';
+        $disclose_marks ='disclose_marks';
+        $late_submission_policy='late_submission_policy';
+        $variety_assignment_used = 'variety_assignment_used';
+        $course_objective_achieved ='course_objective_achieved';
+        $expectations_communicated ='expectations_communicated';
+        $sold_handout='sold_handout';
+        $created_friendly_atmosphere='created_friendly_atmosphere';
+        $programmecode='programmecode';
+    }
+
+
+    public function getDepartmentProgramme($pCode){
+        $program = \DB::table('tpoly_programme')->where('PROGRAMMECODE',$pCode)->first();
+
+
+        $department = \DB::table('tpoly_department')->where('DEPTCODE',$program->DEPTCODE)->get();
+
+        return @$department[0]->DEPARTMENT;
+
+    }
+
 
 
     public function getSchoolCode($dept){
@@ -802,6 +953,15 @@ class SystemController extends Controller
 
 
         return $lecturer->staffID;
+
+
+    }
+    public function getLectureName($staffID) {
+
+        $lecturer = \DB::table('tpoly_workers')->Select("fullName")->where("staffID",$staffID)->first();
+
+
+        return $lecturer->fullName;
 
 
     }
@@ -1722,6 +1882,17 @@ class SystemController extends Controller
             ->get();
 
         return @$course[0]->COURSE_CODE;
+
+    }
+    public function getCourseName($id){
+
+        $course= \DB::table('tpoly_courses')
+            ->join('tpoly_mounted_courses',  'tpoly_mounted_courses.COURSE', '=', 'tpoly_courses.ID')
+
+            ->select('*')->where('tpoly_mounted_courses.PROGRAMME',"!=","")->where('tpoly_mounted_courses.ID',$id)
+            ->get();
+
+        return @$course;
 
     }
 

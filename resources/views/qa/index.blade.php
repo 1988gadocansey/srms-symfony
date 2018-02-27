@@ -207,7 +207,7 @@
                             <td>
 
 
-                                <a onclick="return MM_openBrWindow('{{url("#")}}', 'mark', 'width=800,height=500')">Print Lecturer Report</a>
+                                <a onclick="return MM_openBrWindow('{{url("print_report_qa/$row->lecturer/lecturer/$row->semester/sem/$row->course/course")}} ', 'mark', 'width=800,height=500')">Print Lecturer Report</a>
 
                             </td>
 

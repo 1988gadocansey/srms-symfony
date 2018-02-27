@@ -356,7 +356,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/download_registered','CourseController@downloadRegisteredExcel');
 
 
-
+    Route::get('/print_report_qa/{lecturer}/lecturer/{sem}/sem/{course}/course','QualityAssuranceController@printView');
 
 
 

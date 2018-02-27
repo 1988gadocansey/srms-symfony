@@ -64,14 +64,41 @@ class QualityAssuranceController extends Controller
 
 
     }
+    public function printView(Request $request, SystemController $sys){
 
-    public function showBulkReport(Request $request, SystemController $sys)
-    {
-        $data = $sys->getProgramList();
-        return view("admissions.bulkAdmissionLetter")
-            ->with("data", $data);
+        $array = $sys->getSemYear();
+
+        $qa= $array[0]->QA;
+
+        $data=explode(",",$qa);
+
+        $year=$data[0];
+
+       // $sem=$data[1];
+
+        $lecturer = $request->lecturer;
+        $course = $request->course;
+        $sem= $request->sem;
+
+
+
+
+
+             $query = Models\QAquestionModel::where("lecturer", $lecturer)
+                ->where("academic_year", $year)->where("semester", $sem)->where("course",$course)->groupBy("indexno")->get();
+
+            return view('qa.printLecturer')->with('course', $course)
+                ->with("lecturer",$lecturer)
+                ->with("year",$year)
+                ->with("data",$query)
+                ->with("sem",$sem)
+                ;
+
+
 
     }
+
+
 
 
 }
