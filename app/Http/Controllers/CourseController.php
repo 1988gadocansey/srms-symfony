@@ -1273,8 +1273,9 @@ class CourseController extends Controller
                 $sql=Models\StudentModel::where("INDEXNO",$student)->first();
 
 
-                //if(count($sql)==0){
-
+                if($sql->PAID<=0.85*$sql->BILLS &&  @\Auth::user()->department != 'Tptop'){
+                return redirect("/dashboard")->with("error","Check fee payment");
+                }
                 //    return redirect("/transcript")->with("error","<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
                 // }
                 // else{
@@ -1292,11 +1293,15 @@ class CourseController extends Controller
 
 
                 //}
-            }
+            
+            //else{
+            	
+            //}
 
         }
 
     }
+}
     public function transcriptHeader($student, SystemController $sys) {
         ?>
         <div class="md-card" style="overflow-x: auto;" >

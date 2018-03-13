@@ -83,7 +83,7 @@ class HomeController extends Controller
 
         $totalOwing=@$sys->formatMoney($studentDetail);
         //Payment details
-        $totalPaid=Models\FeePaymentModel::query()->where('SEMESTER',$sem)->where('YEAR',$year)->where('PAYMENTTYPE','School Fees')->sum("AMOUNT");
+        $totalPaid=Models\FeePaymentModel::query()->where('YEAR',$year)->where('FEE_TYPE','School Fees')->sum("AMOUNT");
 
         $paid=@$sys->formatMoney($totalPaid);
  

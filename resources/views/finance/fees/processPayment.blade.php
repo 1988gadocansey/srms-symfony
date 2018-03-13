@@ -46,7 +46,7 @@
                     <div class="md-card-content">
                         <div class="uk-overflow-container">
                             <table>
-                                <tr>
+                              {{--  <tr>
                                     <td  align=""> <div  align="right" class="uk-text-success">Update Level/Year</div></td>
                                     <td>
 
@@ -54,7 +54,7 @@
                                         <p class="uk-text-danger uk-text-small"  v-if="applicationForm.level.$error.required" >Level is required</p>
 
                                     </td>
-                                </tr>
+                                </tr>--}}
 
                                 <tr>
                                     <td  align=""> <div  align="right" class="uk-text-success">Amount Paying GHC</div></td>
@@ -174,25 +174,28 @@
 
                                             </td>
                                         </tr>
-                                        @if($data[0]->YEAR=='100H' ||$data[0]->YEAR=='100NT' ||$data[0]->YEAR=='100BTT' )
                                         <tr>
-                                            <td  align=""> <div  align="right" >Admission Number</div></td>
+                                            <td  align=""> <div  align="right" >Admission Number / IndexNo</div></td>
                                             <td>
-                                                {{ $data[0]->STNO}}
-                                                <input type="hidden" name="student" id="student" value="{{ $data[0]->STNO}}" />
+                                                @if($data[0]->INDEXNO!="")
+                                                    {{ $data[0]->INDEXNO}}
+                                                @else
+                                                    {{ $data[0]->STNO}}
+                                                @endif
 
+
+
+                                                @if($data[0]->INDEXNO!="")
+
+                                                    <input type="hidden" name="student" id="student" value="{{ $data[0]->INDEXNO}}" />
+
+                                                @else
+                                                    <input type="hidden" name="student" id="student" value="{{ $data[0]->STNO}}" />
+
+                                                @endif
                                             </td>
                                         </tr>
-                                        @else
-                                        <tr>
-                                            <td  align=""> <div  align="right" >Index Number:</div></td>
-                                            <td>
-                                                {{ $data[0]->INDEXNO}}
-                                                <input type="hidden" name="student" id="student" value="{{ $data[0]->INDEXNO}}" />
-
-                                            </td>
-                                        </tr>
-                                        @endif
+                            
                                         <tr>
                                             <td  align=""> <div  align="right" >Full Name:</div></td>
                                             <td>
@@ -277,12 +280,12 @@
                                         <td> {{ $finance->perPage()*($finance->currentPage()-1)+($index+1) }} </td>
                                         <td> {{ strtoupper($data[0]->NAME) }}</td>
 
-                                        <td> {{ strtoupper(@$row->LEVEL)	 }}</td>
-                                        <td> {{ @$row->YEAR	 }}</td>
-                                        <td> {{ @$row->SEMESTER	 }}</td>
-                                        <td>GHS{{ @$row->AMOUNT	 }}</td>
-                                        <td> {{ @$row->FEE_TYPE	 }}</td>
-                                        <td> {{ @$row->user->name	 }}</td>
+                                        <td> {{ strtoupper(@$row->LEVEL)     }}</td>
+                                        <td> {{ @$row->YEAR  }}</td>
+                                        <td> {{ @$row->SEMESTER  }}</td>
+                                        <td>GHS{{ @$row->AMOUNT  }}</td>
+                                        <td> {{ @$row->FEE_TYPE  }}</td>
+                                        <td> {{ @$row->user->name    }}</td>
                                                        <td>
                                                   
                                                       <a onclick="return MM_openBrWindow('{{url("printreceipt/" . trim(@$row->RECEIPTNO))}}', 'mark', 'width=800,height=500')" ><i title='Click to print receipt of this payment .. please allow popups on browser' class="md-icon material-icons">book</i></a> 

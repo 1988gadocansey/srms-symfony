@@ -36,7 +36,7 @@ class QualityAssuranceController extends Controller
             $query->where("level", $request->input("level", ""));
         }
         if ($request->has('semester') && trim($request->input('semester')) != "") {
-            $query->where("sem", $request->input("sem", ""));
+            $query->where("semester", $request->input("semester", ""));
         }
         if ($request->has('lecturer') && trim($request->input('lecturer')) != "") {
             $query->where("lecturer", $request->input("lecturer", ""));
@@ -51,6 +51,15 @@ class QualityAssuranceController extends Controller
                 });
             }) ;
            }
+        if ($request->has('department') && trim($request->input('department')) != "") {
+            $query->whereHas('studentDetials', function($q)use ($request) {
+                $q->whereHas('programme', function($q )use ($request) {
+                    $q->whereHas('departments', function($q)use ($request) {
+                        $q->whereIn('DEPTCODE', [$request->input('department')]);
+                    });
+                });
+            }) ;
+        }
         $data = $query->orderBy("academic_year","desc")->paginate(200);
         $request->flashExcept("_token");
 

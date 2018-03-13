@@ -8,31 +8,81 @@
             padding:2px;
         }
     </style>
-    <script language="javascript" type="text/javascript">
-        function printDiv(divID) {
-            //Get the HTML of div
-            var divElements = document.getElementById(divID).innerHTML;
-            //Get the HTML of whole page
-            var oldPage = document.body.innerHTML;
+    <style>
+        html, body, #page3,  #page4, #page5 { float: none; }
 
-            //Reset the page's HTML with div's HTML only
-            document.body.innerHTML =
-                "<html><head><title></title></head><body>" +
-                divElements + "</body>";
+        @media print
+        {
+            table {float: none !important; }
+            div { float: none !important; }
+            #page1  { page-break-inside: avoid; page-break-before: always; }
+            #page2  { page-break-inside: avoid; page-break-before: always; }
+            #page3  { page-break-inside: avoid; page-break-before: always; }
+        }
 
-            //Print Page
-            window.print();
+        @page {
+            size: A4;
+        }
 
-            //Restore orignal HTML
-            document.body.innerHTML = oldPage;
+        table, figure {
+            page-break-inside: avoid;
+        }
 
+        @page {
+            size: A4;
+        }
+
+        table, figure {
+            page-break-inside: avoid;
+        }
+        fieldset legend {
+            page-break-before: always;
+        }
+        h1, h2, h3, h4, h5 {
+            page-break-after: avoid;
+        }
+        .biodata{
+            padding: 1px;
+        }
+        body{
+            background: none;
+        }
+        .uppercase{
+            font-size: 12px;
+            text-align: right;
+            font-weight: bolder;
+        }
+        td{
+            font-size: 13px
+        }
+        .folder table{
+            border-collapse: collapse;
+            border-spacing: 0;
+
+            margin-bottom: 15px;
+        }
+        .folder td{
+            padding:4px;
+        }
+        .folder table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 15px;
 
         }
-    </script>
+        .watermark {
+
+            display: block;
+            position: relative;
+        }
+
+
+    </style>
+
 @endsection
 @section('content')
     @inject('help', 'App\Http\Controllers\SystemController')
-    <div align="" style=" margin-left: 9px">
+
         <?php
         $comprehensive_outline ='comprehensive_outline';
         $outline_based_on_sylla= 'outline_based_on_sylla';   //to be removed
@@ -77,10 +127,11 @@
         ?>
 @if($data!="")
 
-            <a  style="float:left"onclick="javascript:printDiv('print')" class="md-btn   md-btn-success">Click to print form</a>
-            <p>&nbsp;</p>
+            {{--<a  style="float:left"onclick="javascript:printDiv('print')" class="md-btn   md-btn-success">Click to print form</a>--}}
+
             <div id="print">
 
+                <div id="page1">
                 <table>
                     <tr>
                         <td><img style="width:1000px;height: auto" src='{{url("public/assets/img/qualityassurance.jpg")}}'
@@ -89,7 +140,7 @@
                     </tr>
                 </table>
                     <p></p>
-                <div id='page1'>
+
                     <?php
                         $arr=$help->getCourseName($course);
                     ?>
@@ -104,7 +155,7 @@
 
 
                         <p style='text-align:justify'>
-                            <div>
+
 
 
 
@@ -378,6 +429,10 @@
                                 </table>
 
                         <p></p>
+
+                </div>
+
+                        <div id="page2">
                         <table  class="uk-table gad"  border="1">
                             <tr>
                                 <th width="20" style="text-align: left">MODE OF DELIVERY</th>
@@ -869,9 +924,10 @@
                             </tr>
                             </tbody>
                         </table>
+                        </div>
 
                         <p></p>
-
+                            <div id="page3">
                         <table  class="uk-table gad"  border="1">
                             <tr>
                                 <th width="20" style="text-align: left">HANDOUT/COURSE MATERIALS</th>
