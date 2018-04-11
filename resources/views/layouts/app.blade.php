@@ -435,6 +435,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/nservice") !!}'>National Service</a></li>
 
                                 </ul>
                             </div>
@@ -485,6 +486,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/nservice") !!}'>National Service</a></li>
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/search_password") !!}'>Search student password</a></li>
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
@@ -625,6 +627,7 @@
                                 <ul class="uk-nav uk-nav-dropdown">
 
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                    <li><a href='{!! url("/nservice") !!}'>National Service</a></li>
                                     <li><a href='{!! url("/transcript") !!}' target="_blank">Transcript</a></li>
                                     <li><a href='{!! url("/search_password") !!}'>Search student password</a></li>
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
@@ -819,6 +822,7 @@
                             <div class="uk-dropdown uk-dropdown-scrollable">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li><a href='{!! url("/students") !!}'>Students</a></li>
+                                     <li><a href='{!! url("/nservice") !!}'>National Service</a></li>
                                     <li><a href='{!! url("/download_registered") !!}'>Download Excel Sheet</a></li>
                                     <li><a href='{!! url("/attendanceSheet") !!}'>Print Exam Attendance Sheet</a></li>
 

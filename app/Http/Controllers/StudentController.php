@@ -209,6 +209,125 @@ class StudentController extends Controller
             ->with('type', $sys->getProgrammeTypes());
 
     }
+
+
+    public function nservice(Request $request, SystemController $sys) {
+
+        if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'||  @\Auth::user()->department=="qa"){
+            $student = StudentModel::query();
+        }
+        elseif (@\Auth::user()->role=="Registrar") {
+            $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q) {
+                $q->whereHas('departments', function($q) {
+                    $q->whereIn('FACCODE', array(@\Auth::user()->department));
+                });
+            }) ;
+        }
+        elseif (@\Auth::user()->department=="Finance") {
+            $student = StudentModel::where("STATUS","In School");
+        }
+        else{
+            $departmentArray=explode(",",@\Auth::user()->department);
+            $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q)use($departmentArray) {
+                $q->whereHas('departments', function($q)use($departmentArray) {
+                    $q->whereIn('DEPTCODE',  $departmentArray);
+                });
+            }) ;
+        }
+
+        if ($request->has('department') && trim($request->input('department')) != "") {
+            $student->whereHas('programme', function($q)use ($request) {
+                $q->whereHas('departments', function($q)use ($request) {
+                    $q->whereIn('DEPTCODE', [$request->input('department')]);
+                });
+            });
+        }
+        if ($request->has('type') && trim($request->input('type')) != "") {
+            $student->whereHas('programme', function($q)use ($request) {
+
+                $q->where('TYPE', [$request->input('type')]);
+
+            });
+        }
+
+        if ($request->has('school') && trim($request->input('school')) != "") {
+            $student->whereHas('programme', function($q)use ($request) {
+                $q->whereHas('departments', function($q)use ($request) {
+
+                    $q->whereHas('school', function($q)use ($request) {
+                        $q->whereIn('FACCODE', [$request->input('school')]);
+                    });
+                });
+            });
+        }
+
+
+
+        if ($request->has('search') && trim($request->input('search')) != "") {
+            // dd($request);
+            $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%");
+        }
+        if ($request->has('program') && trim($request->input('program')) != "") {
+            $student->where("PROGRAMMECODE", $request->input("program", ""));
+        }
+        if ($request->has('level') && trim($request->input('level')) != "") {
+            $student->where("LEVEL", $request->input("level", ""));
+        }
+        if ($request->has('qa') && trim($request->input('qa')) != "") {
+            $student->where("QUALITY_ASSURANCE", $request->input("qa", ""));
+        }
+
+        if ($request->has('status') && trim($request->input('status')) != "") {
+            $student->where("STATUS", $request->input("status", ""));
+        }
+        if ($request->has('group') && trim($request->input('group')) != "") {
+            $student->where("GRADUATING_GROUP", $request->input("group", ""));
+        }
+        if ($request->has('nationality') && trim($request->input('nationality')) != "") {
+            $student->where("COUNTRY", $request->input("country", ""));
+        }
+        if ($request->has('region') && trim($request->input('region')) != "") {
+            $student->where("REGION", $request->input("region", ""));
+        }
+        if ($request->has('gender') && trim($request->input('gender')) != "") {
+            $student->where("SEX", $request->input("gender", ""));
+        }
+        if ($request->has('sms') && trim($request->input('sms')) != "") {
+            $student->where("SMS_SENT", $request->input("sms", ""));
+        }
+        if ($request->has('hall') && trim($request->input('hall')) != "") {
+            $student->where("HALL", $request->input("hall", ""));
+        }
+        if ($request->has('register') && trim($request->input('register')) != "") {
+            $student->where("REGISTERED", $request->input("register", ""));
+        }
+        if ($request->has('religion') && trim($request->input('religion')) != "") {
+            $student->where("RELIGION", $request->input("religion", ""));
+        }
+        if ($request->has('search') && trim($request->input('search')) != "" && trim($request->input('by')) != "") {
+            // dd($request);
+            $student->where($request->input('by'), "LIKE", "%" . $request->input("search", "") . "%")
+            ;
+        }
+        $data = $student->orderBy('LEVEL')->orderBy('PROGRAMMECODE')->orderBy('INDEXNO')->paginate(500);
+
+        $request->flashExcept("_token");
+
+        \Session::put('students', $data);
+        return view('students.sindex')->with("data", $data)
+            ->with('year', $sys->years())
+            ->with('nationality', $sys->getCountry())
+            ->with('halls', $sys->getHalls())
+            ->with('level', $sys->getLevelList())
+            ->with('religion', $sys->getReligion())
+            ->with('region', $sys->getRegions())
+            ->with('department', $sys->getDepartmentList())
+            ->with('school', $sys->getSchoolList())
+            ->with('programme', $sys->getProgramList())
+            ->with('type', $sys->getProgrammeTypes());
+
+    }
+
     public function sms(Request $request, SystemController $sys){
         ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
         $message = $request->input("message", "");

@@ -1387,7 +1387,8 @@ class CourseController extends Controller
         $programObject=Models\StudentModel::where('ID',$sql)->select("PROGRAMMECODE")->get();
         $program=$programObject[0]->PROGRAMMECODE;
 
-        $records=  Models\AcademicRecordsModel::where("student",$sql)->groupBy("year")->groupBy("level")->orderBy("level")->get();
+        $records=  Models\AcademicRecordsModel::where([['student','=',$sql],['grade','!=', 'E'],['grade','!=', 'IC'],['grade','!=', 'NC']])->groupBy("year")->groupBy("level")->orderBy("level")->get();
+
 
 
         ?>
@@ -1406,7 +1407,7 @@ class CourseController extends Controller
                     $a=0;
                     foreach ($records as $row){
                         for($i=1;$i<3;$i++){
-                            $query=  Models\AcademicRecordsModel::where("student",$sql)->where("year",$row->year)->where("sem",$i)->get()->toArray();
+                            $query=  Models\AcademicRecordsModel::where("student",$sql)->where("year",$row->year)->where("sem",$i)->orderby("code")->orderby("resit")->get()->toArray();
 
 
                             if(count($query)>0){
@@ -1443,7 +1444,7 @@ class CourseController extends Controller
                                         <td <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>> <?php $object=$sys->getCourseByCodeProgramObject($rs['code'],$program); echo @$object[0]->COURSE_CODE; ?></td>
                                         <td <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>> <?php
                                             if($rs['resit']=="yes"){
-                                                echo @$object[0]->COURSE_NAME."<span style='color:red'>*</span>";}else{echo @$object[0]->COURSE_NAME;}?> </td>
+                                                echo "<span style='color:red'>* </span>".@$object[0]->COURSE_NAME."<span style='color:red'> *</span>";}else{echo @$object[0]->COURSE_NAME;}?> </td>
 
                                         <td align='center' <?php // if($rs['grade']=="E"|| $rs['grade']=="F"){ echo "style='display:none'";}?>><?php  @$gcredit+=@$rs['credits'];   $totcredit+=@$rs['credits'];@$a+=$totcredit; if($rs['credits']){ echo $rs['credits'];} else{echo "IC";};?></td>
 
@@ -1473,7 +1474,12 @@ class CourseController extends Controller
 
                                         <td>&nbsp</td>
 
-                                        <td class="uk-text-bold"><span>CGPA</span> <?php echo  number_format(@($totgpoint/$totcredit), 2, '.', ',');?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                        <td class="uk-text-bold"><span>CGPA</span> <?php echo  number_format(@($totgpoint/$totcredit), 2, '.', ',');
+                                        if ($totgpoint/$totcredit > 4) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;First Class';}
+                                        elseif($totgpoint/$totcredit > 3) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second Upper';}
+                                        elseif($totgpoint/$totcredit > 2) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second lower';}
+                                        elseif($totgpoint/$totcredit > 1.5) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Pass';}
+                                        else {echo '&nbsp;&nbsp;&nbsp;&nbsp;Fail';}?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
 
                                         <td class="uk-text-bold" align='center'><?php echo   $totcredit; ?></td>
                                         <td >&nbsp;</td>

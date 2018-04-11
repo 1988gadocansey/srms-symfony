@@ -92,6 +92,10 @@ Route::group(['middleware' => ['web']], function () {
         'anyData' => 'students.data',
         'getIndex' => 'students',
     ]);
+    Route::controller('nservice', 'StudentController', [
+        'anyData' => 'students.data',
+        'getIndex' => 'nservice',
+    ]);
 
     Route::get('tpoly', 'StudentController@tpoly');
     Route::match(array("get", "post"), '/outreach/add', "ApplicantController@addOutreach");
@@ -104,6 +108,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('outreach/auto/sms', 'ApplicantController@fireAutomaticOutreach');
     Route::delete('/outreach/delete', 'ApplicantController@destroy');
     Route::get('students', 'StudentController@index');
+    Route::get('nservice', 'StudentController@nservice');
     Route::post('/sms', 'StudentController@sms');
     Route::get('/add_students', 'StudentController@create');
     Route::get('/upload_students', 'StudentController@showUploadForm');
