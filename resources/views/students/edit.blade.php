@@ -116,7 +116,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Title :</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                            {!!   Form::select('title',array("Mr"=>"Mr","Mrs"=>"Mrs","Miss"=>"Miss"),old('title',''),array('placeholder'=>'Select title',"required"=>"required","class"=>"md-input","v-model"=>"title","v-form-ctrl"=>"","v-select"=>"title"))  !!}
+                                            {!!   Form::select('title',array("Mr"=>"Mr","Mrs"=>"Mrs","Miss"=>"Miss"),old('title',$data->TITLE),array('placeholder'=>'Select title',"required"=>"required","class"=>"md-input","v-model"=>"title","v-form-ctrl"=>"","v-select"=>"title"))  !!}
                                             <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.title.$error.required">Title is required</p>                                        
@@ -186,7 +186,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Religious Denomination :</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                          {!!   Form::select('religion',$religion,old('religion',''),array("required"=>"required","class"=>"md-input","id"=>"religion","v-model"=>"religion","v-form-ctrl"=>"","style"=>"","v-select"=>"religion")   )  !!}
+                                          {!!   Form::select('religion', (['' => 'select religion'] + $religion ),old('religion',$data->RELIGION),array("required"=>"required","class"=>"md-input","id"=>"religion","v-model"=>"religion","v-form-ctrl"=>"","style"=>"","v-select"=>"religion")   )  !!}
                                     <span class="md-input-bar"></span>
                                         </div> 
 
@@ -232,7 +232,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Hometown Region:</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                            {!!   Form::select('region',$region ,array("required"=>"required","class"=>"md-input","id"=>"region","v-model"=>"region","v-form-ctrl"=>"","v-select"=>"{{old('region')}}")   )  !!}
+                                            {!!   Form::select('region',$region ,old('region',$data->REGION),array("required"=>"required","class"=>"md-input","id"=>"region","v-model"=>"region","v-form-ctrl"=>"","v-select"=>"{{old('region')}}")   )  !!}
                                             <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.region.$error.required">Region is required</p>                                        
@@ -244,7 +244,9 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Nationality:</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                             {!!   Form::select('nationality',$country ,array("required"=>"required","class"=>"md-input","id"=>"nationality","v-model"=>"nationality","v-form-ctrl"=>"","v-select"=>"nationality")   )  !!}
+                                             {!!   Form::select('nationality',$country ,old('nationality',$data->COUNTRY),array("required"=>"required","class"=>"md-input","id"=>"nationality","v-model"=>"nationality","v-form-ctrl"=>"","v-select"=>"nationality")   )  !!}
+
+
                                             <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.nationality.$error.required">Nationality is required</p>                                        
@@ -256,7 +258,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Student Category :</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                            {!!   Form::select('category',array("Regular"=>"Regular","Evening"=>"Evening","Weekend"=>"Weekend",'Exchange programme'=>'Exchange programme'),old('category',''),array('placeholder'=>'Select category',"required"=>"required","class"=>"md-input","v-model"=>"category","v-form-ctrl"=>"","v-select"=>"category"))  !!}
+                                            {!!   Form::select('category',array("Regular"=>"Regular","Evening"=>"Evening","Weekend"=>"Weekend",'Exchange programme'=>'Exchange programme'),old('category',$data->TYPE),array('placeholder'=>'Select category',"required"=>"required","class"=>"md-input","v-model"=>"category","v-form-ctrl"=>"","v-select"=>"category"))  !!}
                                             <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.category.$error.required">Type is required</p>                                        
@@ -273,7 +275,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Level/Year (As at last sem):</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                              {!!   Form::select('year',$level ,array("required"=>"required","class"=>"md-input","id"=>"year","v-model"=>"year","v-form-ctrl"=>"","v-select"=>"year")   )  !!}
+                                              {!!   Form::select('year',$level ,old("year",$level),array("required"=>"required","class"=>"md-input","id"=>"year","v-model"=>"year","v-form-ctrl"=>"","v-select"=>"year")   )  !!}
                                           <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.year.$error.required">year is required</p>                                        
@@ -285,7 +287,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Programme:</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                             {!!   Form::select('programme',$programme ,array("required"=>"required","readonly"=>"","class"=>"md-input","id"=>"programme","v-model"=>"programme","v-form-ctrl"=>"","v-select"=>"programme")   )  !!}
+                                             {!!   Form::select('programme', (['' => 'Select programs'] + $programme ),old('programme',$programme),array("required"=>"required","class"=>"md-input","id"=>"programme","v-model"=>"programme","v-form-ctrl"=>"","v-select"=>"programme")   )  !!}
                                             <span class="md-input-bar"></span>
                                         </div>    
                                         <p class="uk-text-danger uk-text-small"  v-if="updateForm.programme.$error.required">programme is required</p>                                        
@@ -297,7 +299,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
 
                                         <label for="">Residential Status :</label>     
                                         <div class="md-input-wrapper md-input-filled">
-                                            {!!   Form::select('type',array("Resident"=>"Resident",'Non Resident'=>"Non Resident"),old('type',''),array('placeholder'=>'Select residential status', "style"=>"","class"=>"md-input","v-model"=>"type","v-form-ctrl"=>"","v-select"=>"type"))  !!}
+                                            {!!   Form::select('type',array("Resident"=>"Resident",'Non Resident'=>"Non Resident"),old('type',$data->STUDENT_TYPE),array('placeholder'=>'Select residential status', "style"=>"","class"=>"md-input","v-model"=>"type","v-form-ctrl"=>"","v-select"=>"type"))  !!}
                                             <span class="md-input-bar"></span>
                                         </div>    
                                          <p class="uk-text-danger uk-text-small"  v-if="updateForm.type.$error.required">Residential Status is required</p>                                        
@@ -309,7 +311,7 @@ echo $obj->picture("{!! url(\"public/albums/students/$pic.jpg\") !!}", 90) ?>   
                                     <div class="uk-input-group">
 
                                          
-                                       <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Hostel :</label><input type="text" id="hostel" name="hostel" class="md-input"   required="required"    v-model="hostel"  v-form-ctrl><span class="md-input-bar"></span></div>                
+                                       <div class="md-input-wrapper md-input-filled"><label for="wizard_referer">Hostel :</label><input type="text" id="hostel" name="hostel" class="md-input"   required="required"    v-model="hostel"  v-form-ctrl v-select="hostel"><span class="md-input-bar"></span></div>
                                         <p  class=" uk-text-danger uk-text-small  "   v-if="updateForm.hostel.$error.required">Hostel Name is required</p>                                      
                                     
 
@@ -537,6 +539,7 @@ var vm = new Vue({
     region : "{{  $data->REGION }}",
     religion : "{{  $data->RELIGION }}",
     dob : "{{  $data->DATEOFBIRTH }}",
+
      hometown : "{{  $data->HOMETOWN }}",
     programme : "{{  $data->PROGRAMMECODE }}",
     country : "{{  $data->COUNTRY }}",
@@ -550,7 +553,7 @@ var vm = new Vue({
     category : "{{  $data->TYPE }}",
     halls : "{{  $data->HALL }}",
     year : "{{  $data->YEAR }}",
-    disability : "{{  $data->DISABILITY }}",
+
     
  options: [      
     ],
