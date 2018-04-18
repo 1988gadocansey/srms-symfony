@@ -101,7 +101,114 @@ class APIController extends Controller {
             \DB::rollback();
         }
     }
+    public function pushToSRMS(Request $request, SystemController $sys)
+    {
+       // $date = \Carbon::create(date('Y'));
 
+
+
+        $student=$request;
+        $program = $student->input('program');
+        $ptype = $sys->getProgrammeType($program);
+        if ($ptype == "NON TERTIARY") {
+            $level = "100NT";
+            $group=date("Y")."/".(date("Y") + 2);
+        } elseif ($ptype == "HND") {
+
+            $level = "100H";
+            $group=date("Y")."/".(date("Y") + 3);
+
+        } elseif ($ptype == "BTECH") {
+            $level = "100BTT";
+            $group=date("Y")."/".(date("Y") + 2);
+        }
+        elseif ($ptype == "DEGREE") {
+            $level = "100B";
+            $group=date("Y")."/".(date("Y") + 4);
+        }
+        else {
+            $level = "500MT";
+            $group=date("Y")."/".(date("Y") + 2);
+        }
+
+
+        /////////////////////////////////////////////////////
+        $checker=Models\StudentModel::where("STNO",$student->input('stno'))->get();
+        if(count($checker)==0) {
+
+            $query = new Models\StudentModel();
+            $query->YEAR = $level;
+            $query->LEVEL = $level;
+            $query->FIRSTNAME = $student->input('firstname');
+            $query->SURNAME = $student->input('lastname');
+            $query->OTHERNAMES = $student->input('othernames');
+            $query->TITLE = $student->input('title');
+            $query->SEX = $student->input('gender');
+            $query->DATEOFBIRTH = $student->input('dob');
+            $query->NAME = $student->input('name');
+            $query->AGE = $student->input('age');
+            $query->MARITAL_STATUS = $student->input('marital');
+            $query->DATE_ADMITTED = $student->input('date-admitted');
+            $query->GRADUATING_GROUP = $group;
+            $query->HAS_PASSWORD = 1;
+
+            $query->HALL = $student->input('hall');
+            $query->ADDRESS = $student->input('address');
+            $query->RESIDENTIAL_ADDRESS = $student->input('address');
+            $query->EMAIL = $student->input('email');
+            $query->PROGRAMMECODE = $student->input('program');
+            $query->TELEPHONENO = $student->input('phone');
+            $query->COUNTRY = $student->input('country');
+            $query->REGION = $student->input('region');
+            $query->RELIGION = $student->input('religion');;
+            $query->HOMETOWN = $student->input('hometown');
+            $query->GUARDIAN_NAME = $student->input('guardian-name');
+            $query->GUARDIAN_ADDRESS = $student->input('guardian-address');
+            $query->GUARDIAN_PHONE = $student->input('guardian-phone');
+            $query->GUARDIAN_OCCUPATION = $student->input('guardian-occupation');
+            $query->DISABILITY = $student->input('disable');
+            $query->STNO = $student->input('stno');
+            $query->INDEXNO = $student->input('stno');
+            $query->TYPE = $student->input('type');
+            $query->STUDENT_TYPE = $student->input('resident');
+            $query->ALLOW_REGISTER = 1;
+            $query->STATUS = "Admitted";
+
+            $query->SYSUPDATE = "1";
+
+
+            $query->BILLS = $student->input('fees');
+            $query->BILL_OWING = $student->input('fees');
+            $query->PAID = 0.00;
+
+
+            @$query->save();
+
+            @$sys->getPassword($student->input('stno'));
+
+        }
+        else{
+
+            Models\StudentModel::where("STNO",$student->input('stno'))->update(
+                array("FIRSTNAME"=> $student->input('firstname'),
+
+                    "SURNAME"=> $student->input('lastname'),
+                    "OTHERNAMES"=>$student->input('othernames'),
+                    "NAME"=>$student->input('name'),
+                    "BILLS"=> $student->input('fees'),
+                    "BILL_OWING"=> $student->input('fees'),
+                    "PROGRAMMECODE"=> $student->input('program'),
+                    "HALL"=> $student->input('hall'),
+                    "GRADUATING_GROUP"=> $group,
+
+
+
+                )
+            );
+
+        }
+
+    }
     public function payFee(Request $request, SystemController $sys) {
          header('Content-Type: application/json');
         $indexno=$request->input("accountRef");

@@ -2,88 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3359a2f-c5e4-4bd2-9d25-344ae685ff0e" name="Default" comment="worked on password creation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Archive.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nbproject/private/config.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/uikit/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/uikit/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/uikit/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont-.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/academic.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/academicboard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/broadsheet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/downloadexcel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/mountedcourses.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/nabptex.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/logins.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/finance.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/marks/mark.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/marks/students.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views.tar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/2567514ae922a1ea029babc0c2c138c9ddc55ecc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/72ec1ec7de47577c4e7032ef7e6637848263ed2b" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/b968429f2737d52cc0b5c23cf60975dff25efc21" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/e06804200c4721c0b2c064574545c0bf64095272" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Final_Admission_System/.idea/php.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Final_Admission_System/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/NserviceController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Models/MountedCourse2Model.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bankonline.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/env" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/htaccess" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/htaccessold" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/level_gender_update.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/owe_update.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/themes/themes_combined.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/uikit/css/uikit.almost-flat.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/css/weather-icons.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/weather-icons/font/weathericons-regular-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/x-editable/dist/jquery-editable/jquery-ui-datepicker/js/jquery-ui-1.10.3.custom.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/x-editable/dist/jquery-editable/js/jquery-editable-poshytip.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admissions/reports/matureResult.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/courses/broadsheet.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/courses/legacyGrades.blade - Copy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/courses/markUpdate.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/dashboardold.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/students/sindex.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/sessions/8ba728c9a0df82cc74498ff060ab4ae58ad3c78f" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/16eb3b682e168f81a7317266ecdb640170a7cd40.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/257abaa9b657b61c5c9df5a3a013eeb0bb200227.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/26646d8d42c5440aa6498cc15fc90029d493d5b6.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/28aaaf09d27992388b2d17b6645fdeb65a718e57.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/2c6bc2c944834070cece2d687f121fdc767c8292.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/33e42e1bb8caccb00d4e840de7bad259dfaf1e79.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/36578440269b83dbab9a4f4984c6bee9ac35466d.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/40a016280bc997a84450270bad9871738a355600.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/5ba026a623a7a43d31018c3cd052042336c6300e.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/60e916a1b6b8765cefe8dce6c7855598f3e2203e.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/67c3f888a4cc83a7f6d36df4033dbe3e67b88001.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/6f54f6dadcecafa37ebf7e052c9250fbbdb3f60e.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/819aeea066aade7656b57f36db953a3ea5142d26.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/84d8c58b7adc5e150369bb41334798d332fc947d.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/8a1f7c5d1b1dd818f495f9ccc24f10d4fa5c68f2.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/91493e304be0a97d9705c5b08a2db51e5de89b7b.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/940356ce018bd3f147326f4217d8fd686002a95e.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/97fb146e4e9053377016dd67843558e1e03f58b7.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/a21242627572fc0ee37da7672debe11608b092d4.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/af2175567570157cbd3ffdf1c6b109417ce6ece9.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/bddf3c310bcbc04fb237c7285b023026dda126e3.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/d35e489d6e93629806172f2a0bbf838d9ee8b622.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/dbc1cfbf7282a1764fb0362a40a0ff60c3c7420a.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/e928a4f8733763d5e3d211b51f4c6297155538ab.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/f0813e6970d12bec05a31fcf526e0259647c1156.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/f2629ddfa13ae551b1200685d923a0af21fc0537.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/framework/views/f9644033514c965aa58593987f04f21de48acd7c.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/2567514ae922a1ea029babc0c2c138c9ddc55ecc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/72ec1ec7de47577c4e7032ef7e6637848263ed2b" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/8ba728c9a0df82cc74498ff060ab4ae58ad3c78f" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/b968429f2737d52cc0b5c23cf60975dff25efc21" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/e06804200c4721c0b2c064574545c0bf64095272" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Final_Admission_System/app/Http/Controllers/FormController.php" afterPath="$PROJECT_DIR$/../Final_Admission_System/app/Http/Controllers/FormController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/APIController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/APIController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/16eb3b682e168f81a7317266ecdb640170a7cd40.php" afterPath="$PROJECT_DIR$/storage/framework/views/16eb3b682e168f81a7317266ecdb640170a7cd40.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/257abaa9b657b61c5c9df5a3a013eeb0bb200227.php" afterPath="$PROJECT_DIR$/storage/framework/views/257abaa9b657b61c5c9df5a3a013eeb0bb200227.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/26646d8d42c5440aa6498cc15fc90029d493d5b6.php" afterPath="$PROJECT_DIR$/storage/framework/views/26646d8d42c5440aa6498cc15fc90029d493d5b6.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/28aaaf09d27992388b2d17b6645fdeb65a718e57.php" afterPath="$PROJECT_DIR$/storage/framework/views/28aaaf09d27992388b2d17b6645fdeb65a718e57.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/2c6bc2c944834070cece2d687f121fdc767c8292.php" afterPath="$PROJECT_DIR$/storage/framework/views/2c6bc2c944834070cece2d687f121fdc767c8292.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/33e42e1bb8caccb00d4e840de7bad259dfaf1e79.php" afterPath="$PROJECT_DIR$/storage/framework/views/33e42e1bb8caccb00d4e840de7bad259dfaf1e79.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/36578440269b83dbab9a4f4984c6bee9ac35466d.php" afterPath="$PROJECT_DIR$/storage/framework/views/36578440269b83dbab9a4f4984c6bee9ac35466d.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/40a016280bc997a84450270bad9871738a355600.php" afterPath="$PROJECT_DIR$/storage/framework/views/40a016280bc997a84450270bad9871738a355600.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/5ba026a623a7a43d31018c3cd052042336c6300e.php" afterPath="$PROJECT_DIR$/storage/framework/views/5ba026a623a7a43d31018c3cd052042336c6300e.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/60e916a1b6b8765cefe8dce6c7855598f3e2203e.php" afterPath="$PROJECT_DIR$/storage/framework/views/60e916a1b6b8765cefe8dce6c7855598f3e2203e.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/67c3f888a4cc83a7f6d36df4033dbe3e67b88001.php" afterPath="$PROJECT_DIR$/storage/framework/views/67c3f888a4cc83a7f6d36df4033dbe3e67b88001.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/6f54f6dadcecafa37ebf7e052c9250fbbdb3f60e.php" afterPath="$PROJECT_DIR$/storage/framework/views/6f54f6dadcecafa37ebf7e052c9250fbbdb3f60e.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/819aeea066aade7656b57f36db953a3ea5142d26.php" afterPath="$PROJECT_DIR$/storage/framework/views/819aeea066aade7656b57f36db953a3ea5142d26.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/84d8c58b7adc5e150369bb41334798d332fc947d.php" afterPath="$PROJECT_DIR$/storage/framework/views/84d8c58b7adc5e150369bb41334798d332fc947d.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/8a1f7c5d1b1dd818f495f9ccc24f10d4fa5c68f2.php" afterPath="$PROJECT_DIR$/storage/framework/views/8a1f7c5d1b1dd818f495f9ccc24f10d4fa5c68f2.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/91493e304be0a97d9705c5b08a2db51e5de89b7b.php" afterPath="$PROJECT_DIR$/storage/framework/views/91493e304be0a97d9705c5b08a2db51e5de89b7b.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/940356ce018bd3f147326f4217d8fd686002a95e.php" afterPath="$PROJECT_DIR$/storage/framework/views/940356ce018bd3f147326f4217d8fd686002a95e.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/97fb146e4e9053377016dd67843558e1e03f58b7.php" afterPath="$PROJECT_DIR$/storage/framework/views/97fb146e4e9053377016dd67843558e1e03f58b7.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/a21242627572fc0ee37da7672debe11608b092d4.php" afterPath="$PROJECT_DIR$/storage/framework/views/a21242627572fc0ee37da7672debe11608b092d4.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/af2175567570157cbd3ffdf1c6b109417ce6ece9.php" afterPath="$PROJECT_DIR$/storage/framework/views/af2175567570157cbd3ffdf1c6b109417ce6ece9.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/bddf3c310bcbc04fb237c7285b023026dda126e3.php" afterPath="$PROJECT_DIR$/storage/framework/views/bddf3c310bcbc04fb237c7285b023026dda126e3.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/d35e489d6e93629806172f2a0bbf838d9ee8b622.php" afterPath="$PROJECT_DIR$/storage/framework/views/d35e489d6e93629806172f2a0bbf838d9ee8b622.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/dbc1cfbf7282a1764fb0362a40a0ff60c3c7420a.php" afterPath="$PROJECT_DIR$/storage/framework/views/dbc1cfbf7282a1764fb0362a40a0ff60c3c7420a.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/e928a4f8733763d5e3d211b51f4c6297155538ab.php" afterPath="$PROJECT_DIR$/storage/framework/views/e928a4f8733763d5e3d211b51f4c6297155538ab.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/f0813e6970d12bec05a31fcf526e0259647c1156.php" afterPath="$PROJECT_DIR$/storage/framework/views/f0813e6970d12bec05a31fcf526e0259647c1156.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/f2629ddfa13ae551b1200685d923a0af21fc0537.php" afterPath="$PROJECT_DIR$/storage/framework/views/f2629ddfa13ae551b1200685d923a0af21fc0537.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/f9644033514c965aa58593987f04f21de48acd7c.php" afterPath="$PROJECT_DIR$/storage/framework/views/f9644033514c965aa58593987f04f21de48acd7c.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,43 +58,69 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/students/edit.blade.php">
+      <file leaf-file-name="napbtexBroadsheet.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7525">
-              <caret line="301" column="149" lean-forward="false" selection-start-line="301" selection-start-column="149" selection-end-line="301" selection-end-column="157" />
+            <state relative-caret-position="1813">
+              <caret line="310" column="71" lean-forward="false" selection-start-line="310" selection-start-column="71" selection-end-line="310" selection-end-column="71" />
               <folding>
-                <marker date="1523468903585" expanded="true" signature="8090:8325" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="8106:8322" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="9220:9445" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="9236:9442" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="10188:10459" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="10204:10456" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="13383:13631" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="13399:13628" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="16742:16944" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="17686:17904" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="17702:17901" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="18664:18980" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="18680:18977" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="20829:21066" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="20845:21063" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="21882:22138" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="21898:22135" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="26035:26246" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="26051:26243" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="30527:30813" ph="..." />
-                <marker date="1523468903585" expanded="true" signature="30543:30810" ph="..." />
+                <marker date="1524013337522" expanded="true" signature="4016:4262" ph="..." />
+                <marker date="1524013337522" expanded="true" signature="4030:4259" ph="..." />
+                <marker date="1524013337522" expanded="true" signature="4487:4725" ph="..." />
+                <marker date="1524013337522" expanded="true" signature="4501:4722" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admissions/applicants/index.blade.php">
+      <file leaf-file-name="CourseController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="462" column="78" lean-forward="false" selection-start-line="462" selection-start-column="49" selection-end-line="462" selection-end-column="78" />
+            <state relative-caret-position="225">
+              <caret line="2869" column="5" lean-forward="true" selection-start-line="2869" selection-start-column="5" selection-end-line="2869" selection-end-column="5" />
+              <folding>
+                <marker date="1524005940357" expanded="true" signature="4392:4424" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="7214:7246" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="7486:7518" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="7669:7701" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="7824:7856" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="12936:12968" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="13130:13162" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="13295:13327" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="17928:17960" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="18110:18142" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="18270:18302" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="31971:32003" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="32128:32160" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="40369:40401" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="40530:40562" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="60110:60126" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="62066:62075" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="62127:62136" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="75421:75453" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="75620:75652" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="79146:79178" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="104483:104515" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="104772:104804" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="104981:105013" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="105171:105203" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="111917:111949" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="112160:112192" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="112350:112382" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="121307:121339" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="122905:122937" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="123088:123120" ph="..." />
+                <marker date="1524005940357" expanded="true" signature="124118:124150" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SystemController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="201" column="22" lean-forward="false" selection-start-line="201" selection-start-column="15" selection-end-line="201" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -150,22 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>broadsh</find>
-      <find>getCourseGrade</find>
-      <find>process_broad</find>
-      <find>getmount</find>
-      <find>getGrade</find>
-      <find>cpa</find>
-      <find>getCourseGradeCounter</find>
-      <find>#</find>
-      <find>getLecture</find>
-      <find>getCourse</find>
-      <find>getCourseCod</find>
-      <find>getLectureName</find>
-      <find>getDe</find>
-      <find>getDep</find>
-      <find>bulk</find>
-      <find>selectcount</find>
       <find>selectcO</find>
       <find>remark</find>
       <find>total_mark_remark</find>
@@ -180,10 +151,27 @@
       <find>religion</find>
       <find>title</find>
       <find>region</find>
+      <find>nap</find>
+      <find>getTrails</find>
+      <find>pushToSrms</find>
+      <find>fetchData</find>
+      <find>date</find>
+      <find>car</find>
+      <find>carbo</find>
+      <find>getPassword</find>
+      <find>getG</find>
+      <find>napbt</find>
+      <find>process_broadsheet_napbtex</find>
+      <find>getGPABySem</find>
+      <find>napb</find>
+      <find>getGPBySem</find>
+      <find>transc</find>
+      <find>@round</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>$pupil-&gt;</replace>
+      <replace>@number_format</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -193,10 +181,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/admissions/reports/results.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admissions/reports/conditionalResult.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admissions/reports/matureResult.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
         <option value="$PROJECT_DIR$/resources/views/admissions/reports/matureResult.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admissions/reports/technicalResult.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/courses/gad.php" />
@@ -216,7 +202,6 @@
         <option value="$PROJECT_DIR$/app/Models/AssumptionDutyModel.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/LiaisonController.php" />
         <option value="$PROJECT_DIR$/app/Models/StudentModel.php" />
-        <option value="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/courses/broadsheet.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/importExport.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" />
@@ -224,7 +209,6 @@
         <option value="$PROJECT_DIR$/resources/views/staff/old_Create.php" />
         <option value="$PROJECT_DIR$/resources/views/staff/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/StaffController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/APIController.php" />
         <option value="$PROJECT_DIR$/resources/views/qa/index.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" />
@@ -233,17 +217,21 @@
         <option value="$PROJECT_DIR$/app/Models/FormModel.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/app/Models/AcademicRecordsModel.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
         <option value="$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/qa/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" />
         <option value="$PROJECT_DIR$/resources/views/qa/printLecturer.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/QualityAssuranceController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
         <option value="$PROJECT_DIR$/resources/views/finance/fees/processPayment.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/FeeController.php" />
         <option value="$PROJECT_DIR$/resources/views/students/edit.blade.php" />
+        <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/APIController.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SystemController.php" />
+        <option value="$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php" />
       </list>
     </option>
   </component>
@@ -378,6 +366,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="46" />
+    <option name="y" value="63" />
     <option name="width" value="1440" />
     <option name="height" value="858" />
   </component>
@@ -397,6 +387,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -415,45 +407,10 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="admissions" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="srms-laravel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srms-laravel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="admissions" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="applicants" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -627,7 +584,8 @@
       <workItem from="1523542299876" duration="258000" />
       <workItem from="1523546734247" duration="12000" />
       <workItem from="1523550008151" duration="3000" />
-      <workItem from="1523968363182" duration="90000" />
+      <workItem from="1523968363182" duration="16434000" />
+      <workItem from="1524004491397" duration="8821000" />
     </task>
     <task id="LOCAL-00001" summary="financial platform">
       <created>1503653729378</created>
@@ -888,17 +846,24 @@
       <option name="project" value="LOCAL" />
       <updated>1523470111020</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="worked on password creation">
+      <created>1523968478192</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1523968478192</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="352032000" />
+    <option name="totallyTimeSpent" value="377197000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="858" extended-state="0" />
+    <frame x="46" y="63" width="1440" height="858" extended-state="0" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14592275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0937053" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -946,6 +911,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="financial platform" />
     <MESSAGE value="NABPTEX Broadsheet integration" />
     <MESSAGE value="Accreditation Board Reports" />
@@ -969,41 +936,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StaffController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2994">
-          <caret line="207" column="42" lean-forward="true" selection-start-line="207" selection-start-column="42" selection-end-line="207" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/reset.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/update.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/users.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PasswordController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2925">
@@ -1015,13 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16900">
           <caret line="686" column="9" lean-forward="false" selection-start-line="686" selection-start-column="9" selection-end-line="686" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/APIController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="31" column="6" lean-forward="false" selection-start-line="31" selection-start-column="6" selection-end-line="44" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1165,13 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74975">
-          <caret line="3010" column="30" lean-forward="false" selection-start-line="3010" selection-start-column="30" selection-end-line="3010" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/courses/noticeboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -1213,27 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReportController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6875">
-          <caret line="288" column="65" lean-forward="false" selection-start-line="288" selection-start-column="65" selection-end-line="288" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5875">
-          <caret line="244" column="29" lean-forward="false" selection-start-line="244" selection-start-column="16" selection-end-line="244" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="257" column="15" lean-forward="false" selection-start-line="257" selection-start-column="14" selection-end-line="257" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/qa/printLecturer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10775">
@@ -1252,13 +1149,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8275">
-          <caret line="338" column="0" lean-forward="false" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1307,13 +1197,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="33" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/courses/broadsheet_naptex.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2507">
@@ -1321,55 +1204,182 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admissions/applicants/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3757">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="2041" column="0" lean-forward="true" selection-start-line="2041" selection-start-column="0" selection-end-line="2041" selection-end-column="0" />
+        <state relative-caret-position="6155">
+          <caret line="462" column="78" lean-forward="false" selection-start-line="462" selection-start-column="49" selection-end-line="462" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/students/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7525">
+        <state relative-caret-position="25">
           <caret line="301" column="149" lean-forward="false" selection-start-line="301" selection-start-column="149" selection-end-line="301" selection-end-column="157" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1250">
+          <caret line="57" column="77" lean-forward="false" selection-start-line="57" selection-start-column="77" selection-end-line="57" selection-end-column="77" />
           <folding>
-            <marker date="1523468903585" expanded="true" signature="8090:8325" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="8106:8322" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="9220:9445" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="9236:9442" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="10188:10459" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="10204:10456" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="13383:13631" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="13399:13628" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="16742:16944" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="17686:17904" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="17702:17901" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="18664:18980" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="18680:18977" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="20829:21066" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="20845:21063" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="21882:22138" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="21898:22135" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="26035:26246" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="26051:26243" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="30527:30813" ph="..." />
-            <marker date="1523468903585" expanded="true" signature="30543:30810" ph="..." />
+            <marker date="1497873852000" expanded="true" signature="7493:7525" ph="..." />
+            <marker date="1497873852000" expanded="true" signature="12096:12128" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admissions/applicants/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/StudentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11071">
+          <caret line="213" column="71" lean-forward="true" selection-start-line="213" selection-start-column="71" selection-end-line="213" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplicantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1978">
+          <caret line="1078" column="18" lean-forward="false" selection-start-line="1078" selection-start-column="18" selection-end-line="1078" selection-end-column="18" />
+          <folding>
+            <marker date="1523982627490" expanded="true" signature="41483:41515" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReportController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="583" column="57" lean-forward="false" selection-start-line="583" selection-start-column="57" selection-end-line="583" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
+      <provider editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="2" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="2" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/APIController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1877">
+          <caret line="188" column="9" lean-forward="true" selection-start-line="188" selection-start-column="9" selection-end-line="188" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Jobs/Job.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
-          <caret line="462" column="78" lean-forward="false" selection-start-line="462" selection-start-column="49" selection-end-line="462" selection-end-column="78" />
+          <caret line="326" column="18" lean-forward="false" selection-start-line="326" selection-start-column="18" selection-end-line="326" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bankonline.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding>
+            <marker date="1508330656000" expanded="true" signature="565:724" ph="Select Date2... Find_index" />
+            <marker date="1508330656000" expanded="true" signature="1250:1361" ph="Select NAME,... tpoly_students" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/owe_update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1057">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1511049925000" expanded="true" signature="439:505" ph="Select INDEX... tpoly_students" />
+            <marker date="1511049925000" expanded="true" signature="828:902" ph="Select sum(A... tpoly_feedetails" />
+            <marker date="1511049925000" expanded="true" signature="1128:1215" ph="Update tpoly... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SystemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="201" column="22" lean-forward="false" selection-start-line="201" selection-start-column="15" selection-end-line="201" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/courses/napbtexBroadsheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1813">
+          <caret line="310" column="71" lean-forward="false" selection-start-line="310" selection-start-column="71" selection-end-line="310" selection-end-column="71" />
+          <folding>
+            <marker date="1524013337522" expanded="true" signature="4016:4262" ph="..." />
+            <marker date="1524013337522" expanded="true" signature="4030:4259" ph="..." />
+            <marker date="1524013337522" expanded="true" signature="4487:4725" ph="..." />
+            <marker date="1524013337522" expanded="true" signature="4501:4722" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CourseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="2869" column="5" lean-forward="true" selection-start-line="2869" selection-start-column="5" selection-end-line="2869" selection-end-column="5" />
+          <folding>
+            <marker date="1524005940357" expanded="true" signature="4392:4424" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="7214:7246" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="7486:7518" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="7669:7701" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="7824:7856" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="12936:12968" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="13130:13162" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="13295:13327" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="17928:17960" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="18110:18142" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="18270:18302" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="31971:32003" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="32128:32160" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="40369:40401" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="40530:40562" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="60110:60126" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="62066:62075" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="62127:62136" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="75421:75453" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="75620:75652" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="79146:79178" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="104483:104515" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="104772:104804" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="104981:105013" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="105171:105203" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="111917:111949" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="112160:112192" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="112350:112382" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="121307:121339" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="122905:122937" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="123088:123120" ph="..." />
+            <marker date="1524005940357" expanded="true" signature="124118:124150" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

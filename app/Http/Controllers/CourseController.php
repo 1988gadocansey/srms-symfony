@@ -2871,7 +2871,7 @@ class CourseController extends Controller
     // naptex broadsheet view
     public function processNaptexBroadsheet(Request $request, SystemController $sys){
 
-
+        ini_set('max_execution_time', 180000);
         \Session::put('level', $request->input("level", ""));
         \Session::put('year', $request->input("year", ""));
         \Session::put('program', $request->input("program", ""));
@@ -2914,8 +2914,16 @@ class CourseController extends Controller
 
         }
         else{
-            $studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
 
+            //$studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
+            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")
+                ->where("programme",$program)
+
+
+                ->orderBy("indexno")
+                ->groupBy("indexno")
+                ->select("indexno","level","grade")
+                ->get();
 
         }
 

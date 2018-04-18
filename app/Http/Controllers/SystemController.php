@@ -201,6 +201,19 @@ class SystemController extends Controller
         }
         return round( $totalGP/$totalCR,2);
     }
+    public function getCGPAPerSem($indexno,$sem,$levels) {
+
+        $totalCR=Models\AcademicRecordsModel::where("indexno",$indexno)->where("level",$levels)
+            ->where("sem",$sem)->where("grade","!=","E")->sum("credits");
+        $totalGP=Models\AcademicRecordsModel::where("indexno",$indexno)->where("level",$levels)
+            ->where("sem",$sem)->where("grade","!=","E")->sum("gpoint");
+
+
+        if($totalCR<=0 ||  $totalGP<=0){
+            return 0;
+        }
+        return round( $totalGP/$totalCR,2);
+    }
     public function getCGPA($indexno) {
 
         $totalCR=Models\AcademicRecordsModel::where("indexno",$indexno)->where("grade","!=","E")->sum("credits");
@@ -499,7 +512,7 @@ class SystemController extends Controller
     public function getTrails($indexno){
         $resultData=array();
         $trailsArray = \DB::table('tpoly_academic_record')->where('indexno',$indexno)
-            ->where("grade","E")
+            ->where("grade","F")
             ->get();
         foreach ($trailsArray as $row){
             array_push($resultData,$row->grade);
@@ -2821,9 +2834,9 @@ $total_course_assessed= $datac[0];*/
 
     public  function getPassword($indexno)
     {
-        $data = Models\ApplicantModel::where("APPLICATION_NUMBER", $indexno)->first();
-        $que = Models\PortalPasswordModel::where("username", $data->APPLICATION_NUMBER)->first();
-        $ptype=$this->getProgrammeType($data->PROGRAMME_ADMITTED);
+        $data = Models\StudentModel::where("STNO", $indexno)->orWhere("INDEXNO", $indexno)->first();
+        $que = Models\PortalPasswordModel::where("username", $data->STNO)->orWhere("username", $data->INDEXNO)->first();
+        $ptype=$this->getProgrammeType($data->PROGRAMMECODE);
         if($ptype=="NON TERTIARY"){
             $level="100NT";
         }
@@ -2833,11 +2846,15 @@ $total_course_assessed= $datac[0];*/
         elseif($ptype=="BTECH"){
             $level="100BTT";
         }
-        else{
-            $level="500";
+        elseif($ptype=="DEGREE"){
+            $level="100B";
         }
+        else{
+            $level="500MT";
+        }
+        $program = $data->PROGRAMMECODE;
         if (empty($que) && !empty($indexno)) {
-            $program = $data->PROGRAMME_ADMITTED;
+
             $str = 'abcdefhkmnprtuvwxy34678abcdefhkmnprtuvwxy34678';
             $shuffled = str_shuffle($str);
             $vcode = substr($shuffled, 0, 9);
@@ -2852,6 +2869,9 @@ $total_course_assessed= $datac[0];*/
                 'password' => bcrypt($real),
             ]);
 
+        }
+        else{
+            Models\PortalPasswordModel::where("username",$indexno)->update(array("level"=>$level,"programme"=>$program));
         }
     }
     public function getReceipt() {

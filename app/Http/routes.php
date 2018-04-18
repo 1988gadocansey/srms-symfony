@@ -324,7 +324,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( '/process_broadsheet', "CourseController@processBroadsheet");
 
     Route::get( '/broadsheet/napbtex', "CourseController@naptexBroadsheet");
-    Route::post( '/process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
+    Route::post( 'process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
 
 
     //Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");

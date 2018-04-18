@@ -82,7 +82,7 @@
         <div class="md-card">
             <div class="md-card-content">
 
-                <form action="<?php echo e(url('/process_broadsheet_napbtex')); ?>"  method="POST" accept-charset="utf-8"  >
+                <form action="<?php echo e(url('process_broadsheet_napbtex')); ?>"  method="POST" accept-charset="utf-8"  >
                     <?php echo csrf_field(); ?>
 
                     <div class="uk-grid" data-uk-grid-margin="">
@@ -162,13 +162,13 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 1</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 2</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 3</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 4</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 5</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 6</th>
-                                <th COLSPAN="3" class="uk uk-text-bold" style="text-align:center;font-weight: bold">COMMULATIVE</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 1</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 2</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 3</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 4</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 5</th>
+                                <th COLSPAN="4" class="uk uk-text-bold" style="text-align:center;font-weight: bold">SEM 6</th>
+                                <th COLSPAN="6" class="uk uk-text-bold" style="text-align:center;font-weight: bold">COMMULATIVE</th>
 
                             </tr>
 
@@ -181,24 +181,38 @@
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
                                 <th>CR</th>
                                 <th>GP</th>
                                 <th>GPA</th>
+                                <th>CGPA</th>
+
 
                                 <th>AWARDS</th>
                                 <th>TRAILS</th>
@@ -218,59 +232,111 @@
                                     \Session::put('students', $students);echo $count?></td>
                                 <td> <?php echo e(strtoupper(@$pupil->INDEXNO)); ?></td>
                                 <td> <?php echo e(strtoupper(@$pupil->NAME)); ?></td>
+
                                 <td> <?php $semArray11=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
                                 <td> <?php $gpArray11=  $sys->getGPBySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
                                 <td> <?php $gpaArray11=  $sys->getGPABySem(@$pupil->INDEXNO,1,'100H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'100H')	 ?></td>
+                                <td> <?php $sem1CGPA=  $sys->getCGPAPerSem(@$pupil->INDEXNO,1,'100H');
+
+
+                                echo $sem1CGPA	 ?></td>
+
                                 <td> <?php $semArray12=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
                                 <td> <?php $gpArray12=  $sys->getGPBySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
                                 <td> <?php $gpaArray12=  $sys->getGPABySem(@$pupil->INDEXNO,2,'100H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'100H')	 ?></td>
 
+                                <td> <?php $sem2CGPA=    @number_format( (($gpArray11+$gpArray12)/($semArray11+$semArray12)),2, '.', ',');
+
+
+                                    echo $sem2CGPA	 ?></td>
                                 <!-- 2nd year -->
 
                                 <td> <?php $semArray21=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
                                 <td> <?php $gpArray21=  $sys->getGPBySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
                                 <td> <?php $gpaArray21=  $sys->getGPABySem(@$pupil->INDEXNO,1,'200H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'200H')	 ?></td>
+                                <td> <?php $sem3CGPA=    @number_format( (($gpArray11+$gpArray12+$gpArray21)/($semArray11+$semArray12+$semArray21)),2, '.', ',');
+
+
+                                    echo $sem3CGPA	 ?></td>
+
                                 <td> <?php $semArray22=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
                                 <td> <?php $gpArray22=  $sys->getGPBySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
                                 <td> <?php $gpaArray22=  $sys->getGPABySem(@$pupil->INDEXNO,2,'200H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'200H')	 ?></td>
+                                <td> <?php $sem4CGPA=    @number_format( (($gpArray11+$gpArray12+$gpArray21+$gpArray22)/($semArray11+$semArray12+$semArray21+$semArray22)),2, '.', ',');
 
+
+                                    echo $sem4CGPA	 ?></td>
                                 <!-- 3rd year -->
 
                                 <td> <?php $semArray31=  $sys->getCreditBySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
                                 <td> <?php $gpArray31=  $sys->getGPBySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getGPBySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
                                 <td> <?php $gpaArray31=  $sys->getGPABySem(@$pupil->INDEXNO,1,'300H');echo @$sys->getGPABySem(@$pupil->INDEXNO,1,'300H')	 ?></td>
+                                <td> <?php $sem5CGPA=    @number_format( (($gpArray11+$gpArray12+$gpArray21+$gpArray22+$gpArray31)/($semArray11+$semArray12+$semArray21+$semArray22+$semArray31)),2, '.', ',');
+
+
+                                    echo $sem5CGPA	 ?></td>
+
+
+
+
                                 <td> <?php $semArray32=  $sys->getCreditBySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getCreditBySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
                                 <td> <?php $gpArray32=  $sys->getGPBySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getGPBySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
                                 <td> <?php $gpaArray32=  $sys->getGPABySem(@$pupil->INDEXNO,2,'300H');echo @$sys->getGPABySem(@$pupil->INDEXNO,2,'300H')	 ?></td>
 
+                                <td> <?php @$sem6CGPA=    @number_format( (($gpArray11+$gpArray12+$gpArray21+$gpArray22+$gpArray31+$gpArray32)/($semArray11+$semArray12+$semArray21+$semArray22+$semArray31+$semArray32)),2, '.', ',');
+
+
+                                    echo @$sem6CGPA	 ?></td>
+
                                 <!-- cummulative total -->
+
 
                                 <td> <?php $totalCredit=  $semArray11+$semArray12+$semArray21
                                         +$semArray22+$semArray31+$semArray32;
-                                        echo round( $totalCredit,2);
-                                     	 ?>
+                                    echo  @number_format( $totalCredit,2, '.', ',');
+                                    ?>
 
                                 </td>
                                 <td> <?php $totalGP= $gpArray32+$gpArray31+$gpArray22
                                         +$gpArray21+$gpArray12+$gpArray11;
-                                    echo round( $totalGP,2);
+                                    echo  @number_format( $totalGP,2, '.', ',');
                                     ?>
 
                                 </td>
                                 <td> <?php $totalGPA=$gpaArray32+$gpaArray31+$gpaArray22
                                         +$gpaArray21+$gpaArray12+$gpaArray11;
-                                    echo @round( $totalGP/$totalCredit,2);
+                                    echo @number_format( $totalGP/$totalCredit,2, '.', ',');
                                     ?>
 
                                 </td>
+                                <td> <?php $sem6CGPA=    @number_format( (($gpArray11+$gpArray12+$gpArray21+$gpArray22+$gpArray31+$gpArray32)/($semArray11+$semArray12+$semArray21+$semArray22+$semArray31+$semArray32)),2);
+
+
+                                    echo @number_format($sem6CGPA	, 2, '.', ',') ?></td>
                                 <td>
                                     <?php
-                                    echo $sys->getClass(@round($totalGP/$totalCredit,2));
+
+                                        if(@number_format($sem6CGPA	, 2, '.', ',')>4){
+                                            echo "First Class";
+                                        }
+                                    elseif(@number_format($sem6CGPA	, 2, '.', ',')>3){
+                                            echo "Second Upper";
+                                        }
+                                        elseif(@number_format($sem6CGPA	, 2, '.', ',')>2){
+                                            echo "Second Lower";
+                                        }
+                                        elseif(@number_format($sem6CGPA	, 2, '.', ',')>1.5){
+                                            echo "Pass";
+                                        }
+                                        else {echo 'Fail';}
+
+
+
                                     ?>
                                 </td>
                                 <td>
                                     <?php
-                                        echo $sys->getTrails(@$pupil->INDEXNO);
+                                    echo $sys->getTrails(@$pupil->INDEXNO);
                                     ?>
                                 </td>
 
@@ -278,7 +344,7 @@
 
 
                             <?php endforeach; ?>
-                            <?php  $gpArray32=0;$gpArray31=0;$gpArray22=0;$gpArray21;$gpArray12;$gpArray11?>
+                            <?php  $gpArray32=0;$gpArray31=0;$gpArray22=0;$gpArray21;$gpArray12;$gpArray11;$sem2CGPA=0?>
 
                             </tbody>
 
