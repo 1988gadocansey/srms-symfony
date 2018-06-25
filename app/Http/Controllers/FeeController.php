@@ -63,16 +63,16 @@ class FeeController extends Controller
 
     }
 
-    public function getTotalPayment($student, $term, $yearr)
+    public function getTotalPayment($student, $yearr)
     {
         $sys = new SystemController();
         $array = $sys->getSemYear();
         if ($term == "" && $yearr == "") {
-            $term = $array[0]->SEMESTER;
+            //$term = $array[0]->SEMESTER;
             $yearr = $array[0]->YEAR;
         }
 
-        $fee = FeePaymentModel::query()->where('YEAR', '=', $yearr)->where('SEMESTER', $term)->where('INDEXNO', $student)->sum('AMOUNT');
+        $fee = FeePaymentModel::query()->where('YEAR', '=', $yearr)->where('INDEXNO', $student)->sum('AMOUNT');
         return $fee;
 
 
@@ -82,7 +82,7 @@ class FeeController extends Controller
     {
 
         $array = $sys->getSemYear();
-        $sem = $array[0]->SEMESTER;
+       // $sem = $array[0]->SEMESTER;
         $year = $array[0]->YEAR;
         $fee = FeePaymentModel::query();
 
@@ -114,7 +114,7 @@ class FeeController extends Controller
             $a[] = $row->AMOUNT;
             //$data[$key]->TOTALS = array_sum($a);
 
-            $t[] = $this->getTotalPayment($row->INDEXNO, $row->SEMESTER, $row->YEAR);
+            $t[] = $this->getTotalPayment($row->INDEXNO, $row->YEAR);
             $data[$key]->TOTALS = @array_sum($t);
         }
 
@@ -275,7 +275,7 @@ class FeeController extends Controller
     {
         $sys = new SystemController();
         $array = $sys->getSemYear();
-        $sem = $array[0]->SEMESTER;
+        //$sem = $array[0]->SEMESTER;
         $year = $array[0]->YEAR;
         $fee = FeeModel::query();
 
@@ -319,7 +319,7 @@ class FeeController extends Controller
 
 
         $fees = FeeModel::join('tpoly_programme', 'tpoly_fees.PROGRAMME', '=', 'tpoly_programme.ID')
-            ->select(['tpoly_fees.ID', 'tpoly_fees.NAME', 'tpoly_fees.DESCRIPTION', 'tpoly_fees.AMOUNT', 'tpoly_fees.FEE_TYPE', 'tpoly_fees.SEASON_TYPE', 'tpoly_programme.PROGRAMME', 'tpoly_fees.LEVEL', 'tpoly_fees.SEMESTER', 'tpoly_fees.YEAR', 'tpoly_fees.STATUS', 'tpoly_fees.NATIONALITY']);
+            ->select(['tpoly_fees.ID', 'tpoly_fees.NAME', 'tpoly_fees.DESCRIPTION', 'tpoly_fees.AMOUNT', 'tpoly_fees.FEE_TYPE', 'tpoly_fees.SEASON_TYPE', 'tpoly_programme.PROGRAMME', 'tpoly_fees.LEVEL', 'tpoly_fees.YEAR', 'tpoly_fees.STATUS', 'tpoly_fees.NATIONALITY']);
 
 
         return Datatables::of($fees)
@@ -366,7 +366,7 @@ class FeeController extends Controller
         if (@\Auth::user()->role == 'FO') {
             $sys = new SystemController();
             $array = $sys->getSemYear();
-            $sem1 = $array[0]->SEMESTER;
+            //$sem1 = $array[0]->SEMESTER;
             $year1 = $array[0]->YEAR;
             /*
              * make sure only bills for the current semester are charged againts
@@ -430,7 +430,7 @@ class FeeController extends Controller
     {
 
         $array = $sys->getSemYear();
-        $sem = $array[0]->SEMESTER;
+       // $sem = $array[0]->SEMESTER;
         $year = $array[0]->YEAR;
         $student = explode(',', $request->input('q'));
         $student = $student[0];
@@ -451,7 +451,7 @@ class FeeController extends Controller
             return redirect("/pay_fees")->with("error", "<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
         } else {
 
-            return view("finance.fees.processPayment")->with('data', $sql)->with('year', $year)->with('sem', $sem)->with('banks', $this->banks())->with('receipt', $this->getReceipt())->with('level', $sys->getLevelList())
+            return view("finance.fees.processPayment")->with('data', $sql)->with('year', $year)->with('banks', $this->banks())->with('receipt', $this->getReceipt())->with('level', $sys->getLevelList())
                 ->with("finance", $finance);
 
         }
@@ -477,9 +477,9 @@ class FeeController extends Controller
         } else {
             $sys = new SystemController();
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
+            //$sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
-            return view("finance.fees.process_penalty")->with('data', $sql)->with('year', $year)->with('sem', $sem)->with('banks', $this->banks())->with('receipt', $this->getReceipt());
+            return view("finance.fees.process_penalty")->with('data', $sql)->with('year', $year)->with('banks', $this->banks())->with('receipt', $this->getReceipt());
 
         }
     }
@@ -489,7 +489,7 @@ class FeeController extends Controller
         if (@\Auth::user()->department == "Finance" || @\Auth::user()->department == "Tptop") {
             $sys = new SystemController();
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
+            //$sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
             $phone = $request->input('phone');
             $status = $request->input('status');
@@ -519,7 +519,7 @@ class FeeController extends Controller
                     $feeLedger->RECEIPTNO = $receipt;
                     $feeLedger->YEAR = $year;
                     $feeLedger->FEE_TYPE = "Late Registration Fee";
-                    $feeLedger->SEMESTER = $sem;
+                    //$feeLedger->SEMESTER = $sem;
                     if ($feeLedger->save()) {
                         \DB::commit();
 
@@ -546,6 +546,7 @@ class FeeController extends Controller
                 $program = $request->input('programme');
                 $level = $request->input('level');
                 $bank = $request->input('bank');
+                //dd($level );
 
                 $previousOwing = $request->input('prev-owing');
                 if (empty($previousOwing)) {
@@ -585,7 +586,7 @@ class FeeController extends Controller
                     $feeLedger->RECEIPTNO = $receipt;
                     $feeLedger->YEAR = $year;
                     $feeLedger->FEE_TYPE = $feetype;
-                    $feeLedger->SEMESTER = $sem;
+                    //$feeLedger->SEMESTER = $sem;
 
                     if ($feeLedger->save()) {
                         $this->updateReceipt();
@@ -597,12 +598,13 @@ class FeeController extends Controller
 
 
                         $billOwing = (@$balance[0]->BILL_OWING - $amount) + $previousOwing;
+                        $billpaid = (@$balance[0]->PAID + $amount);
+                        
+                        StudentModel::where('INDEXNO', $indexno)->orWhere("STNO", $request->input('stno'))->update(array('BILL_OWING' => $billOwing, 'PAID' => $billpaid, 'TELEPHONENO' => $phone, 'SYSUPDATE' => '1', "ALLOW_REGISTER" => $status));
+                         //dd($billOwing);
 
 
-                        StudentModel::where('INDEXNO', $indexno)->orWhere("STNO", $request->input('stno'))->update(array('BILL_OWING' => $billOwing, 'TELEPHONENO' => $phone, 'SYSUPDATE' => '1', "ALLOW_REGISTER" => $status));
-
-
-                        $smsOwing = @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $request->input('stno'))->where('STATUS', '=', 'In School')->get();
+                        $smsOwing = @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $request->input('stno'))->where('STATUS', '=', 'In school')->get();
 
 
                         $smsOwe = $smsOwing[0]->BILL_OWING;
@@ -610,9 +612,9 @@ class FeeController extends Controller
                         \Session::put('applicant', $indexno);
                         $message = "Hi $firstname, GHS$amount paid as $feetype, you owe GHS$smsOwe Please visit ttuportal.com to do your course registration. You can print your receipt using receipt no. $receipt ";
                         \DB::commit();
-                        if ($sys->firesms($message, $phone, $indexno)) {
+                       // if ($sys->firesms($message, $phone, $indexno)) {
 
-                        }
+                       // }
 
                         $url = url("printreceipt/" . trim($receipt));
                         $print_window = "<script >window.open('$url','','location=1,status=1,menubar=yes,scrollbars=yes,resizable=yes,width=1000,height=500')</script>";
@@ -641,7 +643,7 @@ class FeeController extends Controller
             } else {
                 $sys = new SystemController();
                 $array = $sys->getSemYear();
-                $sem = $array[0]->SEMESTER;
+                //$sem = $array[0]->SEMESTER;
                 $year = $array[0]->YEAR;
                 $student = explode(',', $request->input('q'));
                 $student = $student[0];
@@ -653,7 +655,7 @@ class FeeController extends Controller
                     return redirect("/students")->with("error", "<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
                 } else {
 
-                    return view("finance.fees.processProtocol")->with('data', $sql)->with('year', $year)->with('sem', $sem);
+                    return view("finance.fees.processProtocol")->with('data', $sql)->with('year', $year);
 
                 }
             }
@@ -673,7 +675,7 @@ class FeeController extends Controller
                 'type' => 'required',
             ]);
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
+            //$sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
             $action = $request->input("action");
             $student = $request->input("student");
@@ -682,13 +684,13 @@ class FeeController extends Controller
             $protocol = new Models\ProtocolModel();
 
             $protocol->year = $year;
-            $protocol->sem = $sem;
+            //$protocol->sem = $sem;
             $protocol->student = $student;
             $protocol->reason = $reason;
             $protocol->action = $action;
             $protocol->policy = $type;
             $protocol->user = @\Auth::user()->fund;
-            Models\StudentModel::where("INDEXNO", $student)->update(array("PROTOCOL" => 1));
+            Models\StudentModel::where("INDEXNO", $student)->update(array('STATUS' => 'In school',"PROTOCOL" => 1));
             if ($protocol->save()) {
                 return redirect("/students")->with("success", "Registration protocol subscribed for $student successful. He/She can proceed to register");
             } else {
@@ -711,7 +713,7 @@ class FeeController extends Controller
                 //  dd("d");
                 $sys = new SystemController();
                 $array = $sys->getSemYear();
-                $sem = $array[0]->SEMESTER;
+                //$sem = $array[0]->SEMESTER;
                 $year = $array[0]->YEAR;
                 $receipt = explode(',', $request->input('q'));
                 $receipt = $receipt[0];
@@ -754,7 +756,7 @@ class FeeController extends Controller
                 //dd("FFF");
                 $sys = new SystemController();
                 $array = $sys->getSemYear();
-                $sem = $array[0]->SEMESTER;
+                //$sem = $array[0]->SEMESTER;
                 $year = $array[0]->YEAR;
                 $student = explode(',', $request->input('q'));
                 $student = $student[0];
@@ -766,7 +768,7 @@ class FeeController extends Controller
                     return redirect("/print/password")->with("error", "<span style='font-weight:bold;font-size:13px;'> $request->input('q') does not exist!</span>");
                 } else {
                     $indexNo = $sql[0]->indexNo;
-                    $receiptQuery = FeePaymentModel::where("INDEXNO", $student)->orWhere("INDEXNO", $sql[0]->STNO)->where("YEAR", $year)->where("SEMESTER", $sem)->first();
+                    $receiptQuery = FeePaymentModel::where("INDEXNO", $student)->orWhere("INDEXNO", $sql[0]->STNO)->where("YEAR", $year)->orderBy("ID", "DESC")->first(); 
                     if (!empty($receiptQuery)) {
                         $receipt = $receiptQuery->RECEIPTNO;
                         $url = url("printreceipt/" . trim($receipt));
@@ -897,7 +899,7 @@ class FeeController extends Controller
         } else {
 
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
+            //$sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
             $user = \Auth::user()->id;
             $valid_exts = array('csv', 'xls', 'xlsx'); // valid extensions
@@ -939,7 +941,7 @@ class FeeController extends Controller
                                 $fee->NATIONALITY = $nationality;
                                 $fee->PROGRAMME = $row->ID;
                                 $fee->LEVEL = $level;
-                                $fee->SEMESTER = $sem;
+                                //$fee->SEMESTER = $sem;
                                 $fee->YEAR = $year;
 
                                 $fee->CREATED_BY = $user;
@@ -1014,7 +1016,7 @@ class FeeController extends Controller
                             $season = $col[4];
                             $programme = $col[5];
                             $level = $col[6];
-                            $sem = $col[7];
+                            //$sem = $col[7];
                             $year = $col[8];
                             $nationality = $col[9];
                             $programs = $this->programmeSearch(); // check if the programmes in the file tally wat is in the db
@@ -1030,7 +1032,7 @@ class FeeController extends Controller
                                 $fee->SEASON_TYPE = $season;
                                 $fee->PROGRAMME = $programme;
                                 $fee->LEVEL = $level;
-                                $fee->SEMESTER = $sem;
+                                //$fee->SEMESTER = $sem;
                                 $fee->YEAR = $year;
                                 $fee->NATIONALITY = $nationality;
                                 $fee->CREATED_BY = $user;
@@ -1221,7 +1223,7 @@ class FeeController extends Controller
                     $fee->SEASON_TYPE = $request->input('stype');
                     $fee->PROGRAMME = $programs->ID;
                     $fee->LEVEL = $request->input('level');
-                    $fee->SEMESTER = $request->input('semester');
+                    //$fee->SEMESTER = $request->input('semester');
                     $fee->YEAR = $request->input('year');
                     $fee->NATIONALITY = $request->input('country');
                     $name = $request->input('name');
@@ -1240,7 +1242,7 @@ class FeeController extends Controller
                     $fee->SEASON_TYPE = $request->input('stype');
                     $fee->PROGRAMME = $programs->ID;
                     $fee->LEVEL = $request->input('level');
-                    $fee->SEMESTER = $request->input('semester');
+                    //$fee->SEMESTER = $request->input('semester');
                     $fee->YEAR = $request->input('year');
                     $fee->NATIONALITY = $request->input('country');
                     $name = $request->input('name');
@@ -1258,7 +1260,7 @@ class FeeController extends Controller
             $fee->SEASON_TYPE = $request->input('stype');
             $fee->PROGRAMME = $request->input('programme');
             $fee->LEVEL = $request->input('level');
-            $fee->SEMESTER = $request->input('semester');
+            //$fee->SEMESTER = $request->input('semester');
             $fee->YEAR = $request->input('year');
             $fee->NATIONALITY = $request->input('country');
             $name = $request->input('name');
@@ -1371,7 +1373,7 @@ class FeeController extends Controller
 
             })->get(); //dd($data);
             $array = $sys->getSemYear();
-            $sem = $array[0]->SEMESTER;
+            //$sem = $array[0]->SEMESTER;
             $year = $array[0]->YEAR;
 
             $i = 0;
@@ -1423,7 +1425,7 @@ class FeeController extends Controller
                 $feeLedger->RECEIPTNO = $receipt + 1;
                 $feeLedger->YEAR = $year;
                 $feeLedger->FEE_TYPE = "School Fees";
-                $feeLedger->SEMESTER = $sem;
+               // $feeLedger->SEMESTER = $sem;
 
                 $feeLedger->save();
 
@@ -1440,7 +1442,7 @@ class FeeController extends Controller
                 $feeLedger2->RECEIPTNO = $receipt + 2;
                 $feeLedger2->YEAR = $year;
                 $feeLedger2->FEE_TYPE = "School Fees";
-                $feeLedger2->SEMESTER = $sem;
+                //$feeLedger2->SEMESTER = $sem;
 
                 $feeLedger2->save();
                 $this->updateReceipt();
@@ -1456,7 +1458,7 @@ class FeeController extends Controller
                 $feeLedger3->RECEIPTNO = $receipt + 3;
                 $feeLedger3->YEAR = $year;
                 $feeLedger3->FEE_TYPE = "School Fees";
-                $feeLedger3->SEMESTER = $sem;
+                //$feeLedger3->SEMESTER = $sem;
 
                 $feeLedger3->save();
                 $this->updateReceipt();

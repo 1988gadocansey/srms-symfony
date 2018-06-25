@@ -15,13 +15,13 @@
  <div class="uk-grid">
      <div class="uk-width-1-1">
 
-
+         <div id="pop_div"></div>
 
          <div class="uk-grid uk-grid-small">
+             <?= Lava::render('ColumnChart', 'Finances', 'perf_div') ?>
 
-             <canvas id="canvas" height="280" width="600"></canvas>
-             <div id="pop-div" style="width:800px;border:1px solid black"></div>
-<?= $lava->render('GeoChart', 'Popularity', 'pop-div') ?>
+
+             @columnchart('Finances', 'perf_div')
          </div>
      </div></div>
  @endsection

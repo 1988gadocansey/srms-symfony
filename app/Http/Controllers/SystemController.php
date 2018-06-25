@@ -212,7 +212,7 @@ class SystemController extends Controller
         if($totalCR<=0 ||  $totalGP<=0){
             return 0;
         }
-        return round( $totalGP/$totalCR,2);
+        return round( $totalGP/$totalCR,5);
     }
     public function getCGPA($indexno) {
 
@@ -223,7 +223,7 @@ class SystemController extends Controller
         if($totalCR<=0 ||  $totalGP<=0){
             return 0;
         }
-        return round( $totalGP/$totalCR,2);
+        return round( $totalGP/$totalCR,5);
     }
     public function age($birthdate, $pattern = 'eu')
     {
@@ -543,7 +543,7 @@ class SystemController extends Controller
         return @$department[0]->DEPARTMENT;
 
     }
-    function selectcount($table_field, $Yes_or_No, $lecturer, $coursecode)
+    function selectcount($table_field, $Yes_or_No, $lecturer, $coursecode,$sem,$year)
     {
         $array = $this->getSemYear();
 
@@ -551,9 +551,9 @@ class SystemController extends Controller
 
         $data=explode(",",$qa);
 
-        $year=$data[0];
+        //$year=$data[0];
 
-        $sem=$data[1];
+        //$sem=$data[1];
 
 
 
@@ -931,13 +931,29 @@ $total_course_assessed= $datac[0];*/
 
         if(@\Auth::user()->role=='Lecturer'){
             $course=@\DB::table('tpoly_mounted_courses')
-                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->where('tpoly_mounted_courses.Lecturer',@\Auth::user()->fund )->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->get();
+                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->where('tpoly_mounted_courses.Lecturer',@\Auth::user()->fund )->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->groupby('tpoly_mounted_courses.COURSE_CODE')->get();
             return $course;
 
         }
         else {
             $course=@\DB::table('tpoly_mounted_courses')
                 ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->get();
+            return $course;
+        }
+    }
+
+
+    public function getMountedCourseList3() {
+
+        if(@\Auth::user()->role=='Lecturer'){
+            $course=@\DB::table('tpoly_mounted_courses')
+                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->where('tpoly_mounted_courses.Lecturer',@\Auth::user()->fund )->where('tpoly_mounted_courses.COURSE_SEMESTER','=', '2')->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->groupby('tpoly_mounted_courses.COURSE_CODE')->get();
+            return $course;
+
+        }
+        else {
+            $course=@\DB::table('tpoly_mounted_courses')
+                ->join('tpoly_courses','tpoly_courses.COURSE_CODE', '=', 'tpoly_mounted_courses.COURSE_CODE')->where('tpoly_mounted_courses.COURSE_SEMESTER','=', '2')->select('tpoly_courses.COURSE_NAME', 'tpoly_mounted_courses.COURSE_CODE','tpoly_mounted_courses.COURSE_SEMESTER')->get();
             return $course;
         }
     }
@@ -1194,6 +1210,13 @@ $total_course_assessed= $datac[0];*/
 
         return @$course[0]->COURSE_CREDIT;
     }
+    public function getMountedCreditHour($courseCode,$sem,$level,$program) {
+        $course = \DB::table('tpoly_mounted_courses')->where('COURSE_CODE',$courseCode)->where('COURSE_SEMESTER',$sem)->where('COURSE_LEVEL',$level)
+            ->where("PROGRAMME",$program)
+            ->get();
+
+        return @$course[0]->COURSE_CREDIT;
+    }
     public function getStudentByID($id){
 
         $student = \DB::table('tpoly_students')->where('ID',$id)->get();
@@ -1205,6 +1228,16 @@ $total_course_assessed= $datac[0];*/
         $student = \DB::table('tpoly_students')->where('INDEXNO',$indexno)->get();
 
         return  @$student[0]->ID;
+    }
+    public function getStudentprogramfromIndexno($indexno) {
+        $student = \DB::table('tpoly_students')->where('INDEXNO',$indexno)->get();
+
+        return  @$student[0]->PROGRAMMECODE;
+    }
+    public function getStudentyeargroupfromIndexno($indexno) {
+        $student = \DB::table('tpoly_students')->where('INDEXNO',$indexno)->get();
+
+        return  @$student[0]->GRADUATING_GROUP;
     }
     public function getStudentNameByID($id){
 
@@ -1315,6 +1348,30 @@ $total_course_assessed= $datac[0];*/
         return ($total);
     }
 
+    public function getStudentsHighestCGPA_HND($skip){
+        //$array = $this->getSemYear();
+
+        //$year = $array[0]->YEAR;
+        //$sem=$array[0]->SEMESTER;
+
+        $total = \DB::table('tpoly_students')
+            ->join('tpoly_programme', 'tpoly_students.PROGRAMMECODE', '=', 'tpoly_programme.PROGRAMMECODE')
+            ->where('tpoly_students.STATUS','In School')
+            ->where('tpoly_students.LEVEL', "LIKE", "%"."H")
+            ->where('tpoly_students.LEVEL', "=", "300H")
+            ->orderby("tpoly_students.CGPA",'DESC')
+            ->skip($skip)
+            ->take(1)
+            //->lists('INDEXNO', 'CGPA');
+            // ->where('tpoly_academic_record.year', $year)
+            //->where('tpoly_academic_record.sem', $sem)
+            // ->groupBy('tpoly_academic_record.student')
+            ->get();
+        return ($total);
+    }
+
+    //$users = DB::table('users')->skip(10)->take(5)->get();
+
     public function getStudentsTotalPerLevelAll($level){
         $array = $this->getSemYear();
 
@@ -1348,6 +1405,9 @@ $total_course_assessed= $datac[0];*/
             ->get();
         return count($total);
     }
+
+
+
 
     public function getStudentsTotalPerLevelAllRegistered($level){
         $array = $this->getSemYear();
@@ -2059,7 +2119,7 @@ $total_course_assessed= $datac[0];*/
             try {
 
 
-                $phone="+233".\substr($phone,1,9);
+                $phone="+233".\substr($phone,-9);
                 $phone = str_replace(' ', '', $phone);
                 $phone = str_replace('-', '', $phone);
                 if (!empty($message) && !empty($phone)) {

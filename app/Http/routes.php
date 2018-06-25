@@ -29,15 +29,17 @@ Route::get('student/{indexno}/qa', 'APIController@qualityAssurance');
 Route::get('delete/wrong', 'StudentController@showWrong');
 
 Route::get('student/{indexno}/liaison', 'APIController@liaison');
-Route::post('receivePayment', 'APIController@payFee');
+Route::post('api/receivePayment', 'APIController@payFeeLive');
 Route::post('/api/hall', 'APIController@getStudentHall');
+Route::get('/api/student/{indexno}/password', 'APIController@getStudentPassword');
 Route::post('/api/local', 'APIController@getLocalData');
 Route::post('/api/kojo', 'APIController@getStudentKojo');
 Route::post('/api/kojo/name', 'APIController@getStudentKojoName');
 Route::post('/api/send', 'APIController@pushToSrms');
-Route::post('/api/student', 'APIController@getStudentID');
+//Route::post('/api/student', 'APIController@getStudentID');
 Route::post('fireVoucher', 'APIController@fireVoucher');
 
+Route::get( '/api/student/{indexno}', "APIController@getStudentData");
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/', function () {
@@ -86,7 +88,10 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('laracharts', 'HomeController@getLaraChart');
-    Route::get('/graph', 'HomeController@buildChart');
+    Route::get('/graph', 'HomeController@getLaraChart');
+    Route::get('/graph/students', 'GraphController@student');
+    Route::get('/graph/try', 'GraphController@chartjs');
+
     // student routes
     Route::controller('students', 'StudentController', [
         'anyData' => 'students.data',
@@ -278,7 +283,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( 'load_legacy', "CourseController@processsUploadLegacy");
 
 
-    Route::get('/printAttendance/{semester}/sem/{course}/course/{code}/code/{level}/level/{id}/id','CourseController@printAttendance');
+    Route::get('/printAttendance/{course}/course/{level}/level','CourseController@printAttendance');
     Route::get( 'resit', "CourseController@uploadResit");
     Route::post('/upload_resit', "CourseController@processResit");
     Route::get('/system/registration/batch', "CourseController@batchRegistration");
@@ -324,7 +329,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post( '/process_broadsheet', "CourseController@processBroadsheet");
 
     Route::get( '/broadsheet/napbtex', "CourseController@naptexBroadsheet");
-    Route::post( 'process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
+    Route::post( '/process_broadsheet_napbtex', "CourseController@processNaptexBroadsheet");
 
 
     //Route::match(array("get", "post"), '/broadsheet/naptex', "CourseController@naptexBroadsheet");
@@ -342,6 +347,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/accept/bulk', 'SyncController@sendBulk');
 
     Route::get('/auth/send', 'SystemController@sendAuthOutreach');
+    Route::get('/student/resit', 'StudentController@showResitView');
+    Route::post('student_resit_process', 'StudentController@showTrails');
 
 
 
@@ -357,16 +364,22 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/download_registered','CourseController@showFileUploadRegistered');
-
     Route::post('/download_registered','CourseController@downloadRegisteredExcel');
+
+    Route::get('/download_results','CourseController@showFileUploadResults');
+    Route::post('/download_results','CourseController@downloadResults');
 
 
     Route::get('/print_report_qa/{lecturer}/lecturer/{sem}/sem/{course}/course','QualityAssuranceController@printView');
+
+    Route::get('/updateProfile','SettingsController@updateFone');
+    Route::get('/updatePassword','SettingsController@updatePass');
 
 
 
     Route::match(array("get", "post"),'/systems/users/update','SettingsController@updateUsers');
     Route::post('users/update/phone','SettingsController@updateProfile');
+    Route::post('admin/update/phone','SettingsController@updateProfilePassword');
     Route::get('/applicants/view/','ApplicantController@index');
     Route::get('/applicants/sms/','ApplicantController@admitMessage');
     Route::get('/admissions/voucher','ApplicantController@cards');

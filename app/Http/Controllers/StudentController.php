@@ -95,8 +95,15 @@ class StudentController extends Controller
     }
     public function index(Request $request, SystemController $sys) {
 
+        if($request->has('status') && trim($request->input('status')) != ""){
+                $status=$request->input('status')  ;
+        }
+        else{
+             $status= "In school";
+        }
+
         if($request->user()->isSupperAdmin || @\Auth::user()->role=="FO"  || @\Auth::user()->department=="Tpmid" || @\Auth::user()->department=="Tptop" || @\Auth::user()->department=="Rector" || @\Auth::user()->role=="Rector" || @\Auth::user()->department=="Registrar" || @\Auth::user()->department=="Admissions" ||  @\Auth::user()->department=="Planning" ||  @\Auth::user()->department=="top"  || @\Auth::user()->department == 'Examination'||  @\Auth::user()->department=="qa"){
-            $student = StudentModel::query();
+            $student = StudentModel::query()->where("STATUS",$status);
         }
         elseif (@\Auth::user()->role=="Registrar") {
             $student = StudentModel::where('PROGRAMMECODE', '!=', '')->whereHas('programme', function($q) {
@@ -555,7 +562,7 @@ class StudentController extends Controller
                             'password' => bcrypt($real),
                         ]);
 
-                        $message = "Hi $fname, Please visit ttuportal.com to do update your biodata with $indexno as your username  and $real as password   ";
+                        $message = "Hi $fname, Please visit ttuportal.com to update your biodata with $indexno as your username  and $real as password   ";
 
                         \DB::commit();
                         if ($sys->firesms($message, $phone, $indexno)) {
@@ -598,7 +605,7 @@ class StudentController extends Controller
         $hall=$sys->getHalls();
         $religion=$sys->getReligion();
 
-        $trails=  Models\AcademicRecordsModel::where('student', $id)->where("grade","E")->paginate(100);
+        $trails=  Models\AcademicRecordsModel::where('student', $id)->where("grade","F")->paginate(100);
 
         return view('students.show')->with('student', $query)
             ->with('programme', $programme)
@@ -673,6 +680,8 @@ class StudentController extends Controller
             })->first();
 
         }
+
+        //dd($query);
         $region=$sys->getRegions();
 
 
@@ -810,7 +819,7 @@ class StudentController extends Controller
                         "DATEOFBIRTH"=>$dob,
                         "AGE"=>$age,
                         "LEVEL"=>$level,
-                       // "GRADUATING_GROUP"=>$group,
+                        // "GRADUATING_GROUP"=>$group,
                         "MARITAL_STATUS"=>strtoupper($marital_status),
                         "HALL"=>strtoupper($hall),
                         "ADDRESS"=>strtoupper($address),
@@ -867,7 +876,7 @@ class StudentController extends Controller
         return view("students.indexUpload");
     }
     /*
-     * upload continuing students 
+     * upload continuing students
      */
     public function uploadIndexNumber(Request $request, SystemController $sys) {
         set_time_limit(36000);
@@ -1115,7 +1124,7 @@ class StudentController extends Controller
 //                            }
 //
 //                             $indexNo_query = Models\IndexNoModel::first();
-//                	
+//
 //                            $indexno ="07".date("y").$indexNo_query->no;
 //                            $year = $col[0];
 //                            $level = $col[1];
@@ -1131,16 +1140,16 @@ class StudentController extends Controller
 //                            $bill= $col[11];
 //                            $owing = $col[12];
 //                            $admissionNum=$col[13];
-//                            
+//
 //                           // print_r($program)."<br/>"
 //                        // first check if the students exist in the system if true then update else insert
 //                     $programme = $sys->programmeSearchByCode(); // check if the programmes in the file tally wat is in the db
 //                            if (array_search($program, $programme)) {
-//         
+//
 //                        $testQuery=StudentModel::where('STNO', $admissionNum)->first();
 //                          if(empty($testQuery)){
-//                              
-//                          
+//
+//
 //                                $student=new StudentModel();
 //                               // $student->INDEXNO=$indexno;
 //                                $student->LEVEL=@$level;
@@ -1149,7 +1158,7 @@ class StudentController extends Controller
 //                                $student->PROGRAMMECODE=$program;
 //                                $student->STATUS="In School";
 //                                $student->SYSUPDATE="1";
-//                                 
+//
 //                                $student->GRADUATING_GROUP=$group;
 //                                $student->SURNAME=$surname;
 //                                $student->FIRSTNAME=$othername;
@@ -1163,31 +1172,31 @@ class StudentController extends Controller
 //                                 \DB::commit();
 //                              }
 //                             else{
-//                                
+//
 //                                         StudentModel::where('INDEXNO', $indexno)->update(array("LEVEL" =>@$level, "YEAR" => $year, "PROGRAMMECODE" => $program, "SYSUPDATE"=>"1", "STATUS" => 'In School',"NAME"=>$name,"GRADUATING_GROUP"=>$group,"BILLS"=>$bill,"BILL_OWING"=>$owing,"SEX"=>$gender,"FIRSTNAME"=>$othername,"TELEPHONENO"=>$phone,"RESIDENT_ADDRESS"=>$resident,"ADDRESS"=>$contact,"SURNAME"=>$surname));
 //                                        \DB::commit();
 //                               }
-//                             
+//
 //                            }
 //                            else{
 //                               return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contains unrecognised programme codes.. please check your programme code!</span> ");
-//                      
+//
 //                            }
-//                                               
-//                        } 
-//                              
-//                       
+//
+//                        }
+//
+//
 //                        fclose($handle);
 //                        return redirect('/students')->with("success",  " <span style='font-weight:bold;font-size:13px;'>student uploaded  successfully!</span> ");
-//                             
+//
 //                    }
 //                } else {
 //                     return redirect('/upload_applicants')->with("error", " <span style='font-weight:bold;font-size:13px;'>Only csv (comma delimited ) file is accepted!</span> ");
-//                                   
+//
 //                }
 //            } else {
 //                 return redirect('/upload_students')->with("error", " <span style='font-weight:bold;font-size:13px;'>Please upload a csv file!</span> ");
-//                    
+//
 //        }}
 //    catch (\Exception $e) {
 //            \DB::rollback();
@@ -1392,7 +1401,7 @@ class StudentController extends Controller
         //dd($request);
 
         $academicDetails = $sys->getSemYear();
-        $sem = $academicDetails[0]->SEMESTER;
+        //$sem = $academicDetails[0]->SEMESTER;
         $year = $academicDetails[0]->YEAR;
         //$data =  $this->fetchData("https://www.zenithbank.com.gh/realtimenotification/api/bankpaydetail");
         if ($request->hasFile('file')) {
@@ -1433,7 +1442,7 @@ class StudentController extends Controller
                             $program = $oldStudent->PROGRAMMECODE;
                             $bill = $sys->getYearBill($year, $level, $program);
 
-                            $bill_owing = $bill - $item->amount;
+                            //$bill_owing = $bill - $item->amount;
                             if ($bill <= $item->amount) {
                                 $details = "Full payment";
 
@@ -1443,18 +1452,19 @@ class StudentController extends Controller
 
                             $date = $item->PaymentDate;
 
-                            $checker=Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->get();
-                            if(empty($checker)){
+                            $checker=Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("AMOUNT",$item->amount)->where("BANK_DATE",$item->paymentdate)->where("FEE_TYPE",$item->type)->get();
+                            //dd( $checker);
+                            if(count($checker)==0){
                                 $feeLedger = new Models\FeePaymentModel();
                                 $feeLedger->INDEXNO = $index;
                                 $feeLedger->PROGRAMME = $program;
                                 $feeLedger->AMOUNT = $item->amount;
-                                $feeLedger->PAYMENTTYPE = "School Fees";
-                                $feeLedger->PAYMENTDETAILS = $details;
+                                $feeLedger->PAYMENTTYPE = $details;
+                                $feeLedger->PAYMENTDETAILS = "Paid at bank";
                                 $feeLedger->BANK_DATE = $item->paymentdate;
                                 $feeLedger->CHECKER = rand();
                                 $feeLedger->LEVEL = $level;
-                                $feeLedger->RECIEPIENT = 751999;
+                                $feeLedger->RECIEPIENT = 701099;
                                 $feeLedger->BANK = $item->accountnumber;
                                 if(empty($item->transaction)){
                                     $feeLedger->TRANSACTION_ID = rand();
@@ -1464,11 +1474,11 @@ class StudentController extends Controller
                                 }
                                 $feeLedger->RECEIPTNO = $sys->getReceipt();
                                 $feeLedger->YEAR = $year;
-                                $feeLedger->FEE_TYPE = "School Fees";
-                                $feeLedger->SEMESTER = $sem;
+                                $feeLedger->FEE_TYPE = $item->type;
+                                //$feeLedger->SEMESTER = $sem;
                                 $feeLedger->save();
                                 if ($feeLedger->save()) {
-                                    @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $indexno)->update(array("BILL_OWING" => $bill_owing, "BILLS" => $bill));
+                                    @StudentModel::where("INDEXNO", $indexno)->orWhere("STNO", $indexno)->update(array("BILLS" => $bill));
 
                                     $sys->updateReceipt();
                                 }
@@ -1476,7 +1486,7 @@ class StudentController extends Controller
                             }
                             else{
 
-                                dd( Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("FEE_TYPE","School Fees")->update(array("AMOUNT"=>$item->amount)));
+                                Models\FeePaymentModel::where("INDEXNO",$index)->where("YEAR",$year)->where("AMOUNT",$item->amount)->where("BANK_DATE",$item->paymentdate)->where("FEE_TYPE",$item->type)->update(array("AMOUNT"=>$item->amount));
 
                             }
 
@@ -1490,5 +1500,84 @@ class StudentController extends Controller
 
             }
         }
+    }
+
+    /*
+     * Get route
+     */
+
+    public function showResitView(Request $request, SystemController $sys){
+        return view("students.resits")
+            ->with('level', $sys->getLevelList())
+            ->with("program", $sys->getProgramList());
+
+
+
+    }
+    public  function showTrails(Request $request,SystemController $sys){
+
+        $program=$request->input("program");
+        $level=$request->input("level");
+        //$year=$request->input("year");
+        $semester=$request->input("semester");
+
+        $data=Models\AcademicRecordsModel::where("programme",$program)->where("level",$level)
+            //->where("year",$year)
+            ->where("sem",$semester)
+            ->where("grade","F")
+            ->whereNull("resit")
+            ->groupBy("indexno")
+            ->orderBy("indexno")
+
+            ->get();
+
+
+
+        return view("students.resits")->with("data",$data)
+            //->with("years", $request->input("year", ""))
+            ->with("programs", $request->input("program", ""))
+            ->with("levels", $request->input("level", ""))
+            ->with("term", $request->input("semester", ""))
+            ->with('level', $sys->getLevelList())
+            ->with("year", $sys->years())
+            ->with("program", $sys->getProgramList());
+
+
+
+    }
+    public function  getStudentName($indexno){
+        $data=Models\StudentModel::where("INDEXNO",$indexno)
+            ->orWhere("STNO",$indexno)
+            ->select("NAME")->first();
+
+        return $data->NAME;
+
+    }
+    public function getTrails($indexno,$sem,$level,$program){
+        $resultData=array();
+        $trailsArray = \DB::table('tpoly_academic_record')->where('indexno',$indexno)
+            ->where("level",$level)
+            //->where("year",$year)
+            ->where("sem",$sem)
+            ->where("programme",$program)
+            ->where("grade","F")
+            ->get();
+        foreach ($trailsArray as $row){
+            array_push($resultData,$row->code);
+        }
+
+
+        return implode(" , ",$resultData);
+    }
+    public function countTrails($code,$sem,$level,$program)
+    {
+
+        return  \DB::table('tpoly_academic_record')->where('code', $code)
+            ->where("level", $level)
+            //->where("year", $year)
+            ->where("sem", $sem)
+            ->where("programme", $program)
+            ->where("grade", "F")
+            ->count();
     }
 }

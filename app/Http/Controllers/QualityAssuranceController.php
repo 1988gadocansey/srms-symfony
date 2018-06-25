@@ -31,6 +31,8 @@ class QualityAssuranceController extends Controller
 
     public function printIndividualLecturer(Request $request, SystemController $sys)
     {
+        \Session::put('sem', $request->input("semester", ""));
+        \Session::put('year', $request->input("year", ""));
         $query= Models\QAquestionModel::groupBy('coursecode')->groupBy('academic_year');
         if ($request->has('level') && trim($request->input('level')) != "") {
             $query->where("level", $request->input("level", ""));
@@ -81,9 +83,15 @@ class QualityAssuranceController extends Controller
 
         $data=explode(",",$qa);
 
-        $year=$data[0];
+       // $year=$data[0];
+
+        $year=\Session::get('year');
+
+
+
 
        // $sem=$data[1];
+
 
         $lecturer = $request->lecturer;
         $course = $request->course;
@@ -93,10 +101,13 @@ class QualityAssuranceController extends Controller
 
 
 
+
+
              $query = Models\QAquestionModel::where("lecturer", $lecturer)
                 ->where("academic_year", $year)->where("semester", $sem)->where("course",$course)->groupBy("indexno")->get();
+//dd($query);
 
-            return view('qa.printLecturer')->with('course', $course)
+             return view('qa.printLecturer')->with('course', $course)
                 ->with("lecturer",$lecturer)
                 ->with("year",$year)
                 ->with("data",$query)

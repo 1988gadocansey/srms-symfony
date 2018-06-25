@@ -7,11 +7,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/balping/json-raw-encoder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-snappy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/captcha-com/captcha" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/captcha-com/laravel-captcha" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consoletvs/charts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
@@ -49,6 +51,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mtdowling/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/muhamadrezaar/highcharts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
@@ -117,9 +120,11 @@
           <root url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
           <root url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
           <root url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
+          <root url="file://$MODULE_DIR$/vendor/balping/json-raw-encoder" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-snappy" />
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/consoletvs/charts" />
           <root url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
@@ -155,6 +160,7 @@
           <root url="file://$MODULE_DIR$/vendor/mockery/mockery" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/mtdowling/cron-expression" />
+          <root url="file://$MODULE_DIR$/vendor/muhamadrezaar/highcharts" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
           <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
@@ -219,9 +225,11 @@
           <root url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
           <root url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
           <root url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
+          <root url="file://$MODULE_DIR$/vendor/balping/json-raw-encoder" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-snappy" />
           <root url="file://$MODULE_DIR$/vendor/classpreloader/classpreloader" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/consoletvs/charts" />
           <root url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
@@ -257,6 +265,7 @@
           <root url="file://$MODULE_DIR$/vendor/mockery/mockery" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/mtdowling/cron-expression" />
+          <root url="file://$MODULE_DIR$/vendor/muhamadrezaar/highcharts" />
           <root url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
           <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />

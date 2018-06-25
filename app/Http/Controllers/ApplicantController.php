@@ -1011,7 +1011,14 @@ class ApplicantController extends Controller {
 
     public function pushToSRMS(Request $request, SystemController $sys)
     {
-         $student=$request;
+        $data = Models\ApplicantModel::where("ADMITTED", "1")->take(500);
+        foreach ($data as $student) {
+
+
+            $check = Models\StudentModel::where("STNO", $student->APPLICATION_NUMBER)->first();
+
+            if (empty($check->STNO)) {
+
                 $program = $student->PROGRAMME_ADMITTED;
                 $ptype = $sys->getProgrammeType($program);
                 if ($ptype == "NON TERTIARY") {
@@ -1020,11 +1027,7 @@ class ApplicantController extends Controller {
                     $level = "100H";
                 } elseif ($ptype == "BTECH") {
                     $level = "100BTT";
-                }
-                 elseif ($ptype == "DEGREE") {
-                    $level = "100B";
-                }
-                else {
+                } else {
                     $level = "500MT";
                 }
 
@@ -1035,50 +1038,45 @@ class ApplicantController extends Controller {
                 $query = new Models\StudentModel();
                 $query->YEAR = $level;
                 $query->LEVEL = $level;
-                $query->FIRSTNAME = $student->input('firstname');
-                $query->SURNAME = $student->input('lastname');
-                $query->OTHERNAMES = $student->input('othernames');
-                $query->TITLE = $student->input('title');
-                $query->SEX = $student->input('gender');
-                $query->DATEOFBIRTH = $student->input('dob');
-                $query->NAME = $student->input('name');
-                $query->AGE = $student->input('age');
+                $query->FIRSTNAME = $student->FIRSTNAME;
+                $query->SURNAME = $student->SURNAME;
+                $query->OTHERNAMES = $student->OTHERNAME;
+                $query->TITLE = $student->TITLE;
+                $query->SEX = $student->GENDER;
+                $query->DATEOFBIRTH = $student->DOB;
+                $query->NAME = $student->NAME;
+                $query->AGE = $student->AGE;
 
-                 $query->HALL = $student->input('hall');
-                $query->ADDRESS = $student->input('address');
-                $query->RESIDENTIAL_ADDRESS = $student->input('address');
-                $query->EMAIL = $student->input('email');
-                $query->PROGRAMMECODE = $student->input('program');
-                $query->TELEPHONENO = $student->input('phone');
-                $query->COUNTRY = $student->input('country');
-                $query->REGION = $student->input('region');
-                $query->RELIGION = $student->input('religion');;
-                $query->HOMETOWN = $student->input('hometown');
-                $query->GUARDIAN_NAME = $student->input('guardian-name');
-                $query->GUARDIAN_ADDRESS = $student->input('guardian-address');
-                $query->GUARDIAN_PHONE = $student->input('guardian-phone');
-                $query->GUARDIAN_OCCUPATION = $student->input('guardian-occupation');
-                $query->DISABILITY = $student->input('disable');
-                $query->STNO = $student->input('stno');
-                $query->INDEXNO = $student->input('stno');
-                $query->TYPE = $student->input('type');
-                $query->STUDENT_TYPE = $student->input('resident');
-                $query->ALLOW_REGISTER = 1;
-                $query->STATUS = "Admitted";
+                $query->MARITAL_STATUS = $student->MARITAL_STATUS;
+                $query->HALL = $student->HALL_ADMITTED;
+                $query->ADDRESS = $student->ADDRESS;
+                $query->RESIDENTIAL_ADDRESS = $student->RESIDENTIAL_ADDRESS;
+                $query->EMAIL = $student->EMAIL;
+                $query->PROGRAMMECODE = $student->PROGRAMME_ADMITTED;
+                $query->TELEPHONENO = $student->PHONE;
+                $query->COUNTRY = $student->NATIONALITY;
+                $query->REGION = $student->REGION;
+                $query->RELIGION = $student->RELIGION;
+                $query->HOMETOWN = $student->HOMETOWN;
+                $query->GUARDIAN_NAME = $student->GURDIAN_NAME;
+                $query->GUARDIAN_ADDRESS = $student->GURDIAN_ADDRESS;
+                $query->GUARDIAN_PHONE = $student->GURDIAN_PHONE;
+                $query->GUARDIAN_OCCUPATION = $student->GURDIAN_OCCUPATION;
+                $query->DISABILITY = $student->PHYSICALLY_DISABLED;
                 $query->STATUS = "In School";
                 $query->SYSUPDATE = "1";
 
 
-                $query->BILLS =  $student->input('fees');
-                $query->BILL_OWING =  $student->input('fees');
-                $query->PAID =  0.00;
+                $query->BILLS = $student->ADMISSION_FEES;
 
-
+                $query->STNO = $student->APPLICATION_NUMBER;
+                $query->INDEXNO = $student->APPLICATION_NUMBER;
                 $query->save();
 
-                //$sys->getPassword($student->input('stno'));
+                $sys->getPassword($student->APPLICATION_NUMBER);
 
-
+            }
+        }
     }
     public function generateResultApplicants(Request $request, SystemController $sys){
         $sql=Models\ApplicantModel::where("Admitted",1)->where("ADMISSION_TYPE",'regular')->where("PASS","Requirement Met");

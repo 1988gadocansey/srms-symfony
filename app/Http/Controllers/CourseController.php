@@ -586,12 +586,9 @@ class CourseController extends Controller
                             $record->gpoint =round(( $credit*$gradePoint),2);
                             $record->save();
 
-                            $cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-                            $oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA")->first();
-
-                            $newCgpa=$cgpa+@$oldCgpa->CGPA;
-
-                            Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa));
+                            $newCgpa=@$sys->getCGPA($indexNo);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
                             \DB::commit();
 
                         }
@@ -671,7 +668,11 @@ class CourseController extends Controller
                         $indexNo=$col[0];
                         $studentDb= $indexNo  ;
                         $studentID= $sys->getStudentIDfromIndexno($indexNo);
+                        $studentProgram= $sys->getStudentprogramfromIndexno($indexNo);
+                        $studentYearGroup= $sys->getStudentyeargroupfromIndexno($indexNo);
 
+                        $courseid3=@$sys->getCourseMountedInfo($course);
+                        $courseid2= $courseid3[0]->ID;
 
 
                         $courseName=@$sys->getCourseCodeByIDArray2($course);
@@ -693,11 +694,11 @@ class CourseController extends Controller
                         $gradeArray = @$sys->getGrade($total, $program[0]->GRADING_SYSTEM);
                         $grade = @$gradeArray[0]->grade;
 
-                        $credit=$sys->getCreditHour($name,$semester,$level,$program[0]->PROGRAMMECODE); // get credit hour of a course
+                        $credit=$sys->getMountedCreditHour($name,$semester,$level,$program[0]->PROGRAMMECODE); // get credit hour of a course
 
                         $gradePoint = @$gradeArray[0]->value;
                         $test=Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("credits",$credit)->where("year",$year)->where("resit","yes")->get()->toArray();
-                        if(empty($test)){
+                        if(count($test)==0){
                             if($total>0 || $total!=""){
                                 $record = new Models\AcademicRecordsModel();
                                 $record->indexno = $indexNo;
@@ -707,7 +708,9 @@ class CourseController extends Controller
                                 $record->credits = $credit;
                                 $record->student= $studentID;
                                 $record->level = $level;
-
+                                $record->course = $courseid2;
+                                $record->programme = $studentProgram;
+                                $record->yrgp = $studentYearGroup;
                                 $record->exam = $exam;
                                 $record->total = $total;
                                 $record->resit = "yes";
@@ -716,13 +719,34 @@ class CourseController extends Controller
                                 $record->gpoint =round(( $credit*$gradePoint),2);
                                 $record->save();
 
-                                $cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-                                //$oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA")->first();
+                                $checkF=Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("year",$year)->where("grade","F")->get()->toArray();
+                                    if(count($checkF)==0){
+                                        $recordf = new Models\AcademicRecordsModel();
+                                        $recordf->indexno = $indexNo;
+                                        $recordf->code = $course;
+                                        $recordf->sem = $semester;
+                                        $recordf->year = $year;
+                                        $recordf->credits = $credit;
+                                        $recordf->student= $studentID;
+                                        $recordf->level = $level;
+                                        $recordf->course = $courseid2;
+                                        $recordf->programme = $studentProgram;
+                                        $recordf->yrgp = $studentYearGroup;
+                                        $recordf->exam = "40";
+                                        $recordf->total = "40";
+                                        $recordf->resit = "done";
 
-                                //$newCgpa=$cgpa+@$oldCgpa->CGPA;
+                                        $recordf->grade = "F";
+                                        $recordf->gpoint =round((0),2);
+                                        $recordf->save();
+                                        }
 
-                                //@Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa));
-                                // \DB::commit();
+                                 $newCgpa=@$sys->getCGPA($indexNo);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
+
+                                    Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("credits",$credit)->where("year",$year)->where("grade","F")->update(array("resit"=>"done","resit"=>"done"));
+                                 \DB::commit();
                             }
                         }
 
@@ -842,9 +866,14 @@ class CourseController extends Controller
                         $indexNo=$col[0];
                         $studentDb= $indexNo  ;
                         $studentID= $sys->getStudentIDfromIndexno($indexNo);
+                        $studentProgram= $sys->getStudentprogramfromIndexno($indexNo);
+                        $studentYearGroup= $sys->getStudentyeargroupfromIndexno($indexNo);
 
 
                         $courseName=@$sys->getCourseCodeByIDArray2($course);
+
+                        $courseid3=@$sys->getCourseMountedInfo($course);
+                        $courseid2= $courseid3[0]->ID;
 
                         $displayCourse=@$courseName[0]->COURSE_NAME;
                         $displayCode=@$courseName[0]->COURSE_CODE;
@@ -863,21 +892,23 @@ class CourseController extends Controller
                         $program=$sys->getProgramArray($programmeDetail);
                         $gradeArray = @$sys->getGrade($total, $program[0]->GRADING_SYSTEM);
                         $grade = @$gradeArray[0]->grade;
-                        $credit=$sys->getCreditHour($name,$semester,$level,$program[0]->PROGRAMMECODE); // get credit hour of a course
+                        $credit=$sys->getMountedCreditHour($name,$semester,$level,$program[0]->PROGRAMMECODE); // get credit hour of a course
 
 
                         $gradePoint = @$gradeArray[0]->value;
-                        $test=@Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("credits",$credit)->where("year",$year)->get()->toArray();
-                        if(empty($test)){
+                        $test=@Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("year",$year)->get()->toArray();
+                        if(count($test)==0){
                             $record = new Models\AcademicRecordsModel();
                             $record->indexno = $indexNo;
                             $record->code = $course;
+                            $record->course = $courseid2;
                             $record->sem = $semester;
                             $record->year = $year;
                             $record->credits = $credit;
                             $record->student= $studentID;
                             $record->level = $level;
-
+                            $record->programme = $studentProgram;
+                            $record->yrgp = $studentYearGroup;
                             $record->exam = $exam;
                             $record->total = $total;
 
@@ -886,17 +917,15 @@ class CourseController extends Controller
                             $record->save();
 
                             $cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-                            //@$oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA")->first();
-
-                            // $newCgpa=$cgpa+@$oldCgpa->CGPA;
-
-                            //@Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa));
+                            $newCgpa=@$sys->getCGPA($indexNo);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
                             //\DB::commit();
 
                         }
                         else{
 
-                            Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("credits",$credit)->where("year",$year)->update(
+                            Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("code",$course)->where("year",$year)->update(
                                 array(
                                     "indexno" =>$indexNo,
                                     "code"=>$course,
@@ -905,27 +934,26 @@ class CourseController extends Controller
                                     "credits"=>$credit,
                                     "student"=>$studentID,
                                     "level"=>$level,
-
+                                    "course"=>$courseid2,
                                     "exam" =>$exam,
                                     "total"=> $total,
+                                    "programme" =>$studentProgram,
+                                    "yrgp"=> $studentYearGroup,
 
                                     "grade" => $grade,
                                     "gpoint" =>round(( $credit*$gradePoint),2),
                                 )
 
                             );
-                            //  $cgpa= @number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-
-                            //$oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA")->first();
-                            //$newCgpa=@$cgpa+@$oldCgpa->CGPA;
-
-                            //  @Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa));
+                           $newCgpa=@$sys->getCGPA($indexNo);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
                             // \DB::commit();
                         }
 
 
-
+//dd($newCgpa);
 
 
 //                               }
@@ -1128,7 +1156,7 @@ class CourseController extends Controller
 
     public function gradeModification(SystemController $sys,Request $request){
 
-        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' ||  @\Auth::user()->fund== '755991'||  @\Auth::user()->fund== '1201610' || @\Auth::user()->fund== '701088') {
+        if ( @\Auth::user()->role== 'Lecturer' || @\Auth::user()->role== 'HOD' || @\Auth::user()->fund== '701088') {
 
             if ($request->isMethod("get")) {
 
@@ -1241,19 +1269,6 @@ class CourseController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function transcript(SystemController $sys,Request $request){
 
         if (@\Auth::user()->role == 'HOD' || @\Auth::user()->role == 'Support' || @\Auth::user()->role == 'Lecturer' || @\Auth::user()->role == 'Registrar' || @\Auth::user()->department == 'top' || @\Auth::user()->department == 'Rector' || @\Auth::user()->department == 'Tpmid' || @\Auth::user()->department == 'Tptop' || @\Auth::user()->role == 'Admin') {
@@ -1308,77 +1323,66 @@ class CourseController extends Controller
 
             <div   class="uk-grid" data-uk-grid-margin>
 
-                <table  border="0" width="886px" cellspacing="0" align="center" style="margin-left:8px">
-
+                <table  border="0" valign="top" cellspacing="0" align="left">
                     <tr>
-                        <th height="41" valign="top" class="bod" scope="row">
-                            <table width="100%" border="0">
+                        <td>
+                            <table width="826px" style="margin-left:18px" height="133">
                                 <tr>
-                                    <th align="center" valign="middle" scope="row">
-                                        <table height="133" border="0">
-                                            <tr>
-                                                <th align="center" valign="middle" scope="row">
-
-                                                    <table border="0" >
-                                                        <tr>
-
-                                                            <td>
-                                                                <table>
-                                                                    <tr>
-                                                                        <td class="uk-text-danger uk-text-left" colspan="3"><blinks>Use Mozilla Firefox or Google Chrome. Contact your HOD or call 0246091283 / 0505284060 for any assistance. </blinks></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3" align='left'> <img src="<?php echo url('public/assets/img/academic.jpg')?>" style='width: 826px;height: auto;margin-bottom: 10px;'/></td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold"style="padding-right: px;">INDEX NUMBER</td> <td style=""><?php echo $student->INDEXNO;?></td>
-                                                                        <td rowspan="5" width="145">&nbsp;
-                                                                            <img   style="width:130px;height: auto;margin-left: 8px"
-                                                                                <?php
-                                                                                $pic = $student->INDEXNO;
-                                                                                ?>
-                                                                                   src='<?php echo url("public/albums/students/$pic.JPG")?>' alt="  Affix student picture here"    />
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold" style="">NAME</td> <td><?php echo strtoupper($student->TITLE .' '.  $student->NAME)?></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold"style="">GENDER</td> <td><?php echo strtoupper($student->SEX)?></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold">PROGRAMME</td> <td><?php echo strtoupper($student->program->PROGRAMME)?></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold" style="">DATE OF ADMISSION</td> <td><?php echo strtoupper($student->DATE_ADMITTED)?></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="uk-text-bold" style="">DATE OF BIRTH</td> <td><?PHP echo  $student->DATEOFBIRTH ; ?></td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td class="uk-text-left" colspan="3">&nbsp;<br/>For HND only. &nbsp;&nbsp;Grade &nbsp;= &nbsp;Value, &nbsp;&nbsp;&nbsp;A+ &nbsp;= &nbsp;5.0, &nbsp;&nbsp;&nbsp;A &nbsp;= &nbsp;4.5, &nbsp;&nbsp;&nbsp;B+ &nbsp;= &nbsp;4.0, &nbsp;&nbsp;&nbsp;B &nbsp;= &nbsp;3.5, &nbsp;&nbsp;&nbsp;C+ &nbsp;= &nbsp;3, &nbsp;&nbsp;&nbsp;C &nbsp;= &nbsp;2.5, &nbsp;&nbsp;&nbsp;D+ &nbsp;= &nbsp;2, &nbsp;&nbsp;&nbsp;D &nbsp;= &nbsp;1.5, &nbsp;&nbsp;&nbsp;F &nbsp;= &nbsp;0, &nbsp;&nbsp;&nbsp;red asterisk means resit</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                            </tr>
-                                        </table> <!-- end basic infos -->
-
-
-
-
-
-            </div>
-
-        </div>
-        </tr>
-        </table></th>
-        </tr>
-        <tr></tr>
-        </table>
+                        
+                                    <td class="uk-text-danger uk-text-left" colspan="3"><blinks>Use Mozilla Firefox or Google Chrome. Contact your HOD or call 0246091283 / 0505284060 for any assistance. </blinks>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align='left'> <img src="<?php echo url('public/assets/img/academic.jpg')?>" style='width: 826px;height: auto;margin-bottom: 10px;'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold"style="padding-right: px;">INDEX NUMBER
+                                    </td> 
+                                    <td style=""><?php echo $student->INDEXNO;?>
+                                    </td>
+                                    <td rowspan="5" width="145" align="right">&nbsp;
+                                        <img style="width:130px;height: auto;margin-left: 8px;"
+                                            <?php
+                                                $pic = $student->INDEXNO;
+                                            ?>
+                                            src='<?php echo url("public/albums/students/$pic.JPG")?>' alt="  Affix student picture here"    />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold" style="">NAME
+                                    </td> 
+                                    <td><?php echo strtoupper($student->TITLE .' '.  $student->NAME)?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold"style="">GENDER</td> 
+                                    <td><?php echo strtoupper($student->SEX)?></td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold">PROGRAMME</td> 
+                                    <td><?php echo strtoupper($student->program->PROGRAMME)?></td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold" style="">DATE OF ADMISSION</td> 
+                                    <td><?php echo strtoupper($student->DATE_ADMITTED)?></td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-bold" style="">DATE OF BIRTH</td> 
+                                    <td><?PHP echo  $student->DATEOFBIRTH ; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-left" colspan="3">&nbsp;<br/>For HND only. &nbsp;&nbsp;Grade &nbsp;= &nbsp;Value, &nbsp;&nbsp;&nbsp;A+ &nbsp;= &nbsp;5.0, &nbsp;&nbsp;&nbsp;A &nbsp;= &nbsp;4.5, &nbsp;&nbsp;&nbsp;B+ &nbsp;= &nbsp;4.0, &nbsp;&nbsp;&nbsp;B &nbsp;= &nbsp;3.5, &nbsp;&nbsp;&nbsp;C+ &nbsp;= &nbsp;3, &nbsp;&nbsp;&nbsp;C &nbsp;= &nbsp;2.5, &nbsp;&nbsp;&nbsp;D+ &nbsp;= &nbsp;2, &nbsp;&nbsp;&nbsp;D &nbsp;= &nbsp;1.5, &nbsp;&nbsp;&nbsp;F &nbsp;= &nbsp;0, &nbsp;&nbsp;&nbsp;red asterisk means resit
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-left" colspan="3">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+            
+        
+        
 
         <?php
 
@@ -1413,21 +1417,21 @@ class CourseController extends Controller
                             if(count($query)>0){
 
 
-                                echo "<div class='uk-text-bold' align='left' style='margin-left:18px'>YEAR : ".$row->year."    ";
-                                echo ", SEMESTER : ".$i;
-                                echo ", LEVEL :  " .$row->level." <hr/></div>";
+                                echo "<div class='uk-text-bold' align='left' style='margin-left:18px'>YEAR : ".$row->year.", ";
+                                echo " LEVEL :  " .$row->level.", ";
+                                echo " SEMESTER : ".$i." <hr/></div>";
 
                                 ?>
 
                                 <div class="uk-overflow-container">
-                                <table style="margin-left:18px"  border="0" style="" width='840px'  class="uk-table uk-table-striped">
+                                <table style="margin-left:18px"  border="0" width='826px'  class="uk-table uk-table-striped">
                                     <thead >
                                     <tr class="uk-text-bold" style="background-color:#1A337E;color:white;">
                                         <td  width="86">CODE</td>
                                         <td  width="458">COURSE</td>
                                         <td align='center' width="48">CR</td>
                                         <td align='center' width="49">GD</td>
-                                        <td align='center'width="95" >GP</td>
+                                        <td align='center' width="70">GP</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -1464,7 +1468,7 @@ class CourseController extends Controller
 
                                         <td>&nbsp</td>
 
-                                        <td class="uk-text-bold"><span>GPA</span> <?php echo  number_format(@($gpoint/$gcredit), 2, '.', ',');?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                        <td class="uk-text-bold"><span>GPA</span> <?php echo  number_format(@($gpoint/$gcredit), 5, '.', ',');?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
 
                                         <td class="uk-text-bold" align='center'><?php echo $gcredit; ?></td>
                                         <td >&nbsp;</td>
@@ -1474,11 +1478,11 @@ class CourseController extends Controller
 
                                         <td>&nbsp</td>
 
-                                        <td class="uk-text-bold"><span>CGPA</span> <?php echo  number_format(@($totgpoint/$totcredit), 2, '.', ',');
-                                        if ($totgpoint/$totcredit > 4) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;First Class';}
-                                        elseif($totgpoint/$totcredit > 3) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second Upper';}
-                                        elseif($totgpoint/$totcredit > 2) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second lower';}
-                                        elseif($totgpoint/$totcredit > 1.5) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Pass';}
+                                        <td class="uk-text-bold"><span>CGPA</span> <?php echo  number_format(@($totgpoint/$totcredit), 5, '.', ',');
+                                        if ($totgpoint/$totcredit >= 4) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;First Class';}
+                                        elseif($totgpoint/$totcredit >= 3) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second Upper';}
+                                        elseif($totgpoint/$totcredit >= 2) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Second lower';}
+                                        elseif($totgpoint/$totcredit >= 1.5) {echo ' &nbsp;&nbsp;&nbsp;&nbsp;Pass';}
                                         else {echo '&nbsp;&nbsp;&nbsp;&nbsp;Fail';}?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
 
                                         <td class="uk-text-bold" align='center'><?php echo   $totcredit; ?></td>
@@ -1505,7 +1509,10 @@ class CourseController extends Controller
             </tr>
 
         </table>
+    </td>
+        </tr>
 
+        </table>
         </div></div>
 
     <?php }
@@ -1787,7 +1794,7 @@ class CourseController extends Controller
                 $level = $request->input('level');
                 $semester = $request->input('semester');
                 $credit = $request->input('credit');
-                $year = "2017/2018";
+                $year = $request->input('year');
                 $lecturer = $request->input('lecturer');
                 $type = $request->input('type');
                 if($request->input('type')==""){
@@ -1846,7 +1853,7 @@ class CourseController extends Controller
     }
     public function enterMark($course,$code,$year,$sem, SystemController $sys ,Models\AcademicRecordsModel $record ){
         //$this->authorize('update',$record); // in Controllers
-        if(@\Auth::user()->role=='HOD' ||@\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Tpmid'  ){
+        if(@\Auth::user()->role=='HOD' ||@\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'  ){
              $array=explode("_",$year);
             $array2 = $sys->getSemYear();
 
@@ -1862,8 +1869,10 @@ class CourseController extends Controller
                     ->where('lecturer',$lecturer)
                     ->where('year',$year)
                     ->where('sem',$sem)
+                    ->where('grade','!=','E')
+                    ->orderBy("indexno")
                     //  ->orwhereIn('groups',$group)
-                    ->paginate(70);
+                    ->paginate(100);
                 $total=count($mark);
                 $th=$sys->getCourseCodeByIDArray2($code);
                 $courseName=$th[0]->COURSE_NAME;
@@ -1922,6 +1931,615 @@ class CourseController extends Controller
 
     }
 
+
+        public function downloadResults(Request $request, SystemController $sys )
+
+    {
+
+        $this->validate($request, [
+
+
+            'program' => 'required',
+           // 'sem' => 'required',
+           // 'year' => 'required',
+            'year' => 'required',
+        ]);
+
+        $kojoSense = 0;
+        $array = $sys->getSemYear();
+        //$sem = $request->input("sem");
+        $year = $request->input("year");
+        //$level = $request->input("level");
+        $program = $request->input("program");
+        //$course = $request->input("course");
+        $lecturer = @\Auth::user()->fund;
+        $lectname = @\Auth::user()->name;
+        $programme2 = \DB::table('tpoly_programme')->where('PROGRAMMECODE',$program)->first();
+        $programme = $programme2->PROGRAMME;
+        $dpt1 = $programme2->DEPTCODE;
+        $dpt2 = \DB::table('tpoly_department')->where('DEPTCODE',$dpt1)->first();
+        $dpt3 = $dpt2->DEPARTMENT;
+        $fac1 = $dpt2->FACCODE;
+        $fac2 = \DB::table('tpoly_faculty')->where('FACCODE',$fac1)->first();
+        $fac3 = $fac2->FACULTY;
+        //$courcec = \DB::table('tpoly_courses')->where('COURSE_CODE',$course)->first();
+        //$courced = $courcec->COURSE_NAME;
+
+
+        /* $data = Models\AcademicRecordsModel::
+         join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
+             ->where('tpoly_academic_record.code', $course)
+             ->where('tpoly_academic_record.lecturer', $lecturer)
+             ->where('tpoly_academic_record.year', $year)
+             ->where('tpoly_academic_record.sem', $sem)
+             ->select('tpoly_students.INDEXNO', 'tpoly_students.NAME', 'tpoly_academic_record.quiz1', 'tpoly_academic_record.quiz2', 'tpoly_academic_record.midsem1', 'tpoly_academic_record.exam', 'tpoly_academic_record.total')
+             ->orderBy("tpoly_students.INDEXNO")
+             ->get();*/
+
+        $data = Models\StudentModel::where("PROGRAMMECODE",$program)
+            ->where("GRADUATING_GROUP",$year)
+            ->where("STATUS","In school")
+            ->orderBy("INDEXNO")
+            ->select('INDEXNO', 'NAME')
+            ->get();
+
+        $kojoSense = count($data)+1;
+
+        //dd($kojoSense);
+
+        return Excel::create($year.'_'.$programme, function ($excel) use ($data,$program,$year,$programme,$kojoSense,$dpt3,$fac3,$lectname){
+
+            $excel->getProperties()
+   ->setCreator($lectname)
+   ->setTitle($year.'_'.$programme)
+   ->setLastModifiedBy($lectname)
+   ->setDescription('Multiple sheets showing all results')
+   ->setSubject($year)
+   ->setKeywords('TP, marks, rs, normal')
+   ;
+
+            $excel->sheet('TP', function ($sheet) use ($data,$kojoSense,$program,$year,$programme,$dpt3,$fac3,$lectname) {
+                $sheet->setWidth(array(
+                    'A'     =>  15,
+                    'B'     =>  35,
+                    'C'     =>  8,
+                    'D'     =>  8,
+                    'E'     =>  8,
+                    'F'     =>  8,
+                    'G'     =>  8,
+                    'H'     =>  8,
+                    'J'     =>  6,
+                    'K'     =>  6
+                ));
+
+                $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total', 'grade'));
+                 //$sheet->prependRow(1, array('assignment', 'quiz', 'midsem', 'exam', 'total'));
+
+                $sheet->fromArray($data);$sheet->setBorder('A1:H'.$kojoSense.'', 'thin');
+                //$sheet->setCellsValue('C2:F'.$kojoSense.'','0');
+                //$sheet->cells('C2:C5', function($cells) {
+
+                // $cells->setValue('0');
+
+//});
+                //$sheet->cells('C2:C5', function($cell) {
+
+                //manipulate the cell
+                //$cell->setValue('0');
+                //});
+                // $sheet->setCellValue('G5','=SUM(C5:F5)');
+
+                for($k=2;$k<$kojoSense+1;$k++){
+                    //$sheet->setCellValue('C'.$k.'','0');
+                    //$sheet->setCellValue('D'.$k.'','0');
+                    //$sheet->setCellValue('E'.$k.'','0');
+                    //$sheet->setCellValue('F'.$k.'','0');
+                    $sheet->setCellValue('G'.$k.'','=IF(SUM(C'.$k.':F'.$k.') > 0,SUM(C'.$k.':F'.$k.'),"")');
+                    $sheet->setCellValue('H'.$k.'','=IF(G'.$k.'>100,"",IF(G'.$k.'>=85,"A+",IF(G'.$k.'>=80,"A",IF(G'.$k.'>=75,"B+",IF(G'.$k.'>=70,"B",IF(G'.$k.'>=65,"C+",IF(G'.$k.'>=60,"C",IF(G'.$k.'>=55,"D+",IF(G'.$k.'>=50,"D",IF(G'.$k.'>=1,"F",""))))))))))');
+
+
+                }
+
+                $cheat = 25+$k;
+                $cheat2 = $cheat + 3;
+                $cheat3 = $cheat2 + 1;
+
+                $sheet->prependRow(1, array(' '.' '.' '.''
+                ));
+                
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$programme
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$dpt3.' DEPARTMENT'
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$fac3
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' TAKORADI TECHNICAL UNIVERSITY'
+                ));
+
+                $sheet->setCellValue('D2','Year :');
+                $sheet->setCellValue('D3','Semester :');
+                $sheet->setCellValue('D4','Year Group :');
+                $sheet->setCellValue('D5','Course Code :');
+
+                $sheet->setCellValue('F2','2017/2018');
+                $sheet->setCellValue('F3','2');
+                $sheet->setCellValue('F4',$year);
+                $sheet->setCellValue('J3','STATISTICS');
+                //$sheet->setCellValue('J4','Max :');
+                //$sheet->setCellValue('J5','Min :');
+                //$sheet->setCellValue('J6','Avg :');
+
+                //$sheet->setCellValue('J8','A+ :');
+                //$sheet->setCellValue('J9','A :');
+                //$sheet->setCellValue('J10','B+ :');
+                //$sheet->setCellValue('J11','B :');
+                //$sheet->setCellValue('J12','C+ :');
+                //$sheet->setCellValue('J13','C :');
+                //$sheet->setCellValue('J14','D+ :');
+                //$sheet->setCellValue('J15','D :');
+                //$sheet->setCellValue('J16','F :');
+                //$sheet->setCellValue('J17','Sum :');
+
+                //$sheet->setCellValue('K4','=MAX(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K5','=MIN(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K6','=AVERAGE(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K8','=COUNTIF(H8:H'.$cheat.',"A+")');
+                //$sheet->setCellValue('K9','=COUNTIF(H8:H'.$cheat.',"A")');
+                //$sheet->setCellValue('K10','=COUNTIF(H8:H'.$cheat.',"B+")');
+                //$sheet->setCellValue('K11','=COUNTIF(H8:H'.$cheat.',"B")');
+                //$sheet->setCellValue('K12','=COUNTIF(H8:H'.$cheat.',"C+")');
+                //$sheet->setCellValue('K13','=COUNTIF(H8:H'.$cheat.',"C")');
+                //$sheet->setCellValue('K14','=COUNTIF(H8:H'.$cheat.',"D+")');
+                //$sheet->setCellValue('K15','=COUNTIF(H8:H'.$cheat.',"D")');
+                //$sheet->setCellValue('K16','=COUNTIF(H8:H'.$cheat.',"F")');
+                //$sheet->setCellValue('K17','=SUM(K8:K16)');
+                ///$sheet->setCellValue('B'.$cheat2,$lectname);
+                //$sheet->setCellValue('C'.$cheat2,'___________');
+                //$sheet->setCellValue('E'.$cheat2,'___________');
+                //$sheet->setCellValue('B'.$cheat3,'(Lecturer)');
+                //$sheet->setCellValue('C'.$cheat3,'(Signature)');
+                //$sheet->setCellValue('E'.$cheat3,'(Date)');
+
+
+                //=COUNTIF(H8:H11, "A+")
+               // $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+
+                for($lisa=1;$lisa<6;$lisa++){
+                    $sheet->mergeCells('A'.$lisa.':B'.$lisa);
+                    $sheet->mergeCells('D'.$lisa.':E'.$lisa);
+                    $sheet->mergeCells('F'.$lisa.':G'.$lisa);
+                    $sheet->mergeCells('J3:K3');
+                    
+                    //$sheet->cell('A'.$lisa, function($cell) {
+                    $sheet->cells('A1:A5', function($cells) {
+
+                    // manipulate the cell
+                     ////$cell->setAlignment('center');
+                        $cells->setFont(array(
+                        'size'       => '12',
+                        'bold'       =>  true
+                        ));
+
+                });
+                    //$sheet->mergeCells('J2':'K2');
+                    $sheet->cells('A1:G6', function($cells) {
+
+                   $cells->setBackground('#ffffff');
+                });
+                    $sheet->cells('J3:K17', function($cells) {
+
+                   $cells->setBackground('#262626');
+                   $cells->setFontColor('#edeff6');
+                });
+
+                }
+
+                $sheet->cells('H8:H'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                 $sheet->cells('G8:G'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                $sheet->cells('K4:K17', function($cells) {
+
+                   $cells->setAlignment('left');
+                });
+                                
+                $sheet->setHeight(array(
+                    '1'     =>  22,
+                    '2'     =>  22,
+                    '3'     =>  22,
+                    '4'     =>  22,
+                    '5'     =>  22
+                    
+                ));
+
+                $sheet->cell('J4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->setFreeze('A8');            
+//});
+            });
+
+
+            $excel->sheet('RSA', function ($sheet) use ($data,$kojoSense,$program,$year,$programme,$dpt3,$fac3,$lectname) {
+                $sheet->setWidth(array(
+                    'A'     =>  15,
+                    'B'     =>  35,
+                    'C'     =>  8,
+                    'D'     =>  8,
+                    'E'     =>  8,
+                    'F'     =>  8,
+                    'G'     =>  8,
+                    'H'     =>  8,
+                    'J'     =>  6,
+                    'K'     =>  6
+                ));
+
+                $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total', 'grade'));
+                 //$sheet->prependRow(1, array('assignment', 'quiz', 'midsem', 'exam', 'total'));
+
+                $sheet->fromArray($data);$sheet->setBorder('A1:H'.$kojoSense.'', 'thin');
+                //$sheet->setCellsValue('C2:F'.$kojoSense.'','0');
+                //$sheet->cells('C2:C5', function($cells) {
+
+                // $cells->setValue('0');
+
+//});
+                //$sheet->cells('C2:C5', function($cell) {
+
+                //manipulate the cell
+                //$cell->setValue('0');
+                //});
+                // $sheet->setCellValue('G5','=SUM(C5:F5)');
+
+                for($k=2;$k<$kojoSense+1;$k++){
+                    //$sheet->setCellValue('C'.$k.'','0');
+                    //$sheet->setCellValue('D'.$k.'','0');
+                    //$sheet->setCellValue('E'.$k.'','0');
+                    //$sheet->setCellValue('F'.$k.'','0');
+                    $sheet->setCellValue('G'.$k.'','=IF(SUM(C'.$k.':F'.$k.') > 0,SUM(C'.$k.':F'.$k.'),"")');
+                    $sheet->setCellValue('H'.$k.'','=IF(G'.$k.'>100,"",IF(G'.$k.'>=85,"A+",IF(G'.$k.'>=80,"A",IF(G'.$k.'>=75,"B+",IF(G'.$k.'>=70,"B",IF(G'.$k.'>=65,"C+",IF(G'.$k.'>=60,"C",IF(G'.$k.'>=55,"D+",IF(G'.$k.'>=50,"D",IF(G'.$k.'>=1,"F",""))))))))))');
+
+
+                }
+
+                $cheat = 25+$k;
+                $cheat2 = $cheat + 3;
+                $cheat3 = $cheat2 + 1;
+
+                $sheet->prependRow(1, array(' '.' '.' '.''
+                ));
+                
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$programme
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$dpt3.' DEPARTMENT'
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$fac3
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' TAKORADI TECHNICAL UNIVERSITY'
+                ));
+
+                $sheet->setCellValue('D2','Year :');
+                $sheet->setCellValue('D3','Semester :');
+                $sheet->setCellValue('D4','Year Group :');
+                $sheet->setCellValue('D5','Course Code :');
+
+                $sheet->setCellValue('F2','2017/2018');
+                $sheet->setCellValue('F3','2');
+                $sheet->setCellValue('F4',$year);
+                $sheet->setCellValue('J3','STATISTICS');
+                //$sheet->setCellValue('J4','Max :');
+                //$sheet->setCellValue('J5','Min :');
+                //$sheet->setCellValue('J6','Avg :');
+
+                //$sheet->setCellValue('J8','A+ :');
+                //$sheet->setCellValue('J9','A :');
+                //$sheet->setCellValue('J10','B+ :');
+                //$sheet->setCellValue('J11','B :');
+                //$sheet->setCellValue('J12','C+ :');
+                //$sheet->setCellValue('J13','C :');
+                //$sheet->setCellValue('J14','D+ :');
+                //$sheet->setCellValue('J15','D :');
+                //$sheet->setCellValue('J16','F :');
+                //$sheet->setCellValue('J17','Sum :');
+
+                //$sheet->setCellValue('K4','=MAX(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K5','=MIN(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K6','=AVERAGE(G8:G'.$cheat.')');
+                //$sheet->setCellValue('K8','=COUNTIF(H8:H'.$cheat.',"A+")');
+                //$sheet->setCellValue('K9','=COUNTIF(H8:H'.$cheat.',"A")');
+                //$sheet->setCellValue('K10','=COUNTIF(H8:H'.$cheat.',"B+")');
+                //$sheet->setCellValue('K11','=COUNTIF(H8:H'.$cheat.',"B")');
+                //$sheet->setCellValue('K12','=COUNTIF(H8:H'.$cheat.',"C+")');
+                //$sheet->setCellValue('K13','=COUNTIF(H8:H'.$cheat.',"C")');
+                //$sheet->setCellValue('K14','=COUNTIF(H8:H'.$cheat.',"D+")');
+                //$sheet->setCellValue('K15','=COUNTIF(H8:H'.$cheat.',"D")');
+                //$sheet->setCellValue('K16','=COUNTIF(H8:H'.$cheat.',"F")');
+                //$sheet->setCellValue('K17','=SUM(K8:K16)');
+                ///$sheet->setCellValue('B'.$cheat2,$lectname);
+                //$sheet->setCellValue('C'.$cheat2,'___________');
+                //$sheet->setCellValue('E'.$cheat2,'___________');
+                //$sheet->setCellValue('B'.$cheat3,'(Lecturer)');
+                //$sheet->setCellValue('C'.$cheat3,'(Signature)');
+                //$sheet->setCellValue('E'.$cheat3,'(Date)');
+
+
+                //=COUNTIF(H8:H11, "A+")
+               // $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+
+                for($lisa=1;$lisa<6;$lisa++){
+                    $sheet->mergeCells('A'.$lisa.':B'.$lisa);
+                    $sheet->mergeCells('D'.$lisa.':E'.$lisa);
+                    $sheet->mergeCells('F'.$lisa.':G'.$lisa);
+                    $sheet->mergeCells('J3:K3');
+                    
+                    //$sheet->cell('A'.$lisa, function($cell) {
+                    $sheet->cells('A1:A5', function($cells) {
+
+                    // manipulate the cell
+                     ////$cell->setAlignment('center');
+                        $cells->setFont(array(
+                        'size'       => '12',
+                        'bold'       =>  true
+                        ));
+
+                });
+                    //$sheet->mergeCells('J2':'K2');
+                    $sheet->cells('A1:G6', function($cells) {
+
+                   $cells->setBackground('#ffffff');
+                });
+                    $sheet->cells('J3:K17', function($cells) {
+
+                   $cells->setBackground('#262626');
+                   $cells->setFontColor('#edeff6');
+                });
+
+                }
+
+                $sheet->cells('H8:H'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                 $sheet->cells('G8:G'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                $sheet->cells('K4:K17', function($cells) {
+
+                   $cells->setAlignment('left');
+                });
+                                
+                $sheet->setHeight(array(
+                    '1'     =>  22,
+                    '2'     =>  22,
+                    '3'     =>  22,
+                    '4'     =>  22,
+                    '5'     =>  22
+                    
+                ));
+
+                $sheet->cell('J4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->setFreeze('A8');            
+//});
+            });
+
+        })->download('xlsx');
+
+
+    }
+
     public function downloadRegisteredExcel(Request $request, SystemController $sys )
 
     {
@@ -1931,7 +2549,7 @@ class CourseController extends Controller
 
             'program' => 'required',
             'sem' => 'required',
-            'year' => 'required',
+           // 'year' => 'required',
             'level' => 'required',
         ]);
 
@@ -1941,7 +2559,20 @@ class CourseController extends Controller
         $year = $request->input("year");
         $level = $request->input("level");
         $program = $request->input("program");
+        $course = $request->input("course");
         $lecturer = @\Auth::user()->fund;
+        $lectname = @\Auth::user()->name;
+        $programme2 = \DB::table('tpoly_programme')->where('PROGRAMMECODE',$program)->first();
+        $programme = $programme2->PROGRAMME;
+        $dpt1 = $programme2->DEPTCODE;
+        $dpt2 = \DB::table('tpoly_department')->where('DEPTCODE',$dpt1)->first();
+        $dpt3 = $dpt2->DEPARTMENT;
+        $fac1 = $dpt2->FACCODE;
+        $fac2 = \DB::table('tpoly_faculty')->where('FACCODE',$fac1)->first();
+        $fac3 = $fac2->FACULTY;
+        $courcec = \DB::table('tpoly_courses')->where('COURSE_CODE',$course)->first();
+        $courced = $courcec->COURSE_NAME;
+
 
         /* $data = Models\AcademicRecordsModel::
          join('tpoly_students', 'tpoly_academic_record.student', '=', 'tpoly_students.ID')
@@ -1962,9 +2593,9 @@ class CourseController extends Controller
 
         $kojoSense = count($data)+1;
 
-        return Excel::create($program.$level, function ($excel) use ($data,$program,$kojoSense){
+        return Excel::create($course.'_'.$programme, function ($excel) use ($data,$program,$level,$programme,$kojoSense,$course,$dpt3,$fac3,$courced,$lectname){
 
-            $excel->sheet($program, function ($sheet) use ($data,$kojoSense) {
+            $excel->sheet($program, function ($sheet) use ($data,$kojoSense,$program,$level,$programme,$course,$dpt3,$fac3,$courced,$lectname) {
                 $sheet->setWidth(array(
                     'A'     =>  15,
                     'B'     =>  35,
@@ -1972,10 +2603,16 @@ class CourseController extends Controller
                     'D'     =>  8,
                     'E'     =>  8,
                     'F'     =>  8,
-                    'G'     =>  8
+                    'G'     =>  8,
+                    'H'     =>  8,
+                    'J'     =>  6,
+                    'K'     =>  6
                 ));
-                $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total'));
-                $sheet->fromArray($data);$sheet->setBorder('A1:G'.$kojoSense.'', 'thin');
+
+                $sheet->prependRow(1, array('prepended', 'prepended', 'assignment', 'quiz', 'midsem', 'exam', 'total', 'grade'));
+                 //$sheet->prependRow(1, array('assignment', 'quiz', 'midsem', 'exam', 'total'));
+
+                $sheet->fromArray($data);$sheet->setBorder('A1:H'.$kojoSense.'', 'thin');
                 //$sheet->setCellsValue('C2:F'.$kojoSense.'','0');
                 //$sheet->cells('C2:C5', function($cells) {
 
@@ -1990,24 +2627,252 @@ class CourseController extends Controller
                 // $sheet->setCellValue('G5','=SUM(C5:F5)');
 
                 for($k=2;$k<$kojoSense+1;$k++){
-                    $sheet->setCellValue('C'.$k.'','0');
-                    $sheet->setCellValue('D'.$k.'','0');
-                    $sheet->setCellValue('E'.$k.'','0');
-                    $sheet->setCellValue('F'.$k.'','0');
-                    $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+                    //$sheet->setCellValue('C'.$k.'','0');
+                    //$sheet->setCellValue('D'.$k.'','0');
+                    //$sheet->setCellValue('E'.$k.'','0');
+                    //$sheet->setCellValue('F'.$k.'','0');
+                    $sheet->setCellValue('G'.$k.'','=IF(SUM(C'.$k.':F'.$k.') > 0,SUM(C'.$k.':F'.$k.'),"")');
+                    $sheet->setCellValue('H'.$k.'','=IF(G'.$k.'>100,"",IF(G'.$k.'>=85,"A+",IF(G'.$k.'>=80,"A",IF(G'.$k.'>=75,"B+",IF(G'.$k.'>=70,"B",IF(G'.$k.'>=65,"C+",IF(G'.$k.'>=60,"C",IF(G'.$k.'>=55,"D+",IF(G'.$k.'>=50,"D",IF(G'.$k.'>=1,"F",""))))))))))');
+
+
                 }
 
+                $cheat = 25+$k;
+                $cheat2 = $cheat + 3;
+                $cheat3 = $cheat2 + 1;
+
+                $sheet->prependRow(1, array(' '.' '.' '.''
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$courced
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$programme
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$dpt3.' DEPARTMENT'
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' '.$fac3
+                ));
+                $sheet->prependRow(1, array(' '.' '.' '.' '.' TAKORADI TECHNICAL UNIVERSITY'
+                ));
+
+                $sheet->setCellValue('D2','Year :');
+                $sheet->setCellValue('D3','Semester :');
+                $sheet->setCellValue('D4','Level :');
+                $sheet->setCellValue('D5','Course Code :');
+
+                $sheet->setCellValue('F2','2017/2018');
+                $sheet->setCellValue('F3','2');
+                $sheet->setCellValue('F4',$level);
+                $sheet->setCellValue('F5',$course);
+                $sheet->setCellValue('J3','STATISTICS');
+                $sheet->setCellValue('J4','Max :');
+                $sheet->setCellValue('J5','Min :');
+                $sheet->setCellValue('J6','Avg :');
+
+                $sheet->setCellValue('J8','A+ :');
+                $sheet->setCellValue('J9','A :');
+                $sheet->setCellValue('J10','B+ :');
+                $sheet->setCellValue('J11','B :');
+                $sheet->setCellValue('J12','C+ :');
+                $sheet->setCellValue('J13','C :');
+                $sheet->setCellValue('J14','D+ :');
+                $sheet->setCellValue('J15','D :');
+                $sheet->setCellValue('J16','F :');
+                $sheet->setCellValue('J17','Sum :');
+
+                $sheet->setCellValue('K4','=MAX(G8:G'.$cheat.')');
+                $sheet->setCellValue('K5','=MIN(G8:G'.$cheat.')');
+                $sheet->setCellValue('K6','=AVERAGE(G8:G'.$cheat.')');
+                $sheet->setCellValue('K8','=COUNTIF(H8:H'.$cheat.',"A+")');
+                $sheet->setCellValue('K9','=COUNTIF(H8:H'.$cheat.',"A")');
+                $sheet->setCellValue('K10','=COUNTIF(H8:H'.$cheat.',"B+")');
+                $sheet->setCellValue('K11','=COUNTIF(H8:H'.$cheat.',"B")');
+                $sheet->setCellValue('K12','=COUNTIF(H8:H'.$cheat.',"C+")');
+                $sheet->setCellValue('K13','=COUNTIF(H8:H'.$cheat.',"C")');
+                $sheet->setCellValue('K14','=COUNTIF(H8:H'.$cheat.',"D+")');
+                $sheet->setCellValue('K15','=COUNTIF(H8:H'.$cheat.',"D")');
+                $sheet->setCellValue('K16','=COUNTIF(H8:H'.$cheat.',"F")');
+                $sheet->setCellValue('K17','=SUM(K8:K16)');
+                //$sheet->setCellValue('B'.$cheat2,$lectname);
+                //$sheet->setCellValue('C'.$cheat2,'___________');
+                //$sheet->setCellValue('E'.$cheat2,'___________');
+                //$sheet->setCellValue('B'.$cheat3,'(Lecturer)');
+                //$sheet->setCellValue('C'.$cheat3,'(Signature)');
+                //$sheet->setCellValue('E'.$cheat3,'(Date)');
+
+
+                //=COUNTIF(H8:H11, "A+")
+               // $sheet->setCellValue('G'.$k.'','=SUM(C'.$k.':F'.$k.')');
+
+                for($lisa=1;$lisa<6;$lisa++){
+                    $sheet->mergeCells('A'.$lisa.':B'.$lisa);
+                    $sheet->mergeCells('D'.$lisa.':E'.$lisa);
+                    $sheet->mergeCells('F'.$lisa.':G'.$lisa);
+                    $sheet->mergeCells('J3:K3');
+                    
+                    //$sheet->cell('A'.$lisa, function($cell) {
+                    $sheet->cells('A1:A5', function($cells) {
+
+                    // manipulate the cell
+                     ////$cell->setAlignment('center');
+                        $cells->setFont(array(
+                        'size'       => '12',
+                        'bold'       =>  true
+                        ));
+
+                });
+                    //$sheet->mergeCells('J2':'K2');
+                    $sheet->cells('A1:G6', function($cells) {
+
+                   $cells->setBackground('#ffffff');
+                });
+                    $sheet->cells('J3:K17', function($cells) {
+
+                   $cells->setBackground('#262626');
+                   $cells->setFontColor('#edeff6');
+                });
+
+                }
+
+                $sheet->cells('H8:H'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                 $sheet->cells('G8:G'.$cheat.'', function($cells) {
+
+                   $cells->setAlignment('right');
+                });
+
+                $sheet->cells('K4:K17', function($cells) {
+
+                   $cells->setAlignment('left');
+                });
+                                
+                $sheet->setHeight(array(
+                    '1'     =>  22,
+                    '2'     =>  22,
+                    '3'     =>  22,
+                    '4'     =>  22,
+                    '5'     =>  22
+                    
+                ));
+
+                $sheet->cell('J4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K4', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K6', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K8', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K10', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K12', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K14', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('K16', function($cell) {
+                $cell->setBackground('#595959');
+                });
+
+                $sheet->cell('J5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K5', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K7', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K9', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K11', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K13', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('J15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->cell('K15', function($cell) {
+                $cell->setBackground('#404040');
+                });
+
+                $sheet->setFreeze('A8');            
 //});
             });
 
-        })->download('xls');
+        })->download('xlsx');
 
 
     }
     public function processMark(SystemController $sys,Request $request) {
         // dd($request);
-        set_time_limit(36000);
-        ini_set('max_input_vars', '9000');
+        set_time_limit(360000);
+        ini_set('max_input_vars', '90000');
         $array = $sys->getSemYear();
         $sem =$request->input('sem');
         $year = $request->input('years');
@@ -2097,12 +2962,12 @@ class CourseController extends Controller
 
                     //dd($gradeArray );
                     $gradePoint = round(($courseArr[0]->COURSE_CREDIT*@$gradeArray[0]->value),2);
-                    $cgpa= number_format(@( $gradePoint/$courseArr[0]->COURSE_CREDIT), 2, '.', ',');
+                    $cgpa= number_format(@( $gradePoint/$courseArr[0]->COURSE_CREDIT), 5, '.', ',');
                     $oldCgpa= @Models\StudentModel::where("INDEXNO",$student)->select("CGPA","CLASS")->first();
 
-                    $newCgpa=$cgpa+@$oldCgpa->CGPA;
-                    $class=@$sys->getClass($newCgpa);
-                    Models\StudentModel::where("INDEXNO",$student)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
+                   $newCgpa=@$sys->getCGPA($student);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$student)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
                     Models\AcademicRecordsModel::where("id", $keyData)->where('lecturer', $lecturer)->update(array("quiz1" => $quiz1Data, "quiz2" => $quiz2Data, "quiz3" => $quiz3Data, "midSem1" => $midsem1Data, "exam" => $examTotal, "total" => $total, "lecturer" => $lecturer, 'grade' => $grade, 'gpoint' => $gradePoint));
 
@@ -2157,9 +3022,9 @@ class CourseController extends Controller
 
     }
     public function attendanceSheet(Request $request,SystemController $sys){
-        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Rector' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='top' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer' || @\Auth::user()->department=='Rector' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Planning' || @\Auth::user()->department=='Tptop'){
             if ($request->isMethod("get")) {
-                $course=$sys->getMountedCourseList();
+                $course=$sys->getProgramList();//original is mounted course list
 
                 return view('courses.attendanceSheet')
                     ->with('courses',$course)->with('year',$sys->years())->with('level', $sys->getLevelList());
@@ -2171,18 +3036,18 @@ class CourseController extends Controller
                 $course =  $request->input('course') ;
                 $level = $request->input('level');
 
-                $mark = Models\AcademicRecordsModel::where("code", $course)->where('year',$year)->where('sem',$semester)->where('level',$level)->paginate(100);
+                $mark = Models\StudentModel::where("PROGRAMMECODE", $course)->where('STATUS','In school')->where('LEVEL',$level)->orderBy("INDEXNO")->paginate(500);
                 // dd($mark);
-                $courseArr= $sys->getCourseMountedInfo($course);
+               // $courseArr= $sys->getCourseMountedInfo($course);
                 // dd($courseArr);
-                $courseDb= $courseArr[0]->ID;
-                $courseCreditDb= $courseArr[0]->COURSE_CREDIT;
-                $courseLecturerDb= $courseArr[0]->LECTURER;
-                $courseName=@$sys->getCourseCodeByIDArray($courseArr[0]->COURSE);
-                $displayCourse=$courseName[0]->COURSE_NAME;
-                $displayCode=$courseName[0]->COURSE_CODE;
+                //$courseDb= $courseArr[0]->ID;
+                //$courseCreditDb= $courseArr[0]->COURSE_CREDIT;
+                //$courseLecturerDb= $courseArr[0]->LECTURER;
+                //$courseName=@$sys->getCourseCodeByIDArray($courseArr[0]->COURSE);
+                //$displayCourse=$courseName[0]->COURSE_NAME;
+                //$displayCode=$courseName[0]->COURSE_CODE;
                 \Session::put('year', $year);
-                $url = url('printAttendance/'.$semester.'/sem/'.$displayCourse.'/course/'.$displayCode.'/code/'.$level.'/level/'.$course.'/id');
+                $url = url('printAttendance/'.$course.'/course/'.$level.'/level/');
 
                 $print_window = "<script >window.open('$url','','location=1,status=1,menubar=yes,scrollbars=yes,resizable=yes,width=1000,height=500')</script>";
                 $request->session()->flash("success",
@@ -2202,22 +3067,22 @@ class CourseController extends Controller
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
         }
     }
-    public function printAttendance(Request $request,$semester,$course,$code,$level,$id) {
+    public function printAttendance(Request $request,$course,$level) {
         $year=\Session::get('year');
-        $mark = Models\AcademicRecordsModel::where("code", $code)->where('year',$year)->where('sem',$semester)->where('level',$level)->paginate(100);
+        $mark = Models\StudentModel::where("PROGRAMMECODE", $course)->where('STATUS','In school')->where('LEVEL',$level)->orderBy("INDEXNO")->paginate(500);
 
         return view('courses.printAttendance')->with('mark', $mark)
             ->with('year', $year)
-            ->with('sem', $semester)
-            ->with('course', $course)
-            ->with('code', $code);
+           // ->with('sem', $semester)
+            ->with('course', $course);
+           // ->with('code', $code);
 
 
     }
     public function showFileUpload(SystemController $sys){
         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $programme=$sys->getProgramList();
-            $course=$sys->getMountedCourseList2();
+            $course=$sys->getMountedCourseList3();
 
             return view('courses.markUpload')->with('programme', $programme)
                 ->with('courses',$course)->with('level', $sys->getLevelList())->with('year',$sys->years22());
@@ -2229,9 +3094,22 @@ class CourseController extends Controller
     public function showFileUploadRegistered(SystemController $sys){
         if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->role=='Support' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
             $programme=$sys->getProgramList5();
-            // $course=$sys->getProgramList5();
+            $course=$sys->getMountedCourseList3();
 
-            return view('courses.downloadRegistered')->with('programme', $programme)
+            return view('courses.downloadRegistered')->with('programme', $programme)->with('courses',$course)
+                ->with('level', $sys->getLevelList())->with('year',$sys->years());
+        }
+        else{
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'This action is unauthorized.');
+        }
+    }
+
+    public function showFileUploadResults(SystemController $sys){
+        if(@\Auth::user()->role=='HOD' || @\Auth::user()->department=='Tpmid' || @\Auth::user()->role=='Support' || @\Auth::user()->role=='Admin' || @\Auth::user()->department=='Tptop'|| @\Auth::user()->role=='Dean' || @\Auth::user()->role=='Lecturer'){
+            $programme=$sys->getProgramList5();
+            $course=$sys->getMountedCourseList3();
+
+            return view('courses.downloadResults')->with('programme', $programme)->with('courses',$course)
                 ->with('level', $sys->getLevelList())->with('year',$sys->years());
         }
         else{
@@ -2325,7 +3203,7 @@ class CourseController extends Controller
                                 // dd($gradeArray );
                                 $gradePoint = @$gradeArray[0]->value;
                                 $test=Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("course",$course)->where("credits",$credit)->where("year",$year)->get()->toArray();
-                                if(empty($test)){
+                                if(count($test)==0){
                                     $record = new Models\AcademicRecordsModel();
                                     $record->indexno = $indexNo;
                                     $record->course = $course;
@@ -2345,17 +3223,17 @@ class CourseController extends Controller
                                     $record->gpoint =round(( $credit*$gradePoint),2);
                                     $record->save();
 
-                                    $cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-                                    $oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA","CLASS")->first();
+                                    //$cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
+                                    //$oldCgpa= @Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA","CLASS")->first();
 
-                                    $newCgpa=$cgpa+@$oldCgpa->CGPA;
+                                    $newCgpa=@$sys->getCGPA($indexNo);
                                     $class=@$sys->getClass($newCgpa);
                                     Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
                                     \DB::commit();
 
                                 }
                                 else{
-                                    Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("course",$course)->where("credits",$credit)->where("year",$year)->update(
+                                    Models\AcademicRecordsModel::where("indexno",$indexNo)->where("level",$level)->where("sem",$semester)->where("course",$course)->where("year",$year)->update(
                                         array(
                                             "indexno" =>$indexNo,
                                             "course"=>$course,
@@ -2376,11 +3254,8 @@ class CourseController extends Controller
                                         )
 
                                     );
-                                    $cgpa= number_format(@(( $credit*$gradePoint)/$credit), 2, '.', ',');
-
-                                    $oldCgpa= Models\StudentModel::where("INDEXNO",$indexNo)->select("CGPA","CLASS")->first();
-                                    $newCgpa=$cgpa+$oldCgpa->CGPA;
-                                    $class=$sys->getClass($newCgpa);
+                                    $newCgpa=@$sys->getCGPA($indexNo);
+                                    $class=@$sys->getClass($newCgpa);
                                     Models\StudentModel::where("INDEXNO",$indexNo)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
                                     \DB::commit();
@@ -2418,7 +3293,7 @@ class CourseController extends Controller
         }
     }
     public function uploadMarks(Request $request, SystemController $sys){
-
+            \Config::set('excel.import.startRow', 7);
         $this->validate($request, [
 
             'file' => 'required',
@@ -2449,23 +3324,30 @@ class CourseController extends Controller
                 $level = $request->input('level');
                 $studentIndexNo = $sys->getStudentIDfromIndexno($request->input('student'));
 
+                $leecount = 0;
 
                 if (in_array($ext, $valid_exts)) {
 
                     $data = Excel::load($path, function($reader) {
-
-                    })->get();
+                      // $reader->setHeaderRow(7); 
+                    })
+                    ->get();
                     //  dd($data);
-                    if (!empty($data) && $data->count()) {
+                                        if (!empty($data) && $data->count()) {
 
+                            $essien = 0;
 
                         foreach ($data as $key => $value) {
 
                             $totalRecords = count($data);
+                            $essien = $essien + 1;
+
+                            $studentProgram= $sys->getStudentprogramfromIndexno($value->indexno);
+                            $studentYearGroup= $sys->getStudentyeargroupfromIndexno($value->indexno);
 
 
 
-                            $studentId= $sys->getStudentIDfromIndexno($value->index_no);
+                            $studentId= $sys->getStudentIDfromIndexno($value->indexno);
                             //print_r($value);
 
                             $studentDb=$value->indexno  ;
@@ -2474,7 +3356,7 @@ class CourseController extends Controller
                             // dd($courseArr);
                             $courseDb= $courseArr[0]->ID;
                             $courseCreditDb= $courseArr[0]->COURSE_CREDIT;
-                            $courseLecturerDb= $courseArr[0]->LECTURER;
+                            $courseLecturerDb= @\Auth::user()->fund;
                             $courseName=$sys->getCourseCodeByIDArray($courseArr[0]->COURSE);
                             $displayCourse=$courseName[0]->COURSE_NAME;
                             $displayCode=$courseName[0]->COURSE_CODE;
@@ -2502,11 +3384,24 @@ class CourseController extends Controller
                             //$class=@$sys->getClass($newCgpa);
                             //Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
+                            if ($total > 0) {
+                              
+                              $leecount++;  # code...
+                            
+
                             $checker=Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->first();
 
-                            if(!empty($checker)){
+                            if(count($checker)!=0){
 
-                                Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade,'course' => $courseDb, 'gpoint' => $gradePoint));
+
+
+                                Models\AcademicRecordsModel::where("indexno", $studentDb)->where("code", $course)->where("sem",$semester)->where("year",$year1)->update(array("quiz1" => $quiz1, "quiz2" => $quiz2, "level" => $level, "programme" => $studentProgram, "yrgp" => $studentYearGroup, "student" => $studentId, "quiz3" =>0, "midSem1" => $midsem, "exam" => $exam, "total" => $total, "lecturer" =>$courseLecturerDb,'grade' => $grade,'course' => $courseDb, 'gpoint' => $gradePoint));
+
+                                    $newCgpa=@$sys->getCGPA($studentDb);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
+
+                                //dd($courseLecturerDb);
                             }
                             else{
 
@@ -2516,7 +3411,7 @@ class CourseController extends Controller
                                 $record->student=$studentId;
                                 $record->credits=$courseCreditDb;
                                 $record->code=$course;
-                                $record->sem=1;
+                                $record->sem=$semester;
                                 $record->year=$year1;
                                 $record->quiz1=$quiz1;
                                 $record->quiz2=$quiz2;
@@ -2528,14 +3423,22 @@ class CourseController extends Controller
                                 $record->gpoint=$gradePoint;
                                 $record->level=$level;
                                 $record->course=$courseDb;
+                                $record->programme = $studentProgram;
+                                $record->yrgp = $studentYearGroup;
                                 $record->save();
 
 
+                                    $newCgpa=@$sys->getCGPA($studentDb);
+                                    $class=@$sys->getClass($newCgpa);
+                                    Models\StudentModel::where("INDEXNO",$studentDb)->update(array("CGPA"=>$newCgpa,"CLASS"=>$class));
 
 
 
+                            }
 
-                            } //else {
+
+                        }
+                             //else {
 //                                return redirect('/upload/marks')->with("error", " <span style='font-weight:bold;font-size:13px;'>File contain unrecognized students for $displayCourse - $displayCode.please upload only registered students for  $displayCourse - $displayCode  as downloaded from the system!</span> ");
 //
 //
@@ -2543,7 +3446,7 @@ class CourseController extends Controller
                         }
 
 
-                        return redirect('/upload_marks')->with("success",  " <span style='font-weight:bold;font-size:13px;'> $totalRecords Marks  successfully uploaded for  $displayCourse - $displayCode!</span> ");
+                        return redirect('/upload_marks')->with("success",  " <span style='font-weight:bold;font-size:13px;'> $leecount Marks  successfully uploaded for  $displayCourse - $displayCode</span> ");
 
 
                     } else {
@@ -2871,7 +3774,7 @@ class CourseController extends Controller
     // naptex broadsheet view
     public function processNaptexBroadsheet(Request $request, SystemController $sys){
 
-        ini_set('max_execution_time', 180000);
+
         \Session::put('level', $request->input("level", ""));
         \Session::put('year', $request->input("year", ""));
         \Session::put('program', $request->input("program", ""));
@@ -2880,16 +3783,16 @@ class CourseController extends Controller
 
         $level=$request->input("level", "");
         $semester=$request->input("semester", "");
-        $year=$request->input("year", "");
+        $yeargroup=$request->input("year", "");
 
 
         if ($request->has('search') && trim($request->input('search')) != "") {
             // dd($request);
             $headerQuery=
-                Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("indexno",$request->input('search'))->get();
+                Models\StudentModel::where("GRADUATING_GROUP",$yeargroup)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("indexno",$request->input('search'))->get();
         }
         else{
-            $headerQuery=Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
+            $headerQuery=Models\StudentModel::where("GRADUATING_GROUP",$yeargroup)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
 
 
             // dd($headerQuery);
@@ -2909,21 +3812,13 @@ class CourseController extends Controller
             }
         }
         if ($request->has('search') && trim($request->input('search')) != "") {
-            $studentData=  Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("INDEXNO",$request->input('search'))->get();
+            $studentData=  Models\StudentModel::where("GRADUATING_GROUP",$yeargroup)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->where("INDEXNO",$request->input('search'))->get();
 
 
         }
         else{
+            $studentData= Models\StudentModel::where("GRADUATING_GROUP",$yeargroup)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
 
-            //$studentData= Models\StudentModel::where("LEVEL",$level)->where("PROGRAMMECODE",$program)->with('academic')->select("INDEXNO","LEVEL","NAME")->get();
-            $studentData= Models\AcademicRecordsModel::where("level",$level)->where("grade","!=","E")
-                ->where("programme",$program)
-
-
-                ->orderBy("indexno")
-                ->groupBy("indexno")
-                ->select("indexno","level","grade")
-                ->get();
 
         }
 
@@ -2954,7 +3849,7 @@ class CourseController extends Controller
 
 
     public function processBroadsheet(Request $request, SystemController $sys) {
-        ini_set('max_execution_time', 180000);
+        ini_set('max_execution_time', 280000);
         \Session::put('level', $request->input("level", ""));
         \Session::put('year', $request->input("year", ""));
         \Session::put('program', $request->input("program", ""));
@@ -3066,10 +3961,13 @@ class CourseController extends Controller
         //$courses =Models\MountedCourse2Model::where('LECTURER',   \Auth::user()->fund)
             //->where("COURSE_SEMESTER",1)->where("COURSE_YEAR",$year)->paginate(100);
         $courses= Models\AcademicRecordsModel::query()->where('lecturer',   \Auth::user()->fund)
-        ->where("sem",1)->where("year",$year)->where("grade","!=","E")->groupBy("code")->paginate(100);
+        ->where("year",$year)->where("sem","2")->where("grade","!=","E")->groupBy("code")->paginate(100);
+
+        $program = $courses[0]->programme;
+        //dd($program);
 
         return view('courses.edit_result')->with("data", $courses)
-            ->with('program', $sys->getProgramList())
+            ->with('program', $program)
             ->with('level', $sys->getLevelList())
             ->with('year',$sys->years());
 
