@@ -226,13 +226,25 @@ class APIController extends Controller
 
             $a[] = (array)$json;
 
-            foreach ($a as $i) {
+           /* foreach ($a as $i) {
                 $data["admission_number"] = $i["application_number"];
                 $data["name"] = $i["name"];
                 $data["programme"] = $i["programme"];
                 $data["fees"] = $i["fees"];
                 $data["hall"] = $i["hall"];
                 $data["type"] = "Newly admited applicant";
+            }*/
+
+
+            foreach ($a as $i) {
+                $data["INDEXNO"] = $i["application_number"];
+                $data["STNO"] = $i["application_number"];
+                $data["NAME"] = $i["name"];
+                $data["PROGRAMMECODE"] = $i["programme"];
+                $data["LEVEL"] = '100';
+                $data["BILLS"] = $i["fees"];
+                $data["STATUS"] = "Applicant";
+
             }
 
 
